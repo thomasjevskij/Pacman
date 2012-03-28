@@ -1,0 +1,1 @@
+git pull git@github.com:ThomasSievert/Pacman.git $1

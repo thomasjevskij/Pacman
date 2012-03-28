@@ -1,0 +1,1 @@
+git push git@github.com:ThomasSievert/Pacman.git $1
