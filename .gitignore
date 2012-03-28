@@ -1,1 +1,9 @@
-# No ignored files yet
+# Ignore compiled files
+Dist/
+Build/
+
+# Ignore Visual Studio session files
+ipch/
+*.opensdf
+*.sdf
+*.suo
