@@ -1,0 +1,3 @@
+11/4 - 2012
+3h Architectural overview diagram
+1h State machine diagrams
