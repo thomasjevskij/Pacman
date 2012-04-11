@@ -1,0 +1,36 @@
+Code Standard:
+
+Header files should be in capitalized camel case, and with extension: .hpp
+Ex: ApplicationWindow.hpp
+
+Source files should be in capitalized camel case, and with extension: .cpp
+Ex: ApplicationWindow.cpp
+
+Class member fields should be prefixed with the letter m, and use camel case.
+Ex: mThisIsAClassField
+
+Static non-constant variables are prefixed with the letter s, and use camel case.
+Ex: sThisIsAStaticField
+
+Constants, BOTH global and local, are prefixed with the letter C and use only upper-case, with words separated by underscore.
+Ex: C_THIS_IS_A_CONSTANT
+
+Public struct member fields should have no prefix, be capitalized and use camel case.
+Ex: ThisIsAStructField
+
+Methods in both classes and structs, should be capitalized and use camel case.
+Ex: ThisIsAMethod()
+
+Parameters in methods should have no prefix and use camel case.
+Ex: ThisIsAMethod(int thisIsAParameter)
+
+Local variables use the same syntax as parameters.
+Ex: int thisIsALocalVariable
+
+
+Important or ambigious methods should be well-commented in the header file, with one or two lines above the declaration.
+Ex:
+	// Returns the max of a or b
+	int max(int a, int b);
+
+Code should in general be well-commented, especially ambigious sections!
