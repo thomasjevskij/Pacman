@@ -71,7 +71,7 @@ namespace Framework
 		bool CreateDepthStencilBuffer(const Description::Buffer& description);
 
 		D3DContext(const D3DContext&);
-		D3DContext& operator=(const D3DContext&);s
+		D3DContext& operator=(const D3DContext&);
 	};
 }
 #endif
