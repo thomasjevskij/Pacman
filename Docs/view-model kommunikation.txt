@@ -1,0 +1,27 @@
+modell -> view
+
+position and facing of Pacman
+position,color and facing of Ghosts
+position of pellets
+position of power pellets
+Level UI Data (grid) 
+color scheme
+position of lights
+lives
+score
+vilken level
+
+
+Notifikationer när:
+
+pellet eaten
+powerpellet eaten
+powerpellet effect ends
+ghost is eaten
+ghost is ressurected
+pacman is killed
+game won
+
+controller -> model
+directional button hit
+
