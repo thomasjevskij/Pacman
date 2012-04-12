@@ -9,7 +9,7 @@
 namespace Framework
 {
 	// Sets up the Direct3D environment
-	class D3DContext
+	class D3DContext : public WindowNotificationSubscriber
 	{
 	public:
 		// Defines a rendering area on the backbuffer. All values ar nomalized [0.0, 1.0]
@@ -31,8 +31,11 @@ namespace Framework
 			{
 				unsigned int Width;
 				unsigned int Height;
+
+				Buffer();
 			};
 
+			// Whether the application should initially be in fullscreen or not.
 			bool Fullscreen;
 
 			// Setting the width or height to 0 will make the buffer the size of the target window's client area
@@ -41,11 +44,14 @@ namespace Framework
 			// Setting the width or height to 0 will make the buffer the size of the back buffer
 			Buffer DepthBuffer;
 
+			// A vector of all viewports.
 			std::vector<Viewport> Viewports;
+
 
 			Description();
 		};
 
+		// Constructor & Destructor
 		D3DContext(ApplicationWindow* targetWindow, const Description& description);
 		~D3DContext() throw();
 
@@ -70,6 +76,7 @@ namespace Framework
 		bool CreateBackBufferView();
 		bool CreateDepthStencilBuffer(const Description::Buffer& description);
 
+		// Resource - disable copying
 		D3DContext(const D3DContext&);
 		D3DContext& operator=(const D3DContext&);
 	};
