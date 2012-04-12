@@ -31,8 +31,11 @@ namespace Framework
 			{
 				unsigned int Width;
 				unsigned int Height;
+
+				Buffer();
 			};
 
+			// Whether the application should initially be in fullscreen or not.
 			bool Fullscreen;
 
 			// Setting the width or height to 0 will make the buffer the size of the target window's client area
@@ -41,13 +44,28 @@ namespace Framework
 			// Setting the width or height to 0 will make the buffer the size of the back buffer
 			Buffer DepthBuffer;
 
+			// A vector of all viewports.
 			std::vector<Viewport> Viewports;
+
 
 			Description();
 		};
 
+		// Constructor & Destructor
 		D3DContext(ApplicationWindow* targetWindow, const Description& description);
 		~D3DContext() throw();
+
+		// Getters
+		ID3D10Device* GetDevice();
+
+		// Viewport management
+		const std::vector<Viewport> GetViewports() const;
+		void SetViewports(const std::vector<Viewport>& viewports);
+		void SetActiveViewport(unsigned int index);
+		unsigned int GetActiveViewport() const;
+
+		// Resize the back and depth buffer
+		bool ResizeBuffers(Description::Buffer backBufferDescription, const Description::Buffer& depthBufferDescription);
 
 		// Clear the backbuffer and the depth/stencil buffer
 		void Clear(const D3DXCOLOR& color = D3DXCOLOR(0, 0, 0, 0));
@@ -63,13 +81,17 @@ namespace Framework
 		ID3D10Texture2D* mDepthStencilBuffer;
 		ID3D10DepthStencilView* mDepthStencilView;
 
+		Description::Buffer mBackBufferSize;
+		Description::Buffer mDepthBufferSize;
+
 		std::vector<Viewport> mViewports;
 		unsigned int mActiveViewport;
 
-		bool CreateDeviceAndSwapChain(const Description& description);
+		bool CreateDeviceAndSwapChain(Description description);
 		bool CreateBackBufferView();
-		bool CreateDepthStencilBuffer(const Description::Buffer& description);
+		bool CreateDepthStencilBuffer(Description::Buffer description);
 
+		// Resource - disable copying
 		D3DContext(const D3DContext&);
 		D3DContext& operator=(const D3DContext&);
 	};
