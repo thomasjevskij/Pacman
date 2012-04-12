@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Untitled Gantt Project" company="" webLink="http://" view-date="2012-03-26" view-index="0" gantt-divider-location="482" resource-divider-location="300" version="2.0">
+<project name="Untitled Gantt Project" company="" webLink="http://" view-date="2012-03-19" view-index="0" gantt-divider-location="489" resource-divider-location="300" version="2.0">
     <description/>
-    <view zooming-state="default:5" id="gantt-chart"/>
+    <view zooming-state="default:6" id="gantt-chart"/>
     <view id="resource-table">
         <field id="0" name="Namn" width="50" order="0"/>
         <field id="1" name="Standard roll" width="50" order="1"/>
@@ -32,15 +32,15 @@
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
-        <task id="0" name="Projekt" color="#8cb6ce" meeting="false" start="2012-03-26" duration="45" complete="16" expand="true">
+        <task id="0" name="Projekt" color="#8cb6ce" meeting="false" start="2012-03-26" duration="45" complete="17" expand="true">
             <task id="2" name="Design phase" color="#8cb6ce" meeting="false" start="2012-04-12" duration="5" complete="0" expand="true">
-                <task id="4" name="Archetecture overview diagram" color="#8cb6ce" meeting="false" start="2012-04-12" duration="5" complete="0" expand="true"/>
-                <task id="5" name="State diagram" color="#8cb6ce" meeting="false" start="2012-04-12" duration="1" complete="0" expand="true"/>
-                <task id="6" name="Class diagram" color="#8cb6ce" meeting="false" start="2012-04-12" duration="1" complete="0" expand="true"/>
-                <task id="8" name="Pakage diagram" color="#8cb6ce" meeting="false" start="2012-04-12" duration="1" complete="0" expand="true"/>
+                <task id="4" name="Architecture overview diagram" color="#8cb6ce" meeting="false" start="2012-04-12" duration="5" complete="0" expand="true"/>
+                <task id="5" name="State diagrams" color="#8cb6ce" meeting="false" start="2012-04-12" duration="1" complete="0" expand="true"/>
+                <task id="6" name="Class diagrams" color="#8cb6ce" meeting="false" start="2012-04-12" duration="1" complete="0" expand="true"/>
+                <task id="8" name="Package diagrams" color="#8cb6ce" meeting="false" start="2012-04-12" duration="1" complete="0" expand="true"/>
             </task>
-            <task id="10" name="Dokumentation" color="#8cb6ce" meeting="false" start="2012-03-26" duration="45" complete="23" expand="true">
-                <task id="11" name="Weakly reports" color="#8cb6ce" meeting="false" start="2012-03-26" duration="36" complete="28" expand="true">
+            <task id="10" name="Documentation" color="#8cb6ce" meeting="false" start="2012-03-26" duration="45" complete="23" expand="true">
+                <task id="11" name="Weekly reports" color="#8cb6ce" meeting="false" start="2012-03-26" duration="36" complete="28" expand="false">
                     <task id="17" name="R1" color="#8cb6ce" meeting="false" start="2012-03-26" duration="6" complete="100" expand="true"/>
                     <task id="19" name="R2" color="#8cb6ce" meeting="false" start="2012-04-02" duration="6" complete="100" expand="true"/>
                     <task id="20" name="R3" color="#8cb6ce" meeting="false" start="2012-04-09" duration="6" complete="0" expand="true"/>
@@ -60,23 +60,56 @@
                 </task>
                 <task id="16" name="L4" color="#8cb6ce" meeting="false" start="2012-05-16" duration="8" complete="0" expand="true"/>
             </task>
-            <task id="9" name="Pragraming phase" color="#8cb6ce" meeting="false" start="2012-03-26" duration="1" complete="0" expand="true">
-                <task id="37" name="Foundations" color="#8cb6ce" meeting="false" start="2012-03-26" duration="1" complete="0" expand="true">
-                    <task id="41" name="Low lvl renderer" color="#8cb6ce" meeting="false" start="2012-03-26" duration="1" complete="0" expand="true">
-                        <task id="46" name="Render batch" color="#8cb6ce" meeting="false" start="2012-03-26" duration="1" complete="0" expand="true"/>
+            <task id="9" name="Programming phase" color="#8cb6ce" meeting="false" start="2012-04-09" duration="20" complete="13" expand="true">
+                <task id="37" name="Foundations" color="#8cb6ce" meeting="false" start="2012-04-10" duration="14" complete="0" expand="true">
+                    <task id="41" name="Low-level renderer" color="#8cb6ce" meeting="false" start="2012-04-16" duration="5" complete="0" expand="true">
+                        <task id="46" name="Render batch" color="#8cb6ce" meeting="false" start="2012-04-16" duration="5" complete="0" expand="true"/>
                     </task>
-                    <task id="42" name="Content manager" color="#8cb6ce" meeting="false" start="2012-03-26" duration="1" complete="0" expand="true"/>
-                    <task id="43" name="Window class" color="#8cb6ce" meeting="false" start="2012-03-26" duration="1" complete="0" expand="true"/>
-                    <task id="44" name="D3DContext class" color="#8cb6ce" meeting="false" start="2012-03-26" duration="1" complete="0" expand="true"/>
-                    <task id="45" name="Game class" color="#8cb6ce" meeting="false" start="2012-03-26" duration="1" complete="0" expand="true"/>
+                    <task id="42" name="Content manager" color="#8cb6ce" meeting="false" start="2012-04-16" duration="10" complete="0" expand="true"/>
+                    <task id="43" name="Window class" color="#8cb6ce" meeting="false" start="2012-04-10" duration="5" complete="0" expand="true"/>
+                    <task id="44" name="D3DContext class" color="#8cb6ce" meeting="false" start="2012-04-10" duration="5" complete="0" expand="true"/>
+                    <task id="45" name="Game class" color="#8cb6ce" meeting="false" start="2012-04-10" duration="5" complete="0" expand="true"/>
+                    <task id="48" name="Camera class" color="#8cb6ce" meeting="false" start="2012-04-16" duration="5" complete="0" expand="true"/>
+                    <task id="50" name="Audio" color="#8cb6ce" meeting="false" start="2012-04-16" duration="3" complete="0" expand="true"/>
+                    <task id="49" name="Scene graph" color="#8cb6ce" meeting="false" start="2012-04-23" duration="5" complete="0" expand="true"/>
                 </task>
-                <task id="36" name="Modell" color="#8cb6ce" meeting="false" start="2012-03-26" duration="1" complete="0" expand="true">
-                    <task id="39" name="Logic" color="#8cb6ce" meeting="false" start="2012-03-26" duration="1" complete="0" expand="true"/>
-                    <task id="40" name="AI" color="#8cb6ce" meeting="false" start="2012-03-26" duration="1" complete="0" expand="true"/>
+                <task id="36" name="Model" color="#8cb6ce" meeting="false" start="2012-04-16" duration="15" complete="0" expand="true">
+                    <task id="39" name="Logic" color="#8cb6ce" meeting="false" start="2012-04-16" duration="15" complete="0" expand="true">
+                        <task id="53" name="Level class" color="#8cb6ce" meeting="false" start="2012-04-16" duration="5" complete="0" expand="true">
+                            <depend id="49" type="2" difference="0" hardness="Strong"/>
+                        </task>
+                        <task id="59" name="Game logic class" color="#8cb6ce" meeting="false" start="2012-04-16" duration="15" complete="0" expand="true"/>
+                        <task id="58" name="Game object class" color="#8cb6ce" meeting="false" start="2012-04-16" duration="10" complete="0" expand="true">
+                            <task id="62" name="Player class" color="#8cb6ce" meeting="false" start="2012-04-16" duration="5" complete="0" expand="true"/>
+                            <task id="63" name="Enemy class" color="#8cb6ce" meeting="false" start="2012-04-16" duration="10" complete="0" expand="true"/>
+                            <task id="64" name="Food class" color="#8cb6ce" meeting="false" start="2012-04-16" duration="5" complete="0" expand="true"/>
+                        </task>
+                    </task>
+                    <task id="40" name="AI" color="#8cb6ce" meeting="false" start="2012-04-23" duration="7" complete="0" expand="true">
+                        <task id="54" name="Pathfinding" color="#8cb6ce" meeting="false" start="2012-04-23" duration="5" complete="0" expand="true">
+                            <depend id="61" type="2" difference="0" hardness="Strong"/>
+                        </task>
+                        <task id="55" name="Behavior" color="#8cb6ce" meeting="false" start="2012-04-26" duration="4" complete="0" expand="true">
+                            <task id="61" name="Targeting" color="#8cb6ce" meeting="false" start="2012-04-30" duration="2" complete="0" expand="true"/>
+                            <task id="60" name="State machine" color="#8cb6ce" meeting="false" start="2012-04-26" duration="2" complete="0" expand="true"/>
+                        </task>
+                    </task>
                 </task>
-                <task id="38" name="View/Controller" color="#8cb6ce" meeting="false" start="2012-03-26" duration="1" complete="0" expand="true">
-                    <task id="34" name="Effects" color="#8cb6ce" meeting="false" start="2012-03-26" duration="1" complete="0" expand="true"/>
-                    <task id="35" name="GUI" color="#8cb6ce" meeting="false" start="2012-03-26" duration="1" complete="0" expand="true"/>
+                <task id="38" name="View/Controller" color="#8cb6ce" meeting="false" start="2012-04-09" duration="20" complete="33" expand="true">
+                    <task id="34" name="Visual effects" color="#8cb6ce" meeting="false" start="2012-04-09" duration="20" complete="38" expand="true">
+                        <task id="65" name="Particle system" color="#8cb6ce" meeting="false" start="2012-04-09" duration="10" complete="50" expand="true"/>
+                        <task id="66" name="Shadows" color="#8cb6ce" meeting="false" start="2012-04-30" duration="5" complete="0" expand="true"/>
+                        <task id="67" name="Reflections" color="#8cb6ce" meeting="false" start="2012-04-30" duration="5" complete="0" expand="true"/>
+                        <task id="68" name="Environment mapping" color="#8cb6ce" meeting="false" start="2012-04-30" duration="5" complete="0" expand="true"/>
+                    </task>
+                    <task id="51" name="Camera controller" color="#8cb6ce" meeting="false" start="2012-04-30" duration="2" complete="0" expand="true"/>
+                    <task id="69" name="Animation" color="#8cb6ce" meeting="false" start="2012-04-30" duration="5" complete="0" expand="true"/>
+                    <task id="35" name="Front end" color="#8cb6ce" meeting="false" start="2012-04-16" duration="5" complete="0" expand="true">
+                        <task id="70" name="Game screen classes" color="#8cb6ce" meeting="false" start="2012-04-16" duration="5" complete="0" expand="true"/>
+                        <task id="71" name="Game state machine" color="#8cb6ce" meeting="false" start="2012-04-16" duration="5" complete="0" expand="true"/>
+                        <task id="72" name="HUD elements" color="#8cb6ce" meeting="false" start="2012-04-16" duration="5" complete="0" expand="true"/>
+                        <task id="73" name="GUI elements" color="#8cb6ce" meeting="false" start="2012-04-16" duration="5" complete="0" expand="true"/>
+                    </task>
                 </task>
             </task>
         </task>
@@ -93,9 +126,9 @@
         <displaycolumn property-id="tpd9" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd0" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd6" order="-1" width="75" visible="false"/>
-        <displaycolumn property-id="tpd3" order="0" width="242" visible="true"/>
-        <displaycolumn property-id="tpd4" order="1" width="118" visible="true"/>
-        <displaycolumn property-id="tpd5" order="2" width="118" visible="true"/>
+        <displaycolumn property-id="tpd3" order="0" width="236" visible="true"/>
+        <displaycolumn property-id="tpd4" order="1" width="117" visible="true"/>
+        <displaycolumn property-id="tpd5" order="2" width="117" visible="true"/>
     </taskdisplaycolumns>
     <previous/>
     <roles roleset-name="Default"/>
