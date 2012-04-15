@@ -88,11 +88,16 @@ namespace Framework
 		return mActiveViewport;
 	}
 
+	void D3DContext::ToggleFullscreen()
+	{
+		mSwapChain->SetFullscreenState(TRUE, NULL);
+	}
+
 	bool D3DContext::ResizeBuffers(Description::Buffer backBufferDescription, const Description::Buffer& depthBufferDescription)
 	{
 		backBufferDescription.Width = (backBufferDescription.Width == 0) ? mTargetWindow->GetClientWidth() : backBufferDescription.Width;
 		backBufferDescription.Height = (backBufferDescription.Height == 0) ? mTargetWindow->GetClientHeight() : backBufferDescription.Height;
-
+		
 		SafeRelease(mBackBufferView);
 		SafeRelease(mDepthStencilBuffer);
 		SafeRelease(mDepthStencilView);

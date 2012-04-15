@@ -64,6 +64,10 @@ namespace Framework
 		void SetActiveViewport(unsigned int index);
 		unsigned int GetActiveViewport() const;
 
+
+		// Toggle fullscreen mode
+		void ToggleFullscreen();
+
 		// Resize the back and depth buffer
 		bool ResizeBuffers(Description::Buffer backBufferDescription, const Description::Buffer& depthBufferDescription);
 
