@@ -1,3 +1,4 @@
 2012-04-10: 6h Prototype, Foundations
 2012-04-11: 3h Architecture Diagram, 1h State Machine, 1/2 Prototype, Foundation
 2012-04-12: 2h WBS, 2h Class Diagram, 1h Prototype, Foundation
+2012-04-15: 2h Weekly
