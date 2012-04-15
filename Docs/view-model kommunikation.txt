@@ -1,12 +1,11 @@
 modell -> view
 
 position and facing of Pacman
-position,color and facing of Ghosts
+position and facing of Ghosts
 position of pellets
 position of power pellets
-Level UI Data (grid) 
+Level Data (grid) 
 color scheme
-position of lights
 lives
 score
 vilken level
