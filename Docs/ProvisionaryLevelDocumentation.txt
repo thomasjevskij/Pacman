@@ -1,0 +1,22 @@
+powerpellet 			R
+pellet					G
+pacmanspawn				B
+ghostspawn (4 olika)	RG
+ljuspositioner			GB
+empty					RGB
+
+"utdata" även väggar
+
+Cell-klass
+
+Grid/Level-klass
+private vector<Cell>
+Get vector<WallPos>
+Get vector<LightPos>
+Get vector<FoodPos>
+Get vector<PelletPos>
+Get vector<PowerPelletPos>
+
+public GetCell(x, y);
+AddFood(x, y);
+RemoveEatable(x, y);
