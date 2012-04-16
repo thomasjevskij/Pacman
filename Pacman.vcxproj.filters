@@ -35,6 +35,9 @@
     <ClCompile Include="Code\Framework\RenderBatch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Resources\ResourceManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Framework\ApplicationWindow.hpp">
@@ -53,6 +56,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Framework\RenderBatch.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Resources\ResourceManager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
