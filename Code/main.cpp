@@ -1,26 +1,21 @@
 #include "Global.hpp"
-#include "ApplicationWindow.hpp"
+#include "ResourceManager.hpp"
 
-using Framework::ApplicationWindow;
+class Dummy
+{
+public:
+	Dummy(const std::string& filename)
+	{
+		MessageBox(NULL, filename.c_str(), "Loaded!", MB_OK);
+	}
+};
 
 int WINAPI WinMain(HINSTANCE instance, HINSTANCE previousInstance, LPSTR commandLine, int showState)
 {
-	ApplicationWindow::Description description;
-	description.X = 0;
-	description.Y = 0;
-	description.ClientWidth = 640;
-	description.ClientHeight = 480;
-	description.ShowState = showState;
-	description.HasFrame = true;
-	description.Resizable = true;
-	
-	ApplicationWindow window(instance, description);
-	
-	bool running = true;
-	while (running)
-	{
-		running = window.ProcessMessages();
-	}
+	Resources::ResourceManager<Dummy> rm("Resources/");
+
+	Resources::ResourceManager<Dummy>::GetManager().Load("Hello world");
+	Resources::ResourceManager<Dummy>::GetManager().Load("Hello world 2");
 
 	return 0;
 }
