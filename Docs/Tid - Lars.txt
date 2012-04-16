@@ -3,3 +3,4 @@
 2012-04-12: 2h WBS, 2h Class Diagram, 1h Prototype, Foundation
 2012-04-15: 2h Weekly
 2012-04-16: 1h Resource Manager
+	    0.5h Camera Class

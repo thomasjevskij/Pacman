@@ -2,4 +2,5 @@
 
 -- Rapportera v16 2012-04-11: 4h Architecture
 
-2012-04-16: 1h Resource Manager
+2012-04-16: 	1h Resource Manager
+		0.5h Camera
