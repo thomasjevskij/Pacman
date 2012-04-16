@@ -46,6 +46,7 @@ namespace Framework
 	{}
 
 	ApplicationWindow::ApplicationWindow(HINSTANCE instance, const Description& description)
+		: mExitValue(0)
 	{
 		if (!SetupClass(description))
 			throw std::runtime_error("Failed to register window class");
@@ -111,6 +112,11 @@ namespace Framework
 		return mHandle;
 	}
 
+	int ApplicationWindow::GetExitValue() const
+	{
+		return mExitValue;
+	}
+
 	bool ApplicationWindow::ProcessMessages()
 	{
 		MSG message;
@@ -121,6 +127,9 @@ namespace Framework
 			TranslateMessage(&message);
 			DispatchMessage(&message);
 		}
+
+		if (message.message == WM_QUIT)
+			mExitValue = (int) message.wParam;
 
 		return message.message != WM_QUIT;
 	}

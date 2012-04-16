@@ -9,16 +9,18 @@ namespace Framework
 {
 	class RenderBatch;
 
-	class Game
+	class Game : public WindowNotificationSubscriber
 	{
 	public:
 		Game(HINSTANCE instance, const ApplicationWindow::Description& windowDescription, const D3DContext::Description& contextDescription);
 		virtual ~Game() throw();
 
-		void Start();
+		int Start();
 	protected:
 		virtual void Update(float dt) = 0;
 		virtual void Draw(RenderBatch& renderBatch, float dt) = 0;
+
+		void Quit();
 	private:
 		bool mRunning;
 		ApplicationWindow mWindow;
