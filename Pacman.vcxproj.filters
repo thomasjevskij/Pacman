@@ -35,9 +35,6 @@
     <ClCompile Include="Code\Framework\RenderBatch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Resources\ResourceManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Helper\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

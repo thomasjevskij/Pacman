@@ -166,7 +166,6 @@
     <ClCompile Include="Code\Helper\Camera.cpp" />
     <ClCompile Include="Code\Helper\Primitives.cpp" />
     <ClCompile Include="Code\main.cpp" />
-    <ClCompile Include="Code\Resources\ResourceManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Framework\ApplicationWindow.hpp" />
