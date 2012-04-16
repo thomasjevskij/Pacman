@@ -4,3 +4,4 @@
 2012-04-15: 2h Weekly
 2012-04-16: 1h Resource Manager
 	    0.5h Camera Class
+	    1h PacmanGame Class
