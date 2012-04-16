@@ -1,1 +1,5 @@
 2012-04-10: 4h
+
+-- Rapportera v16 2012-04-11: 4h Architecture
+
+2012-04-16: 1h Resource Manager
