@@ -55,7 +55,7 @@ namespace Model
 		// Checks if food exists or not
 		bool FoodExists() const;
 
-		Cell GetCell(int x, int y) const;
+		const Cell& GetCell(int x, int y) const;
 		Coord GetPacmanSpawnPosition() const;
 		const std::vector<Coord>& GetWallPositions() const;
 		const std::vector<Coord>& GetLightPositions() const;
@@ -63,6 +63,7 @@ namespace Model
 		const std::vector<Coord>& GetPowerPelletPositions() const;
 		const std::vector<Coord>& GetGhostSpawnPositions() const;
 	private:
+		// Converts x and y coordinates to the corresponding index in mCells. Returns -1 if invalid x or y is passed
 		int GetIndex(int x, int y) const;
 		void SetCellType(int x, int y, Cell::CellType type);
 

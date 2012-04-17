@@ -121,9 +121,12 @@ namespace Model
 		SetCellType(x, y, Cell::C_CELLTYPE_EMPTY);
 	}
 
-	Cell Level::GetCell(int x, int y) const
+	const Cell& Level::GetCell(int x, int y) const
 	{
-		return mCells[GetIndex(x, y)];
+		int i = GetIndex(x, y);
+		assert(i >= 0 && i < mCells.size());
+
+		return mCells[i];
 	}
 
 	bool Level::FoodExists() const
@@ -135,27 +138,22 @@ namespace Model
 	{
 		return mPacmanSpawnPosition;
 	}
-
 	const std::vector<Coord>& Level::GetWallPositions() const
 	{
 		return mWallPositions;
 	}
-
 	const std::vector<Coord>& Level::GetLightPositions() const
 	{
 		return mLightPositions;
 	}
-
 	const std::vector<Coord>& Level::GetPelletPositions() const
 	{
 		return mPelletPositions;
 	}
-
 	const std::vector<Coord>& Level::GetPowerPelletPositions() const
 	{
 		return mPowerPelletPositions;
 	}
-
 	const std::vector<Coord>& Level::GetGhostSpawnPositions() const
 	{
 		return mGhostSpawnPositions;
@@ -163,11 +161,18 @@ namespace Model
 
 	int Level::GetIndex(int x, int y) const
 	{
-		return x + y * mHeight;
+		if (x >= 0 && x < mWidth &&
+			y >= 0 && y < mHeight)
+			return x + y * mHeight;
+		else
+			return -1;
 	}
 
 	void Level::SetCellType(int x, int y, Cell::CellType type)
 	{
-		mCells[GetIndex(x, y)].Type = type;
+		int i = GetIndex(x, y);
+		assert(i >= 0 && i < mCells.size());
+
+		mCells[i].Type = type;
 	}
 }
