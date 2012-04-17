@@ -57,6 +57,11 @@ namespace Framework
 		SafeRelease(mDevice);
 	}
 
+	ID3D10Device* D3DContext::GetDevice()
+	{
+		return mDevice;
+	}
+
 	const std::vector<D3DContext::Viewport> D3DContext::GetViewports() const
 	{
 		return mViewports;

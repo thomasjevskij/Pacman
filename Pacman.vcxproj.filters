@@ -15,6 +15,8 @@
     <ClCompile Include="Code\main.cpp" />
     <ClCompile Include="Code\PacmanGame.cpp" />
     <ClCompile Include="Code\Framework\GameTime.cpp" />
+    <ClCompile Include="Code\Helper\r2tk\r2-assert.cpp" />
+    <ClCompile Include="Code\Helper\r2tk\r2-exception.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Effect\Effect.hpp" />
@@ -32,6 +34,11 @@
     <ClInclude Include="Code\PacmanGame.hpp" />
     <ClInclude Include="Code\Resources\ResourceManager.hpp" />
     <ClInclude Include="Code\Framework\GameTime.hpp" />
+    <ClInclude Include="Code\Helper\r2tk\r2-assert.hpp" />
+    <ClInclude Include="Code\Helper\r2tk\r2-exception.hpp" />
+    <ClInclude Include="Code\Helper\r2tk\r2-global.hpp" />
+    <ClInclude Include="Code\Helper\r2tk\r2-singleton.hpp" />
+    <ClInclude Include="Code\Resources\FileResourceManager.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

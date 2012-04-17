@@ -2,8 +2,11 @@
 #define EFFECT_HPP
 
 #include "Global.hpp"
+#include <string>
 #include <vector>
 #include "Technique.hpp"
+#include "ResourceManager.hpp"
+#include "r2-singleton.hpp"
 
 namespace D3D
 {
@@ -60,6 +63,20 @@ namespace D3D
 		*/
 		Effect(const Effect& copy);
 		Effect& operator=(const Effect& copy);
+	};
+}
+
+namespace Resources
+{
+	class EffectResourceManager : public r2::Singleton<EffectResourceManager>, public Private::ResourceManager<D3D::Effect>
+	{
+	public:
+		EffectResourceManager(const std::string& path, ID3D10Device* device);
+
+		D3D::Effect* Load(const std::string& filename);
+	private:
+		ID3D10Device* mDevice;
+		std::string mPath;
 	};
 }
 

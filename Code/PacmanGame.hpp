@@ -2,6 +2,9 @@
 #define PACMAN_GAME_HPP
 
 #include "Game.hpp"
+#include "FileResourceManager.hpp"
+#include "Effect.hpp"
+#include "Level.hpp"
 
 using namespace Framework;
 
@@ -9,6 +12,7 @@ class PacmanGame : public Game
 {
 public:
 	PacmanGame(HINSTANCE instance);
+	~PacmanGame() throw();
 
 	void KeyPressed(ApplicationWindow* window, int keyCode);
 	void KeyReleased(ApplicationWindow* window, int keyCode);
@@ -31,6 +35,9 @@ private:
 
 		ContextDescription();
 	};
+
+	Resources::EffectResourceManager* mEffectManager;
+	Resources::FileResourceManager<Model::Level>* mLevelManager;
 };
 
 #endif

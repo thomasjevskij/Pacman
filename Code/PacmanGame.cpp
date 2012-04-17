@@ -19,7 +19,14 @@ PacmanGame::ContextDescription::ContextDescription()
 PacmanGame::PacmanGame(HINSTANCE instance)
 	: Game(instance, WindowDescription().Description, ContextDescription().Description)
 {
-	
+	mEffectManager = new Resources::EffectResourceManager("Resources/Effects/", mD3DContext.GetDevice());
+	mLevelManager = new Resources::FileResourceManager<Model::Level>("Resources/Levels/");
+}
+
+PacmanGame::~PacmanGame() throw()
+{
+	SafeDelete(mEffectManager);
+	SafeDelete(mLevelManager);
 }
 
 void PacmanGame::Update(float dt)

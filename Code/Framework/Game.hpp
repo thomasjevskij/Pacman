@@ -18,14 +18,15 @@ namespace Framework
 
 		int Start();
 	protected:
+		ApplicationWindow mWindow;
+		D3DContext mD3DContext;
+
 		virtual void Update(float dt) = 0;
 		virtual void Draw(RenderBatch& renderBatch, float dt) = 0;
 
 		void Quit();
 	private:
 		bool mRunning;
-		ApplicationWindow mWindow;
-		D3DContext mD3DContext;
 		RenderBatch mRenderBatch;
 		GameTime mTimer;
 

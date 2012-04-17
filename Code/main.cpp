@@ -1,4 +1,5 @@
 #include "Global.hpp"
+#include "ResourceManager.hpp"
 #include "PacmanGame.hpp"
 
 int WINAPI WinMain(HINSTANCE instance, HINSTANCE previousInstance, LPSTR commandLine, int showState)
