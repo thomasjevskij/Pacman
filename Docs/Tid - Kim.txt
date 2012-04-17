@@ -5,3 +5,4 @@
 2012-04-16: 	1h Resource Manager
 		0.5h Camera
 		1h PacmanGame Class
+2012-04-17:		2h Resource Manager
