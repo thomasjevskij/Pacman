@@ -58,6 +58,7 @@ namespace Framework
 		unsigned int GetClientWidth() const;
 		unsigned int GetClientHeight() const;
 		HWND GetHandle() const;
+		int GetExitValue() const;
 
 		// Process all messages currently in the message queue
 		bool ProcessMessages();
@@ -72,6 +73,7 @@ namespace Framework
 		RECT mClientRect;
 		RECT mWindowRect;
 		NotificationSubscriberVector mNotificationSubscribers;
+		int mExitValue;
 
 		// The static WndProc. Forwards all messages to the proper ApplicationWindow class.
 		static LRESULT CALLBACK WndProc(HWND handle, UINT message, WPARAM wParam, LPARAM lParam);

@@ -42,6 +42,19 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Logic\Level.cpp">
+    <ClCompile Include="Code\Effect\Effect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Effect\Pass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Effect\Technique.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Effect\VertexBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\PacmanGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -71,6 +84,19 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Logic\Level.hpp">
+    <ClInclude Include="Code\Effect\Effect.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Effect\Pass.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Effect\Technique.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Effect\VertexBuffer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\PacmanGame.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

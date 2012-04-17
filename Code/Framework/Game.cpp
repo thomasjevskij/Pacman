@@ -10,16 +10,25 @@ namespace Framework
 
 	Game::~Game() throw() {}
 
-	void Game::Start()
+	int Game::Start()
 	{
 		while (mRunning)
 		{
 			mRunning = mWindow.ProcessMessages();
+			if (!mRunning)
+				break;
 
 			// TODO: Add Timer class and calculate proper dt
 			Update(0.0f);
 			DrawWrapper(0.0f);
 		}
+
+		return mWindow.GetExitValue();
+	}
+
+	void Game::Quit()
+	{
+		PostQuitMessage(0);
 	}
 
 	void Game::DrawWrapper(float dt)
