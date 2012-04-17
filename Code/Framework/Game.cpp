@@ -6,21 +6,25 @@ namespace Framework
 		: mWindow(instance, windowDescription)
 		, mD3DContext(&mWindow, contextDescription)
 		, mRunning(true)
-	{}
+	{
+		mWindow.AddNotificationSubscriber(this);
+	}
 
 	Game::~Game() throw() {}
 
 	int Game::Start()
 	{
+		mTimer.Update();
 		while (mRunning)
 		{
+			mTimer.Update();
+
 			mRunning = mWindow.ProcessMessages();
 			if (!mRunning)
 				break;
 
-			// TODO: Add Timer class and calculate proper dt
-			Update(0.0f);
-			DrawWrapper(0.0f);
+			Update(mTimer.GetTimeSinceLastTick().Seconds);
+			DrawWrapper(mTimer.GetTimeSinceLastTick().Seconds);
 		}
 
 		return mWindow.GetExitValue();

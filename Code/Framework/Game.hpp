@@ -4,6 +4,7 @@
 #include "ApplicationWindow.hpp"
 #include "D3DContext.hpp"
 #include "RenderBatch.hpp"
+#include "GameTime.hpp"
 
 namespace Framework
 {
@@ -26,6 +27,7 @@ namespace Framework
 		ApplicationWindow mWindow;
 		D3DContext mD3DContext;
 		RenderBatch mRenderBatch;
+		GameTime mTimer;
 
 		void DrawWrapper(float dt);
 

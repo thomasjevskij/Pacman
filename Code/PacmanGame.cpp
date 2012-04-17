@@ -32,3 +32,19 @@ void PacmanGame::Draw(RenderBatch& renderBatch, float dt)
 
 }
 
+void PacmanGame::KeyPressed(ApplicationWindow* window, int keyCode)
+{
+	if (keyCode == VK_ESCAPE)
+		Quit();
+}
+
+void PacmanGame::KeyReleased(ApplicationWindow* window, int keyCode)
+{
+
+}
+
+void PacmanGame::CharEntered(ApplicationWindow* window, char character)
+{
+
+}
+

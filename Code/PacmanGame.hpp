@@ -10,6 +10,9 @@ class PacmanGame : public Game
 public:
 	PacmanGame(HINSTANCE instance);
 
+	void KeyPressed(ApplicationWindow* window, int keyCode);
+	void KeyReleased(ApplicationWindow* window, int keyCode);
+	void CharEntered(ApplicationWindow* window, char character);
 protected:
 	void Update(float dt);
 	void Draw(RenderBatch& renderBatch, float dt);
