@@ -2,8 +2,8 @@ modell -> view
 
 position and facing of Pacman
 position and facing of Ghosts
-position of pellets
-position of power pellets
+position of pellets (i Levelklassen)
+position of power pellets (i Levelklassen)
 Level Data (grid) 
 color scheme
 lives

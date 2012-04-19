@@ -1,2 +1,3 @@
 2012-04-11	3h 	Arkitekturdiagram mm.
 2012-04-12	4h	Gantt och UML-diagram
+2016-04-16	3h	Levelklass
