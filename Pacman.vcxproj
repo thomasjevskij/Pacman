@@ -172,6 +172,7 @@
     <ClCompile Include="Code\Helper\Primitives.cpp" />
     <ClCompile Include="Code\Helper\r2tk\r2-assert.cpp" />
     <ClCompile Include="Code\Helper\r2tk\r2-exception.cpp" />
+    <ClCompile Include="Code\Logic\GameplayHandler.cpp" />
     <ClCompile Include="Code\Logic\Level.cpp" />
     <ClCompile Include="Code\main.cpp" />
     <ClCompile Include="Code\PacmanGame.cpp" />
@@ -193,6 +194,7 @@
     <ClInclude Include="Code\Helper\r2tk\r2-exception.hpp" />
     <ClInclude Include="Code\Helper\r2tk\r2-global.hpp" />
     <ClInclude Include="Code\Helper\r2tk\r2-singleton.hpp" />
+    <ClInclude Include="Code\Logic\GameplayHandler.hpp" />
     <ClInclude Include="Code\Logic\Level.hpp" />
     <ClInclude Include="Code\PacmanGame.hpp" />
     <ClInclude Include="Code\Resources\FileResourceManager.hpp" />

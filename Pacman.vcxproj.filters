@@ -17,6 +17,7 @@
     <ClCompile Include="Code\Framework\GameTime.cpp" />
     <ClCompile Include="Code\Helper\r2tk\r2-assert.cpp" />
     <ClCompile Include="Code\Helper\r2tk\r2-exception.cpp" />
+    <ClCompile Include="Code\Logic\GameplayHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Effect\Effect.hpp" />
@@ -39,6 +40,7 @@
     <ClInclude Include="Code\Helper\r2tk\r2-global.hpp" />
     <ClInclude Include="Code\Helper\r2tk\r2-singleton.hpp" />
     <ClInclude Include="Code\Resources\FileResourceManager.hpp" />
+    <ClInclude Include="Code\Logic\GameplayHandler.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
