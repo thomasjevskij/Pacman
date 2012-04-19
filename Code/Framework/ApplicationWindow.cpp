@@ -1,6 +1,7 @@
 #include "ApplicationWindow.hpp"
 #include "Primitives.hpp"
 #include <stdexcept>
+#include <algorithm>
 
 namespace Framework
 {
@@ -42,11 +43,10 @@ namespace Framework
 		, Caption("Application")
 		, Resizable(true)
 		, HasFrame(true)
-	{
-		
-	}
+	{}
 
 	ApplicationWindow::ApplicationWindow(HINSTANCE instance, const Description& description)
+		: mExitValue(0)
 	{
 		if (!SetupClass(description))
 			throw std::runtime_error("Failed to register window class");
@@ -56,7 +56,65 @@ namespace Framework
 
 	ApplicationWindow::~ApplicationWindow()
 	{
+		if (sWindowRegister.find(mHandle) != sWindowRegister.end())
+		{
+			sWindowRegister.erase(mHandle);
+		}
+	}
 
+	void ApplicationWindow::AddNotificationSubscriber(WindowNotificationSubscriber* subscriber)
+	{
+		NotificationSubscriberVector::iterator it = std::find(mNotificationSubscribers.begin(), mNotificationSubscribers.end(), subscriber);
+		if (it == mNotificationSubscribers.end())
+		{
+			mNotificationSubscribers.push_back(subscriber);
+		}
+	}
+
+	void ApplicationWindow::RemoveNotificationSubscriber(WindowNotificationSubscriber* subscriber)
+	{
+		NotificationSubscriberVector::iterator it = std::find(mNotificationSubscribers.begin(), mNotificationSubscribers.end(), subscriber);
+		while (it != mNotificationSubscribers.end())
+		{
+			mNotificationSubscribers.erase(it);
+			it = std::find(mNotificationSubscribers.begin(), mNotificationSubscribers.end(), subscriber);
+		}
+	}
+
+	bool ApplicationWindow::IsNotificationSubscriber(const WindowNotificationSubscriber* subscriber) const
+	{
+		NotificationSubscriberVector::const_iterator it = std::find(mNotificationSubscribers.begin(), mNotificationSubscribers.end(), subscriber);
+		return it != mNotificationSubscribers.end();
+	}
+
+	unsigned int ApplicationWindow::GetWindowWidth() const
+	{
+		return Helper::GetRectWidth(mWindowRect);
+	}
+
+	unsigned int ApplicationWindow::GetWindowHeight() const
+	{
+		return Helper::GetRectHeight(mWindowRect);
+	}
+
+	unsigned int ApplicationWindow::GetClientWidth() const
+	{
+		return Helper::GetRectWidth(mClientRect);
+	}
+
+	unsigned int ApplicationWindow::GetClientHeight() const
+	{
+		return Helper::GetRectHeight(mClientRect);
+	}
+
+	HWND ApplicationWindow::GetHandle() const
+	{
+		return mHandle;
+	}
+
+	int ApplicationWindow::GetExitValue() const
+	{
+		return mExitValue;
 	}
 
 	bool ApplicationWindow::ProcessMessages()
@@ -69,6 +127,9 @@ namespace Framework
 			TranslateMessage(&message);
 			DispatchMessage(&message);
 		}
+
+		if (message.message == WM_QUIT)
+			mExitValue = (int) message.wParam;
 
 		return message.message != WM_QUIT;
 	}
@@ -152,8 +213,67 @@ namespace Framework
 			case WM_DESTROY:
 				PostQuitMessage(0);
 				return true;
+			case WM_SIZE:
+				HandleSizeMessage();
+				return true;
+			case WM_KEYDOWN:
+				HandleKeyDownMessage(wParam, lParam);
+				return true;
+			case WM_KEYUP:
+				HandleKeyUpMessage(wParam, lParam);
+				return true;
+			case WM_CHAR:
+				HandleCharMessage(wParam, lParam);
+				return true;
 		}
 
 		return false;
+	}
+
+	void ApplicationWindow::HandleSizeMessage()
+	{
+		WINDOWINFO info;
+		GetWindowInfo(mHandle, &info);
+
+		bool resized = false;
+		if (Helper::GetRectWidth(info.rcClient) != Helper::GetRectWidth(mClientRect))
+			resized = true;
+		else if (Helper::GetRectHeight(info.rcClient) != Helper::GetRectHeight(mClientRect))
+			resized = true;
+
+		mClientRect = info.rcClient;
+		mWindowRect = info.rcWindow;
+				
+		if (resized)
+		{
+			for (size_t i = 0; i < mNotificationSubscribers.size(); ++i)
+			{
+				mNotificationSubscribers[i]->WindowResized(this, GetClientWidth(), GetClientHeight());
+			}
+		}
+	}
+
+	void ApplicationWindow::HandleKeyDownMessage(WPARAM wParam, LPARAM lParam)
+	{
+		for (size_t i = 0; i < mNotificationSubscribers.size(); ++i)
+		{
+			mNotificationSubscribers[i]->KeyPressed(this, wParam);
+		}
+	}
+
+	void ApplicationWindow::HandleKeyUpMessage(WPARAM wParam, LPARAM lParam)
+	{
+		for (size_t i = 0; i < mNotificationSubscribers.size(); ++i)
+		{
+			mNotificationSubscribers[i]->KeyReleased(this, wParam);
+		}
+	}
+
+	void ApplicationWindow::HandleCharMessage(WPARAM wParam, LPARAM lParam)
+	{
+		for (size_t i = 0; i < mNotificationSubscribers.size(); ++i)
+		{
+			mNotificationSubscribers[i]->CharEntered(this, static_cast<char>(wParam));
+		}
 	}
 }

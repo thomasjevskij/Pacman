@@ -6,3 +6,12 @@
 2h WBS
 2h Package/class diagrams
 1h Foundation
+
+15/4 - 2012
+1h Weekly report/WBS
+
+16/4 - 2012
+3.5h Level class [done]
+
+17/4 - 2012
+0.5h Level class

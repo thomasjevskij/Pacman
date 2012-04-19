@@ -26,8 +26,8 @@ namespace Helper
 	template <typename T>
 	struct Point2
 	{
-		T x;
-		T y;
+		T X;
+		T Y;
 
 		Point2();
 		Point2(T x, T y);
@@ -44,9 +44,9 @@ namespace Helper
 	template <typename T>
 	struct Point3
 	{
-		T x;
-		T y;
-		T z;
+		T X;
+		T Y;
+		T Z;
 
 		Point3();
 		Point3(T x, T y, T z);
@@ -63,7 +63,7 @@ namespace Helper
 	template <typename T>
 	struct AABB2
 	{
-		Point2<T> mCorners[2];
+		Point2<T> Corners[2];
 
 		AABB2();
 		AABB2(T x, T y, T width, T height);
@@ -86,7 +86,7 @@ namespace Helper
 	template <typename T>
 	struct AABB3
 	{
-		Point3<T> mCorners[2];
+		Point3<T> Corners[2];
 
 		AABB3();
 		AABB3(T x, T y, T z, T width, T height, T depth);
@@ -112,12 +112,12 @@ namespace Helper
 	*/
 	struct Frustum
 	{
-		Frustum() : mNearDistance(0.0f), mFarDistance(0.0f), mFieldOfViewY(0.0f), mAspectRatio(0.0f) {}
+		Frustum() : NearDistance(0.0f), FarDistance(0.0f), FieldOfViewY(0.0f), AspectRatio(0.0f) {}
 
-		float mNearDistance;
-		float mFarDistance;
-		float mFieldOfViewY;
-		float mAspectRatio;
+		float NearDistance;
+		float FarDistance;
+		float FieldOfViewY;
+		float AspectRatio;
 
 		/**
 			Create a perspective projection matrix from the
@@ -133,26 +133,26 @@ namespace Helper
 	*/
 
 	template <typename T>
-	Point2<T>::Point2() : x(0), y(0) {}
+	Point2<T>::Point2() : X(0), Y(0) {}
 
 	template <typename T>
 	Point2<T>::Point2(T x, T y)
 	{
-		this->x = x;
-		this->y = y;
+		X = x;
+		Y = y;
 	}
 
 
 
 	template <typename T>
-	Point3<T>::Point3() : x(0), y(0), z(0) {}
+	Point3<T>::Point3() : X(0), Y(0), Z(0) {}
 
 	template <typename T>
 	Point3<T>::Point3(T x, T y, T z)
 	{
-		this->x = x;
-		this->y = y;
-		this->z = z;
+		X = x;
+		Y = y;
+		Z = z;
 	}
 
 
@@ -165,15 +165,15 @@ namespace Helper
 	template <typename T>
 	AABB2<T>::AABB2(T x, T y, T width, T height)
 	{
-		mCorners[0] = Point2<T>(x, y);
-		mCorners[1] = Point2<T>(x + width, y + height);
+		Corners[0] = Point2<T>(x, y);
+		Corners[1] = Point2<T>(x + width, y + height);
 	}
 
 	template <typename T>
 	AABB2<T>::AABB2(const Point2<T>& p1, const Point2<T>& p2)
 	{
-		mCorners[0] = p1;
-		mCorners[1] = p2;
+		Corners[0] = p1;
+		Corners[1] = p2;
 	}
 
 
@@ -181,25 +181,25 @@ namespace Helper
 	template <typename T>
 	T AABB2<T>::GetLeft() const
 	{
-		return std::min(mCorners[0].x, mCorners[1].x);
+		return std::min(Corners[0].x, Corners[1].x);
 	}
 
 	template <typename T>
 	T AABB2<T>::GetBottom() const
 	{
-		return std::min(mCorners[0].y, mCorners[1].y);
+		return std::min(Corners[0].y, Corners[1].y);
 	}
 
 	template <typename T>
 	T AABB2<T>::GetWidth() const
 	{
-		return std::abs(mCorners[0].x - mCorners[1].x);
+		return std::abs(Corners[0].x - Corners[1].x);
 	}
 
 	template <typename T>
 	T AABB2<T>::GetHeight() const
 	{
-		return std::abs(mCorners[0].y - mCorners[1].y);
+		return std::abs(Corners[0].y - Corners[1].y);
 	}
 
 
@@ -212,55 +212,54 @@ namespace Helper
 	template <typename T>
 	AABB3<T>::AABB3(T x, T y, T z, T width, T depth, T height)
 	{
-		mCorners[0] = Point3<T>(x, y, z);
-		mCorners[1] = Point3<T>(x + width, y + height, z + depth);
+		Corners[0] = Point3<T>(x, y, z);
+		Corners[1] = Point3<T>(x + width, y + height, z + depth);
 	}
 
 	template <typename T>
 	AABB3<T>::AABB3(const Point3<T>& p1, const Point3<T>& p2)
 	{
-		mCorners[0] = p1;
-		mCorners[1] = p2;
+		Corners[0] = p1;
+		Corners[1] = p2;
 	}
 
 
 	template <typename T>
 	T AABB3<T>::GetLeftPlane() const
 	{
-		return std::min(mCorners[0].x, mCorners[1].x);
+		return std::min(Corners[0].x, Corners[1].x);
 	}
 
 	template <typename T>
 	T AABB3<T>::GetBottomPlane() const
 	{
-		return std::min(mCorners[0].y, mCorners[1].y);
+		return std::min(Corners[0].y, Corners[1].y);
 	}
 
 	template <typename T>
 	T AABB3<T>::GetFrontPlane() const
 	{
-		return std::min(mCorners[0].z, mCorners[1].z);
+		return std::min(Corners[0].z, Corners[1].z);
 	}
 
 
 	template <typename T>
 	T AABB3<T>::GetWidth() const
 	{
-		return std::abs(mCorners[0].x - mCorners[1].x);
+		return std::abs(Corners[0].x - Corners[1].x);
 	}
 
 	template <typename T>
 	T AABB3<T>::GetDepth() const
 	{
-		return std::abs(mCorners[0].z - mCorners[1].z);
+		return std::abs(Corners[0].z - Corners[1].z);
 	}
 
 	template <typename T>
 	T AABB3<T>::GetHeight() const
 	{
-		return std::abs(mCorners[0].y - mCorners[1].y);
+		return std::abs(Corners[0].y - Corners[1].y);
 	}
-
 }
 
 #endif
