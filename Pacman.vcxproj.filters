@@ -11,17 +11,19 @@
     <ClCompile Include="Code\Framework\RenderBatch.cpp" />
     <ClCompile Include="Code\Helper\Camera.cpp" />
     <ClCompile Include="Code\Helper\Primitives.cpp" />
-    <ClCompile Include="Code\Logic\Level.cpp" />
     <ClCompile Include="Code\main.cpp" />
     <ClCompile Include="Code\PacmanGame.cpp" />
-    <ClCompile Include="Code\Framework\GameTime.cpp" />
     <ClCompile Include="Code\Helper\r2tk\r2-assert.cpp" />
     <ClCompile Include="Code\Helper\r2tk\r2-exception.cpp" />
-    <ClCompile Include="Code\Logic\GameplayHandler.cpp" />
-    <ClCompile Include="Code\Logic\LevelHandler.cpp" />
-    <ClCompile Include="Code\Logic\Fruit.cpp" />
-    <ClCompile Include="Code\Logic\Player.cpp" />
-    <ClCompile Include="Code\Logic\Ghost.cpp" />
+    <ClCompile Include="Code\Helper\GameFont.cpp" />
+    <ClCompile Include="Code\Helper\GameTime.cpp" />
+    <ClCompile Include="Code\Model\Fruit.cpp" />
+    <ClCompile Include="Code\Model\GameplayHandler.cpp" />
+    <ClCompile Include="Code\Model\Ghost.cpp" />
+    <ClCompile Include="Code\Model\Level.cpp" />
+    <ClCompile Include="Code\Model\LevelHandler.cpp" />
+    <ClCompile Include="Code\Model\Player.cpp" />
+    <ClCompile Include="Code\View\Menu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Effect\Effect.hpp" />
@@ -35,22 +37,24 @@
     <ClInclude Include="Code\Helper\Camera.hpp" />
     <ClInclude Include="Code\Helper\Global.hpp" />
     <ClInclude Include="Code\Helper\Primitives.hpp" />
-    <ClInclude Include="Code\Logic\Level.hpp" />
     <ClInclude Include="Code\PacmanGame.hpp" />
     <ClInclude Include="Code\Resources\ResourceManager.hpp" />
-    <ClInclude Include="Code\Framework\GameTime.hpp" />
     <ClInclude Include="Code\Helper\r2tk\r2-assert.hpp" />
     <ClInclude Include="Code\Helper\r2tk\r2-exception.hpp" />
     <ClInclude Include="Code\Helper\r2tk\r2-global.hpp" />
     <ClInclude Include="Code\Helper\r2tk\r2-singleton.hpp" />
     <ClInclude Include="Code\Resources\FileResourceManager.hpp" />
-    <ClInclude Include="Code\Logic\GameplayHandler.hpp" />
-    <ClInclude Include="Code\Logic\LevelHandler.hpp" />
-    <ClInclude Include="Code\Logic\GameObject.hpp" />
-    <ClInclude Include="Code\Logic\Fruit.hpp" />
-    <ClInclude Include="Code\Logic\Ai.hpp" />
-    <ClInclude Include="Code\Logic\Ghost.hpp" />
-    <ClInclude Include="Code\Logic\Player.hpp" />
+    <ClInclude Include="Code\Helper\GameTime.hpp" />
+    <ClInclude Include="Code\Helper\GameFont.hpp" />
+    <ClInclude Include="Code\Model\Ai.hpp" />
+    <ClInclude Include="Code\Model\Player.hpp" />
+    <ClInclude Include="Code\Model\Fruit.hpp" />
+    <ClInclude Include="Code\Model\GameObject.hpp" />
+    <ClInclude Include="Code\Model\GameplayHandler.hpp" />
+    <ClInclude Include="Code\Model\Ghost.hpp" />
+    <ClInclude Include="Code\Model\Level.hpp" />
+    <ClInclude Include="Code\Model\LevelHandler.hpp" />
+    <ClInclude Include="Code\View\Menu.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

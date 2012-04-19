@@ -1,66 +1,44 @@
 #include "GameFont.hpp"
+#include "r2-exception.hpp"
 
 namespace Helper
 {
-	GameFont::GameFont() : mFont(NULL) {}
+	const unsigned int GameFont::C_WEIGHT_NORMAL = 400;
+	const unsigned int GameFont::C_WEIGHT_BOLD = 700;
 
-	GameFont::GameFont(ID3D10Device* graphicsDevice, TCHAR* name, int size, bool italic, bool bold)
+	GameFont::GameFont(ID3D10Device* device, const std::string& name, unsigned int height, bool italics, bool bold)
+		: mDevice(device)
+		, mFont(NULL)
 	{
-		mGraphicsDevice = graphicsDevice;
-
-		// Create the font description
-		mFontDesc.Height			= size;					// Logical units height of the character cell
-		mFontDesc.Width				= 0;					// Logical units width of the characters (0 - use aspect ratio)
-		if(bold)
-			mFontDesc.Weight		= 700;					// Font weight (0-1000: 0 - use default, 400 - normal, 700 - bold)
-		else
-			mFontDesc.Weight		= 400;					// Font weight (0-1000: 0 - use default, 400 - normal, 700 - bold)
-		mFontDesc.MipLevels			= 1;					// Map texture space identically to screen space
-		mFontDesc.Italic			= italic;				// Whether the font should be italic or not
-		mFontDesc.CharSet			= DEFAULT_CHARSET;		// Use default character set
-		mFontDesc.OutputPrecision	= OUT_DEFAULT_PRECIS;	// Default output precision (match requested height width etc)
-		mFontDesc.Quality			= DEFAULT_QUALITY;		// Default output quality
-		mFontDesc.PitchAndFamily	= DEFAULT_PITCH | FF_DONTCARE;
-		strcpy_s(mFontDesc.FaceName, name);
-
-		// Create the font from description
-		D3DX10CreateFontIndirect(mGraphicsDevice, &mFontDesc, &mFont);
+		if (!LoadFont(name, height, italics, bold))
+			throw r2ExceptionIOM("Failed to load font: " + name);
 	}
 
 	GameFont::~GameFont()
 	{
 		SafeRelease(mFont);
-		mGraphicsDevice = NULL;
 	}
 
-	// Writes text at the specified position with the specified color
-	void GameFont::WriteText(std::string text, POINT position, D3DXCOLOR textColor)
-	{
-		if(mFont == NULL)
-			return;
 
-		RECT destinationRect = {position.x, position.y, 0, 0};
+
+	void GameFont::WriteText(const std::string& text, const Helper::Point2i& position, const D3DXCOLOR& color)
+	{
+		RECT destinationRect = {position.X, position.Y, 0, 0};
 
 		mFont->DrawTextA(NULL,				// No sprite needed for few print outs
 						text.c_str(),		// String to print
 						-1,					// Characters in print string (-1 since the string is null terminated)
 						&destinationRect,	// The rectangle to draw text to
 						DT_NOCLIP,			// How to act when the text reaches rectangle edge
-						textColor);			// Text color
+						color);				// Text color
 	}
 
-	// Writes text with the specified color in a rectangle, using the specified vertical and horizontal alignment.
-	// If the line goes outside the rectangle, a line break will occur (unless the vertical alignment is set to middle 
-	// or bottom which require a single line of text - all line breaks are ignored)
-	void GameFont::WriteText(std::string text, RECT* destinationRect, D3DXCOLOR textColor, 
-		AlignHorizontal alignHor, AlignVertical alignVert)
+	void GameFont::WriteText(const std::string& text, RECT destinationRect, const D3DXCOLOR& color, 
+			AlignHorizontal alignHor, AlignVertical alignVert)
 	{
-		if(mFont == NULL)
-			return;
+		UINT alignment = DT_WORDBREAK;				// Set the alignment to break between rows
 
-		UINT alignment			= DT_WORDBREAK;		// Set the alignment to break between rows
-
-		switch(alignHor)							// Set the horizontal alignment based on the enum AlignHorizontal
+		switch (alignHor)							// Set the horizontal alignment based on the enum AlignHorizontal
 		{
 			case(Left):
 				alignment |= DT_LEFT;
@@ -75,7 +53,7 @@ namespace Helper
 				alignment |= DT_LEFT;
 		}
 
-		switch(alignVert)							// Set the vertical alignment based on the enum AlignVertical
+		switch (alignVert)							// Set the vertical alignment based on the enum AlignVertical
 		{
 			case(Top):
 				alignment |= DT_TOP;
@@ -93,54 +71,76 @@ namespace Helper
 		mFont->DrawTextA(NULL,				// No sprite needed for few print outs
 						text.c_str(),		// String to print
 						-1,					// Characters in print string (-1 since the string is null terminated)
-						destinationRect,	// The rectangle to draw text to
+						&destinationRect,	// The rectangle to draw text to
 						alignment,			// How to act when the text reaches rectangle edge
-						textColor);			// Text color
+						color);				// Text color
 	}
 
-	// Changes the font name and updates the font
-	void GameFont::ChangeFontName(TCHAR* newName)
+
+
+	bool GameFont::LoadFont(const std::string& name, unsigned int height, bool italics, bool bold)
 	{
-		if(mFont == NULL)
-			return;
-
-		strcpy_s(mFontDesc.FaceName, newName);								// Change the font name in the description
-
-		D3DX10CreateFontIndirect(mGraphicsDevice, &mFontDesc, &mFont);		// Update the font
-	}
-
-	// Changes the size of the font and updates
-	void GameFont::ChangeSize(int newSize)
-	{
-		if(mFont == NULL)
-			return;
-
-		mFontDesc.Height = newSize;											// Change the size in the description
-
-		D3DX10CreateFontIndirect(mGraphicsDevice, &mFontDesc, &mFont);		// Update the font
-	}
-
-	// Changes whether the font is bold and italic, then font is updated
-	void GameFont::ChangeBoldItalic(bool isItalic, bool isBold)
-	{
-		if(mFont == NULL)
-			return;
-
-		// Change the bold and italic values in the description
-		if(isBold)
-			mFontDesc.Weight		= 700;
+		// Set the font description
+		mFontDesc.Height			= height;				// Logical units height of the character cell
+		mFontDesc.Width				= 0;					// Logical units width of the characters (0 - use aspect ratio)
+		if(bold)
+			mFontDesc.Weight		= C_WEIGHT_BOLD;		// Font weight (0-1000: 0 - use default, 400 - normal, 700 - bold)
 		else
-			mFontDesc.Weight		= 400;
-		mFontDesc.Italic			= isItalic;
+			mFontDesc.Weight		= C_WEIGHT_NORMAL;		// Font weight (0-1000: 0 - use default, 400 - normal, 700 - bold)
+		mFontDesc.MipLevels			= 1;					// Map texture space identically to screen space
+		mFontDesc.Italic			= italics;				// Whether the font should be in italics or not
+		mFontDesc.CharSet			= DEFAULT_CHARSET;		// Use default character set
+		mFontDesc.OutputPrecision	= OUT_DEFAULT_PRECIS;	// Default output precision (match requested height width etc)
+		mFontDesc.Quality			= DEFAULT_QUALITY;		// Default output quality
+		mFontDesc.PitchAndFamily	= DEFAULT_PITCH | FF_DONTCARE;
+		
+		// Copy the font name into the description
+		strncpy_s(mFontDesc.FaceName, name.c_str(), 31);
+		mFontDesc.FaceName[31] = '\0';
 
-		D3DX10CreateFontIndirect(mGraphicsDevice, &mFontDesc, &mFont);		// Update the font
-
+		// Recreate the font
+		return RecreateFontFromDescription();
 	}
 
-	// Returns the current font size
-	int GameFont::GetSize()
+	bool GameFont::SetHeight(unsigned int height)
+	{
+		mFontDesc.Height = height;
+		return RecreateFontFromDescription();
+	}
+
+	bool GameFont::SetStyle(bool italics, bool bold)
+	{
+		if (bold)
+			mFontDesc.Weight = C_WEIGHT_BOLD;
+		else
+			mFontDesc.Weight = C_WEIGHT_NORMAL;
+		mFontDesc.Italic = italics;
+
+		return RecreateFontFromDescription();
+	}
+
+
+
+	unsigned int GameFont::GetHeight()
 	{
 		return mFontDesc.Height;
 	}
 
+	bool GameFont::IsBold() const
+	{
+		return mFontDesc.Weight == C_WEIGHT_BOLD;
+	}
+
+	bool GameFont::IsItalics() const
+	{
+		return mFontDesc.Italic == TRUE;
+	}
+
+
+
+	bool GameFont::RecreateFontFromDescription()
+	{
+		SafeRelease(mFont);
+		return SUCCEEDED(D3DX10CreateFontIndirect(mDevice, &mFontDesc, &mFont));
+	}
 }
