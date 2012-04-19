@@ -2,9 +2,14 @@
 
 namespace Model
 {
+	Player::Player(Coord gridPosition)
+	{
+		//Sätt mRealPosition till start värde
+	}
+
 	void Player::UpdateMovement()
 	{
-
+		//Updatera pacmans position
 	}
 
 	void Player::GoLeft()

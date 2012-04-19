@@ -1,13 +1,15 @@
 #ifndef FRUIT_HPP
 #define FRUIT_HPP
 
+#include "GameObject.hpp"
+
 namespace Model
 {
-	class Fruit
+	class Fruit:public GameObject
 	{
 	public:
-		Fruit(){};
-		bool IsLifeTimeOver()
+		Fruit(Coord gridPosition):GameObjekt(gridPosition);
+		bool IsLifeTimeOver();
 	private:
 		Timer mLifeTimer;
 		static const cLifeTime = 10;

@@ -8,7 +8,7 @@ namespace Model
 	public:
 		GameObjekt(Coord gridPosition){mGridPosition = gridPosition};
 		Coord GetGridPosition(){return GridPosition};
-	private:
+	protected:
 		Coord mGridPosition;
 	}
 }
