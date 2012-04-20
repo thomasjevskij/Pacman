@@ -7,6 +7,7 @@
 #include "Player.hpp"
 #include "Fruit.hpp"
 #include "Ghost.hpp"
+#include "GameTime.hpp"
 #include <vector>
 
 namespace Model
@@ -15,9 +16,9 @@ namespace Model
 	{
 	public:
 		GameplayHandler();
-		void Update();
-		//GameObject GetPacman();
-		//vector<GameObject> GetGhosts();
+		void Update(Framework::GameTime gametime);
+		GameObject GetPacman();
+		std::vector<GameObject> GetGhosts();
 		Level GetLevel();
 		int GetCurrentlevelIndex();
 		int GetLives();
@@ -26,8 +27,8 @@ namespace Model
 	private:
 		LevelHandler mLevelHandler;
 		Level mLevel;
-		//Player player;
-		//vector<Ghost> ghosts;
+		Player player;
+		std::vector<Ghost> ghosts;
 		//Timer timer
 		int mLives, mCurrentLevel, mScore;
 		bool TestGridCollision(Coord objectPos1, Coord objectPos2);

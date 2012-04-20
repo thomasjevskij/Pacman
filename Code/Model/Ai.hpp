@@ -6,7 +6,8 @@ namespace Model
 	class Ai
 	{
 	public:
-		Ai(Coord homeSquare){HomeSquare = homeSquare};
+		Ai();
+		Ai(Coord homeSquare){HomeSquare = homeSquare;};
 		virtual  Coord getTargetPosition(){};
 	protected:
 		Coord HomeSquare;

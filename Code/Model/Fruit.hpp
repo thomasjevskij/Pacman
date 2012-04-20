@@ -2,16 +2,17 @@
 #define FRUIT_HPP
 
 #include "GameObject.hpp"
+#include "GameTime.hpp"
 
 namespace Model
 {
 	class Fruit:public GameObject
 	{
 	public:
-		Fruit(Coord gridPosition):GameObjekt(gridPosition);
-		bool IsLifeTimeOver();
+		Fruit(Coord gridPosition, Helper::GameTime gameTime): GameObject(gridPosition){};
+		bool IsLifeTimeOver(Helper::GameTime gameTime);
 	private:
-		//Timer mLifeTimer;
+		Time mStartTime;
 		static const int cLifeTime = 10;
 	};
 }

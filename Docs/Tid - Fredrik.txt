@@ -3,4 +3,7 @@
 2012-04-16	3h	Levelklass
 2012-04-18	2h	GameplayHandler
 		2h	LevelHandler
-		0,5h	Ändringar iUML modeldiagram
+		0,5h	Ändringar i UML modeldiagram
+2012-04-19	3h	GameplayHandler
+		0,5h	PlayerKlass
+		0,5h	Ghostklass

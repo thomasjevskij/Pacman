@@ -16,7 +16,7 @@ namespace Model
 		int GetCurrentLevelIndex();
 		void SetCurrentLevelIndex(int levelIndex);
 	private:
-		vector<Level> mLevels;
+		std::vector<Level> mLevels;
 		int mCurrentLevelIndex;
 	};
 }
