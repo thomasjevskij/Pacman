@@ -9,6 +9,7 @@ namespace Model
 	class Player: public GameObject
 	{
 	public:
+		Player();
 		Player(Coord gridPosition); // : GameObject(gridPosition);
 		void UpdateMovement();
 		void GoLeft();

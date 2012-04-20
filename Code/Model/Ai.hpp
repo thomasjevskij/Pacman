@@ -8,7 +8,7 @@ namespace Model
 	public:
 		Ai();
 		Ai(Coord homeSquare){HomeSquare = homeSquare;};
-		virtual  Coord getTargetPosition(){};
+		virtual Coord getTargetPosition() = 0;
 	protected:
 		Coord HomeSquare;
 	};

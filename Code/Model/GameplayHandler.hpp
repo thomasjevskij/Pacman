@@ -16,9 +16,9 @@ namespace Model
 	{
 	public:
 		GameplayHandler();
-		void Update(Framework::GameTime gametime);
+		void Update(float dt);
 		GameObject GetPacman();
-		std::vector<GameObject> GetGhosts();
+		std::vector<Ghost> GetGhosts();
 		Level GetLevel();
 		int GetCurrentlevelIndex();
 		int GetLives();
@@ -27,9 +27,8 @@ namespace Model
 	private:
 		LevelHandler mLevelHandler;
 		Level mLevel;
-		Player player;
-		std::vector<Ghost> ghosts;
-		//Timer timer
+		Player mPlayer;
+		std::vector<Ghost> mGhosts;
 		int mLives, mCurrentLevel, mScore;
 		bool TestGridCollision(Coord objectPos1, Coord objectPos2);
 		bool TestRealCollision(Coord ghostRealPos, Coord pacmanRealPos);

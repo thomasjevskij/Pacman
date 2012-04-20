@@ -15,6 +15,11 @@ namespace Model
 	Cell::Cell(Coord coordinate, CellType type)
 		: Coordinate(coordinate), Type(type) {}
 
+	Level::Level()
+	{
+		mHeight = 0;
+		mWidth = 0;
+	}
 	Level::Level(const std::string& path)
 	{
 		FIBITMAP *imgFile = FreeImage_Load(FIF_PNG, path.c_str(), PNG_DEFAULT);

@@ -15,13 +15,13 @@ namespace Model
 		Coord GetFacing(){return mFacing;}
 		Coord GetRealPos(){return mRealPosition;}
 
-		enum GhostState{ Scatter, Chase, Frightened, Killed};
-		void SetGhostState(GhostState state);
-		GhostState GetGhostState();
+		//enum GhostState{ Scatter, Chase, Frightened, Killed};
+		//void SetGhostState(GhostState state);
+		//GhostState GetGhostState();
 		
 	private:
-		GhostState ghostState;
-		Ai Personality;
+		//GhostState ghostState;
+		//Ai* Personality;
 		Coord mFacing; //Enhetsvektor 0,1 = upp, 1,0 = right 0,-1 = down, -1,0 = left
 		Coord mRealPosition;
 	};
