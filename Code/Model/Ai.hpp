@@ -1,6 +1,8 @@
 #ifndef AI_HPP
 #define AI_HPP
 
+#include "Coord.hpp"
+
 namespace Model
 {
 	class Ai
