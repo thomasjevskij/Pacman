@@ -2,33 +2,35 @@
 #define GAMEPLAYHANDLER_HPP
 
 #include "Level.hpp"
+#include "LevelHandler.hpp"
 #include <vector>
 
 namespace Model
 {
 	class GameplayHandler
 	{
-	private:
-		//LevelHandler levelHandler;
-		Level level;
-		//Player player;
-		//vector<Ghost> ghosts;
-		//Timer timer
-		int lives, currentLevel, score;
 	public:
-		void Initialize();
+		GameplayHandler();
 		void Update();
 		//GameObject GetPacman();
-		//vector<GameObject> GetGhost();
-		//vector<Coord> GetPellets();
-		//vector<Coord> GetPowerPellets();
+		//vector<GameObject> GetGhosts();
 		Level GetLevel();
 		int GetCurrentlevelIndex();
 		int GetLives();
 		int GetScore();
 		//Time GetTimeLeft();
+	private:
+		LevelHandler mLevelHandler;
+		Level mLevel;
+		//Player player;
+		//vector<Ghost> ghosts;
+		//Timer timer
+		int mLives, mCurrentLevel, mScore;
+		bool TestGridCollision(Coord objectPos1, Coord objectPos2);
+		bool TestRealCollision(Coord ghostRealPos, Coord pacmanRealPos);
 
-	}
+
+	};
 }
 
 

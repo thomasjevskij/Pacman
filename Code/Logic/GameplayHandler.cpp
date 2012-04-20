@@ -1,33 +1,47 @@
-#include "GamePlayHandler.hpp"
+#include "GameplayHandler.hpp"
 
 namespace Model
 {
-	void GameplayHandler::Initialize()
+	GameplayHandler::GameplayHandler()
 	{
-		//Levelhandler loading
 	}
-	void GameplayHandler::Update(){}
+
+	void GameplayHandler::Update()
+	{
+		//Update movement
+		//test collision
+		// Modify level acordingly
+		// Report Events
+	}
+
+
+	bool GameplayHandler::TestGridCollision(Coord objectPos1, Coord objectPos2)
+	{
+		return (objectPos1 == objectPos2);
+	}
+	bool GameplayHandler::TestRealCollision(Coord ghostRealPos, Coord pacmanRealPos){}
+	
+
+
 	//GameObject GameplayHandler::GetPacman()
-	//vector<GameObject> GameplayHandler::GetGhost()
-	//vector<Coord> GameplayHandler::GetPellets()
-	//vector<Coord> GameplayHandler::GetPowerPellets()
+	//vector<GameObject> GameplayHandler::GetGhosts()
 	Level GameplayHandler::GetLevel()
 	{
-		return level;
+		return mLevel;
 	}
 
 	int GameplayHandler::GetCurrentlevelIndex()
 	{
-		return currentLevel;
+		return mCurrentLevel;
 	}
 
 	int GameplayHandler::GetLives()
 	{
-		return lives;
+		return mLives;
 	}
 	int GameplayHandler::GetScore()
 	{
-		return score;
+		return mScore;
 	}
 	//Time GameplayHandler::GetTimeLeft()
 
