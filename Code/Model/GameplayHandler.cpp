@@ -1,4 +1,3 @@
-
 #include "GameplayHandler.hpp"
 
 namespace Model
@@ -7,7 +6,7 @@ namespace Model
 	{
 		mLevel = mLevelHandler.GetCurrentLevel();
 	}
-
+	
 	void GameplayHandler::Update(float dt)
 	{
 		//Update movement
@@ -94,6 +93,4 @@ namespace Model
 		return mScore;
 	}
 	//Time GameplayHandler::GetTimeLeft()
-
-
 }

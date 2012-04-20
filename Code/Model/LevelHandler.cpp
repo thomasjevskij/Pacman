@@ -1,4 +1,3 @@
-
 #include "LevelHandler.hpp"
 
 namespace Model
@@ -7,6 +6,7 @@ namespace Model
 	{
 		mCurrentLevelIndex = 0;
 		//Loads Levels into vector
+
 		for(int i = 0; i <= 16; ++i)
 			mLevels.push_back(Level("Level"));
 	}
@@ -28,4 +28,3 @@ namespace Model
 
 
 }
-
