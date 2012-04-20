@@ -5,3 +5,4 @@
 2012-04-18 0,5+2,5 (Möte + Programering/Arketektur backup + logic class programering) 
 2012-04-18 1,5 (Logic Class Programering)
 2012-04-19 2 (Programerings backup till pp)
+2012-04-20 2,5 + 2,5 (Jobbade i Fruit classen samt fixade playerns movement)

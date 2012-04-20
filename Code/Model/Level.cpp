@@ -116,6 +116,16 @@ namespace Model
 		SetCellType(x, y, Cell::C_CELLTYPE_EMPTY);
 	}
 
+	
+	const int Level::GetWidth() const
+	{
+		return mWidth;
+	}
+	const int Level::GetHeight() const
+	{
+		return mHeight;
+	}
+
 	const Cell& Level::GetCell(int x, int y) const
 	{
 		int i = GetIndex(x, y);
