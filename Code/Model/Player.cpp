@@ -79,9 +79,9 @@ namespace Model
 
 	bool Player::CenterPos()
 	{
-		if(mRealPosition.X % tileSize > tileSize/2 - tileSize/10 && mRealPosition.X % tileSize < tileSize/2 + tileSize/10)
+		if((int)mRealPosition.X % tileSize > tileSize/2 - tileSize/10 && (int)mRealPosition.X % tileSize < tileSize/2 + tileSize/10)
 		{
-			if(mRealPosition.Y % tileSize > tileSize/2 - tileSize/10 && mRealPosition.Y % tileSize < tileSize/2 + tileSize/10)
+			if((int)mRealPosition.Y % tileSize > tileSize/2 - tileSize/10 && (int)mRealPosition.Y % tileSize < tileSize/2 + tileSize/10)
 			{
 				return true;
 			}
