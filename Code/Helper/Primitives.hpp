@@ -31,6 +31,9 @@ namespace Helper
 
 		Point2();
 		Point2(T x, T y);
+
+		bool operator==(const Point2<T>& rhs) const;
+		bool operator!=(const Point2<T>& rhs) const;
 	};
 
 	typedef Point2<int> Point2i;
@@ -50,6 +53,9 @@ namespace Helper
 
 		Point3();
 		Point3(T x, T y, T z);
+
+		bool operator==(const Point3<T>& rhs) const;
+		bool operator!=(const Point3<T>& rhs) const;
 	};
 
 	typedef Point3<int> Point3i;
@@ -142,6 +148,18 @@ namespace Helper
 		Y = y;
 	}
 
+	template <typename T>
+	bool Point2<T>::operator==(const Point2<T>& rhs) const
+	{
+		return (X == rhs.X && Y == rhs.Y);
+	}
+
+	template <typename T>
+	bool Point2<T>::operator!=(const Point2<T>& rhs) const
+	{
+		return !(*this == rhs);
+	}
+
 
 
 	template <typename T>
@@ -155,6 +173,17 @@ namespace Helper
 		Z = z;
 	}
 
+	template <typename T>
+	bool Point3<T>::operator==(const Point3<T>& rhs) const
+	{
+		return (X == rhs.X && Y == rhs.Y && Z == rhs.Z);
+	}
+
+	template <typename T>
+	bool Point3<T>::operator!=(const Point3<T>& rhs) const
+	{
+		return !(*this == rhs);
+	}
 
 
 

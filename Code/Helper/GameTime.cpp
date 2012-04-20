@@ -1,6 +1,6 @@
 #include "GameTime.hpp"
 
-namespace Framework
+namespace Helper
 {
 	// Constructor - initialize the game time, set start values for teh time stamps and calculate the length of a tick
 	GameTime::GameTime() 

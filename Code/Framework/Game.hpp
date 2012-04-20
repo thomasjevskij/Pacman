@@ -28,7 +28,7 @@ namespace Framework
 	private:
 		bool mRunning;
 		RenderBatch mRenderBatch;
-		GameTime mTimer;
+		Helper::GameTime mTimer;
 
 		void DrawWrapper(float dt);
 
