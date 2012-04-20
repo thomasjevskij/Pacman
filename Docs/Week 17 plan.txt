@@ -1,0 +1,11 @@
+TIME	DUE DATE	TASK				WHO
+
+30h 	Friday 		Scene 				Kim, Lars, Martin
+15h 	Friday 		Game logic class	Fredrik, Thomas
+4h		Friday 		Pathfinding			Kim, Fredrik
+3h		Friday 		AI State machine	Fredrik, Thomas
+15h 	Wednesday 	HUD elements		Lars, Thomas
+3h		Wednesday	Screens				Lars, Thomas
+8h		Friday		Particle system		Martin, Lars
+1h 		Wednesday	Debug camera		Lars
+21h		Friday		L2 report			All
