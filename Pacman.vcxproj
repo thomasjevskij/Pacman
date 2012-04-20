@@ -175,6 +175,7 @@
     <ClCompile Include="Code\Helper\r2tk\r2-assert.cpp" />
     <ClCompile Include="Code\Helper\r2tk\r2-exception.cpp" />
     <ClCompile Include="Code\main.cpp" />
+    <ClCompile Include="Code\Model\Coord.cpp" />
     <ClCompile Include="Code\Model\Fruit.cpp" />
     <ClCompile Include="Code\Model\GameplayHandler.cpp" />
     <ClCompile Include="Code\Model\Ghost.cpp" />
@@ -203,6 +204,7 @@
     <ClInclude Include="Code\Helper\r2tk\r2-global.hpp" />
     <ClInclude Include="Code\Helper\r2tk\r2-singleton.hpp" />
     <ClInclude Include="Code\Model\Ai.hpp" />
+    <ClInclude Include="code\model\coord.hpp" />
     <ClInclude Include="Code\Model\Fruit.hpp" />
     <ClInclude Include="Code\Model\GameObject.hpp" />
     <ClInclude Include="Code\Model\GameplayHandler.hpp" />

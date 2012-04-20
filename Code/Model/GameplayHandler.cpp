@@ -3,49 +3,49 @@
 
 namespace Model
 {
-	GameplayHandler::GameplayHandler()
+	GameplayHandler::GameplayHandler(): mPlayer(Coord(1,1))
 	{
 		mLevel = mLevelHandler.GetCurrentLevel();
 	}
 
-	void GameplayHandler::Update(Framework::GameTime gameTime)
+	void GameplayHandler::Update(float dt)
 	{
 		//Update movement
-		player.UpdateMovement();
-		for each( Ghost g in ghosts)
-			g.UpdateMovement(player.GetRealPos());
+		mPlayer.UpdateMovement();
+		for each( Ghost g in mGhosts)
+			g.UpdateMovement(mPlayer.GetRealPos());
 
 		//Test if Pacman is eating anything
-		if (mLevel.GetCell(player.GetGridPosition().X, player.GetGridPosition().Y).Type == Cell::C_CELLTYPE_PELLET)
+		if (mLevel.GetCell(mPlayer.GetGridPosition().X, mPlayer.GetGridPosition().Y).Type == Cell::C_CELLTYPE_PELLET)
 		{
 			//add score, notify view
-			mLevel.SetEaten(player.GetGridPosition().X, player.GetGridPosition().Y);
+			mLevel.SetEaten(mPlayer.GetGridPosition().X, mPlayer.GetGridPosition().Y);
 		}
-		else if (mLevel.GetCell(player.GetGridPosition().X, player.GetGridPosition().Y).Type == Cell::C_CELLTYPE_POWERPELLET)
+		else if (mLevel.GetCell(mPlayer.GetGridPosition().X, mPlayer.GetGridPosition().Y).Type == Cell::C_CELLTYPE_POWERPELLET)
 		{
 			//add score, start powermode, notify view
-			mLevel.SetEaten(player.GetGridPosition().X, player.GetGridPosition().Y);
+			mLevel.SetEaten(mPlayer.GetGridPosition().X, mPlayer.GetGridPosition().Y);
 		}
-		else if (mLevel.GetCell(player.GetGridPosition().X, player.GetGridPosition().Y).Type == Cell::C_CELLTYPE_FOOD)
+		else if (mLevel.GetCell(mPlayer.GetGridPosition().X, mPlayer.GetGridPosition().Y).Type == Cell::C_CELLTYPE_FOOD)
 		{
 			//calculate and add score, remove fruitobject
 			mLevel.RemoveFood();
 		}
 
 		//Test if Pacman collides with ghosts
-		for each (Ghost g in ghosts)
+		for each (Ghost g in mGhosts)
 		{
-			if (TestRealCollision(g.GetRealPos(),player.GetRealPos()))
+			if (TestRealCollision(g.GetRealPos(),mPlayer.GetRealPos()))
 			{
-				if(g.GetGhostState() == Ghost::GhostState.Chase || g.GetGhostState() == Ghost::GhostState.Scatter)
-				{
-					//Kill Pacman, end game etc
-				}
-				else if(g.GetGhostState() == Ghost::GhostState.Frightened)
-				{
-					// Kill Ghost, add points
-					//g.SetGhostState(Ghost::GhostState.Killed);
-				}
+				//if(g.GetGhostState() == g.Chase || g.GetGhostState() == g.Scatter)
+				//{
+				//	//Kill Pacman, end game etc
+				//}
+				//else if(g.GetGhostState() == g.Frightened)
+				//{
+				//	// Kill Ghost, add points
+				//	//g.SetGhostState(Ghost::GhostState.Killed);
+				//}
 			}
 		}
 
@@ -60,18 +60,18 @@ namespace Model
 	{
 		return (objectPos1 == objectPos2);
 	}
-	bool GameplayHandler::TestRealCollision(Coord ghostRealPos, Coord pacmanRealPos){}
+	bool GameplayHandler::TestRealCollision(Coord ghostRealPos, Coord pacmanRealPos){ return true;}
 	
 
 
 	GameObject GameplayHandler::GetPacman()
 	{
-		return player;
+		return mPlayer;
 	}
 
-	std::vector<GameObject> GameplayHandler::GetGhosts()
+	std::vector<Ghost> GameplayHandler::GetGhosts()
 	{
-		return ghosts;
+		return mGhosts;
 	}
 
 

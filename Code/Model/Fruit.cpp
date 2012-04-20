@@ -2,7 +2,7 @@
 
 namespace Model
 {
-	Fruit::Fruit(Coord gridPosition, Framework::GameTime gameTime): GameObject(gridPosition)
+	Fruit::Fruit(Coord gridPosition, Helper::GameTime gameTime): GameObject(gridPosition)
 	{
 
 	}

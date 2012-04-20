@@ -24,6 +24,7 @@
     <ClCompile Include="Code\Model\LevelHandler.cpp" />
     <ClCompile Include="Code\Model\Player.cpp" />
     <ClCompile Include="Code\View\Menu.cpp" />
+    <ClCompile Include="Code\Model\Coord.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Effect\Effect.hpp" />
@@ -55,6 +56,7 @@
     <ClInclude Include="Code\Model\Level.hpp" />
     <ClInclude Include="Code\Model\LevelHandler.hpp" />
     <ClInclude Include="Code\View\Menu.hpp" />
+    <ClInclude Include="code\model\coord.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
