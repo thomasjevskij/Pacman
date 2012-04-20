@@ -11,18 +11,20 @@ namespace Model
 
 	void Player::UpdateMovement(Level *level,float dt)
 	{
-		
-			
-		Cell forwardCell = level->GetCell(GetValidGridPos(mGridPosition + mFacing,level->GetWhidth(), level->GetHeight()));
-		if(forwardCell.Type == Cell::C_CELLTYPE_WALL)
+		if(CenterPos())
 		{
-			if(mFacing == mLastFacing)
+			Coord validCoord = GetValidGridPos(mGridPosition + mFacing,level->GetWidth(), level->GetHeight());
+			Cell forwardCell = level->GetCell(validCoord.X,validCoord.Y);
+			if(forwardCell.Type == Cell::C_CELLTYPE_WALL)
 			{
-				return;
-			}
-			else
-			{
-				mFacing = mLastFacing;
+				if(mFacing == mLastFacing)
+				{
+					return;
+				}
+				else
+				{
+					mFacing = mLastFacing;
+				}
 			}
 		}
 
@@ -35,13 +37,13 @@ namespace Model
 
 	void Player::GoLeft()
 	{	
-		if()
+		if(CenterPos())
 		mFacing = Coord(mFacing.Y*-1,mFacing.X);
 	}
 
 	void Player::GoRight()
 	{
-
+		if(CenterPos())
 		mFacing = Coord(mFacing.Y,mFacing.X*-1);
 	}
 
