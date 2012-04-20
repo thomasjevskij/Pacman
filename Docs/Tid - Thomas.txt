@@ -15,3 +15,14 @@
 
 17/4 - 2012
 0.5h Level class
+
+19/4 - 2012
+1.5h GUI components
+2h Redmine setup
+1h Documentation
+
+20/4 - 2012
+1h Bug fixes (getting the code to compile)
+2h Weekly report
+0.5h extending helper class
+3h GUI components
