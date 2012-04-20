@@ -1,4 +1,4 @@
-#ifdef GHOST_HPP
+#ifndef GHOST_HPP
 #define GHOST_HPP
 
 #include "GameObject.hpp"
@@ -16,6 +16,6 @@ namespace Model
 		Ai Personality;
 		//Facing mFacing
 		Coord mRealPosition;
-	}
+	};
 }
 #endif

@@ -1,3 +1,6 @@
 2012-04-11	3h 	Arkitekturdiagram mm.
 2012-04-12	4h	Gantt och UML-diagram
-2016-04-16	3h	Levelklass
+2012-04-16	3h	Levelklass
+2012-04-18	2h	GameplayHandler
+		2h	LevelHandler
+		0,5h	Ändringar iUML modeldiagram

@@ -39,6 +39,8 @@ namespace Model
 	{
 	public:
 		// Reads a level from a png file
+		
+		Level();
 		Level(const std::string& path);
 
 		// Sets food to existing state
