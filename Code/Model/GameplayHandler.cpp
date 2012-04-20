@@ -11,7 +11,7 @@ namespace Model
 	void GameplayHandler::Update(float dt)
 	{
 		//Update movement
-		mPlayer.UpdateMovement();
+		mPlayer.UpdateMovement(dt);
 		for each( Ghost g in mGhosts)
 			g.UpdateMovement(mPlayer.GetRealPos());
 
