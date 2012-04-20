@@ -28,10 +28,14 @@ namespace Model
 		LevelHandler mLevelHandler;
 		Level mLevel;
 		Player mPlayer;
+		bool mLevelWasWon;
+		bool mGameRestart;
 		std::vector<Ghost> mGhosts;
 		int mLives, mCurrentLevel, mScore;
 		bool TestGridCollision(Coord objectPos1, Coord objectPos2);
 		bool TestRealCollision(Coord ghostRealPos, Coord pacmanRealPos);
+		void NewLevel();
+		void ResetGame();
 
 
 	};

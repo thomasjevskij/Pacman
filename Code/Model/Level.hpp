@@ -46,10 +46,12 @@ namespace Model
 		// Removes food, pellet or powerpellet
 		void SetEaten(int x, int y);
 
-	
 
 		// Checks if food exists or not
 		bool FoodExists() const;
+
+		const int GetWidth() const;
+		const int GetHeight() const;
 
 		const Cell& GetCell(int x, int y) const;
 		Coord GetPacmanSpawnPosition() const;
