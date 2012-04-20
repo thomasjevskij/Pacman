@@ -2,13 +2,12 @@
 
 namespace Model
 {
-	
 	LevelHandler::LevelHandler()
 	{
+		mCurrentLevelIndex = 0;
 		//Loads Levels into vector
-		std::string temp;
 		for(int i = 0; i <= 16; ++i)
-			//mLevels.add(new Level("Level" + i + ".png"));
+			mLevels.add(new Level("Level"));
 	}
 
 	Level LevelHandler::GetCurrentLevel()

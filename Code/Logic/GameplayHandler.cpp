@@ -4,6 +4,7 @@ namespace Model
 {
 	GameplayHandler::GameplayHandler()
 	{
+		mLevel = mLevelHandler.GetCurrentLevel();
 	}
 
 	void GameplayHandler::Update()
@@ -25,6 +26,8 @@ namespace Model
 
 	//GameObject GameplayHandler::GetPacman()
 	//vector<GameObject> GameplayHandler::GetGhosts()
+
+
 	Level GameplayHandler::GetLevel()
 	{
 		return mLevel;

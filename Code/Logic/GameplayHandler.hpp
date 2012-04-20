@@ -3,6 +3,10 @@
 
 #include "Level.hpp"
 #include "LevelHandler.hpp"
+#include "GameObject.hpp"
+#include "Player.hpp"
+#include "Fruit.hpp"
+#include "Ghost.hpp"
 #include <vector>
 
 namespace Model

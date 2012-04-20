@@ -1,11 +1,11 @@
-#ifdef PLAYER_HPP
+#ifndef PLAYER_HPP
 #define PLAYER_HPP
 
 #include "GameObject.hpp"
 
 namespace Model
 {
-	class Player:GameObject
+	class Player: public GameObject
 	{
 	public:
 		Player(Coord gridPosition):GameObject(gridPosition);
@@ -17,6 +17,6 @@ namespace Model
 	private:
 		//Facing mFacing
 		Coord mRealPosition;
-	}
+	};
 }
 #endif

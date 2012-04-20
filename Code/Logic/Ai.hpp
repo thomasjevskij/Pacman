@@ -1,4 +1,4 @@
-#ifdef AI_HPP
+#ifndef AI_HPP
 #define AI_HPP
 
 namespace Model
@@ -10,6 +10,6 @@ namespace Model
 		virtual  Coord getTargetPosition(){};
 	protected:
 		Coord HomeSquare;
-	}
+	};
 }
 #endif

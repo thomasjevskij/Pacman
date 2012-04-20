@@ -6,10 +6,10 @@ namespace Model
 	class GameObject
 	{
 	public:
-		GameObjekt(Coord gridPosition){mGridPosition = gridPosition};
+		GameObject(Coord gridPosition){mGridPosition = gridPosition};
 		Coord GetGridPosition(){return GridPosition};
 	protected:
 		Coord mGridPosition;
-	}
+	};
 }
 #endif

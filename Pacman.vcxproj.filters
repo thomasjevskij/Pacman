@@ -19,6 +19,9 @@
     <ClCompile Include="Code\Helper\r2tk\r2-exception.cpp" />
     <ClCompile Include="Code\Logic\GameplayHandler.cpp" />
     <ClCompile Include="Code\Logic\LevelHandler.cpp" />
+    <ClCompile Include="Code\Logic\Fruit.cpp" />
+    <ClCompile Include="Code\Logic\Player.cpp" />
+    <ClCompile Include="Code\Logic\Ghost.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Effect\Effect.hpp" />
@@ -43,6 +46,11 @@
     <ClInclude Include="Code\Resources\FileResourceManager.hpp" />
     <ClInclude Include="Code\Logic\GameplayHandler.hpp" />
     <ClInclude Include="Code\Logic\LevelHandler.hpp" />
+    <ClInclude Include="Code\Logic\GameObject.hpp" />
+    <ClInclude Include="Code\Logic\Fruit.hpp" />
+    <ClInclude Include="Code\Logic\Ai.hpp" />
+    <ClInclude Include="Code\Logic\Ghost.hpp" />
+    <ClInclude Include="Code\Logic\Player.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

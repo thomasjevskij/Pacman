@@ -11,8 +11,8 @@ namespace Model
 		Fruit(Coord gridPosition):GameObjekt(gridPosition);
 		bool IsLifeTimeOver();
 	private:
-		Timer mLifeTimer;
-		static const cLifeTime = 10;
-	}
+		//Timer mLifeTimer;
+		static const int cLifeTime = 10;
+	};
 }
 #endif
