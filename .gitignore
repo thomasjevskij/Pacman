@@ -11,3 +11,4 @@ ipch/
 # Ignore lock and backup files
 *.autosave
 *.dia~
+*.ods#
