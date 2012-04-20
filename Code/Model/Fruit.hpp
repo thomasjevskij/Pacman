@@ -9,11 +9,11 @@ namespace Model
 	class Fruit:public GameObject
 	{
 	public:
-		Fruit(Coord gridPosition, Helper::GameTime gameTime);
-		bool IsLifeTimeOver(Helper::GameTime gameTime);
+		Fruit(Coord gridPosition);
+		bool IsLifeTimeOver(float dt);
 	private:
-		Helper::GameTime mStartTime;
-		static const int cLifeTime = 10;
+		float mLivedTime;
+		static const int cEndTime = 10;
 	};
 }
 #endif
