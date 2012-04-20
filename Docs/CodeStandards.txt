@@ -34,3 +34,9 @@ Ex:
 	int max(int a, int b);
 
 Code should in general be well-commented, especially ambigious sections!
+
+Implementations should ONLY be done in .cpp files. The only exception to this is if a method has no implementation at all.
+
+Initializations lists are to be used with constructors.
+
+Get methods are typically const, unless there is a specific reason for them not to be. Such a reason should be well documented.
