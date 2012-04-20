@@ -20,3 +20,5 @@ Progress Report R3.pdf för estimerade tider under rubriken "Work planned". Hur m
 
 Vid [KIM3] skall ett diagram som visar hur mycket tid varje gruppmedlem har jobbat finnas. Återigen, hur mycket tid alla har jobbat
 ska finnas i text-filerna.
+
+Om någon har rapporterat in en task som inte finns i gantt chartet, lägg det under något slags "övrig tid"-stolpe.

@@ -25,4 +25,4 @@
 1h Bug fixes (getting the code to compile)
 2h Weekly report
 0.5h extending helper class
-2h GUI components
+3h GUI components
