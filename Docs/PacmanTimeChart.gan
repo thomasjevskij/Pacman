@@ -70,7 +70,7 @@
                     <task id="44" name="D3DContext class" color="#8cb6ce" meeting="false" start="2012-04-10" duration="5" complete="0" expand="true"/>
                     <task id="45" name="Game class" color="#8cb6ce" meeting="false" start="2012-04-10" duration="5" complete="0" expand="true"/>
                     <task id="48" name="Camera class" color="#8cb6ce" meeting="false" start="2012-04-16" duration="5" complete="0" expand="true"/>
-                    <task id="50" name="Audio" color="#8cb6ce" meeting="false" start="2012-04-16" duration="3" complete="0" expand="true"/>
+                    <task id="50" name="Audio" color="#8cb6ce" meeting="false" start="2012-04-16" duration="2" complete="0" expand="true"/>
                     <task id="49" name="Scene graph" color="#8cb6ce" meeting="false" start="2012-04-23" duration="5" complete="0" expand="true"/>
                 </task>
                 <task id="36" name="Model" color="#8cb6ce" meeting="false" start="2012-04-16" duration="15" complete="0" expand="true">
@@ -89,25 +89,25 @@
                         <task id="54" name="Pathfinding" color="#8cb6ce" meeting="false" start="2012-04-23" duration="5" complete="0" expand="true">
                             <depend id="61" type="2" difference="0" hardness="Strong"/>
                         </task>
-                        <task id="55" name="Behavior" color="#8cb6ce" meeting="false" start="2012-04-26" duration="4" complete="0" expand="true">
+                        <task id="55" name="Behavior" color="#8cb6ce" meeting="false" start="2012-04-23" duration="7" complete="0" expand="true">
                             <task id="61" name="Targeting" color="#8cb6ce" meeting="false" start="2012-04-30" duration="2" complete="0" expand="true"/>
-                            <task id="60" name="State machine" color="#8cb6ce" meeting="false" start="2012-04-26" duration="2" complete="0" expand="true"/>
+                            <task id="60" name="State machine" color="#8cb6ce" meeting="false" start="2012-04-23" duration="5" complete="0" expand="true"/>
                         </task>
                     </task>
                 </task>
                 <task id="38" name="View/Controller" color="#8cb6ce" meeting="false" start="2012-04-09" duration="20" complete="33" expand="true">
                     <task id="34" name="Visual effects" color="#8cb6ce" meeting="false" start="2012-04-09" duration="20" complete="38" expand="true">
-                        <task id="65" name="Particle system" color="#8cb6ce" meeting="false" start="2012-04-09" duration="10" complete="50" expand="true"/>
+                        <task id="65" name="Particle system" color="#8cb6ce" meeting="false" start="2012-04-09" duration="15" complete="50" expand="true"/>
                         <task id="66" name="Shadows" color="#8cb6ce" meeting="false" start="2012-04-30" duration="5" complete="0" expand="true"/>
                         <task id="67" name="Reflections" color="#8cb6ce" meeting="false" start="2012-04-30" duration="5" complete="0" expand="true"/>
                         <task id="68" name="Environment mapping" color="#8cb6ce" meeting="false" start="2012-04-30" duration="5" complete="0" expand="true"/>
                     </task>
-                    <task id="51" name="Camera controller" color="#8cb6ce" meeting="false" start="2012-04-30" duration="2" complete="0" expand="true"/>
+                    <task id="51" name="Camera controller" color="#8cb6ce" meeting="false" start="2012-04-23" duration="7" complete="0" expand="true"/>
                     <task id="69" name="Animation" color="#8cb6ce" meeting="false" start="2012-04-30" duration="5" complete="0" expand="true"/>
-                    <task id="35" name="Front end" color="#8cb6ce" meeting="false" start="2012-04-16" duration="5" complete="0" expand="true">
-                        <task id="70" name="Game screen classes" color="#8cb6ce" meeting="false" start="2012-04-16" duration="5" complete="0" expand="true"/>
-                        <task id="71" name="Game state machine" color="#8cb6ce" meeting="false" start="2012-04-16" duration="5" complete="0" expand="true"/>
-                        <task id="72" name="HUD elements" color="#8cb6ce" meeting="false" start="2012-04-16" duration="5" complete="0" expand="true"/>
+                    <task id="35" name="Front end" color="#8cb6ce" meeting="false" start="2012-04-16" duration="8" complete="0" expand="true">
+                        <task id="70" name="Game screen classes" color="#8cb6ce" meeting="false" start="2012-04-16" duration="8" complete="0" expand="true"/>
+                        <task id="71" name="Game state machine" color="#8cb6ce" meeting="false" start="2012-04-16" duration="8" complete="0" expand="true"/>
+                        <task id="72" name="HUD elements" color="#8cb6ce" meeting="false" start="2012-04-16" duration="8" complete="0" expand="true"/>
                         <task id="73" name="GUI elements" color="#8cb6ce" meeting="false" start="2012-04-16" duration="5" complete="0" expand="true"/>
                     </task>
                 </task>
