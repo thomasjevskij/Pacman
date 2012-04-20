@@ -28,6 +28,7 @@ namespace Model
 		LevelHandler mLevelHandler;
 		Level mLevel;
 		Player mPlayer;
+		Fruit* mFruit;
 		bool mLevelWasWon;
 		bool mGameRestart;
 		std::vector<Ghost> mGhosts;

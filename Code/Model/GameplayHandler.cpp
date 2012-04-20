@@ -17,11 +17,10 @@ namespace Model
 			ResetGame();
 
 		//Update movement
-		mPlayer.UpdateMovement(&mLevel);
+		mPlayer.UpdateMovement(&mLevel, dt);
 		for each( Ghost g in mGhosts)
 			g.UpdateMovement(mPlayer.GetRealPos());
 
-		//
 
 		//Test if Pacman is eating anything
 		if (mLevel.GetCell(mPlayer.GetGridPosition().X, mPlayer.GetGridPosition().Y).Type == Cell::C_CELLTYPE_PELLET)
@@ -40,10 +39,19 @@ namespace Model
 		{
 			mScore += mCurrentLevel * 100;
 			//remove fruitobject
+			mFruit = NULL;
 			mLevel.RemoveFood();
 		}
 
-		//Check if fruittimer has ended
+		//Check if fruitlifetime has ended
+		if (mLevel.FoodExists() == true)
+		{
+			if (mFruit->IsLifeTimeOver(dt) == true)
+			{
+				//Remove Fruit
+				mFruit = NULL;
+			}
+		}
 
 		//Test if Pacman collides with ghosts
 		for each (Ghost g in mGhosts)
@@ -57,8 +65,12 @@ namespace Model
 				}
 				else if(g.GetGhostState() == g.Frightened)
 				{
-					// Kill Ghost, add points
 					g.SetGhostState(g.Killed);
+					int k = 0;
+					for each (Ghost c in mGhosts)
+						if (c.GetGhostState() == c.Killed)
+							k++;
+					mScore += 200 * k;
 				}
 			}
 		}
@@ -74,7 +86,8 @@ namespace Model
 	{
 		return (objectPos1 == objectPos2);
 	}
-	bool GameplayHandler::TestRealCollision(Coord ghostRealPos, Coord pacmanRealPos){ return true;}
+	bool GameplayHandler::TestRealCollision(Coord ghostRealPos, Coord pacmanRealPos)
+	{ return true;} //Make FISK
 	
 
 
@@ -107,7 +120,7 @@ namespace Model
 	{
 		return mScore;
 	}
-<<<<<<< HEAD
+
 	//Time GameplayHandler::GetTimeLeft()
 
 	void GameplayHandler::NewLevel()
@@ -130,7 +143,4 @@ namespace Model
 	}
 
 
-=======
-	//Time GameplayHandler::GetTimeLeft()
->>>>>>> c619df9930b8a394a562e7daabfec69199488f9a
 }
