@@ -1,3 +1,4 @@
+
 #include "GameTime.hpp"
 
 namespace Helper
@@ -76,4 +77,5 @@ namespace Helper
 	{
 		return mFPS;
 	}
+
 }

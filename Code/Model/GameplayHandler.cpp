@@ -1,4 +1,3 @@
-
 #include "GameplayHandler.hpp"
 
 namespace Model
@@ -108,6 +107,7 @@ namespace Model
 	{
 		return mScore;
 	}
+<<<<<<< HEAD
 	//Time GameplayHandler::GetTimeLeft()
 
 	void GameplayHandler::NewLevel()
@@ -130,4 +130,7 @@ namespace Model
 	}
 
 
+=======
+	//Time GameplayHandler::GetTimeLeft()
+>>>>>>> c619df9930b8a394a562e7daabfec69199488f9a
 }

@@ -8,8 +8,9 @@ namespace Model
 	class GameObject
 	{
 	public:
-		GameObject(Coord gridPosition){mGridPosition = gridPosition;}
-		Coord GetGridPosition(){return mGridPosition;}
+		GameObject(Coord gridPosition) : mGridPosition(gridPosition) {}
+		Coord GetGridPosition() const {return mGridPosition;}
+
 	protected:
 		Coord mGridPosition;
 	};

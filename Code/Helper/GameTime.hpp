@@ -1,3 +1,4 @@
+
 #ifndef GAMETIME_HPP
 #define GAMETIME_HPP
 
@@ -38,4 +39,5 @@ namespace Helper
 		Time		mElapsedSinceLastTick;
 	};
 }
+
 #endif
