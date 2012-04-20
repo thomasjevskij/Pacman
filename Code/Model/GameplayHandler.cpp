@@ -4,47 +4,62 @@ namespace Model
 {
 	GameplayHandler::GameplayHandler(): mPlayer(Coord(1,1))
 	{
-		mLevel = mLevelHandler.GetCurrentLevel();
+		mGameRestart = true;
 	}
-	
+
 	void GameplayHandler::Update(float dt)
 	{
+		//Test if it should to load the next level
+		if (mLevelWasWon = true)
+			NewLevel();
+		//Test if it should start a new game
+		if (mGameRestart = true)
+			ResetGame();
+
 		//Update movement
-		mPlayer.UpdateMovement(dt);
+		mPlayer.UpdateMovement(&mLevel,dt);
 		for each( Ghost g in mGhosts)
 			g.UpdateMovement(mPlayer.GetRealPos());
+
+		//
 
 		//Test if Pacman is eating anything
 		if (mLevel.GetCell(mPlayer.GetGridPosition().X, mPlayer.GetGridPosition().Y).Type == Cell::C_CELLTYPE_PELLET)
 		{
-			//add score, notify view
+			mScore += 10;
+			//notify view and check if fruit should be added
 			mLevel.SetEaten(mPlayer.GetGridPosition().X, mPlayer.GetGridPosition().Y);
 		}
 		else if (mLevel.GetCell(mPlayer.GetGridPosition().X, mPlayer.GetGridPosition().Y).Type == Cell::C_CELLTYPE_POWERPELLET)
 		{
-			//add score, start powermode, notify view
+			mScore += 50;
+			//start powermode, notify view and check if fruit should be added
 			mLevel.SetEaten(mPlayer.GetGridPosition().X, mPlayer.GetGridPosition().Y);
 		}
 		else if (mLevel.GetCell(mPlayer.GetGridPosition().X, mPlayer.GetGridPosition().Y).Type == Cell::C_CELLTYPE_FOOD)
 		{
-			//calculate and add score, remove fruitobject
+			mScore += mCurrentLevel * 100;
+			//remove fruitobject
 			mLevel.RemoveFood();
 		}
+
+		//Check if fruittimer has ended
 
 		//Test if Pacman collides with ghosts
 		for each (Ghost g in mGhosts)
 		{
 			if (TestRealCollision(g.GetRealPos(),mPlayer.GetRealPos()))
 			{
-				//if(g.GetGhostState() == g.Chase || g.GetGhostState() == g.Scatter)
-				//{
-				//	//Kill Pacman, end game etc
-				//}
-				//else if(g.GetGhostState() == g.Frightened)
-				//{
-				//	// Kill Ghost, add points
-				//	//g.SetGhostState(Ghost::GhostState.Killed);
-				//}
+				if(g.GetGhostState() == g.Chase || g.GetGhostState() == g.Scatter)
+				{
+					//Kill Pacman, end game etc
+					mGameRestart = true;
+				}
+				else if(g.GetGhostState() == g.Frightened)
+				{
+					// Kill Ghost, add points
+					g.SetGhostState(g.Killed);
+				}
 			}
 		}
 
@@ -92,5 +107,27 @@ namespace Model
 	{
 		return mScore;
 	}
+
 	//Time GameplayHandler::GetTimeLeft()
+
+	void GameplayHandler::NewLevel()
+	{
+		mLevelHandler.SetCurrentLevelIndex(mLevelHandler.GetCurrentLevelIndex() + 1);
+		mLevel = mLevelHandler.GetCurrentLevel();
+		mCurrentLevel = mLevelHandler.GetCurrentLevelIndex() +1;
+		mLevelWasWon = false; 
+		//todo: Reset pacman and ghost positions
+	}
+	void GameplayHandler::ResetGame()
+	{
+		mLevelHandler.SetCurrentLevelIndex(0);
+		mLevel = mLevelHandler.GetCurrentLevel();
+		mCurrentLevel = mLevelHandler.GetCurrentLevelIndex() +1;
+		mScore = 0;
+		mLives = 3;
+		mGameRestart = false;
+		//todo: Reset or make new player and ghosts
+	}
+
+
 }
