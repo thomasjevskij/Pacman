@@ -1,18 +1,12 @@
 #ifndef LEVEL_HPP
 #define LEVEL_HPP
 
+#include "Coord.hpp"
 #include <string>
 #include <vector>
 
 namespace Model
 {
-	struct Coord
-	{
-		Coord();
-		Coord(int x, int y);
-		bool operator==(const Coord& rhs) const;
-		int X, Y;
-	};
 
 	struct Cell
 	{
@@ -24,15 +18,15 @@ namespace Model
 		static const CellType C_CELLTYPE_WALL = 4;
 		static const CellType C_CELLTYPE_PACMANSPAWN = 5;
 		static const CellType C_CELLTYPE_GHOSTSPAWN = 6;
+		
+		Coord Coordinate;
+		CellType Type;
 
 		Cell();
 		Cell(int x, int y, CellType type);
 		Cell(Coord coordinate, CellType type);
 
 
-		Coord Coordinate;
-		CellType Type;
-	
 	};
 
 	class Level
