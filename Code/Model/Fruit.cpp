@@ -2,16 +2,17 @@
 
 namespace Model
 {
-	Fruit::Fruit(Coord gridPosition, Framework::GameTime gameTime): GameObject(gridPosition)
+	Fruit::Fruit(Coord gridPosition, Helper::GameTime gameTime): GameObject(gridPosition)
 	{
-
+		mStartTime = 0;
 	}
-	bool Fruit::IsLifeTimeOver()
+	bool Fruit::IsLifeTimeOver(Helper::GameTime gameTime)
 	{
-		/*if(mLifeTimer.getElapsedSeconds() >= cLifeTime)
+		mStartTime += gameTime.GetTimeSinceLastTick();
+		if(mStartTime >= cLifeTime)
 		{
 			return true;
-		}*/
+		}
 		return false;
 	}
 }

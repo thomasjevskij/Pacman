@@ -9,10 +9,10 @@ namespace Model
 	class Fruit:public GameObject
 	{
 	public:
-		Fruit(Coord gridPosition, Framework::GameTime gameTime): GameObject(gridPosition){};
-		bool IsLifeTimeOver();
+		Fruit(Coord gridPosition, Helper::GameTime gameTime): GameObject(gridPosition){};
+		bool IsLifeTimeOver(Helper::GameTime gameTime);
 	private:
-		//Timer mLifeTimer;
+		Time mStartTime;
 		static const int cLifeTime = 10;
 	};
 }
