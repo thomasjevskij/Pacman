@@ -21,6 +21,10 @@ PacmanGame::PacmanGame(HINSTANCE instance)
 {
 	mEffectManager = new Resources::EffectResourceManager("Resources/Effects/", mD3DContext.GetDevice());
 	mLevelManager = new Resources::FileResourceManager<Model::Level>("Resources/Levels/");
+	
+	// DEBUG
+	mSoundManager = new Resources::SoundResourceManager("Resources/Sounds/");
+	mSound = mSoundManager->Load("buttonClick.wav");
 }
 
 PacmanGame::~PacmanGame() throw()
@@ -43,6 +47,8 @@ void PacmanGame::KeyPressed(ApplicationWindow* window, int keyCode)
 {
 	if (keyCode == VK_ESCAPE)
 		Quit();
+	else if (keyCode == VK_F6)
+		mSound->Play();
 }
 
 void PacmanGame::KeyReleased(ApplicationWindow* window, int keyCode)

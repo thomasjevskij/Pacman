@@ -5,6 +5,7 @@
 #include "FileResourceManager.hpp"
 #include "Effect.hpp"
 #include "Level.hpp"
+#include "Sound2D.hpp" // DEBUG
 
 using namespace Framework;
 
@@ -17,6 +18,7 @@ public:
 	void KeyPressed(ApplicationWindow* window, int keyCode);
 	void KeyReleased(ApplicationWindow* window, int keyCode);
 	void CharEntered(ApplicationWindow* window, char character);
+
 protected:
 	void Update(float dt);
 	void Draw(RenderBatch& renderBatch, float dt);
@@ -38,6 +40,10 @@ private:
 
 	Resources::EffectResourceManager* mEffectManager;
 	Resources::FileResourceManager<Model::Level>* mLevelManager;
+	
+	// DEBUG
+	Resources::SoundResourceManager* mSoundManager;
+	Resources::Sound2D* mSound;
 };
 
 #endif

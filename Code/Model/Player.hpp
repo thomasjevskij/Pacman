@@ -18,12 +18,13 @@ namespace Model
 		void GoRight();
 		void GoBack();
 		Helper::Point2f GetRealPos() const;
+
 	private:
 		Coord mFacing; //Enhetsvektor 0,1 = upp, 1,0 = right 0,-1 = down, -1,0 = left
 		Coord mLastFacing;
 		Helper::Point2f mRealPosition;
-		static const float cMovementSpeed = 16;
-		static const int tileSize = 64;
+		static const float cMovementSpeed;
+		static const int tileSize;
 
 		Coord GetValidGridPos(Coord pos,int width,int height);
 		bool CenterPos();
