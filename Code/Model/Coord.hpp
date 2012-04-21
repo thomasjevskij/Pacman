@@ -5,7 +5,8 @@
 
 namespace Model
 {
-	typedef Helper::Point2i Coord;
+	typedef Helper::Point2f Coord;  // DEBUG: changed from Point2i to Point2f because of type clash 
+									// in method call: UpdateMovement in GameplayHandler.
 	//struct Coord
 	//{
 	//	Coord();

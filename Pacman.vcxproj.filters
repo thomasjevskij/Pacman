@@ -25,6 +25,7 @@
     <ClCompile Include="Code\Model\Player.cpp" />
     <ClCompile Include="Code\View\Menu.cpp" />
     <ClCompile Include="Code\Model\Coord.cpp" />
+    <ClCompile Include="Code\Resources\Sound2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Effect\Effect.hpp" />
@@ -57,6 +58,7 @@
     <ClInclude Include="Code\Model\LevelHandler.hpp" />
     <ClInclude Include="Code\View\Menu.hpp" />
     <ClInclude Include="code\model\coord.hpp" />
+    <ClInclude Include="Code\Resources\Sound2D.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
