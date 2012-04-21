@@ -19,7 +19,7 @@ namespace Model
 		//Update movement
 		mPlayer.UpdateMovement(&mLevel, dt);
 		for each( Ghost g in mGhosts)
-			g.UpdateMovement(mPlayer.GetRealPos());
+			g.UpdateMovement(mPlayer.GetGridPosition());
 
 
 		//Test if Pacman is eating anything
@@ -56,7 +56,7 @@ namespace Model
 		//Test if Pacman collides with ghosts
 		for each (Ghost g in mGhosts)
 		{
-			if (TestRealCollision(g.GetRealPos(),mPlayer.GetRealPos()))
+			if (TestRealCollision(g.GetRealPos(),mPlayer.GetGridPosition()))
 			{
 				if(g.GetGhostState() == g.Chase || g.GetGhostState() == g.Scatter)
 				{
@@ -87,7 +87,7 @@ namespace Model
 		return (objectPos1 == objectPos2);
 	}
 	bool GameplayHandler::TestRealCollision(Coord ghostRealPos, Coord pacmanRealPos)
-	{ return true;} //Make FISK
+	{ return false;} //Make FISK
 	
 
 
@@ -120,7 +120,6 @@ namespace Model
 	{
 		return mScore;
 	}
-
 	//Time GameplayHandler::GetTimeLeft()
 
 	void GameplayHandler::NewLevel()

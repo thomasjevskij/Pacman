@@ -24,6 +24,8 @@ namespace Model
 		//Ai* Personality;
 		Coord mFacing; //Enhetsvektor 0,1 = upp, 1,0 = right 0,-1 = down, -1,0 = left
 		Coord mRealPosition;
+		
+		static const int C_TILESIZE = 64;
 	};
 }
 #endif
