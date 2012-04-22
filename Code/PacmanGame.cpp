@@ -1,4 +1,5 @@
 #include "PacmanGame.hpp"
+#include "ModelObj.hpp"
 
 PacmanGame::WindowDescription::WindowDescription()
 {
@@ -21,21 +22,28 @@ PacmanGame::PacmanGame(HINSTANCE instance)
 {
 	mEffectManager = new Resources::EffectResourceManager("Resources/Effects/", mD3DContext.GetDevice());
 	mLevelManager = new Resources::FileResourceManager<Model::Level>("Resources/Levels/");
+	mObjectManager = new Resources::FileResourceManager<Resources::ModelObj>("Resources/Objects/");
+	mMaterialManager = new Resources::FileResourceManager<Resources::Material>("Resources/Objects/");
 	
 	// DEBUG
 	mSoundManager = new Resources::SoundResourceManager("Resources/Sounds/");
 	mSound = mSoundManager->Load("buttonClick.wav");
+
+	Resources::ModelObj* newModel = mObjectManager->Load("pellet.obj");
 }
 
 PacmanGame::~PacmanGame() throw()
 {
 	SafeDelete(mEffectManager);
 	SafeDelete(mLevelManager);
+	SafeDelete(mObjectManager);
+	SafeDelete(mMaterialManager);
+	SafeDelete(mSoundManager);
 }
 
 void PacmanGame::Update(float dt)
 {
-	
+	mSoundManager->Update();
 }
 
 void PacmanGame::Draw(RenderBatch& renderBatch, float dt)

@@ -5,6 +5,7 @@
 #include "FileResourceManager.hpp"
 #include "Effect.hpp"
 #include "Level.hpp"
+#include "ModelObj.hpp"
 #include "Sound2D.hpp" // DEBUG
 
 using namespace Framework;
@@ -40,6 +41,8 @@ private:
 
 	Resources::EffectResourceManager* mEffectManager;
 	Resources::FileResourceManager<Model::Level>* mLevelManager;
+	Resources::FileResourceManager<Resources::ModelObj>* mObjectManager;
+	Resources::FileResourceManager<Resources::Material>* mMaterialManager;
 	
 	// DEBUG
 	Resources::SoundResourceManager* mSoundManager;

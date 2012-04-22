@@ -183,8 +183,10 @@
     <ClCompile Include="Code\Model\LevelHandler.cpp" />
     <ClCompile Include="Code\Model\Player.cpp" />
     <ClCompile Include="Code\PacmanGame.cpp" />
+    <ClCompile Include="Code\Resources\ModelObj.cpp" />
     <ClCompile Include="Code\Resources\Sound2D.cpp" />
     <ClCompile Include="Code\View\Menu.cpp" />
+    <ClCompile Include="Code\View\Scene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Effect\Effect.hpp" />
@@ -215,9 +217,11 @@
     <ClInclude Include="Code\Model\Player.hpp" />
     <ClInclude Include="Code\PacmanGame.hpp" />
     <ClInclude Include="Code\Resources\FileResourceManager.hpp" />
+    <ClInclude Include="Code\Resources\ModelObj.hpp" />
     <ClInclude Include="Code\Resources\ResourceManager.hpp" />
     <ClInclude Include="Code\Resources\Sound2D.hpp" />
     <ClInclude Include="Code\View\Menu.hpp" />
+    <ClInclude Include="Code\View\Scene.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
