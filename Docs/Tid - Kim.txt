@@ -5,4 +5,14 @@
 2012-04-16: 	1h Resource Manager
 		0.5h Camera
 		1h PacmanGame Class
-2012-04-17:		2h Resource Manager
+
+2012-04-17:	2h Resource Manager
+
+2012-04-19	
+1.5h 	GUI components
+
+2012-04-20	4h	Audio + bugfixes, research
+
+2012-04-21	4h	Object loader + research
+
+2012-04-21	3h	Obj forts, scene, Weekly report
