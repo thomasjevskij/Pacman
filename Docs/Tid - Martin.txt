@@ -1,6 +1,9 @@
 2012-04-09 0,5 (Particel effects)
+
 2012-04-11 2+1 (Arketektur+arketektur)
+
 2012-04-12 2+2 (WBS+ParticleDiagram+ParticleCoding)
+
 2012-04-16 1+2,25 (Fixade med statics+lvl class stuff)
 2012-04-18 0,5+2,5 (Möte + Programering/Arketektur backup + logic class programering) 
 2012-04-18 1,5 (Logic Class Programering)
