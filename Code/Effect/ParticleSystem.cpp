@@ -38,7 +38,7 @@ namespace Helper
 
 	D3DXVECTOR3 RandVec(int radius)
 	{
-		D3DXVECTOR3 temp = D3DXVECTOR3( rand() % 10,rand() % 10,rand() % 10);
+		D3DXVECTOR3 temp = D3DXVECTOR3( rand() % 20 - 10,rand() % 20 - 10,rand() % 20 - 10);
 		D3DXVec3Normalize(&temp,&temp);
 		temp *= rand() % radius;
 		return temp;
