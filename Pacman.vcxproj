@@ -161,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Effect\Effect.cpp" />
+    <ClCompile Include="Code\Effect\ParticleSystem.cpp" />
     <ClCompile Include="Code\Effect\Pass.cpp" />
     <ClCompile Include="Code\Effect\Technique.cpp" />
     <ClCompile Include="Code\Effect\VertexBuffer.cpp" />
@@ -188,6 +189,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Effect\Effect.hpp" />
+    <ClInclude Include="Code\Effect\ParticleHandlerInterface.h" />
+    <ClInclude Include="Code\Effect\ParticleSystem.hpp" />
     <ClInclude Include="Code\Effect\Pass.hpp" />
     <ClInclude Include="Code\Effect\Technique.hpp" />
     <ClInclude Include="Code\Effect\VertexBuffer.hpp" />
