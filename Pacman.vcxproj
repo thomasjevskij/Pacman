@@ -215,6 +215,7 @@
     <ClInclude Include="Code\PacmanGame.hpp" />
     <ClInclude Include="Code\Resources\FileResourceManager.hpp" />
     <ClInclude Include="Code\Resources\ResourceManager.hpp" />
+    <ClInclude Include="Code\View\GameEventSubscriber.hpp" />
     <ClInclude Include="Code\View\Menu.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -91,36 +91,39 @@ namespace Model
 	
 
 
-	GameObject GameplayHandler::GetPacman()
+	GameObject GameplayHandler::GetPacman() const
 	{
 		return mPlayer;
 	}
 
-	std::vector<Ghost> GameplayHandler::GetGhosts()
+	std::vector<Ghost> GameplayHandler::GetGhosts() const
 	{
 		return mGhosts;
 	}
 
 
-	Level GameplayHandler::GetLevel()
+	Level GameplayHandler::GetLevel() const
 	{
 		return mLevel;
 	}
 
-	int GameplayHandler::GetCurrentlevelIndex()
+	int GameplayHandler::GetCurrentlevelIndex() const
 	{
 		return mCurrentLevel;
 	}
 
-	int GameplayHandler::GetLives()
+	int GameplayHandler::GetLives() const
 	{
 		return mLives;
 	}
-	int GameplayHandler::GetScore()
+	int GameplayHandler::GetScore() const
 	{
 		return mScore;
 	}
-	//Time GameplayHandler::GetTimeLeft()
+	float GameplayHandler::GetTimeLeft() const
+	{
+		return mGameTime;
+	}
 
 	void GameplayHandler::NewLevel()
 	{

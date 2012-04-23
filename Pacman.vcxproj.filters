@@ -57,6 +57,7 @@
     <ClInclude Include="Code\Model\LevelHandler.hpp" />
     <ClInclude Include="Code\View\Menu.hpp" />
     <ClInclude Include="code\model\coord.hpp" />
+    <ClInclude Include="Code\View\GameEventSubscriber.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
