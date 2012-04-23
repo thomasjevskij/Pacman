@@ -2,6 +2,7 @@
 2012-04-11: 	3h Architecture Diagram, 1h State Machine, 1/2 Prototype, Foundation
 2012-04-12: 	2h WBS, 2h Class Diagram, 1h Prototype, Foundation
 2012-04-15: 	2h Weekly
+
 2012-04-16: 	1h Resource Manager
 	    	0.5h Camera Class
 	    	1h PacmanGame Class
@@ -10,3 +11,6 @@
 		0.5h Menu
 		0.5h Changes to font class
 		0.5h Screen/Screen Stack state
+2012-04-20:	0.5h Redmine setup
+		1h Weekly report
+		3h GUI components

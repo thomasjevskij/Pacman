@@ -2,6 +2,9 @@
 
 namespace Model
 {
+	const float Player::cMovementSpeed = 16;
+	const int Player::tileSize = 64;
+
 	Player::Player(Coord gridPosition) : GameObject(gridPosition)
 	{
 		//Sätt mRealPosition till start värde ändra 64 beroende på hur stora runtorna blir i slut änden
@@ -77,6 +80,7 @@ namespace Model
 		{
 			pos.Y = 0;
 		}
+		// DEBUG: added this because the function must return a value!
 		return pos;
 	}
 

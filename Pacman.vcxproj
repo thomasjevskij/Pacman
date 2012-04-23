@@ -66,7 +66,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IntDir>Build\$(Configuration)\x86\</IntDir>
-    <IncludePath>Code;Code\Model;Code\FreeImage;Code\Effect;Code\Framework;Code\Helper;Code\Helper\r2tk;Code\Resources;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;C:\Program Files (x86)\FMOD SoundSystem\FMOD Programmers API Windows\api\inc;$(IncludePath)</IncludePath>
+    <IncludePath>Code\View;Code;Code\Model;Code\FreeImage;Code\Effect;Code\Framework;Code\Helper;Code\Helper\r2tk;Code\Resources;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;C:\Program Files (x86)\FMOD SoundSystem\FMOD Programmers API Windows\api\inc;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86;C:\Program Files (x86)\FMOD SoundSystem\FMOD Programmers API Windows\api\lib;C:\Program Files (x86)\FMOD Programmers API Windows\api\lib;$(LibraryPath)</LibraryPath>
     <ExecutablePath>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Utilities\bin\x86;$(ExecutablePath);C:\Program Files (x86)\FMOD SoundSystem\FMOD Programmers API Windows\api</ExecutablePath>
   </PropertyGroup>
@@ -75,7 +75,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IntDir>Build\$(Configuration)\x86\</IntDir>
-    <IncludePath>Code;Code\Model;Code\FreeImage;Code\Effect;Code\Framework;Code\Helper;Code\Helper\r2tk;Code\Resources;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;C:\Program Files (x86)\FMOD SoundSystem\FMOD Programmers API Windows\api\inc;$(IncludePath)</IncludePath>
+    <IncludePath>Code\View;Code;Code\Model;Code\FreeImage;Code\Effect;Code\Framework;Code\Helper;Code\Helper\r2tk;Code\Resources;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;C:\Program Files (x86)\FMOD SoundSystem\FMOD Programmers API Windows\api\inc;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86;C:\Program Files (x86)\FMOD SoundSystem\FMOD Programmers API Windows\api\lib;C:\Program Files (x86)\FMOD Programmers API Windows\api\lib;$(LibraryPath)</LibraryPath>
     <ExecutablePath>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Utilities\bin\x86;$(ExecutablePath);C:\Program Files (x86)\FMOD SoundSystem\FMOD Programmers API Windows\api</ExecutablePath>
   </PropertyGroup>
@@ -84,7 +84,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IntDir>Build\$(Configuration)\x64\</IntDir>
-    <IncludePath>Code;Code\Model;Code\FreeImage;Code\Effect;Code\Framework;Code\Helper;Code\Helper\r2tk;Code\Resources;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;C:\Program Files (x86)\FMOD SoundSystem\FMOD Programmers API Windows\api\inc;$(IncludePath)</IncludePath>
+    <IncludePath>Code\View;Code;Code\Model;Code\FreeImage;Code\Effect;Code\Framework;Code\Helper;Code\Helper\r2tk;Code\Resources;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;C:\Program Files (x86)\FMOD SoundSystem\FMOD Programmers API Windows\api\inc;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x64;C:\Program Files (x86)\FMOD Programmers API Windows\api\lib;C:\Program Files (x86)\FMOD SoundSystem\FMOD Programmers API Windows\api\lib;$(LibraryPath)</LibraryPath>
     <ExecutablePath>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Utilities\bin\x64;$(ExecutablePath);C:\Program Files (x86)\FMOD SoundSystem\FMOD Programmers API Windows\api</ExecutablePath>
   </PropertyGroup>
@@ -93,7 +93,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IntDir>Build\$(Configuration)\x64\</IntDir>
-    <IncludePath>Code;Code\Model;Code\FreeImage;Code\Effect;Code\Framework;Code\Helper;Code\Helper\r2tk;Code\Resources;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;C:\Program Files (x86)\FMOD SoundSystem\FMOD Programmers API Windows\api\inc;$(IncludePath)</IncludePath>
+    <IncludePath>Code\View;Code;Code\Model;Code\FreeImage;Code\Effect;Code\Framework;Code\Helper;Code\Helper\r2tk;Code\Resources;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;C:\Program Files (x86)\FMOD SoundSystem\FMOD Programmers API Windows\api\inc;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x64;C:\Program Files (x86)\FMOD Programmers API Windows\api\lib;C:\Program Files (x86)\FMOD SoundSystem\FMOD Programmers API Windows\api\lib;$(LibraryPath)</LibraryPath>
     <ExecutablePath>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Utilities\bin\x64;$(ExecutablePath);C:\Program Files (x86)\FMOD SoundSystem\FMOD Programmers API Windows\api</ExecutablePath>
   </PropertyGroup>
@@ -102,7 +102,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
-      <AdditionalIncludeDirectories>Code\Model;Code\FreeImage;Code;Code\Effect;Code\Framework;Code\Helper;Code\Helper\r2tk;Code\Resources;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;C:\Program Files (x86)\FMOD SoundSystem\FMOD Programmers API Windows\api\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Code\Model;Code\View;Code\FreeImage;Code;Code\Effect;Code\Framework;Code\Helper;Code\Helper\r2tk;Code\Resources;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;C:\Program Files (x86)\FMOD SoundSystem\FMOD Programmers API Windows\api\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
@@ -115,7 +115,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
-      <AdditionalIncludeDirectories>Code\Model;Code\FreeImage;Code;Code\Effect;Code\Framework;Code\Helper;Code\Helper\r2tk;Code\Resources;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;C:\Program Files (x86)\FMOD SoundSystem\FMOD Programmers API Windows\api\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Code\Model;Code\View;Code\FreeImage;Code;Code\Effect;Code\Framework;Code\Helper;Code\Helper\r2tk;Code\Resources;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;C:\Program Files (x86)\FMOD SoundSystem\FMOD Programmers API Windows\api\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -129,7 +129,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
-      <AdditionalIncludeDirectories>Code\Model;Code\FreeImage;Code;Code\Effect;Code\Framework;Code\Helper;Code\Helper\r2tk;Code\Resources;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;C:\Program Files (x86)\FMOD SoundSystem\FMOD Programmers API Windows\api\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Code\Model;Code\View;Code\FreeImage;Code;Code\Effect;Code\Framework;Code\Helper;Code\Helper\r2tk;Code\Resources;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;C:\Program Files (x86)\FMOD SoundSystem\FMOD Programmers API Windows\api\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -145,7 +145,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
-      <AdditionalIncludeDirectories>Code\Model;Code\FreeImage;Code;Code\Effect;Code\Framework;Code\Helper;Code\Helper\r2tk;Code\Resources;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;C:\Program Files (x86)\FMOD SoundSystem\FMOD Programmers API Windows\api\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Code\Model;Code\View;Code\FreeImage;Code;Code\Effect;Code\Framework;Code\Helper;Code\Helper\r2tk;Code\Resources;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;C:\Program Files (x86)\FMOD SoundSystem\FMOD Programmers API Windows\api\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -183,6 +183,7 @@
     <ClCompile Include="Code\Model\LevelHandler.cpp" />
     <ClCompile Include="Code\Model\Player.cpp" />
     <ClCompile Include="Code\PacmanGame.cpp" />
+    <ClCompile Include="Code\Resources\Sound2D.cpp" />
     <ClCompile Include="Code\View\Menu.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -216,6 +217,7 @@
     <ClInclude Include="Code\Resources\FileResourceManager.hpp" />
     <ClInclude Include="Code\Resources\ResourceManager.hpp" />
     <ClInclude Include="Code\View\GameEventSubscriber.hpp" />
+    <ClInclude Include="Code\Resources\Sound2D.hpp" />
     <ClInclude Include="Code\View\Menu.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
