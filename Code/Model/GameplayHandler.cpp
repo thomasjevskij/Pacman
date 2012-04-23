@@ -2,16 +2,19 @@
 
 namespace Model
 {
-	GameplayHandler::GameplayHandler(): mPlayer(Coord(1,1))
+	GameplayHandler::GameplayHandler(): mPlayer(Coord(1,1)), mFruit(Coord(1,1))
 	{
 		mGameRestart = true;
 	}
 
 	void GameplayHandler::Update(float dt)
 	{
+		mGameTime += dt;
+
 		//Test if it should to load the next level
 		if (mLevelWasWon = true)
 			NewLevel();
+
 		//Test if it should start a new game
 		if (mGameRestart = true)
 			ResetGame();
@@ -19,37 +22,46 @@ namespace Model
 		//Update movement
 		mPlayer.UpdateMovement(&mLevel, dt);
 		for each( Ghost g in mGhosts)
-			g.UpdateMovement(mPlayer.GetGridPosition());
-
+		{
+			g.GhostStateBehaviour(mGameTime,mCurrentLevel);
+			g.UpdateMovement(mPlayer.GetGridPosition(), dt, &mLevel);
+		}
 
 		//Test if Pacman is eating anything
-		if (mLevel.GetCell(mPlayer.GetGridPosition().X, mPlayer.GetGridPosition().Y).Type == Cell::C_CELLTYPE_PELLET)
+		Coord playerPos = mPlayer.GetGridPosition();
+		if (mLevel.GetCell(playerPos.X, playerPos.Y).Type == Cell::C_CELLTYPE_PELLET)
 		{
 			mScore += 10;
-			//notify view and check if fruit should be added
-			mLevel.SetEaten(mPlayer.GetGridPosition().X, mPlayer.GetGridPosition().Y);
+			mPelletsEaten++;
+			if (mPelletsEaten == 70 || mPelletsEaten == 170)
+				mFruit = Fruit(mLevel.GetPacmanSpawnPosition());
+			mLevel.SetEaten(playerPos.X, playerPos.Y);
+			mGameEventSubscriber->PelletEaten(playerPos);
 		}
-		else if (mLevel.GetCell(mPlayer.GetGridPosition().X, mPlayer.GetGridPosition().Y).Type == Cell::C_CELLTYPE_POWERPELLET)
+		else if (mLevel.GetCell(playerPos.X, playerPos.Y).Type == Cell::C_CELLTYPE_POWERPELLET)
 		{
 			mScore += 50;
-			//start powermode, notify view and check if fruit should be added
-			mLevel.SetEaten(mPlayer.GetGridPosition().X, mPlayer.GetGridPosition().Y);
+			mPelletsEaten++;
+			if (mPelletsEaten == 70 || mPelletsEaten == 170)
+				mFruit = Fruit(mLevel.GetPacmanSpawnPosition());
+			
+			for each (Ghost c in mGhosts)
+				c.SetGhostState(c.Frightened);
+			mLevel.SetEaten(playerPos.X, playerPos.Y);
+			mGameEventSubscriber->PowerPelletEaten(playerPos);
 		}
-		else if (mLevel.GetCell(mPlayer.GetGridPosition().X, mPlayer.GetGridPosition().Y).Type == Cell::C_CELLTYPE_FOOD)
+		else if (mLevel.GetCell(playerPos.X, playerPos.Y).Type == Cell::C_CELLTYPE_FOOD)
 		{
 			mScore += mCurrentLevel * 100;
-			//remove fruitobject
-			mFruit = NULL;
 			mLevel.RemoveFood();
 		}
 
 		//Check if fruitlifetime has ended
 		if (mLevel.FoodExists() == true)
 		{
-			if (mFruit->IsLifeTimeOver(dt) == true)
+			if (mFruit.IsLifeTimeOver(dt) == true)
 			{
-				//Remove Fruit
-				mFruit = NULL;
+				mLevel.RemoveFood();
 			}
 		}
 
@@ -60,7 +72,7 @@ namespace Model
 			{
 				if(g.GetGhostState() == g.Chase || g.GetGhostState() == g.Scatter)
 				{
-					//Kill Pacman, end game etc
+					mGameEventSubscriber->PacmanKilled();
 					mGameRestart = true;
 				}
 				else if(g.GetGhostState() == g.Frightened)
@@ -74,11 +86,6 @@ namespace Model
 				}
 			}
 		}
-
-		//Update movement
-		//test collision
-		// -Modify level acordingly
-		// -Report Events
 	}
 
 
@@ -87,10 +94,12 @@ namespace Model
 		return (objectPos1 == objectPos2);
 	}
 	bool GameplayHandler::TestRealCollision(Coord ghostRealPos, Coord pacmanRealPos)
-	{ return false;} //Make FISK
+	{ 
+		if(sqrt(pow((ghostRealPos.X - pacmanRealPos.X),2) + pow((ghostRealPos.Y - pacmanRealPos.Y),2)) < 40)
+			return true;
+		return false;
+	}
 	
-
-
 	GameObject GameplayHandler::GetPacman() const
 	{
 		return mPlayer;
@@ -100,7 +109,6 @@ namespace Model
 	{
 		return mGhosts;
 	}
-
 
 	Level GameplayHandler::GetLevel() const
 	{
@@ -130,7 +138,8 @@ namespace Model
 		mLevelHandler.SetCurrentLevelIndex(mLevelHandler.GetCurrentLevelIndex() + 1);
 		mLevel = mLevelHandler.GetCurrentLevel();
 		mCurrentLevel = mLevelHandler.GetCurrentLevelIndex() +1;
-		mLevelWasWon = false; 
+		mLevelWasWon = false;
+		mPelletsEaten = 0;
 		//todo: Reset pacman and ghost positions
 	}
 	void GameplayHandler::ResetGame()
@@ -141,6 +150,7 @@ namespace Model
 		mScore = 0;
 		mLives = 3;
 		mGameRestart = false;
+		mPelletsEaten = 0;
 		//todo: Reset or make new player and ghosts
 	}
 

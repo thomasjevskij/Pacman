@@ -5,12 +5,16 @@
 
 namespace View
 {
-	virtual void PelletEaten(Point2i position)=0;
-	virtual void PowerPelletEaten(Point2i position)=0;
-	virtual void PowerPelletEnd();
-	virtual void GhostEaten(int index)=0;
-	virtual void GhostResurrected(int index)=0;
-	virtual void PacmanKilled()=0;
-	virtual void GameWon()=0;
+	class GameEventSubscriber
+	{
+	public:
+		virtual void PelletEaten(Helper::Point2f position)=0;
+		virtual void PowerPelletEaten(Helper::Point2f position)=0;
+		virtual void PowerPelletEnd()=0;
+		virtual void GhostEaten(int index)=0;
+		virtual void GhostResurrected(int index)=0;
+		virtual void PacmanKilled()=0;
+		virtual void GameWon()=0;
+	};
 }
 #endif

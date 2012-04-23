@@ -8,7 +8,7 @@
 #include "Fruit.hpp"
 #include "Ghost.hpp"
 #include "GameTime.hpp"
-#include "
+#include "GameEventSubscriber.hpp"
 #include <vector>
 
 namespace Model
@@ -18,6 +18,7 @@ namespace Model
 	public:
 		GameplayHandler();
 		void Update(float dt);
+
 		GameObject GetPacman() const;
 		std::vector<Ghost> GetGhosts() const;
 		Level GetLevel() const;
@@ -27,14 +28,17 @@ namespace Model
 		float GetTimeLeft() const;
 	private:
 		LevelHandler mLevelHandler;
+		View::GameEventSubscriber* mGameEventSubscriber;
 		Level mLevel;
 		Player mPlayer;
-		Fruit* mFruit;
+		Fruit mFruit;
+		std::vector<Ghost> mGhosts;
+
 		bool mLevelWasWon;
 		bool mGameRestart;
-		std::vector<Ghost> mGhosts;
-		int mLives, mCurrentLevel, mScore;
+		int mLives, mCurrentLevel, mScore, mPelletsEaten;
 		float mGameTime;
+
 		bool TestGridCollision(Coord objectPos1, Coord objectPos2);
 		bool TestRealCollision(Coord ghostRealPos, Coord pacmanRealPos);
 		void NewLevel();
@@ -43,14 +47,6 @@ namespace Model
 
 	};
 }
-
-
-
-
-
-
-
-
 
 
 #endif

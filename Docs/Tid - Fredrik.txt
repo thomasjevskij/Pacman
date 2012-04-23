@@ -1,4 +1,4 @@
-2012-04-11	3h 	Arkitekturdiagram mm.
+﻿2012-04-11	3h 	Arkitekturdiagram mm.
 2012-04-12	4h	Gantt och UML-diagram
 2012-04-16	3h	Levelklass
 2012-04-18	2h	GameplayHandler
@@ -11,3 +11,10 @@
 		0,5h	Changes in Level and Levelhandler
 		1h	Ghostclass
 		0,5h	Tried to find codemetrics tool
+2012-04-22	0,5h	Reading about pathfinding
+		0,5h	Reading about ghost states
+2012-04-23	2h	Gameplayhandler + interface
+		0,5h	Ghostclass
+		1h	Ghost States
+		0,5h	Pathfinding
+

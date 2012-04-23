@@ -2,8 +2,6 @@
 
 namespace Model
 {
-	const float Player::cMovementSpeed = 16;
-	const int Player::tileSize = 64;
 
 	Player::Player(Coord gridPosition) : GameObject(gridPosition)
 	{
