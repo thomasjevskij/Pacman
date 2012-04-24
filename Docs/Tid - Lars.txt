@@ -14,3 +14,5 @@
 2012-04-20:	0.5h Redmine setup
 		1h Weekly report
 		3h GUI components
+2012-04-23:	3.5h Particle System
+		0.5h Redmine setup
