@@ -5,21 +5,25 @@
 #include "GameObject.hpp"
 #include "Ai.hpp"
 #include "Level.hpp"
+#include "Player.hpp"
+
 
 namespace Model
 {
+	class Ai;
+
 	class Ghost : public GameObject
 	{
 	public:
 		Ghost(Coord gridPosition);
-		void UpdateMovement(Coord playerPosition, float dt, Level* level);
+		void UpdateMovement(Coord playerPosition, float dt, Level* level, Player* player);
 		void GhostStateBehaviour(float gameTime, int levelIndex);
 
 		Coord GetFacing();
 		Coord GetRealPos();
 
 		enum GhostState{ Scatter, Chase, Frightened, Killed};
-		void SetGhostState(GhostState state);
+		void SetGhostState(Ghost::GhostState state);
 		GhostState GetGhostState();
 		
 	private:
@@ -32,6 +36,15 @@ namespace Model
 		bool CenterPos();
 
 		static const int C_TILESIZE = 64;
+	};
+
+	class Ai
+	{
+	public:
+		Ai();
+		virtual Coord GetTargetPosition(Player* player, Ghost::GhostState state) = 0;
+	protected:
+		Coord mScatterSquare;
 	};
 }
 #endif

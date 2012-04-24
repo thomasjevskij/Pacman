@@ -5,6 +5,7 @@ namespace Model
 	GameplayHandler::GameplayHandler(): mPlayer(Coord(1,1)), mFruit(Coord(1,1))
 	{
 		mGameRestart = true;
+		srand(NULL);
 	}
 
 	void GameplayHandler::Update(float dt)
@@ -24,7 +25,7 @@ namespace Model
 		for each( Ghost g in mGhosts)
 		{
 			g.GhostStateBehaviour(mGameTime,mCurrentLevel);
-			g.UpdateMovement(mPlayer.GetGridPosition(), dt, &mLevel);
+			g.UpdateMovement(mPlayer.GetGridPosition(), dt, &mLevel, &mPlayer);
 		}
 
 		//Test if Pacman is eating anything

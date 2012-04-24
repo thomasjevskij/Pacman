@@ -26,6 +26,11 @@
     <ClCompile Include="Code\View\Menu.cpp" />
     <ClCompile Include="Code\Model\Coord.cpp" />
     <ClCompile Include="Code\Resources\Sound2D.cpp" />
+    <ClCompile Include="Code\Model\Ai.cpp" />
+    <ClCompile Include="Code\Model\Blinky.cpp" />
+    <ClCompile Include="Code\Model\Pinky.cpp" />
+    <ClCompile Include="Code\Model\Inky.cpp" />
+    <ClCompile Include="Code\Model\Clyde.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Effect\Effect.hpp" />
@@ -60,6 +65,10 @@
     <ClInclude Include="code\model\coord.hpp" />
     <ClInclude Include="Code\View\GameEventSubscriber.hpp" />
     <ClInclude Include="Code\Resources\Sound2D.hpp" />
+    <ClInclude Include="Code\Model\Blinky.hpp" />
+    <ClInclude Include="Code\Model\Pinky.hpp" />
+    <ClInclude Include="Code\Model\Inky.hpp" />
+    <ClInclude Include="Code\Model\Clyde.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

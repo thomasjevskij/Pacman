@@ -17,4 +17,5 @@
 		0,5h	Ghostclass
 		1h	Ghost States
 		0,5h	Pathfinding
+2012-04-23	3h	AI
 

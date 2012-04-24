@@ -11,14 +11,14 @@ namespace Model
 		mMovementSpeed = 16;
 	}
 
-	void Ghost::UpdateMovement(Coord playerPosition, float dt, Level* level)
+	void Ghost::UpdateMovement(Coord playerPosition, float dt, Level* level, Player* player)
 	{
 		if(CenterPos())
 		{
 			//check if current gridpos is an intersection
 			//if killed get ghostspawn from level or
-			//if frightened choose random route else
-			//mPersonality.GetTargetPosition()
+			//if frightened choose random route else -DO NOT-
+			//mPersonality.GetTargetPosition(player, state)
 			//Compare possible alternative grids to target
 			//Change facing (revesed not allowed)
 		}
