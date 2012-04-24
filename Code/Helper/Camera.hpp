@@ -19,6 +19,10 @@ namespace Helper
 
 		void Commit();
 
+		const D3DXVECTOR3& GetPostion() const;
+		const D3DXVECTOR3& GetDirection() const;
+		const D3DXMATRIX& GetViewProjection() const;
+
 	private:
 		static const D3DXVECTOR3 C_WORLD_UP;
 
