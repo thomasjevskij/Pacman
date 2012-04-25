@@ -2,5 +2,7 @@ Week 17 (R4):
 	Change of render batch to sprite batch
 
 Week 18 (R5):
-	Removal of Boost++		Too much effort learning for too little gain
-	Removal of BSP tree		We have yet to locate the need for optimization
+	Removal of Boost++						Too much effort learning for too little gain
+	Removal of BSP tree						We have yet to locate the need for optimization
+	Removal of GameObject base class		No use of polymorphism
+	
