@@ -20,8 +20,8 @@ namespace Model
 		void GhostStateBehaviour(float gameTime, int levelIndex);
 		
 		Coord GetGridPosition() const;
-		Coord GetFacing();
-		Coord GetRealPos();
+		Coord GetFacing() const;
+		Coord GetRealPos() const;
 
 		enum GhostState{ Scatter, Chase, Frightened, Killed};
 		void SetGhostState(Ghost::GhostState state);
@@ -29,7 +29,7 @@ namespace Model
 		
 	private:
 		GhostState mGhostState;
-		Ai* mPersonality;
+		//Ai* mPersonality;
 		Coord mFacing; //Enhetsvektor 0,1 = upp, 1,0 = right 0,-1 = down, -1,0 = left
 		Coord mRealPosition;
 		Coord mGridPosition;

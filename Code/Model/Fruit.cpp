@@ -8,7 +8,7 @@ namespace Model
 	bool Fruit::IsLifeTimeOver(float dt)
 	{
 		mLivedTime += dt;
-		if(mLivedTime >= cEndTime)
+		if(mLivedTime >= C_ENDTIME)
 		{
 			return true;
 		}

@@ -12,7 +12,7 @@ namespace Model
 		bool IsLifeTimeOver(float dt);
 	private:
 		float mLivedTime;
-		static const int cEndTime = 10;
+		static const int C_ENDTIME = 10;
 	};
 }
 #endif

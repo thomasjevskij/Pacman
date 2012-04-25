@@ -10,8 +10,8 @@ namespace Model
 		mRealPosition = Helper::Point2f(gridPosition.X * C_TILESIZE - 32,gridPosition.Y * C_TILESIZE - C_TILESIZE/2);
 		mFacing = Coord(1,0);
 		mMovementSpeed = 16;
-		if (aiType == 0)
-			mPersonality = new Blinky;
+		//if (aiType == 0)
+		//	mPersonality = new Blinky;
 	}
 
 	void Ghost::UpdateMovement(Coord playerPosition, float dt, Level* level, Player* player, Coord blinkyPos)
@@ -68,12 +68,12 @@ namespace Model
 		mGridPosition = Coord(mRealPosition.X / C_TILESIZE,mRealPosition.Y / C_TILESIZE);
 	}
 	
-	Coord Ghost::GetFacing()
+	Coord Ghost::GetFacing() const
 	{
 		return mFacing;
 	}
 
-	Coord Ghost::GetRealPos()
+	Coord Ghost::GetRealPos() const
 	{
 		return mRealPosition;
 	}

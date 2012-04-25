@@ -7,7 +7,7 @@ namespace Model
 	Player::Player(Coord gridPosition)
 	{
 		//Sätt mRealPosition till start värde ändra 64 beroende på hur stora runtorna blir i slut änden
-		mRealPosition = Helper::Point2f(gridPosition.X * tileSize - 32,gridPosition.Y * tileSize - tileSize/2);
+		mRealPosition = Helper::Point2f(gridPosition.X * C_TILESIZE - 32,gridPosition.Y * C_TILESIZE - C_TILESIZE/2);
 		mFacing = Coord(1,0);
 	}
 
@@ -31,8 +31,8 @@ namespace Model
 		}
 
 		//Updatera pacmans position
-		mRealPosition += Helper::Point2f(mFacing.X*cMovementSpeed*dt,mFacing.Y*cMovementSpeed*dt);
-		mGridPosition = Coord(mRealPosition.X / tileSize,mRealPosition.Y / tileSize);
+		mRealPosition += Helper::Point2f(mFacing.X*C_MOVEMENT_SPEED*dt,mFacing.Y*C_MOVEMENT_SPEED*dt);
+		mGridPosition = Coord(mRealPosition.X / C_TILESIZE,mRealPosition.Y / C_TILESIZE);
 		mLastFacing = mFacing;
 		//Glöm ej att uppdatera gridpos
 	}
@@ -94,9 +94,9 @@ namespace Model
 
 	bool Player::CenterPos()
 	{
-		if((int)mRealPosition.X % tileSize > tileSize/2 - tileSize/10 && (int)mRealPosition.X % tileSize < tileSize/2 + tileSize/10)
+		if((int)mRealPosition.X % C_TILESIZE > C_TILESIZE/2 - C_TILESIZE/10 && (int)mRealPosition.X % C_TILESIZE < C_TILESIZE/2 + C_TILESIZE/10)
 		{
-			if((int)mRealPosition.Y % tileSize > tileSize/2 - tileSize/10 && (int)mRealPosition.Y % tileSize < tileSize/2 + tileSize/10)
+			if((int)mRealPosition.Y % C_TILESIZE > C_TILESIZE/2 - C_TILESIZE/10 && (int)mRealPosition.Y % C_TILESIZE < C_TILESIZE/2 + C_TILESIZE/10)
 			{
 				return true;
 			}

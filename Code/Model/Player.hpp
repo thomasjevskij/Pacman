@@ -28,8 +28,8 @@ namespace Model
 		Coord mGridPosition;
 
 		Helper::Point2f mRealPosition;
-		static const int cMovementSpeed = 16;
-		static const int tileSize = 64;
+		static const int C_MOVEMENT_SPEED = 16;
+		static const int C_TILESIZE = 64;
 
 		Coord GetValidGridPos(Coord pos,int width,int height);
 		bool CenterPos();
