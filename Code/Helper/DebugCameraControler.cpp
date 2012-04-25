@@ -15,8 +15,8 @@ namespace Helper
 
 	void DebugCameraControler::Update(float dt)
 	{
-		mCamera->SetPosition(mCamera->GetPostion()+(mCamera->GetDirection()*mKeyState.z*C_MOVESPEED*dt));
-
+		//Kollar så att rotationen befinner sig i ett lagom intervall och ökar om 
+		//keystates säger att en av svängnings knapparna är nertryckta
 		mRot += (TWO_PI/2)*dt*mKeyState.x;
 		if(mRot < 0)
 			mRot += TWO_PI;
@@ -25,6 +25,9 @@ namespace Helper
 
 		mCamera->SetDirection(D3DXVECTOR3(cos(mRot),mCamera->GetDirection().y,sin(mRot)));
 		
+		//Uppdaterar kamerans possition
+		mCamera->SetPosition(mCamera->GetPostion()+(mCamera->GetDirection()*mKeyState.z*C_MOVESPEED*dt));
+
 		mCamera->Commit();
 	}
 
