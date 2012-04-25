@@ -2,7 +2,7 @@
 #include "Ghost.hpp"
 
 namespace Model
-{
+{/*
 	Ai::Ai()
-	{}
+	{}*/
 }

@@ -3,7 +3,6 @@
 
 #include "Level.hpp"
 #include "LevelHandler.hpp"
-#include "GameObject.hpp"
 #include "Player.hpp"
 #include "Fruit.hpp"
 #include "Ghost.hpp"
@@ -19,7 +18,7 @@ namespace Model
 		GameplayHandler();
 		void Update(float dt);
 
-		GameObject GetPacman() const;
+		Player GetPacman() const;
 		std::vector<Ghost> GetGhosts() const;
 		Level GetLevel() const;
 		int GetCurrentlevelIndex() const;

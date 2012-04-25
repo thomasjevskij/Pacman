@@ -56,7 +56,6 @@
     <ClInclude Include="Code\Model\Ai.hpp" />
     <ClInclude Include="Code\Model\Player.hpp" />
     <ClInclude Include="Code\Model\Fruit.hpp" />
-    <ClInclude Include="Code\Model\GameObject.hpp" />
     <ClInclude Include="Code\Model\GameplayHandler.hpp" />
     <ClInclude Include="Code\Model\Ghost.hpp" />
     <ClInclude Include="Code\Model\Level.hpp" />

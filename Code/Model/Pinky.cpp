@@ -7,7 +7,7 @@ namespace Model
 		mScatterSquare = Coord(-10000, -10000);
 	}
 
-	Coord Pinky::GetTargetPosition(Player* player, Ghost::GhostState state)
+	Coord Pinky::GetTargetPosition(Player* player, Ghost::GhostState state, Coord ghostPos, Coord blinkyPos)
 	{
 		//This function does not handle Ghost::Killed since it is much simpler to handle from the Ghost class
 		if(state == Ghost::Scatter)

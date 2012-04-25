@@ -3,26 +3,68 @@
 namespace Model
 {
 
-	Ghost::Ghost(Coord gridPosition) : GameObject(gridPosition)
+	Ghost::Ghost(Coord gridPosition, int aiType)
 	{
+		mSpawnPosition = gridPosition;
 		//Sätt mRealPosition till start värde ändra 64 beroende på hur stora runtorna blir i slut änden
 		mRealPosition = Helper::Point2f(gridPosition.X * C_TILESIZE - 32,gridPosition.Y * C_TILESIZE - C_TILESIZE/2);
 		mFacing = Coord(1,0);
 		mMovementSpeed = 16;
+		if (aiType == 0)
+			mPersonality = new Blinky;
 	}
 
-	void Ghost::UpdateMovement(Coord playerPosition, float dt, Level* level, Player* player)
+	void Ghost::UpdateMovement(Coord playerPosition, float dt, Level* level, Player* player, Coord blinkyPos)
 	{
 		if(CenterPos())
 		{
 			//check if current gridpos is an intersection
-			//if killed get ghostspawn from level or
-			//if frightened choose random route else -DO NOT-
-			//mPersonality.GetTargetPosition(player, state)
-			//Compare possible alternative grids to target
+			//if killed get ghostspawn from level 
+			//mPersonality.GetTargetPosition(player, mGhostState, mGridPosition, blinkyPos)
+			//Compare possible alternatives to target
 			//Change facing (revesed not allowed)
-		}
-		mRealPosition += Helper::Point2f(mFacing.X*mMovementSpeed*dt,mFacing.Y*mMovementSpeed*dt);
+			std::vector<Coord> possibleGrids;
+			Coord backFacing = Coord(mGridPosition.X + mFacing.X * -1,mGridPosition.Y + mFacing.Y * -1);
+			if(level->GetCell(mGridPosition.X + 1, mGridPosition.Y).Type != Model::Cell::C_CELLTYPE_WALL && 
+				Coord(mGridPosition.X + 1, mGridPosition.Y) != backFacing)
+			{
+				possibleGrids.push_back(Coord(mGridPosition.X + 1, mGridPosition.Y));
+			}
+			if(level->GetCell(mGridPosition.X - 1, mGridPosition.Y).Type != Model::Cell::C_CELLTYPE_WALL && 
+				Coord(mGridPosition.X - 1, mGridPosition.Y) != backFacing)
+			{
+				possibleGrids.push_back(Coord(mGridPosition.X - 1, mGridPosition.Y));
+			}
+			if(level->GetCell(mGridPosition.X, mGridPosition.Y + 1).Type != Model::Cell::C_CELLTYPE_WALL && 
+				Coord(mGridPosition.X, mGridPosition.Y + 1) != backFacing)
+			{
+				possibleGrids.push_back(Coord(mGridPosition.X, mGridPosition.Y + 1));
+			}
+			if(level->GetCell(mGridPosition.X, mGridPosition.Y - 1).Type != Model::Cell::C_CELLTYPE_WALL && 
+				Coord(mGridPosition.X, mGridPosition.Y - 1) != backFacing)
+			{
+				possibleGrids.push_back(Coord(mGridPosition.X, mGridPosition.Y - 1));
+			}
+			
+			if(possibleGrids.size() == 1)
+				mFacing == mGridPosition - possibleGrids[0];
+			else
+			{
+				Coord target;
+				if(mGhostState == GhostState::Killed)
+					target = mSpawnPosition;
+				else
+					target = Coord(1,1);
+					//Coord target = mPersonality.GetTargetPosition(player, mGhostState, mGridPosition, blinkyPos);
+				Coord shortestFacing = Coord(1000000,1000000);
+				for each (Coord c in possibleGrids)
+					if (pow((target.X - c.X),2) + pow((target.Y - c.Y),2) < pow((target.X - shortestFacing.X),2) + pow((target.Y - shortestFacing.Y),2))
+						shortestFacing = c;
+				mFacing = shortestFacing;
+			}
+
+		} 
+		mRealPosition += Helper::Point2f(mFacing.X * mMovementSpeed * dt, mFacing.Y * mMovementSpeed * dt);
 		mGridPosition = Coord(mRealPosition.X / C_TILESIZE,mRealPosition.Y / C_TILESIZE);
 	}
 	
@@ -62,6 +104,11 @@ namespace Model
 	Ghost::GhostState Ghost::GetGhostState()
 	{
 		return mGhostState;
+	}
+
+	Coord Ghost::GetGridPosition() const 
+	{
+		return mGridPosition;
 	}
 
 	void Ghost::GhostStateBehaviour(float gameTime, int levelIndex)

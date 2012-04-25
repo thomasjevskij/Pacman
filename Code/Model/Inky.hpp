@@ -10,7 +10,7 @@ namespace Model
 	{
 	public: 
 		Inky();
-		Coord GetTargetPosition(Player* player, Ghost::GhostState state);
+		Coord GetTargetPosition(Player* player, Ghost::GhostState state, Coord ghostPos, Coord blinkyPos);
 	protected:
 		Coord ScatterSquare;
 

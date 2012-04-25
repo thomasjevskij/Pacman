@@ -2,7 +2,7 @@
 
 namespace Model
 {
-	GameplayHandler::GameplayHandler(): mPlayer(Coord(1,1)), mFruit(Coord(1,1))
+	GameplayHandler::GameplayHandler(): mPlayer(Coord(1,1)), mFruit()
 	{
 		mGameRestart = true;
 		srand(NULL);
@@ -25,7 +25,7 @@ namespace Model
 		for each( Ghost g in mGhosts)
 		{
 			g.GhostStateBehaviour(mGameTime,mCurrentLevel);
-			g.UpdateMovement(mPlayer.GetGridPosition(), dt, &mLevel, &mPlayer);
+			g.UpdateMovement(mPlayer.GetGridPosition(), dt, &mLevel, &mPlayer, mGhosts[0].GetGridPosition());
 		}
 
 		//Test if Pacman is eating anything
@@ -35,7 +35,7 @@ namespace Model
 			mScore += 10;
 			mPelletsEaten++;
 			if (mPelletsEaten == 70 || mPelletsEaten == 170)
-				mFruit = Fruit(mLevel.GetPacmanSpawnPosition());
+				mFruit = Fruit();
 			mLevel.SetEaten(playerPos.X, playerPos.Y);
 			mGameEventSubscriber->PelletEaten(playerPos);
 		}
@@ -44,7 +44,7 @@ namespace Model
 			mScore += 50;
 			mPelletsEaten++;
 			if (mPelletsEaten == 70 || mPelletsEaten == 170)
-				mFruit = Fruit(mLevel.GetPacmanSpawnPosition());
+				mFruit = Fruit();
 			
 			for each (Ghost c in mGhosts)
 				c.SetGhostState(c.Frightened);
@@ -101,7 +101,7 @@ namespace Model
 		return false;
 	}
 	
-	GameObject GameplayHandler::GetPacman() const
+	Player GameplayHandler::GetPacman() const
 	{
 		return mPlayer;
 	}
@@ -139,20 +139,27 @@ namespace Model
 		mLevelHandler.SetCurrentLevelIndex(mLevelHandler.GetCurrentLevelIndex() + 1);
 		mLevel = mLevelHandler.GetCurrentLevel();
 		mCurrentLevel = mLevelHandler.GetCurrentLevelIndex() +1;
+		mGhosts.clear();
+		for (int i = 0; i<=3; i++)
+			mGhosts.push_back(Ghost(mLevel.GetGhostSpawnPositions()[i], i));
+		mPlayer = Player(mLevel.GetPacmanSpawnPosition());
 		mLevelWasWon = false;
 		mPelletsEaten = 0;
-		//todo: Reset pacman and ghost positions
 	}
+
 	void GameplayHandler::ResetGame()
 	{
 		mLevelHandler.SetCurrentLevelIndex(0);
 		mLevel = mLevelHandler.GetCurrentLevel();
 		mCurrentLevel = mLevelHandler.GetCurrentLevelIndex() +1;
+		mGhosts.clear();
+		for (int i = 0; i<=3; i++)
+			mGhosts.push_back(Ghost(mLevel.GetGhostSpawnPositions()[i], i));
+		mPlayer = Player(mLevel.GetPacmanSpawnPosition());
 		mScore = 0;
 		mLives = 3;
 		mGameRestart = false;
 		mPelletsEaten = 0;
-		//todo: Reset or make new player and ghosts
 	}
 
 

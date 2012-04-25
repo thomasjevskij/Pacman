@@ -2,8 +2,9 @@
 
 namespace Model
 {
-
-	Player::Player(Coord gridPosition) : GameObject(gridPosition)
+	Player::Player()
+	{}
+	Player::Player(Coord gridPosition)
 	{
 		//Sätt mRealPosition till start värde ändra 64 beroende på hur stora runtorna blir i slut änden
 		mRealPosition = Helper::Point2f(gridPosition.X * tileSize - 32,gridPosition.Y * tileSize - tileSize/2);
@@ -53,6 +54,10 @@ namespace Model
 		mFacing = Coord(mFacing.X*-1,mFacing.Y*-1);
 	}
 
+	Coord Player::GetGridPosition() const 
+	{
+		return mGridPosition;
+	}
 
 	Helper::Point2f Player::GetRealPos() const
 	{

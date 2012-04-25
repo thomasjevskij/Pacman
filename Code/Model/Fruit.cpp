@@ -2,7 +2,7 @@
 
 namespace Model
 {
-	Fruit::Fruit(Coord gridPosition): GameObject(gridPosition), mLivedTime(0.0f)
+	Fruit::Fruit()
 	{
 	}
 	bool Fruit::IsLifeTimeOver(float dt)
