@@ -26,7 +26,7 @@ namespace Helper
 		mCamera->SetDirection(D3DXVECTOR3(cos(mRot),mCamera->GetDirection().y,sin(mRot)));
 		
 		//Uppdaterar kamerans possition
-		mCamera->SetPosition(mCamera->GetPostion()+(mCamera->GetDirection()*mKeyState.z*C_MOVESPEED*dt));
+		mCamera->SetPosition(mCamera->GetPosition()+(mCamera->GetDirection()*mKeyState.z*C_MOVESPEED*dt));
 
 		mCamera->Commit();
 	}

@@ -65,7 +65,7 @@ namespace Helper
 		mViewProjection = mView * mProjection;
 	}
 
-	const D3DXVECTOR3& Camera::GetPostion() const
+	const D3DXVECTOR3& Camera::GetPosition() const
 	{
 		return mStagingChanges.Position;
 	}
