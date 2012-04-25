@@ -8,3 +8,4 @@ Week 18 (R5):
 	Both IngameScreen and Scene implements GameEventSubscriber			Both need the information (reactions in both the 3D scene and in the HUD)
 	Sprite batch removed												Not sure if we need that optimization yet
 	Camera controller using strategy pattern							Different cameras have different behaviors
+	TODO: fix interfaces in Model										They are not perfect
