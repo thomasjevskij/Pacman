@@ -24,3 +24,4 @@
 2012-04-26:
 		2h Redmine setup
 		4h L2 report
+		1h Cleanup
