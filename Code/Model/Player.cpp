@@ -41,13 +41,13 @@ namespace Model
 	void Player::GoLeft()
 	{	
 		if(CenterPos())
-		mFacing = Coord(mFacing.Y*-1,mFacing.X);
+			mFacing = Coord(mFacing.Y*-1,mFacing.X);
 	}
 
 	void Player::GoRight()
 	{
 		if(CenterPos())
-		mFacing = Coord(mFacing.Y,mFacing.X*-1);
+			mFacing = Coord(mFacing.Y,mFacing.X*-1);
 	}
 
 	void Player::GoBack()

@@ -9,3 +9,5 @@ Week 18 (R5):
 	Sprite batch removed												Not sure if we need that optimization yet
 	Camera controller using strategy pattern							Different cameras have different behaviors
 	TODO: fix interfaces in Model										They are not perfect
+	Removed level variable from GameplayHandler							LevelHandler already handles it
+	Simplified LevelHandler interface									It could do too much
