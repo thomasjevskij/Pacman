@@ -163,24 +163,3 @@ namespace Framework
 		mEffect->GetVariableByName(variableName.c_str())->AsShaderResource()->SetResource(value);
 	}
 }
-
-namespace Resources
-{
-	EffectResourceManager::EffectResourceManager(const std::string& path, ID3D10Device* device)
-		: mDevice(device)
-		, mPath(path)
-	{}
-
-	Framework::Effect* EffectResourceManager::Load(const std::string& filename)
-	{
-		Framework::Effect* resource = GetResource(filename);
-
-		if (resource == NULL)
-		{
-			resource = new Framework::Effect(mDevice, mPath + filename);
-			AddResource(filename, resource);
-		}
-
-		return resource;
-	}
-}
