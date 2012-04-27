@@ -1,0 +1,6 @@
+# To ignore a directory, write "dir <directory>"
+# To ignore a file, write "file <file ending>"
+dir r2tk
+dir FreeImage
+file .ignore
+file .py
