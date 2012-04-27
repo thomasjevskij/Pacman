@@ -14,8 +14,7 @@ class IgnoreException(Exception):
 		return repr(self.value)
 
 def get_ignore():
-	file = open('line_counter.ignore')
-	lines = file.readlines()
+	lines = getlines('line_counter.ignore')
 	files = []
 	dirs = []
 	for line in lines:
@@ -31,7 +30,6 @@ def get_ignore():
 			raise IgnoreException("Invalid .ignore file: %s") % line
 	return files, dirs
 			
-
 def get_lines(path):
 	file = open(path)
 	lines = file.readlines()
@@ -83,4 +81,3 @@ for root, dirs, files in walk('.'):
 		
 print "Total lines of code: %d" % loc
 print "Total source lines of code: %d" % sloc
-		

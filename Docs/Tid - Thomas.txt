@@ -47,3 +47,6 @@
 26/4 - 2012
 4h		L2
 1h		Cleanup
+
+27/4 - 2012
+1h		LOC counter script
