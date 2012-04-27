@@ -5,6 +5,7 @@
 #include <map>
 
 #include "Global.hpp"
+#include "Texture.hpp"
 #include "VertexBuffer.hpp"
 #include "Effect.hpp"
 
@@ -25,7 +26,7 @@ namespace Resources
 			float RefractionIndex;		// Ni, optical density, (0.001)1.0-10.0, 1.0-> light doesn't bend
 			//float SpecularExp;			// Ns, ~0-1000, High value-> concentrated highlight
 			//float Sharpness;			// Sharpness of reflections, 0-1000, default 60.0
-			// Textures
+			Texture* MainTexture;		// Texture that can be sent to the shaders
 
 			Definition();
 		};
@@ -38,8 +39,10 @@ namespace Resources
 	class ModelObj
 	{
 	public:
-		ModelObj(std::string filename);
+		ModelObj(ID3D10Device* device, std::string filename);
 		~ModelObj() throw();
+
+		void Draw(D3DXVECTOR3 drawPosition);
 
 	private:
 		// The struct for a vertex in the object. 
@@ -51,13 +54,18 @@ namespace Resources
 			D3DXVECTOR2	UV;
 		};
 
-		Material* objectMaterial;
+		Material* mMaterial;
+		ID3D10Device* mDevice;
+		D3D::Effect* mEffect;
+		D3D::VertexBuffer* mBuffer;
+		D3DXMATRIX mWorld;
 
 		ModelObj(const ModelObj&);
 		ModelObj& operator=(const ModelObj&);
 
 		bool Load(std::string filename);
 		bool LoadMaterial(std::string filename);
+		void UpdateWorldMatrix(D3DXVECTOR3 position);
 	};
 }
 #endif

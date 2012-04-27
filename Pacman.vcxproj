@@ -158,6 +158,8 @@
     <None Include=".gitignore" />
     <None Include="pull.sh" />
     <None Include="push.sh" />
+    <None Include="Resources\Effects\ModelObj.fx" />
+    <None Include="Resources\Textures\whitePixel.png" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Effect\Effect.cpp" />
@@ -185,6 +187,8 @@
     <ClCompile Include="Code\PacmanGame.cpp" />
     <ClCompile Include="Code\Resources\ModelObj.cpp" />
     <ClCompile Include="Code\Resources\Sound2D.cpp" />
+    <ClCompile Include="Code\Resources\Texture.cpp" />
+    <ClCompile Include="Code\View\Ground.cpp" />
     <ClCompile Include="Code\View\Menu.cpp" />
     <ClCompile Include="Code\View\Scene.cpp" />
   </ItemGroup>
@@ -216,10 +220,13 @@
     <ClInclude Include="Code\Model\LevelHandler.hpp" />
     <ClInclude Include="Code\Model\Player.hpp" />
     <ClInclude Include="Code\PacmanGame.hpp" />
+    <ClInclude Include="Code\Resources\D3DResourceManager.hpp" />
     <ClInclude Include="Code\Resources\FileResourceManager.hpp" />
     <ClInclude Include="Code\Resources\ModelObj.hpp" />
     <ClInclude Include="Code\Resources\ResourceManager.hpp" />
     <ClInclude Include="Code\Resources\Sound2D.hpp" />
+    <ClInclude Include="Code\Resources\Texture.hpp" />
+    <ClInclude Include="Code\View\Ground.hpp" />
     <ClInclude Include="Code\View\Menu.hpp" />
     <ClInclude Include="Code\View\Scene.hpp" />
   </ItemGroup>

@@ -60,6 +60,7 @@ namespace Model
 		const std::vector<Coord>& GetPelletPositions() const;
 		const std::vector<Coord>& GetPowerPelletPositions() const;
 		const std::vector<Coord>& GetGhostSpawnPositions() const;
+	
 	private:
 		// Converts x and y coordinates to the corresponding index in mCells. Returns -1 if invalid x or y is passed
 		int GetIndex(int x, int y) const;

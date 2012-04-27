@@ -5,6 +5,7 @@
 #include <cassert>
 
 #include "FileResourceManager.hpp"
+#include "D3DResourceManager.hpp"
 
 namespace Resources
 {
@@ -12,7 +13,7 @@ namespace Resources
 		: Ambient(D3DXVECTOR3(0.2, 0.2, 0.2)), Diffuse(D3DXVECTOR3(0.8, 0.8, 0.8))
 		,  Specular(D3DXVECTOR3(1.0, 1.0, 1.0)), Tf(D3DXVECTOR3(1.0, 1.0, 1.0))
 		,  IlluminationModel(0), /*Opacitiy(1.0),*/ RefractionIndex(1.0)
-		//,  SpecularExp(), Sharpness(60.0)
+		/*,  SpecularExp(), Sharpness(60.0)*/, MainTexture(NULL)
 	{}
 
 	Material::Material(std::string filename)
@@ -97,7 +98,20 @@ namespace Resources
 			//}
 			else if(key == "map_Ka" || key == "map_Kd" || key == "map_Ks")
 			{
-				// TODO: Add Textures
+				// Get the next argument on the line
+				std::string textureFilename;
+				streamLine >> textureFilename;
+
+				// Make sure there is a period in the name indicating a file name. The other
+				// arguments are not interesting at this point.
+				while (textureFilename.find('.') == std::string::npos && !streamLine.eof())
+				{
+					streamLine >> textureFilename;
+				}
+
+				// Only try to load the texture if a filename was read
+				if(textureFilename.find('.') != std::string::npos)
+					Resources::D3DResourceManager<Texture>::Instance().Load(textureFilename);
 			}
 		}
 
@@ -112,14 +126,18 @@ namespace Resources
 
 namespace Resources
 {
-	ModelObj::ModelObj(std::string filename)
+	ModelObj::ModelObj(ID3D10Device* device, std::string filename)
+		: mMaterial(NULL), mDevice(device), mEffect(NULL), mBuffer(NULL)
 	{
+		D3DXMatrixIdentity(&mWorld);
+
 		if(!Load(filename))
 			return;
 	}
 
 	ModelObj::~ModelObj() throw()
 	{
+		SafeDelete(mBuffer);
 	}
 
 	bool ModelObj::Load(std::string filename)
@@ -148,7 +166,18 @@ namespace Resources
 			streamLine.str(line);
 			streamLine >> key;
 
-			if(key == "v")
+			if(key == "mtllib")
+			{
+				std::string matFile;
+				streamLine >> matFile;
+
+				if(!LoadMaterial(matFile))
+				{
+					// Material was not loaded
+					// TODO: error checking?
+				}
+			}
+			else if(key == "v")
 			{
 				D3DXVECTOR3 currPos;
 				streamLine >> currPos.x;
@@ -193,26 +222,69 @@ namespace Resources
 					vertices.push_back(currVertex);
 				}
 			}
-			else if(key == "mtllib")
-			{
-				std::string matFile;
-				streamLine >> matFile;
-
-				if(!LoadMaterial(matFile))
-				{
-					// Material was not loaded
-					// TODO: error checking?
-				}
-			}
 		}
+
+		// Describe the buffer and create it
+		D3D::VertexBuffer::Description desc;
+		desc.ElementCount = vertices.size();
+		desc.ElementSize = sizeof(Vertex);
+		desc.FirstElementPointer = &vertices[0];
+		desc.Topology = D3D::Topology::TriangleList;
+		desc.Usage = D3D::Usage::Default;
+
+		mBuffer = new D3D::VertexBuffer(mDevice);
+		mBuffer->SetData(desc, NULL);
+
+		// Create the effect and set up the input layout
+		mEffect = Resources::D3DResourceManager<D3D::Effect>::Instance().Load("ModelObj.fx");
+		D3D::InputLayoutVector inputLayout;
+		inputLayout.push_back(D3D::InputLayoutElement("POSITION", DXGI_FORMAT_R32G32B32_FLOAT));
+		inputLayout.push_back(D3D::InputLayoutElement("NORMAL", DXGI_FORMAT_R32G32B32_FLOAT));
+		inputLayout.push_back(D3D::InputLayoutElement("UV", DXGI_FORMAT_R32G32_FLOAT));
+
+		mEffect->GetTechniqueByIndex(0).GetPassByIndex(0).SetInputLayout(inputLayout);
 
 		return true;
 	}
 
 	bool ModelObj::LoadMaterial(std::string filename)
 	{
-		objectMaterial = FileResourceManager<Material>::Instance().Load(filename);
+		mMaterial = FileResourceManager<Material>::Instance().Load(filename);
 
-		return objectMaterial->Materials.size() > 0;
+		return mMaterial->Materials.size() > 0;
+	}
+
+	void ModelObj::Draw(D3DXVECTOR3 drawPosition)
+	{
+		UpdateWorldMatrix(drawPosition);
+		D3DXMATRIX worldViewProjection, view, projection;
+
+		// DEBUG: get from Camera...
+		D3DXMatrixLookAtLH(&view, &D3DXVECTOR3(0, 50, -50), &D3DXVECTOR3(0, 0, 0), &D3DXVECTOR3(0, 1, 0));
+		D3DXMatrixPerspectiveFovLH(&projection, 0.25f * D3DX_PI, 1024/768, 1.0f, 1000.0f);
+		
+		worldViewProjection = mWorld * view * projection;
+
+		mEffect->SetVariable("g_matWorld", mWorld);
+		mEffect->SetVariable("g_matWVP", worldViewProjection);
+		
+		// DEBUG: get light position elsewhere
+		mEffect->SetVariable("g_lightDirection", D3DXVECTOR4(10, 10, 0, 0));
+
+		// Bind and draw the buffer, once for each pass
+		mBuffer->Bind();
+		for(UINT p = 0; p < mEffect->GetTechniqueByIndex(0).GetPassCount(); ++p)
+		{
+			mEffect->GetTechniqueByIndex(0).GetPassByIndex(p).Apply(mDevice);
+			mBuffer->Draw();
+		}
+	}
+
+	void ModelObj::UpdateWorldMatrix(D3DXVECTOR3 position)
+	{
+		// Update position in matrix
+		mWorld.m[3][0] = position.x;
+		mWorld.m[3][1] = position.y;
+		mWorld.m[3][2] = position.z;
 	}
 }

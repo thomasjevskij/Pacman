@@ -3,6 +3,7 @@
 
 #include "Game.hpp"
 #include "FileResourceManager.hpp"
+#include "D3DResourceManager.hpp"
 #include "Effect.hpp"
 #include "Level.hpp"
 #include "ModelObj.hpp"
@@ -39,14 +40,16 @@ private:
 		ContextDescription();
 	};
 
-	Resources::EffectResourceManager* mEffectManager;
-	Resources::FileResourceManager<Model::Level>* mLevelManager;
-	Resources::FileResourceManager<Resources::ModelObj>* mObjectManager;
+	Resources::D3DResourceManager<D3D::Effect>* mEffectManager;
+	Resources::D3DResourceManager<Resources::Texture>* mTextureManager;
+	Resources::D3DResourceManager<Resources::ModelObj>* mObjectManager;
 	Resources::FileResourceManager<Resources::Material>* mMaterialManager;
+	Resources::FileResourceManager<Model::Level>* mLevelManager;
 	
 	// DEBUG
 	Resources::SoundResourceManager* mSoundManager;
 	Resources::Sound2D* mSound;
+	Resources::ModelObj* mPellet;
 };
 
 #endif

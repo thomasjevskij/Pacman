@@ -163,24 +163,3 @@ namespace D3D
 		mEffect->GetVariableByName(variableName.c_str())->AsShaderResource()->SetResource(value);
 	}
 }
-
-namespace Resources
-{
-	EffectResourceManager::EffectResourceManager(const std::string& path, ID3D10Device* device)
-		: mDevice(device)
-		, mPath(path)
-	{}
-
-	D3D::Effect* EffectResourceManager::Load(const std::string& filename)
-	{
-		D3D::Effect* resource = GetResource(filename);
-
-		if (resource == NULL)
-		{
-			resource = new D3D::Effect(mDevice, mPath + filename);
-			AddResource(filename, resource);
-		}
-
-		return resource;
-	}
-}

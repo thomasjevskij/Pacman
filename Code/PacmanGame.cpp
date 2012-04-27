@@ -20,16 +20,17 @@ PacmanGame::ContextDescription::ContextDescription()
 PacmanGame::PacmanGame(HINSTANCE instance)
 	: Game(instance, WindowDescription().Description, ContextDescription().Description)
 {
-	mEffectManager = new Resources::EffectResourceManager("Resources/Effects/", mD3DContext.GetDevice());
-	mLevelManager = new Resources::FileResourceManager<Model::Level>("Resources/Levels/");
-	mObjectManager = new Resources::FileResourceManager<Resources::ModelObj>("Resources/Objects/");
+	mEffectManager = new Resources::D3DResourceManager<D3D::Effect>(mD3DContext.GetDevice(), "Resources/Effects/");
+	mTextureManager = new Resources::D3DResourceManager<Resources::Texture>(mD3DContext.GetDevice(), "Resources/Textures/");
+	mObjectManager = new Resources::D3DResourceManager<Resources::ModelObj>(mD3DContext.GetDevice(), "Resources/Objects/");
 	mMaterialManager = new Resources::FileResourceManager<Resources::Material>("Resources/Objects/");
+	mLevelManager = new Resources::FileResourceManager<Model::Level>("Resources/Levels/");
 	
 	// DEBUG
 	mSoundManager = new Resources::SoundResourceManager("Resources/Sounds/");
 	mSound = mSoundManager->Load("buttonClick.wav");
 
-	Resources::ModelObj* newModel = mObjectManager->Load("pellet.obj");
+	mPellet = mObjectManager->Load("pellet.obj");
 }
 
 PacmanGame::~PacmanGame() throw()
@@ -48,7 +49,7 @@ void PacmanGame::Update(float dt)
 
 void PacmanGame::Draw(RenderBatch& renderBatch, float dt)
 {
-
+	mPellet->Draw(D3DXVECTOR3(0, 0, 0));
 }
 
 void PacmanGame::KeyPressed(ApplicationWindow* window, int keyCode)
