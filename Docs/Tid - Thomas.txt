@@ -30,9 +30,9 @@
 
 20/4 - 2012	
 1h 		Bug fixes (getting the code to compile)
-		2h 	Weekly report
-		0.5h 	extending helper class
-		3h GUI components
+2h 		Weekly report
+0.5h 	extending helper class
+3h 		GUI components
 
 23/4 - 2012	
 1h		Game logic
