@@ -1,4 +1,5 @@
 #include "PacmanGame.hpp"
+#include "ModelObj.hpp"
 
 PacmanGame::WindowDescription::WindowDescription()
 {
@@ -19,28 +20,36 @@ PacmanGame::ContextDescription::ContextDescription()
 PacmanGame::PacmanGame(HINSTANCE instance)
 	: Game(instance, WindowDescription().Description, ContextDescription().Description)
 {
-	mEffectManager = new Resources::EffectResourceManager("Resources/Effects/", mD3DContext.GetDevice());
+	mEffectManager = new Resources::D3DResourceManager<D3D::Effect>(mD3DContext.GetDevice(), "Resources/Effects/");
+	mTextureManager = new Resources::D3DResourceManager<Resources::Texture>(mD3DContext.GetDevice(), "Resources/Textures/");
+	mObjectManager = new Resources::D3DResourceManager<Resources::ModelObj>(mD3DContext.GetDevice(), "Resources/Objects/");
+	mMaterialManager = new Resources::FileResourceManager<Resources::Material>("Resources/Objects/");
 	mLevelManager = new Resources::FileResourceManager<Model::Level>("Resources/Levels/");
 	
 	// DEBUG
 	mSoundManager = new Resources::SoundResourceManager("Resources/Sounds/");
 	mSound = mSoundManager->Load("buttonClick.wav");
+
+	mPellet = mObjectManager->Load("pellet.obj");
 }
 
 PacmanGame::~PacmanGame() throw()
 {
 	SafeDelete(mEffectManager);
 	SafeDelete(mLevelManager);
+	SafeDelete(mObjectManager);
+	SafeDelete(mMaterialManager);
+	SafeDelete(mSoundManager);
 }
 
 void PacmanGame::Update(float dt)
 {
-	
+	mSoundManager->Update();
 }
 
 void PacmanGame::Draw(RenderBatch& renderBatch, float dt)
 {
-
+	mPellet->Draw(D3DXVECTOR3(0, 0, 0));
 }
 
 void PacmanGame::KeyPressed(ApplicationWindow* window, int keyCode)
