@@ -1,26 +1,39 @@
-2012-04-10: 	6h Prototype, Foundations
-2012-04-11: 	3h Architecture Diagram, 1h State Machine, 1/2 Prototype, Foundation
-2012-04-12: 	2h WBS, 2h Class Diagram, 1h Prototype, Foundation
-2012-04-15: 	2h Weekly
-
-2012-04-16: 	1h Resource Manager
-	    	0.5h Camera Class
-	    	1h PacmanGame Class
-2012-04-17: 	2h Resource Manager
-2012-04-19: 	3h Redmine setup
-		0.5h Menu
-		0.5h Changes to font class
-		0.5h Screen/Screen Stack state
-2012-04-20:	0.5h Redmine setup
-		1h Weekly report
-		3h GUI components
+2012-04-10: 	
+	6h Prototype, Foundations
+2012-04-11: 	
+	3h Architecture Diagram,
+	1h State Machine
+	0.5h Prototype, Foundation
+2012-04-12: 
+	2h WBS
+	2h Class Diagram
+	1h Prototype, Foundation
+2012-04-15: 	
+	2h Weekly
+	
+2012-04-16: 
+	1h Resource Manager
+	0.5h Camera Class
+	1h PacmanGame Class
+2012-04-17: 
+	2h Resource Manager
+2012-04-19: 
+	3h Redmine setup
+	0.5h Menu
+	0.5h Changes to font class
+	0.5h Screen/Screen Stack state
+2012-04-20:	
+	0.5h Redmine setup
+	1h Weekly report
+	3h GUI components
+	
 2012-04-23:	3.5h Particle System
-		0.5h Redmine setup
+	0.5h Redmine setup
 2012-04-24:
-		2h Redmine setup
+	2h Redmine setup
 2012-04-25:
-		4h Redmine setup
-		5h L2 report
+	4h Redmine setup
+	5h L2 report
 2012-04-26:
-		2h Redmine setup
-		4h L2 report
+	2h Redmine setup
+	4h L2 report
