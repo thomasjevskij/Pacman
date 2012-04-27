@@ -8,7 +8,7 @@
 #include "ResourceManager.hpp"
 #include "r2-singleton.hpp"
 
-namespace D3D
+namespace Framework
 {
 	class Effect
 	{
@@ -56,5 +56,4 @@ namespace D3D
 		Effect& operator=(const Effect& copy);
 	};
 }
-
 #endif

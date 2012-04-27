@@ -225,22 +225,22 @@ namespace Resources
 		}
 
 		// Describe the buffer and create it
-		D3D::VertexBuffer::Description desc;
+		Framework::VertexBuffer::Description desc;
 		desc.ElementCount = vertices.size();
 		desc.ElementSize = sizeof(Vertex);
 		desc.FirstElementPointer = &vertices[0];
-		desc.Topology = D3D::Topology::TriangleList;
-		desc.Usage = D3D::Usage::Default;
+		desc.Topology = Framework::Topology::TriangleList;
+		desc.Usage = Framework::Usage::Default;
 
-		mBuffer = new D3D::VertexBuffer(mDevice);
+		mBuffer = new Framework::VertexBuffer(mDevice);
 		mBuffer->SetData(desc, NULL);
 
 		// Create the effect and set up the input layout
-		mEffect = Resources::D3DResourceManager<D3D::Effect>::Instance().Load("ModelObj.fx");
-		D3D::InputLayoutVector inputLayout;
-		inputLayout.push_back(D3D::InputLayoutElement("POSITION", DXGI_FORMAT_R32G32B32_FLOAT));
-		inputLayout.push_back(D3D::InputLayoutElement("NORMAL", DXGI_FORMAT_R32G32B32_FLOAT));
-		inputLayout.push_back(D3D::InputLayoutElement("UV", DXGI_FORMAT_R32G32_FLOAT));
+		mEffect = Resources::D3DResourceManager<Framework::Effect>::Instance().Load("ModelObj.fx");
+		Framework::InputLayoutVector inputLayout;
+		inputLayout.push_back(Framework::InputLayoutElement("POSITION", DXGI_FORMAT_R32G32B32_FLOAT));
+		inputLayout.push_back(Framework::InputLayoutElement("NORMAL", DXGI_FORMAT_R32G32B32_FLOAT));
+		inputLayout.push_back(Framework::InputLayoutElement("UV", DXGI_FORMAT_R32G32_FLOAT));
 
 		mEffect->GetTechniqueByIndex(0).GetPassByIndex(0).SetInputLayout(inputLayout);
 

@@ -1,0 +1,5 @@
+Bra artikel om Pacman behaviour:
+http://gameinternals.com/post/2072558330/understanding-pac-man-ghost-behavior
+
+The Pacman Dossier (allt om Pacman):
+http://home.comcast.net/~jpittman2/pacman/pacmandossier.html

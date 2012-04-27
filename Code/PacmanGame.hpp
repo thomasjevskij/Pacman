@@ -40,7 +40,7 @@ private:
 		ContextDescription();
 	};
 
-	Resources::D3DResourceManager<D3D::Effect>* mEffectManager;
+	Resources::D3DResourceManager<Framework::Effect>* mEffectManager;
 	Resources::D3DResourceManager<Resources::Texture>* mTextureManager;
 	Resources::D3DResourceManager<Resources::ModelObj>* mObjectManager;
 	Resources::FileResourceManager<Resources::Material>* mMaterialManager;

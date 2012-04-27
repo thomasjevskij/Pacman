@@ -1,7 +1,7 @@
 #include "VertexBuffer.hpp"
 #include <cassert>
 
-namespace D3D
+namespace Framework
 {
 	VertexBuffer::VertexBuffer(ID3D10Device* device) :
 		mDevice(device), 

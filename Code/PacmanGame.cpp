@@ -20,7 +20,7 @@ PacmanGame::ContextDescription::ContextDescription()
 PacmanGame::PacmanGame(HINSTANCE instance)
 	: Game(instance, WindowDescription().Description, ContextDescription().Description)
 {
-	mEffectManager = new Resources::D3DResourceManager<D3D::Effect>(mD3DContext.GetDevice(), "Resources/Effects/");
+	mEffectManager = new Resources::D3DResourceManager<Framework::Effect>(mD3DContext.GetDevice(), "Resources/Effects/");
 	mTextureManager = new Resources::D3DResourceManager<Resources::Texture>(mD3DContext.GetDevice(), "Resources/Textures/");
 	mObjectManager = new Resources::D3DResourceManager<Resources::ModelObj>(mD3DContext.GetDevice(), "Resources/Objects/");
 	mMaterialManager = new Resources::FileResourceManager<Resources::Material>("Resources/Objects/");

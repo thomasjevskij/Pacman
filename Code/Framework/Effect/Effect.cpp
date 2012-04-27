@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <cassert>
 
-namespace D3D
+namespace Framework
 {
 	Effect::Effect(ID3D10Device* device, const std::string& filename) :
 		mDevice(device),

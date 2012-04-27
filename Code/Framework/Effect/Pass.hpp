@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-namespace D3D
+namespace Framework
 {
 	/**
 		Specifies a variable in the vertex buffer, and how it is represented in

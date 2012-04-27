@@ -4,7 +4,7 @@
 #include "Global.hpp"
 #include <vector>
 
-namespace D3D
+namespace Framework
 {
 	// Determine what access will be given to the buffer from the CPU/GPU.
 	// 

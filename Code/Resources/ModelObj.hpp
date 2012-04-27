@@ -56,8 +56,8 @@ namespace Resources
 
 		Material* mMaterial;
 		ID3D10Device* mDevice;
-		D3D::Effect* mEffect;
-		D3D::VertexBuffer* mBuffer;
+		Framework::Effect* mEffect;
+		Framework::VertexBuffer* mBuffer;
 		D3DXMATRIX mWorld;
 
 		ModelObj(const ModelObj&);

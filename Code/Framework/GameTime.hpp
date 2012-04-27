@@ -4,7 +4,7 @@
 
 #include <Windows.h>
 
-namespace Helper
+namespace Framework
 {
 	struct Time
 	{
