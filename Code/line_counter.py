@@ -14,7 +14,7 @@ class IgnoreException(Exception):
 		return repr(self.value)
 
 def get_ignore():
-	lines = getlines('line_counter.ignore')
+	lines = get_lines('line_counter.ignore')
 	files = []
 	dirs = []
 	for line in lines:

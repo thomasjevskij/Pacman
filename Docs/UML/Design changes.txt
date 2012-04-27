@@ -8,6 +8,7 @@ Week 18 (R5):
 	Both IngameScreen and Scene implements GameEventSubscriber			Both need the information (reactions in both the 3D scene and in the HUD)
 	Sprite batch removed												Not sure if we need that optimization yet
 	Camera controller using strategy pattern							Different cameras have different behaviors
-	TODO: fix interfaces in Model										They are not perfect
 	Removed level variable from GameplayHandler							LevelHandler already handles it
 	Simplified LevelHandler interface									It could do too much
+	Adding r2tk library													Primitives, Singletons, exceptions
+	Removal of deferred rendering										Time
