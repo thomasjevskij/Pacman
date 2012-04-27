@@ -59,6 +59,7 @@
     <ClInclude Include="Code\Framework\Effect\Technique.hpp" />
     <ClInclude Include="Code\Framework\GameTime.hpp" />
     <ClInclude Include="Code\View\GUI\Menu.hpp" />
+    <ClInclude Include="Code\Model\ModelDataInterface.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

@@ -212,6 +212,7 @@
     <ClInclude Include="Code\Model\Ghost.hpp" />
     <ClInclude Include="Code\Model\Level.hpp" />
     <ClInclude Include="Code\Model\LevelHandler.hpp" />
+    <ClInclude Include="Code\Model\ModelDataInterface.hpp" />
     <ClInclude Include="Code\Model\Player.hpp" />
     <ClInclude Include="Code\PacmanGame.hpp" />
     <ClInclude Include="Code\Resources\FileResourceManager.hpp" />
