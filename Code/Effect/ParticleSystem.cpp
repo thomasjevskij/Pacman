@@ -6,6 +6,18 @@ namespace Helper
 	mDevice(device), mColor(color)
 	{
 		mEffect = Resources::EffectResourceManager::Instance().Load(file);
+		D3D::InputLayoutVector ParticleLayout;
+		ParticleLayout.push_back(D3D::InputLayoutElement("POSITION",DXGI_FORMAT_R32G32B32_FLOAT));
+		ParticleLayout.push_back(D3D::InputLayoutElement("VELOCITY",DXGI_FORMAT_R32G32B32_FLOAT));
+		ParticleLayout.push_back(D3D::InputLayoutElement("ACCELERATION",DXGI_FORMAT_R32G32B32_FLOAT));
+		ParticleLayout.push_back(D3D::InputLayoutElement("TIMELIVED",DXGI_FORMAT_R32_FLOAT));
+		ParticleLayout.push_back(D3D::InputLayoutElement("TIMETOLIVE",DXGI_FORMAT_R32_FLOAT));
+
+		mEffect->GetTechniqueByIndex(0).GetPassByIndex(0).SetInputLayout(ParticleLayout);
+		ID3D10ShaderResourceView* ParticleTexRV;
+		D3DX10CreateShaderResourceViewFromFile( device, "star.jpg", NULL, NULL, &ParticleTexRV, NULL );
+		mEffect->SetVariable("Color",D3DXVECTOR3(100,200,50));
+		mEffect->SetVariable("Texture",ParticleTexRV);
 	}
 
 	void ParticleSystem::SetPosition(const D3DXVECTOR3& pos)
@@ -28,6 +40,10 @@ namespace Helper
 		buffer.SetData(particleBuffer,NULL);
 
 		buffer.Bind();
+
+		
+
+		
 
 		for( UINT p = 0; p < mEffect->GetTechniqueByIndex(0).GetPassCount(); ++p )
 		{

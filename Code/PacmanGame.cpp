@@ -25,6 +25,14 @@ PacmanGame::PacmanGame(HINSTANCE instance)
 	// DEBUG
 	mSoundManager = new Resources::SoundResourceManager("Resources/Sounds/");
 	mSound = mSoundManager->Load("buttonClick.wav");
+
+	Helper::Frustum f;
+	f.AspectRatio = 1;
+	f.FarDistance = 500;
+	f.NearDistance = 0;
+	f.FieldOfViewY = D3DX_PI/2;
+	c = new Helper::Camera(f.CreatePerspectiveProjection(),D3DXVECTOR3(0,0,-10),D3DXVECTOR3(0,1,0));
+	p = new Helper::ParticleSystem(mD3DContext.GetDevice(),D3DXVECTOR3(0,0,0),"GhostTrail.fx",D3DXCOLOR(255,0,255,100));
 }
 
 PacmanGame::~PacmanGame() throw()
@@ -40,7 +48,7 @@ void PacmanGame::Update(float dt)
 
 void PacmanGame::Draw(RenderBatch& renderBatch, float dt)
 {
-
+	p->Draw(dt,*c);
 }
 
 void PacmanGame::KeyPressed(ApplicationWindow* window, int keyCode)

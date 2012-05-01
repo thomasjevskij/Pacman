@@ -6,6 +6,8 @@
 #include "Effect.hpp"
 #include "Level.hpp"
 #include "Sound2D.hpp" // DEBUG
+#include "ParticleSystem.hpp"
+#include "Camera.hpp"
 
 using namespace Framework;
 
@@ -18,6 +20,9 @@ public:
 	void KeyPressed(ApplicationWindow* window, int keyCode);
 	void KeyReleased(ApplicationWindow* window, int keyCode);
 	void CharEntered(ApplicationWindow* window, char character);
+
+	Helper::Camera *c;
+	Helper::ParticleSystem *p;
 
 protected:
 	void Update(float dt);
