@@ -32,3 +32,6 @@
 		1h	GameLogic
 		1h	Model UMLdiagram (L2) 
 
+2012-04-30	1h	Ai
+
+
