@@ -15,8 +15,8 @@ namespace Helper
 
 		mEffect->GetTechniqueByIndex(0).GetPassByIndex(0).SetInputLayout(ParticleLayout);
 		ID3D10ShaderResourceView* ParticleTexRV;
-		D3DX10CreateShaderResourceViewFromFile( device, "star.jpg", NULL, NULL, &ParticleTexRV, NULL );
-		mEffect->SetVariable("Color",D3DXVECTOR3(100,200,50));
+		D3DX10CreateShaderResourceViewFromFile( device, "Resources/Effects/star.jpg", NULL, NULL, &ParticleTexRV, NULL );
+		mEffect->SetVariable("Color",D3DXVECTOR3(0.1,1,0.5));
 		mEffect->SetVariable("Texture",ParticleTexRV);
 	}
 
@@ -41,8 +41,10 @@ namespace Helper
 
 		buffer.Bind();
 
-		
-
+		mEffect->SetVariable("WorldViewProj",cam.GetViewProjection());
+		D3DXMATRIX InvView;
+		D3DXMatrixInverse( &InvView, NULL, &cam.GetView() );
+		mEffect->SetVariable("InvView",InvView);
 		
 
 		for( UINT p = 0; p < mEffect->GetTechniqueByIndex(0).GetPassCount(); ++p )

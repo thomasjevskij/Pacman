@@ -79,4 +79,9 @@ namespace Helper
 	{
 		return mViewProjection;
 	}
+
+	const D3DXMATRIX& Camera::GetView() const
+	{
+		return mView;
+	}
 }
