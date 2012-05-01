@@ -27,6 +27,7 @@
     <ClCompile Include="Code\Model\Coord.cpp" />
     <ClCompile Include="Code\Resources\Sound2D.cpp" />
     <ClCompile Include="Code\Effect\ParticleSystem.cpp" />
+    <ClCompile Include="Code\Helper\DebugCameraControler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Effect\Effect.hpp" />
@@ -62,6 +63,7 @@
     <ClInclude Include="Code\Resources\Sound2D.hpp" />
     <ClInclude Include="Code\Effect\ParticleHandlerInterface.h" />
     <ClInclude Include="Code\Effect\ParticleSystem.hpp" />
+    <ClInclude Include="Code\Helper\DebugCameraControler.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
