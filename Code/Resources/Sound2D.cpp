@@ -64,4 +64,9 @@ namespace Resources
 
 		return resource;
 	}
+
+	void SoundResourceManager::Update()
+	{
+		mSystem->update();
+	}
 }

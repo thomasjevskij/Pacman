@@ -1,0 +1,14 @@
+Week 17 (R4):
+	Change of render batch to sprite batch
+
+Week 18 (R5):
+	Removal of Boost++													Too much effort learning for too little gain
+	Removal of BSP tree													We have yet to locate the need for optimization
+	Removal of GameObject base class									No use of polymorphism
+	Both IngameScreen and Scene implements GameEventSubscriber			Both need the information (reactions in both the 3D scene and in the HUD)
+	Sprite batch removed												Not sure if we need that optimization yet
+	Camera controller using strategy pattern							Different cameras have different behaviors
+	Removed level variable from GameplayHandler							LevelHandler already handles it
+	Simplified LevelHandler interface									It could do too much
+	Adding r2tk library													Primitives, Singletons, exceptions
+	Removal of deferred rendering										Time

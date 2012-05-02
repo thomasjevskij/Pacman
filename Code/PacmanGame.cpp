@@ -1,4 +1,5 @@
 #include "PacmanGame.hpp"
+#include "ModelObj.hpp"
 
 PacmanGame::WindowDescription::WindowDescription()
 {
@@ -19,7 +20,10 @@ PacmanGame::ContextDescription::ContextDescription()
 PacmanGame::PacmanGame(HINSTANCE instance)
 	: Game(instance, WindowDescription().Description, ContextDescription().Description)
 {
-	mEffectManager = new Resources::EffectResourceManager("Resources/Effects/", mD3DContext.GetDevice());
+	mEffectManager = new Resources::D3DResourceManager<Framework::Effect>(mD3DContext.GetDevice(), "Resources/Effects/");
+	mTextureManager = new Resources::D3DResourceManager<Resources::Texture>(mD3DContext.GetDevice(), "Resources/Textures/");
+	mObjectManager = new Resources::D3DResourceManager<Resources::ModelObj>(mD3DContext.GetDevice(), "Resources/Objects/");
+	mMaterialManager = new Resources::FileResourceManager<Resources::Material>("Resources/Objects/");
 	mLevelManager = new Resources::FileResourceManager<Model::Level>("Resources/Levels/");
 	
 	// DEBUG
@@ -33,22 +37,29 @@ PacmanGame::PacmanGame(HINSTANCE instance)
 	f.FieldOfViewY = D3DX_PI/2;
 	c = new Helper::DebugCameraControler(D3DXVECTOR3(0,0,-100));
 	p = new Helper::ParticleSystem(mD3DContext.GetDevice(),D3DXVECTOR3(200,0,0),"GhostTrail.fx",D3DXCOLOR(0,255,0,255),true,true);
+
+	mPellet = mObjectManager->Load("pellet.obj");
 }
 
 PacmanGame::~PacmanGame() throw()
 {
 	SafeDelete(mEffectManager);
 	SafeDelete(mLevelManager);
+	SafeDelete(mObjectManager);
+	SafeDelete(mMaterialManager);
+	SafeDelete(mSoundManager);
 }
 
 void PacmanGame::Update(float dt)
 {
 	c->Update(dt);
+	mSoundManager->Update();
 }
 
 void PacmanGame::Draw(RenderBatch& renderBatch, float dt)
 {
 	p->Draw(dt,c->GetCamera());
+	mPellet->Draw(D3DXVECTOR3(0, 0, 0));
 }
 
 void PacmanGame::KeyPressed(ApplicationWindow* window, int keyCode)

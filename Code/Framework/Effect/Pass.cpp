@@ -1,6 +1,6 @@
 #include "Pass.hpp"
 
-namespace D3D
+namespace Framework
 {
 	Pass::Pass(ID3D10EffectPass* pass) :
 		mPass(pass), 

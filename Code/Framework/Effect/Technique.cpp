@@ -1,7 +1,7 @@
 #include "Technique.hpp"
 #include <cassert>
 
-namespace D3D
+namespace Framework
 {
 	Technique::Technique(ID3D10EffectTechnique* technique) :
 		mTechnique(technique)

@@ -5,7 +5,7 @@
 #include <vector>
 #include "Pass.hpp"
 
-namespace D3D
+namespace Framework
 {
 	/**
 		Specifies one technique in an effect file. Every technique can hold several passes.
