@@ -96,4 +96,9 @@ namespace Model
 		}
 		return false;
 	}
+
+	const Coord Player::GetFacing() const
+	{
+		return mFacing;
+	}
 }

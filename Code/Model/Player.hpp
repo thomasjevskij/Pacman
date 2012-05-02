@@ -18,6 +18,7 @@ namespace Model
 		void GoRight();
 		void GoBack();
 		Helper::Point2f GetRealPos() const;
+		const Coord GetFacing() const;
 
 	private:
 		Coord mFacing; //Enhetsvektor 0,1 = upp, 1,0 = right 0,-1 = down, -1,0 = left

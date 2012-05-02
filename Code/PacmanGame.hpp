@@ -8,6 +8,7 @@
 #include "Sound2D.hpp" // DEBUG
 #include "ParticleSystem.hpp"
 #include "Camera.hpp"
+#include "DebugCameraControler.hpp"
 
 using namespace Framework;
 
@@ -21,7 +22,7 @@ public:
 	void KeyReleased(ApplicationWindow* window, int keyCode);
 	void CharEntered(ApplicationWindow* window, char character);
 
-	Helper::Camera *c;
+	Helper::DebugCameraControler *c;
 	Helper::ParticleSystem *p;
 
 protected:

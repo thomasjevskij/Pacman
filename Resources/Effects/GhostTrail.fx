@@ -1,4 +1,4 @@
-float3 Color;
+float4 Color;
 Texture2D Texture;
 
 struct VSParticleIn
@@ -32,10 +32,10 @@ cbuffer Immutable
 {
     float3 g_positions[4] =
     {
-        float3( -0.1, 0.1, 0 ),
-        float3( 0.1, 0.1, 0 ),
-        float3( -0.1, -0.1, 0 ),
-        float3( 0.1, -0.1, 0 ),
+        float3( -0.2, 0.2, 0 ),
+        float3( 0.2, 0.2, 0 ),
+        float3( -0.2, -0.2, 0 ),
+        float3( 0.2, -0.2, 0 ),
     };
     float2 g_texcoords[4] = 
     { 
@@ -109,7 +109,7 @@ void GSScenemain(point VSParticleDrawOut input[1], inout TriangleStream<PSSceneI
 
 float4 PSScenemain(PSSceneIn input) : SV_Target
 {   
-    return Texture.Sample( SamLinear, input.Tex ) * float4(Color,255);
+    return Texture.Sample( SamLinear, input.Tex ) * Color;
 }
 
 

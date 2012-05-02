@@ -2,9 +2,10 @@
 
 namespace Helper
 {
-	ParticleSystem::ParticleSystem(ID3D10Device *device,const D3DXVECTOR3& pos,const std::string& file,const D3DXCOLOR& color):
-	mDevice(device), mColor(color)
+	ParticleSystem::ParticleSystem(ID3D10Device *device,const D3DXVECTOR3& pos,const std::string& file,const D3DXCOLOR& color,const bool& Gravity,const bool& Acceleration):
+	mDevice(device),mPosition(pos), mColor(color), mGravityOn(Gravity),mAccelerationOn(Acceleration)
 	{
+		
 		mEffect = Resources::EffectResourceManager::Instance().Load(file);
 		D3D::InputLayoutVector ParticleLayout;
 		ParticleLayout.push_back(D3D::InputLayoutElement("POSITION",DXGI_FORMAT_R32G32B32_FLOAT));
@@ -16,8 +17,17 @@ namespace Helper
 		mEffect->GetTechniqueByIndex(0).GetPassByIndex(0).SetInputLayout(ParticleLayout);
 		ID3D10ShaderResourceView* ParticleTexRV;
 		D3DX10CreateShaderResourceViewFromFile( device, "Resources/Effects/star.jpg", NULL, NULL, &ParticleTexRV, NULL );
-		mEffect->SetVariable("Color",D3DXVECTOR3(0.1,1,0.5));
+		mEffect->SetVariable("Color",D3DXVECTOR4(mColor));
 		mEffect->SetVariable("Texture",ParticleTexRV);
+
+		Particle p;
+		p.Position = mPosition + RandVec(100);
+		p.Acceleration = RandVec(5);
+		p.Velocity = RandVec(10);
+		p.TimeToLive = rand() % 3 + 2;
+		p.TimeLived = 0;
+				
+		mParticles.push_back(p);
 	}
 
 	void ParticleSystem::SetPosition(const D3DXVECTOR3& pos)
@@ -54,19 +64,16 @@ namespace Helper
 		}
 	}
 
-	D3DXVECTOR3 RandVec(int radius)
-	{
-		D3DXVECTOR3 temp = D3DXVECTOR3( rand() % 20 - 10,rand() % 20 - 10,rand() % 20 - 10);
-		D3DXVec3Normalize(&temp,&temp);
-		temp *= rand() % radius;
-		return temp;
-	}
-
 	void ParticleSystem::Update(float dt)
 	{
 		for(int i = 0;i < mParticles.size();)
 		{
+			if(mAccelerationOn)
 			mParticles[i].Velocity += mParticles[i].Acceleration*dt;
+
+			if(mGravityOn)
+				mParticles[i].Acceleration.y -= C_GRAVITY * dt;
+
 			mParticles[i].Position += mParticles[i].Velocity*dt;
 			mParticles[i].TimeLived += dt;
 
@@ -83,7 +90,7 @@ namespace Helper
 					break;
 				
 				Particle p;
-				p.Position = RandVec(100);
+				p.Position = mPosition + RandVec(100);
 				p.Acceleration = RandVec(5);
 				p.Velocity = RandVec(10);
 				p.TimeToLive = rand() % 3 + 2;
@@ -94,5 +101,12 @@ namespace Helper
 		}
 	}
 
+	D3DXVECTOR3 ParticleSystem::RandVec(int radius)
+	{
+		D3DXVECTOR3 temp = D3DXVECTOR3( rand() % 20 - 10,rand() % 20 - 10,rand() % 20 - 10);
+		D3DXVec3Normalize(&temp,&temp);
+		temp *= rand() % radius;
+		return temp;
+	}
 
 }

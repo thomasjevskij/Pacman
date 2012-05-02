@@ -5,8 +5,8 @@ namespace Helper
 	DebugCameraControler::DebugCameraControler(D3DXVECTOR3 pos)
 	{
 		D3DXMATRIX proj;
-		D3DXMatrixPerspectiveFovLH( &proj, 60, 1080/756, 10, 500 );
-		mCamera = new Camera(proj,pos,D3DXVECTOR3(0,-0.2,1));
+		D3DXMatrixPerspectiveFovLH( &proj, D3DX_PI/2, 1, 0, 500 );
+		mCamera = new Camera(proj,pos,D3DXVECTOR3(0,0,1));
 		
 		mRot = 0;
 		mKeyState = D3DXVECTOR3(0,0,0);
@@ -69,5 +69,27 @@ namespace Helper
 		{
 			mKeyState.x = 0;
 		}
+	}
+
+	const D3DXVECTOR3& DebugCameraControler::GetPosition() const
+	{
+		return mCamera->GetPosition();
+	}
+	const D3DXVECTOR3& DebugCameraControler::GetDirection() const
+	{
+		return mCamera->GetDirection();
+	}
+	const D3DXMATRIX& DebugCameraControler::GetViewProjection() const
+	{
+		return mCamera->GetViewProjection();
+	}
+	const D3DXMATRIX& DebugCameraControler::GetView() const
+	{
+		return mCamera->GetView();
+	}
+
+	const Camera& DebugCameraControler::GetCamera() const
+	{
+		return *mCamera;
 	}
 }

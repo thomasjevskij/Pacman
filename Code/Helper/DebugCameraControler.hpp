@@ -18,6 +18,12 @@ namespace Helper
 
 		void KeyPressed(Framework::ApplicationWindow* window, int keyCode);
 		void KeyReleased(Framework::ApplicationWindow* window, int keyCode);
+
+		const D3DXVECTOR3& GetPosition() const;
+		const D3DXVECTOR3& GetDirection() const;
+		const D3DXMATRIX& GetViewProjection() const;
+		const D3DXMATRIX& GetView() const;
+		const Camera& GetCamera() const;
 	private:
 		Camera* mCamera;
 		D3DXVECTOR3 mKeyState;

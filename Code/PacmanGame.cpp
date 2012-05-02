@@ -31,8 +31,8 @@ PacmanGame::PacmanGame(HINSTANCE instance)
 	f.FarDistance = 500;
 	f.NearDistance = 0;
 	f.FieldOfViewY = D3DX_PI/2;
-	c = new Helper::Camera(f.CreatePerspectiveProjection(),D3DXVECTOR3(0,0,-50),D3DXVECTOR3(0,0,1));
-	p = new Helper::ParticleSystem(mD3DContext.GetDevice(),D3DXVECTOR3(0,0,0),"GhostTrail.fx",D3DXCOLOR(255,0,255,100));
+	c = new Helper::DebugCameraControler(D3DXVECTOR3(0,0,-100));
+	p = new Helper::ParticleSystem(mD3DContext.GetDevice(),D3DXVECTOR3(200,0,0),"GhostTrail.fx",D3DXCOLOR(0,255,0,255),true,true);
 }
 
 PacmanGame::~PacmanGame() throw()
@@ -43,12 +43,12 @@ PacmanGame::~PacmanGame() throw()
 
 void PacmanGame::Update(float dt)
 {
-	
+	c->Update(dt);
 }
 
 void PacmanGame::Draw(RenderBatch& renderBatch, float dt)
 {
-	p->Draw(dt,*c);
+	p->Draw(dt,c->GetCamera());
 }
 
 void PacmanGame::KeyPressed(ApplicationWindow* window, int keyCode)
