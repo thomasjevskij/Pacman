@@ -15,7 +15,7 @@ namespace Helper
 		void Update(float dt);
 		void Draw(const Camera& camera, D3DXVECTOR3 position);
 	private:
-
+		float mTime;
 	};
 }
 
