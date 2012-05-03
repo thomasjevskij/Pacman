@@ -78,5 +78,6 @@
     <None Include="push.sh" />
     <None Include="Resources\Effects\ModelObj.fx" />
     <None Include="Resources\Textures\whitePixel.png" />
+    <None Include="Resources\Effects\Animation.fx" />
   </ItemGroup>
 </Project>

@@ -158,6 +158,7 @@
     <None Include=".gitignore" />
     <None Include="pull.sh" />
     <None Include="push.sh" />
+    <None Include="Resources\Effects\Animation.fx" />
     <None Include="Resources\Effects\ModelObj.fx" />
     <None Include="Resources\Textures\whitePixel.png" />
   </ItemGroup>
