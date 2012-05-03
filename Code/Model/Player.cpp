@@ -63,11 +63,6 @@ namespace Model
 		return mRealPosition;
 	}
 
-	Coord Player::GetFacing() const
-	{
-		return mFacing;
-	}
-
 	Coord Player::GetValidGridPos(Coord pos,int width,int height)
 	{
 		if(pos.X < 0)
@@ -103,7 +98,7 @@ namespace Model
 		return false;
 	}
 
-	const Coord Player::GetFacing() const
+	const Coord& Player::GetFacing() const
 	{
 		return mFacing;
 	}

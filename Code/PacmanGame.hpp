@@ -24,11 +24,8 @@ public:
 	void KeyPressed(ApplicationWindow* window, int keyCode);
 	void KeyReleased(ApplicationWindow* window, int keyCode);
 	void CharEntered(ApplicationWindow* window, char character);
-
-	Helper::DebugCameraControler *c;
-	Helper::Camera* mCamera;
-	Helper::ParticleSystem *p;
-	float pos;
+	
+	
 
 protected:
 	void Update(float dt);
@@ -58,9 +55,15 @@ private:
 	// DEBUG
 	Resources::SoundResourceManager* mSoundManager;
 	Resources::Sound2D* mSound;
+
 	Resources::ModelObj* mPellet;
 	Helper::MorphAnimation* mAnimation;
+
 	Helper::Camera* mCamera;
+	Helper::DebugCameraControler *c;
+
+	Helper::ParticleSystem *p;
+	float pos;
 };
 
 #endif

@@ -11,6 +11,8 @@ namespace Helper
 		Camera(const D3DXMATRIX& projection, const D3DXVECTOR3& position = D3DXVECTOR3(0, 0, 0), 
 			   const D3DXVECTOR3& direction = D3DXVECTOR3(1, 0, 0));
 
+		const D3DXVECTOR3& GetPosition() const;
+		const D3DXVECTOR3& GetDirection() const;
 		const D3DXMATRIX& GetView() const;
 		const D3DXMATRIX& GetProjection() const;
 		const D3DXMATRIX& GetViewProjection() const;
@@ -22,12 +24,6 @@ namespace Helper
 		void SetFacingPoint(const D3DXVECTOR3& target);
 
 		void Commit();
-
-		const D3DXVECTOR3& GetPosition() const;
-		const D3DXVECTOR3& GetDirection() const;
-		const D3DXMATRIX& GetViewProjection() const;
-		const D3DXMATRIX& GetView() const;
-
 	private:
 		static const D3DXVECTOR3 C_WORLD_UP;
 

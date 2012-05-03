@@ -4,53 +4,6 @@
 
 namespace Framework
 {
-	void EffectVariableBatch::SetVariable(const std::string& variableName, int value)
-	{
-		ID3D10EffectScalarVariable a;
-		a.AsScalar()->SetInt(value);
-		mEffect->GetVariableByName(variableName.c_str())->AsScalar()->SetInt(value);
-	}
-
-	void EffectVariableBatch::SetVariable(const std::string& variableName, bool value)
-	{
-		mEffect->GetVariableByName(variableName.c_str())->AsScalar()->SetBool(value);
-	}
-
-	void EffectVariableBatch::SetVariable(const std::string& variableName, float value)
-	{
-		mEffect->GetVariableByName(variableName.c_str())->AsScalar()->SetFloat(value);
-	}
-
-	void EffectVariableBatch::SetVariable(const std::string& variableName, const D3DXVECTOR4& value)
-	{
-		mEffect->GetVariableByName(variableName.c_str())->AsVector()->SetFloatVector((FLOAT*)&value);
-	}
-
-	void EffectVariableBatch::SetVariable(const std::string& variableName, const D3DXVECTOR3& value)
-	{
-		D3DXVECTOR3 v = value;
-		mEffect->GetVariableByName(variableName.c_str())->SetRawValue(&v, 0, sizeof(D3DXVECTOR3));
-	}
-
-	void EffectVariableBatch::SetVariable(const std::string& variableName, const D3DXVECTOR2& value)
-	{
-		D3DXVECTOR2 v = value;
-		mEffect->GetVariableByName(variableName.c_str())->SetRawValue(&v, 0, sizeof(D3DXVECTOR2));
-	}
-
-	void EffectVariableBatch::SetVariable(const std::string& variableName, const D3DXMATRIX& value)
-	{
-		mEffect->GetVariableByName(variableName.c_str())->AsMatrix()->SetMatrix((FLOAT*)&value);
-	}
-
-	void EffectVariableBatch::SetVariable(const std::string& variableName, ID3D10ShaderResourceView* value)
-	{
-		mEffect->GetVariableByName(variableName.c_str())->AsShaderResource()->SetResource(value);
-	}
-
-
-
-
 	Effect::Effect(ID3D10Device* device, const std::string& filename) :
 		mDevice(device),
 		mEffect(NULL)
@@ -163,5 +116,50 @@ namespace Framework
 		}
 
 		throw std::runtime_error("No technique by the name: " + name);
+	}
+
+
+
+
+	void Effect::SetVariable(const std::string& variableName, int value)
+	{
+		mEffect->GetVariableByName(variableName.c_str())->AsScalar()->SetInt(value);
+	}
+
+	void Effect::SetVariable(const std::string& variableName, bool value)
+	{
+		mEffect->GetVariableByName(variableName.c_str())->AsScalar()->SetBool(value);
+	}
+
+	void Effect::SetVariable(const std::string& variableName, float value)
+	{
+		mEffect->GetVariableByName(variableName.c_str())->AsScalar()->SetFloat(value);
+	}
+
+	void Effect::SetVariable(const std::string& variableName, const D3DXVECTOR4& value)
+	{
+		mEffect->GetVariableByName(variableName.c_str())->AsVector()->SetFloatVector((FLOAT*)&value);
+	}
+
+	void Effect::SetVariable(const std::string& variableName, const D3DXVECTOR3& value)
+	{
+		D3DXVECTOR3 v = value;
+		mEffect->GetVariableByName(variableName.c_str())->SetRawValue(&v, 0, sizeof(D3DXVECTOR3));
+	}
+
+	void Effect::SetVariable(const std::string& variableName, const D3DXVECTOR2& value)
+	{
+		D3DXVECTOR2 v = value;
+		mEffect->GetVariableByName(variableName.c_str())->SetRawValue(&v, 0, sizeof(D3DXVECTOR2));
+	}
+
+	void Effect::SetVariable(const std::string& variableName, const D3DXMATRIX& value)
+	{
+		mEffect->GetVariableByName(variableName.c_str())->AsMatrix()->SetMatrix((FLOAT*)&value);
+	}
+
+	void Effect::SetVariable(const std::string& variableName, ID3D10ShaderResourceView* value)
+	{
+		mEffect->GetVariableByName(variableName.c_str())->AsShaderResource()->SetResource(value);
 	}
 }

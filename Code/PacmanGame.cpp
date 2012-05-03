@@ -26,49 +26,40 @@ PacmanGame::PacmanGame(HINSTANCE instance)
 	f.FieldOfViewY = D3DX_PI * 0.25;
 	f.NearDistance = 1;
 
-	mCamera = new Helper::Camera(f.CreatePerspectiveProjection(), D3DXVECTOR3(0, 0, -10), D3DXVECTOR3(0, 0, 1));
-
 	mEffectManager = new Resources::D3DResourceManager<Framework::Effect>(mD3DContext.GetDevice(), "Resources/Effects/");
 	mTextureManager = new Resources::D3DResourceManager<Resources::Texture>(mD3DContext.GetDevice(), "Resources/Textures/");
 	mObjectManager = new Resources::D3DResourceManager<Resources::ModelObj>(mD3DContext.GetDevice(), "Resources/Objects/");
 	mMaterialManager = new Resources::FileResourceManager<Resources::Material>("Resources/Objects/");
 	mLevelManager = new Resources::FileResourceManager<Model::Level>("Resources/Levels/");
-	
-	// DEBUG
 	mSoundManager = new Resources::SoundResourceManager("Resources/Sounds/");
+
+	// DEBUG
 	mSound = mSoundManager->Load("buttonClick.wav");
 
 	mPellet = mObjectManager->Load("pellet.obj");
-	mAnimation = new Helper::MorphAnimation(mD3DContext.GetDevice());
-
-	Helper::Frustum f;
-	f.AspectRatio = 1;
-	f.FarDistance = 500;
-	f.NearDistance = 0;
-	f.FieldOfViewY = D3DX_PI/2;
-	
+	mAnimation = new Helper::MorphAnimation(mD3DContext.GetDevice());	
 	mCamera = new Helper::Camera(f.CreatePerspectiveProjection(),D3DXVECTOR3(200,0,0),D3DXVECTOR3(0,0,1));
-
-	
 	c = new Helper::DebugCameraControler(D3DXVECTOR3(0,0,-100),mCamera);
 	p = new Helper::ParticleSystem(mD3DContext.GetDevice(),D3DXVECTOR3(200,0,0),"GhostTrail.fx",D3DXCOLOR(0,255,0,255),false,true);
 
 	mWindow.AddNotificationSubscriber(c);
 
 	pos = 0;
-
-	//mPellet = mObjectManager->Load("pellet.obj");
 }
 
 PacmanGame::~PacmanGame() throw()
 {
 	SafeDelete(mEffectManager);
+	SafeDelete(mTextureManager);
 	SafeDelete(mLevelManager);
 	SafeDelete(mObjectManager);
 	SafeDelete(mMaterialManager);
 	SafeDelete(mSoundManager);
-	SafeDelete(mCamera);
+
 	SafeDelete(mAnimation);
+	SafeDelete(mCamera);
+	SafeDelete(c);
+	SafeDelete(p);
 }
 
 void PacmanGame::Update(float dt)
@@ -82,10 +73,9 @@ void PacmanGame::Update(float dt)
 
 void PacmanGame::Draw(RenderBatch& renderBatch, float dt)
 {
-	//mPellet->Draw(D3DXVECTOR3(0, 0, 0));
+	mPellet->Draw(D3DXVECTOR3(0, 0, 0));
 	mAnimation->Draw(*mCamera, D3DXVECTOR3(0,0,0));
 	p->Draw(dt,c->GetCamera());
-	//mPellet->Draw(D3DXVECTOR3(0, 0, 0));
 }
 
 void PacmanGame::KeyPressed(ApplicationWindow* window, int keyCode)

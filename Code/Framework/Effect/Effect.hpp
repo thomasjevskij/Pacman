@@ -10,32 +10,6 @@
 
 namespace Framework
 {
-	class EffectVariableBatch
-	{
-	public:
-		EffectVariableBatch();
-		~EffectVariableBatch() throw();
-
-		void SetVariable(const std::string& variableName, int value);
-		void SetVariable(const std::string& variableName, bool value);
-		void SetVariable(const std::string& variableName, float value);
-		void SetVariable(const std::string& variableName, const D3DXVECTOR4& value);
-		void SetVariable(const std::string& variableName, const D3DXVECTOR3& value);
-		void SetVariable(const std::string& variableName, const D3DXVECTOR2& value);
-		void SetVariable(const std::string& variableName, const D3DXMATRIX& value);
-		void SetVariable(const std::string& variableName, ID3D10ShaderResourceView* value);
-	private:
-		std::map<std::string, int> mIntegers;
-		std::map<std::string, bool> mBooleans;
-		std::map<std::string, float> mScalars;
-		std::map<std::string, D3DXVECTOR4> mVectors4;
-		std::map<std::string, D3DXVECTOR3> mVectors3;
-		std::map<std::string, D3DXVECTOR2> mVectors2;
-		std::map<std::string, D3DXMATRIX> mMatrices;
-		//std::map<std::string, 
-		// TODO: Figure out how to store textures.
-	};
-
 	class Effect
 	{
 	public:
@@ -57,6 +31,18 @@ namespace Framework
 		// a runtime exception is raised.
 		Technique& GetTechniqueByName(const std::string& name);
 		const Technique& GetTechniqueByName(const std::string& name) const;
+
+		
+		// Set global or constant buffer variables
+		void SetVariable(const std::string& variableName, int value);
+		void SetVariable(const std::string& variableName, bool value);
+		void SetVariable(const std::string& variableName, float value);
+		void SetVariable(const std::string& variableName, const D3DXVECTOR4& value);
+		void SetVariable(const std::string& variableName, const D3DXVECTOR3& value);
+		void SetVariable(const std::string& variableName, const D3DXVECTOR2& value);
+		void SetVariable(const std::string& variableName, const D3DXMATRIX& value);
+		void SetVariable(const std::string& variableName, ID3D10ShaderResourceView* value);
+
 	private:
 		ID3D10Device* mDevice;
 		ID3D10Effect* mEffect;
@@ -70,4 +56,5 @@ namespace Framework
 		Effect& operator=(const Effect& copy);
 	};
 }
+
 #endif
