@@ -9,6 +9,9 @@
 2012-04-18 1,5 (Logic Class Programering)
 2012-04-19 2 (Programerings backup till pp)
 2012-04-20 2,5 + 2,5 + 1(Jobbade i Fruit classen samt fixade playerns movement,Planning)
+
 2012-04-23 4 (Möte + Effect programing)
 2012-04-24 3 (Camera)
-2012-04-25 1 (Camera documentation)
+2012-04-25 1 +1,5(Camera documentation+Duno)
+
+35,25

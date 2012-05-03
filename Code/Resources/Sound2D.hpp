@@ -37,15 +37,17 @@ namespace Resources
 	// 
 	// The manager will handle all creation/deletion of the resources, and when a resource
 	// is to be loaded, use the Load() method. To access a resource, use the GetResource() method.
-	//
 	// The only restriction on sound resource types loaded from file, is that they have a
 	// constructor that only takes the filename of the resource file.
+	// 
+	// The method SoundManager::Update() must be called once a frame, to flush the sound system.
 	class SoundResourceManager : public r2::Singleton<SoundResourceManager>, public Private::ResourceManager<Sound2D>
 	{
 	public:
 		SoundResourceManager(const std::string& path);
 
 		Sound2D* Load(const std::string& filename);
+		void Update();
 
 	private:
 		FMOD::System* mSystem;
