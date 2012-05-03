@@ -42,14 +42,15 @@ namespace Helper
 
 		mEffect = Resources::D3DResourceManager<Framework::Effect>::Instance().Load("Animation.fx");
 		Framework::InputLayoutVector vec;
-		vec.push_back(Framework::InputLayoutElement("POSITION1", DXGI_FORMAT_R32G32B32_FLOAT, 0));
-		vec.push_back(Framework::InputLayoutElement("NORMAL1", DXGI_FORMAT_R32G32B32_FLOAT, 0));
-		vec.push_back(Framework::InputLayoutElement("UV1", DXGI_FORMAT_R32G32_FLOAT, 0));
-		vec.push_back(Framework::InputLayoutElement("POSITION2", DXGI_FORMAT_R32G32B32_FLOAT, 1));
-		vec.push_back(Framework::InputLayoutElement("NORMAL2", DXGI_FORMAT_R32G32B32_FLOAT, 1));
-		vec.push_back(Framework::InputLayoutElement("UV2", DXGI_FORMAT_R32G32_FLOAT, 1));
+		vec.push_back(Framework::InputLayoutElement("POSITION", DXGI_FORMAT_R32G32B32_FLOAT, 0, 0));
+		vec.push_back(Framework::InputLayoutElement("NORMAL", DXGI_FORMAT_R32G32B32_FLOAT, 0, 0));
+		vec.push_back(Framework::InputLayoutElement("UV", DXGI_FORMAT_R32G32_FLOAT, 0, 0));
+		vec.push_back(Framework::InputLayoutElement("POSITION", DXGI_FORMAT_R32G32B32_FLOAT, 1, 1));
+		vec.push_back(Framework::InputLayoutElement("NORMAL", DXGI_FORMAT_R32G32B32_FLOAT, 1, 1));
+		vec.push_back(Framework::InputLayoutElement("UV", DXGI_FORMAT_R32G32_FLOAT, 1, 1));
 
 		mEffect->GetTechniqueByIndex(0).GetPassByIndex(0).SetInputLayout(vec);
+		mEffect->SetVariable("g_t", 0.0f);
 	}
 
 	void MorphAnimation::Update(float dt)
@@ -77,8 +78,8 @@ namespace Helper
 		for (int p = 0; p < mEffect->GetTechniqueByIndex(0).GetPassCount(); ++p)
 		{
 			mEffect->GetTechniqueByIndex(0).GetPassByIndex(p).Apply(mDevice);
-			//mBuf1.Draw();   :-( / Lars
-			mBuf2.Draw();
+			mBuf1.Draw();   //:-( / Lars
+			//mBuf2.Draw();
 		}
 
 	}

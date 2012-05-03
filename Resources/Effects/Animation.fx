@@ -1,11 +1,11 @@
 struct VS_INPUT
 {
-	float3		position1	: POSITION1;
-	float3		normal1		: NORMAL1;
-	float2		uv1			: UV1;
-	float3		position2	: POSITION2;
-	float3		normal2		: NORMAL2;
-	float2		uv2			: UV2;
+	float3		position1	: POSITION0;
+	float3		normal1		: NORMAL0;
+	float2		uv1			: UV0;
+	float3		position2	: POSITION1;
+	float3		normal2		: NORMAL1;
+	float2		uv2			: UV1;
 };
 
 struct PS_INPUT
