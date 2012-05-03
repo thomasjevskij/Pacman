@@ -2,13 +2,13 @@
 
 namespace Helper
 {
-	DebugCameraControler::DebugCameraControler(D3DXVECTOR3 pos)
+	DebugCameraControler::DebugCameraControler(D3DXVECTOR3 pos,Helper::Camera *c):
+	mCamera(c)
 	{
-		D3DXMATRIX proj;
-		D3DXMatrixPerspectiveFovLH( &proj, D3DX_PI/2, 1, 0, 500 );
-		mCamera = new Camera(proj,pos,D3DXVECTOR3(0,0,1));
-		
+		mCamera->SetPosition(pos);
+
 		mRot = 0;
+		yRot = 0;
 		mKeyState = D3DXVECTOR3(0,0,0);
 
 	}
@@ -23,7 +23,13 @@ namespace Helper
 		else if(mRot > TWO_PI)
 			mRot -= TWO_PI;
 
-		mCamera->SetDirection(D3DXVECTOR3(cos(mRot),mCamera->GetDirection().y,sin(mRot)));
+		yRot += (TWO_PI/2)*dt*mKeyState.y;
+		if(yRot < -TWO_PI/4)
+			yRot = -TWO_PI/4;
+		else if(yRot > TWO_PI/4)
+			yRot = TWO_PI/4;
+
+		mCamera->SetDirection(D3DXVECTOR3(cos(mRot),sin(yRot) ,sin(mRot)));
 		
 		//Uppdaterar kamerans possition
 		mCamera->SetPosition(mCamera->GetPosition()+(mCamera->GetDirection()*mKeyState.z*C_MOVESPEED*dt));
@@ -43,11 +49,19 @@ namespace Helper
 		}
 		else if(VK_RIGHT == keyCode)
 		{
-			mKeyState.x = 1;
+			mKeyState.x = -1;
 		}
 		else if(VK_LEFT == keyCode)
 		{
-			mKeyState.x = -1;
+			mKeyState.x = 1;
+		}
+		else if(VK_NUMPAD8 == keyCode)
+		{
+			mKeyState.y = 1;
+		}
+		else if(VK_NUMPAD5 == keyCode)
+		{
+			mKeyState.y = -1;
 		}
 	}
 
@@ -68,6 +82,14 @@ namespace Helper
 		else if(VK_LEFT == keyCode)
 		{
 			mKeyState.x = 0;
+		}
+		else if(VK_NUMPAD8 == keyCode)
+		{
+			mKeyState.y = 0;
+		}
+		else if(VK_NUMPAD5 == keyCode)
+		{
+			mKeyState.y = 0;
 		}
 	}
 

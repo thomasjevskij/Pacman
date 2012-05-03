@@ -19,7 +19,6 @@
     <ClCompile Include="Code\Model\LevelHandler.cpp" />
     <ClCompile Include="Code\Model\Player.cpp" />
     <ClCompile Include="Code\Model\Coord.cpp" />
-    <ClCompile Include="Code\Effect\ParticleSystem.cpp" />
     <ClCompile Include="Code\Helper\DebugCameraControler.cpp" />
     <ClCompile Include="Code\Helper\ChaseCamera.cpp" />
     <ClCompile Include="Code\Resources\Sound2D.cpp" />
@@ -33,6 +32,11 @@
     <ClCompile Include="Code\Framework\Effect\Technique.cpp" />
     <ClCompile Include="Code\Framework\GameTime.cpp" />
     <ClCompile Include="Code\View\GUI\Menu.cpp" />
+    <ClCompile Include="Code\Effect\Effect.cpp" />
+    <ClCompile Include="Code\Effect\Pass.cpp" />
+    <ClCompile Include="Code\Effect\Technique.cpp" />
+    <ClCompile Include="Code\Effect\VertexBuffer.cpp" />
+    <ClCompile Include="Code\Framework\Effect\ParticleSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Framework\ApplicationWindow.hpp" />
@@ -59,8 +63,6 @@
     <ClInclude Include="Code\Model\Level.hpp" />
     <ClInclude Include="Code\Model\LevelHandler.hpp" />
     <ClInclude Include="code\model\coord.hpp" />
-    <ClInclude Include="Code\Effect\ParticleHandlerInterface.h" />
-    <ClInclude Include="Code\Effect\ParticleSystem.hpp" />
     <ClInclude Include="Code\Helper\DebugCameraControler.hpp" />
     <ClInclude Include="Code\Helper\ChaseCamera.hpp" />
     <ClInclude Include="Code\Resources\Sound2D.hpp" />
@@ -76,6 +78,12 @@
     <ClInclude Include="Code\Framework\GameTime.hpp" />
     <ClInclude Include="Code\View\GUI\Menu.hpp" />
     <ClInclude Include="Code\Model\ModelDataInterface.hpp" />
+    <ClInclude Include="Code\Effect\Effect.hpp" />
+    <ClInclude Include="Code\Effect\Pass.hpp" />
+    <ClInclude Include="Code\Effect\Technique.hpp" />
+    <ClInclude Include="Code\Effect\VertexBuffer.hpp" />
+    <ClInclude Include="Code\Framework\Effect\ParticleHandlerInterface.h" />
+    <ClInclude Include="Code\Framework\Effect\ParticleSystem.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

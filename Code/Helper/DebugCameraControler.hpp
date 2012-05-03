@@ -12,7 +12,7 @@ namespace Helper
 	class DebugCameraControler: public Framework::WindowNotificationSubscriber
 	{
 	public:
-		DebugCameraControler(D3DXVECTOR3 pos);
+		DebugCameraControler(D3DXVECTOR3 pos,Helper::Camera *c);
 
 		void Update(float dt);
 
@@ -27,8 +27,8 @@ namespace Helper
 	private:
 		Camera* mCamera;
 		D3DXVECTOR3 mKeyState;
-		static const int C_MOVESPEED = 10;
-		float mRot;
+		static const int C_MOVESPEED = 20;
+		float mRot,yRot;
 	};
 }
 #endif

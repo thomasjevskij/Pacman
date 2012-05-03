@@ -25,7 +25,9 @@ public:
 	void CharEntered(ApplicationWindow* window, char character);
 
 	Helper::DebugCameraControler *c;
+	Helper::Camera* mCamera;
 	Helper::ParticleSystem *p;
+	float pos;
 
 protected:
 	void Update(float dt);

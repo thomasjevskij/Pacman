@@ -6,13 +6,13 @@ namespace Helper
 	mDevice(device),mPosition(pos), mColor(color), mGravityOn(Gravity),mAccelerationOn(Acceleration)
 	{
 		
-		mEffect = Resources::EffectResourceManager::Instance().Load(file);
-		D3D::InputLayoutVector ParticleLayout;
-		ParticleLayout.push_back(D3D::InputLayoutElement("POSITION",DXGI_FORMAT_R32G32B32_FLOAT));
-		ParticleLayout.push_back(D3D::InputLayoutElement("VELOCITY",DXGI_FORMAT_R32G32B32_FLOAT));
-		ParticleLayout.push_back(D3D::InputLayoutElement("ACCELERATION",DXGI_FORMAT_R32G32B32_FLOAT));
-		ParticleLayout.push_back(D3D::InputLayoutElement("TIMELIVED",DXGI_FORMAT_R32_FLOAT));
-		ParticleLayout.push_back(D3D::InputLayoutElement("TIMETOLIVE",DXGI_FORMAT_R32_FLOAT));
+		mEffect = Resources::D3DResourceManager<Framework::Effect>::Instance().Load(file);
+		Framework::InputLayoutVector ParticleLayout;
+		ParticleLayout.push_back(Framework::InputLayoutElement("POSITION",DXGI_FORMAT_R32G32B32_FLOAT));
+		ParticleLayout.push_back(Framework::InputLayoutElement("VELOCITY",DXGI_FORMAT_R32G32B32_FLOAT));
+		ParticleLayout.push_back(Framework::InputLayoutElement("ACCELERATION",DXGI_FORMAT_R32G32B32_FLOAT));
+		ParticleLayout.push_back(Framework::InputLayoutElement("TIMELIVED",DXGI_FORMAT_R32_FLOAT));
+		ParticleLayout.push_back(Framework::InputLayoutElement("TIMETOLIVE",DXGI_FORMAT_R32_FLOAT));
 
 		mEffect->GetTechniqueByIndex(0).GetPassByIndex(0).SetInputLayout(ParticleLayout);
 		ID3D10ShaderResourceView* ParticleTexRV;
@@ -39,14 +39,14 @@ namespace Helper
 	{
 		Update(dt);
 
-		D3D::VertexBuffer::Description particleBuffer;
-		particleBuffer.Topology = D3D::Topology::PointList;
-		particleBuffer.Usage = D3D::Usage::Default;
+		Framework::VertexBuffer::Description particleBuffer;
+		particleBuffer.Topology = Framework::Topology::PointList;
+		particleBuffer.Usage = Framework::Usage::Default;
 		particleBuffer.ElementSize = sizeof(Particle);
 		particleBuffer.ElementCount = mParticles.size();
 		particleBuffer.FirstElementPointer = &mParticles[0];
 
-		D3D::VertexBuffer buffer(mDevice);
+		Framework::VertexBuffer buffer(mDevice);
 		buffer.SetData(particleBuffer,NULL);
 
 		buffer.Bind();

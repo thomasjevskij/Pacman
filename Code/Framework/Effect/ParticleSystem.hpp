@@ -8,6 +8,7 @@
 #include <vector>
 #include <cstdlib>
 #include "VertexBuffer.hpp"
+#include "D3DResourceManager.hpp"
 
 namespace Helper
 {
@@ -32,7 +33,7 @@ namespace Helper
 
 		void Update(float dt);
 		ID3D10Device* mDevice;
-		D3D::Effect* mEffect;
+		Framework::Effect* mEffect;
 		D3DXVECTOR3 mPosition;
 		D3DXCOLOR mColor;
 		std::vector<Particle> mParticles;
