@@ -1,19 +1,18 @@
 #ifndef FRUIT_HPP
 #define FRUIT_HPP
 
-#include "GameObject.hpp"
 #include "GameTime.hpp"
 
 namespace Model
 {
-	class Fruit:public GameObject
+	class Fruit
 	{
 	public:
-		Fruit(Coord gridPosition);
+		Fruit();
 		bool IsLifeTimeOver(float dt);
 	private:
 		float mLivedTime;
-		static const int cEndTime = 10;
+		static const int C_ENDTIME = 10;
 	};
 }
 #endif

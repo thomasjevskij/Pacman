@@ -19,7 +19,6 @@
 
 2012-04-22	0,5h	Reading about pathfinding
 		0,5h	Reading about ghost states
-
 2012-04-23	2h	Gameplayhandler + interface
 		0,5h	Ghostclass
 		1h	Ghost States
@@ -31,4 +30,6 @@
 		2h	pathfinding
 		1h	GameLogic
 		1h	Model UMLdiagram (L2) 
+
+2012-04-23	3h	AI
 

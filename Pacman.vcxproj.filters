@@ -32,6 +32,11 @@
     <ClCompile Include="Code\View\GUI\Menu.cpp" />
     <ClCompile Include="Code\View\GUI\Table.cpp" />
     <ClCompile Include="Code\Helper\MorphAnimation.cpp" />
+    <ClCompile Include="Code\Model\Ai.cpp" />
+    <ClCompile Include="Code\Model\Blinky.cpp" />
+    <ClCompile Include="Code\Model\Pinky.cpp" />
+    <ClCompile Include="Code\Model\Inky.cpp" />
+    <ClCompile Include="Code\Model\Clyde.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Framework\ApplicationWindow.hpp" />
@@ -52,12 +57,12 @@
     <ClInclude Include="Code\Model\Ai.hpp" />
     <ClInclude Include="Code\Model\Player.hpp" />
     <ClInclude Include="Code\Model\Fruit.hpp" />
-    <ClInclude Include="Code\Model\GameObject.hpp" />
     <ClInclude Include="Code\Model\GameplayHandler.hpp" />
     <ClInclude Include="Code\Model\Ghost.hpp" />
     <ClInclude Include="Code\Model\Level.hpp" />
     <ClInclude Include="Code\Model\LevelHandler.hpp" />
     <ClInclude Include="code\model\coord.hpp" />
+    <ClInclude Include="Code\View\GameEventSubscriber.hpp" />
     <ClInclude Include="Code\Resources\Sound2D.hpp" />
     <ClInclude Include="Code\Resources\ModelObj.hpp" />
     <ClInclude Include="Code\View\Scene.hpp" />
@@ -73,6 +78,10 @@
     <ClInclude Include="Code\Model\ModelDataInterface.hpp" />
     <ClInclude Include="Code\View\GUI\Table.hpp" />
     <ClInclude Include="Code\Helper\MorphAnimation.hpp" />
+    <ClInclude Include="Code\Model\Blinky.hpp" />
+    <ClInclude Include="Code\Model\Pinky.hpp" />
+    <ClInclude Include="Code\Model\Inky.hpp" />
+    <ClInclude Include="Code\Model\Clyde.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
