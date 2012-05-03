@@ -8,6 +8,8 @@
 #include "Level.hpp"
 #include "ModelObj.hpp"
 #include "Sound2D.hpp" // DEBUG
+#include "MorphAnimation.hpp"
+#include "Camera.hpp"
 
 using namespace Framework;
 
@@ -50,6 +52,8 @@ private:
 	Resources::SoundResourceManager* mSoundManager;
 	Resources::Sound2D* mSound;
 	Resources::ModelObj* mPellet;
+	Helper::MorphAnimation* mAnimation;
+	Helper::Camera* mCamera;
 };
 
 #endif

@@ -47,10 +47,10 @@ namespace Framework
 		{
 			vertexDescription[i].SemanticName = mInputLayout[i].mName.c_str();
 			vertexDescription[i].SemanticIndex = mInputLayout[i].mSemanticIndex;
+			vertexDescription[i].InputSlot = mInputLayout[i].mSlot;
 			vertexDescription[i].Format = mInputLayout[i].mFormat;
 
 			vertexDescription[i].AlignedByteOffset = D3D10_APPEND_ALIGNED_ELEMENT;
-			vertexDescription[i].InputSlot = 0;
 			vertexDescription[i].InputSlotClass = D3D10_INPUT_PER_VERTEX_DATA;
 			vertexDescription[i].InstanceDataStepRate = 0;
 		}

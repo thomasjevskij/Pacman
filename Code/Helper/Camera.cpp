@@ -12,6 +12,21 @@ namespace Helper
 		Commit();
 	}
 
+	const D3DXMATRIX& Camera::GetView() const
+	{
+		return mView;
+	}
+
+	const D3DXMATRIX& Camera::GetProjection() const
+	{
+		return mProjection;
+	}
+
+	const D3DXMATRIX& Camera::GetViewProjection() const
+	{
+		return mViewProjection;
+	}
+
 	void Camera::SetProjection(const D3DXMATRIX& projection)
 	{
 		mProjection = projection;

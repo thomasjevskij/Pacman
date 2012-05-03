@@ -31,6 +31,7 @@
     <ClCompile Include="Code\Framework\GameTime.cpp" />
     <ClCompile Include="Code\View\GUI\Menu.cpp" />
     <ClCompile Include="Code\View\GUI\Table.cpp" />
+    <ClCompile Include="Code\Helper\MorphAnimation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Framework\ApplicationWindow.hpp" />
@@ -71,6 +72,7 @@
     <ClInclude Include="Code\View\GUI\Menu.hpp" />
     <ClInclude Include="Code\Model\ModelDataInterface.hpp" />
     <ClInclude Include="Code\View\GUI\Table.hpp" />
+    <ClInclude Include="Code\Helper\MorphAnimation.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
@@ -78,5 +80,6 @@
     <None Include="push.sh" />
     <None Include="Resources\Effects\ModelObj.fx" />
     <None Include="Resources\Textures\whitePixel.png" />
+    <None Include="Resources\Effects\Animation.fx" />
   </ItemGroup>
 </Project>

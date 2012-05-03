@@ -158,6 +158,7 @@
     <None Include=".gitignore" />
     <None Include="pull.sh" />
     <None Include="push.sh" />
+    <None Include="Resources\Effects\Animation.fx" />
     <None Include="Resources\Effects\ModelObj.fx" />
     <None Include="Resources\Textures\whitePixel.png" />
   </ItemGroup>
@@ -173,6 +174,7 @@
     <ClCompile Include="Code\Helper\Camera.cpp" />
     <ClCompile Include="Code\Helper\GameFont.cpp" />
     <ClCompile Include="Code\Framework\GameTime.cpp" />
+    <ClCompile Include="Code\Helper\MorphAnimation.cpp" />
     <ClCompile Include="Code\Helper\Primitives.cpp" />
     <ClCompile Include="Code\Helper\r2tk\r2-assert.cpp" />
     <ClCompile Include="Code\Helper\r2tk\r2-exception.cpp" />
@@ -206,6 +208,7 @@
     <ClInclude Include="Code\Helper\GameFont.hpp" />
     <ClInclude Include="Code\Framework\GameTime.hpp" />
     <ClInclude Include="Code\Helper\Global.hpp" />
+    <ClInclude Include="Code\Helper\MorphAnimation.hpp" />
     <ClInclude Include="Code\Helper\Primitives.hpp" />
     <ClInclude Include="Code\Helper\r2tk\r2-assert.hpp" />
     <ClInclude Include="Code\Helper\r2tk\r2-exception.hpp" />
