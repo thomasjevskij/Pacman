@@ -27,10 +27,10 @@ namespace View
 				Tuple(int size);
 				Tuple(const std::vector<std::string>& elements);
 
-				std::string GetElement(int index) const;
+				const std::string& GetElement(int index) const;
 				int GetSize() const;
 
-				std::string& SetElement(int index, const std::string& text);
+				void SetElement(int index, const std::string& text);
 			private:
 				std::vector<std::string> mElements;
 			};

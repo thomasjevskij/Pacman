@@ -45,7 +45,7 @@ namespace View
 				throw r2ExceptionArgumentM("Tuple cannot have 0 elements");
 		}
 
-		std::string Table::Tuple::GetElement(int index) const
+		const std::string& Table::Tuple::GetElement(int index) const
 		{
 			return mElements[index];
 		}
@@ -55,10 +55,9 @@ namespace View
 			return mElements.size();
 		}
 
-		std::string& Table::Tuple::SetElement(int index, const std::string& text)
+		void Table::Tuple::SetElement(int index, const std::string& text)
 		{
 			mElements[index] = text;
-			return mElements[index];
 		}
 	}
 }
