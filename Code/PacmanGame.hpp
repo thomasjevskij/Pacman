@@ -10,6 +10,8 @@
 #include "Sound2D.hpp" // DEBUG
 #include "MorphAnimation.hpp"
 #include "Camera.hpp"
+#include "ParticleSystem.hpp"
+#include "DebugCameraControler.hpp"
 
 using namespace Framework;
 
@@ -22,6 +24,11 @@ public:
 	void KeyPressed(ApplicationWindow* window, int keyCode);
 	void KeyReleased(ApplicationWindow* window, int keyCode);
 	void CharEntered(ApplicationWindow* window, char character);
+
+	Helper::DebugCameraControler *c;
+	Helper::Camera* mCamera;
+	Helper::ParticleSystem *p;
+	float pos;
 
 protected:
 	void Update(float dt);

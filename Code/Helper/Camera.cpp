@@ -47,7 +47,6 @@ namespace Helper
 		mStagingChanges.Direction = target - mStagingChanges.Position;
 	}
 
-
 	void Camera::Commit()
 	{
 		D3DXVec3Normalize(&mStagingChanges.Direction, &mStagingChanges.Direction);
@@ -79,5 +78,25 @@ namespace Helper
 		mView.m[3][3] = 1;		
 
 		mViewProjection = mView * mProjection;
+	}
+
+	const D3DXVECTOR3& Camera::GetPosition() const
+	{
+		return mStagingChanges.Position;
+	}
+
+	const D3DXVECTOR3& Camera::GetDirection() const
+	{
+		return mStagingChanges.Direction;
+	}
+
+	const D3DXMATRIX& Camera::GetViewProjection() const
+	{
+		return mViewProjection;
+	}
+
+	const D3DXMATRIX& Camera::GetView() const
+	{
+		return mView;
 	}
 }

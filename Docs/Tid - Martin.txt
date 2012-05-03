@@ -13,3 +13,5 @@
 2012-04-23 4 (Möte + Effect programing)
 2012-04-24 3 (Camera)
 2012-04-25 1 +1,5(Camera documentation+Duno)
+
+35,25

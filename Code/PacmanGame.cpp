@@ -40,6 +40,24 @@ PacmanGame::PacmanGame(HINSTANCE instance)
 
 	mPellet = mObjectManager->Load("pellet.obj");
 	mAnimation = new Helper::MorphAnimation(mD3DContext.GetDevice());
+
+	Helper::Frustum f;
+	f.AspectRatio = 1;
+	f.FarDistance = 500;
+	f.NearDistance = 0;
+	f.FieldOfViewY = D3DX_PI/2;
+	
+	mCamera = new Helper::Camera(f.CreatePerspectiveProjection(),D3DXVECTOR3(200,0,0),D3DXVECTOR3(0,0,1));
+
+	
+	c = new Helper::DebugCameraControler(D3DXVECTOR3(0,0,-100),mCamera);
+	p = new Helper::ParticleSystem(mD3DContext.GetDevice(),D3DXVECTOR3(200,0,0),"GhostTrail.fx",D3DXCOLOR(0,255,0,255),false,true);
+
+	mWindow.AddNotificationSubscriber(c);
+
+	pos = 0;
+
+	//mPellet = mObjectManager->Load("pellet.obj");
 }
 
 PacmanGame::~PacmanGame() throw()
@@ -55,6 +73,9 @@ PacmanGame::~PacmanGame() throw()
 
 void PacmanGame::Update(float dt)
 {
+	c->Update(dt);
+	p->SetPosition(D3DXVECTOR3(pos,0,0));
+	pos += 10 * dt;
 	mSoundManager->Update();
 	mAnimation->Update(dt);
 }
@@ -63,6 +84,8 @@ void PacmanGame::Draw(RenderBatch& renderBatch, float dt)
 {
 	//mPellet->Draw(D3DXVECTOR3(0, 0, 0));
 	mAnimation->Draw(*mCamera, D3DXVECTOR3(0,0,0));
+	p->Draw(dt,c->GetCamera());
+	//mPellet->Draw(D3DXVECTOR3(0, 0, 0));
 }
 
 void PacmanGame::KeyPressed(ApplicationWindow* window, int keyCode)
