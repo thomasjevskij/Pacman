@@ -1,4 +1,8 @@
 #include "Ghost.hpp"
+#include "Blinky.hpp"
+#include "Pinky.hpp"
+#include "Inky.hpp"
+#include "Clyde.hpp"
 
 namespace Model
 {
@@ -10,8 +14,15 @@ namespace Model
 		mRealPosition = Helper::Point2f(gridPosition.X * C_TILESIZE - 32,gridPosition.Y * C_TILESIZE - C_TILESIZE/2);
 		mFacing = Coord(1,0);
 		mMovementSpeed = 16;
-		//if (aiType == 0)
-		//	mPersonality = new Blinky;
+		if (aiType == 0)
+			mPersonality = new Blinky();
+		else if(aiType == 1)
+			mPersonality = new Pinky();
+		else if(aiType == 2)
+			mPersonality = new Inky();
+		else
+			mPersonality = new Clyde();
+
 	}
 
 	void Ghost::UpdateMovement(Coord playerPosition, float dt, Level* level, Player* player, Coord blinkyPos)
@@ -20,11 +31,13 @@ namespace Model
 		{
 			//check if current gridpos is an intersection
 			//if killed get ghostspawn from level 
-			//mPersonality.GetTargetPosition(player, mGhostState, mGridPosition, blinkyPos)
+			//mPersonality->GetTargetPosition(player, mGhostState, mGridPosition, blinkyPos)
 			//Compare possible alternatives to target
 			//Change facing (revesed not allowed)
+
 			std::vector<Coord> possibleGrids;
 			Coord backFacing = Coord(mGridPosition.X + mFacing.X * -1,mGridPosition.Y + mFacing.Y * -1);
+			//Find possible routes
 			if(level->GetCell(mGridPosition.X + 1, mGridPosition.Y).Type != Model::Cell::C_CELLTYPE_WALL && 
 				Coord(mGridPosition.X + 1, mGridPosition.Y) != backFacing)
 			{
@@ -45,7 +58,7 @@ namespace Model
 			{
 				possibleGrids.push_back(Coord(mGridPosition.X, mGridPosition.Y - 1));
 			}
-			
+			//Choose a route
 			if(possibleGrids.size() == 1)
 				mFacing == mGridPosition - possibleGrids[0];
 			else
@@ -54,8 +67,7 @@ namespace Model
 				if(mGhostState == GhostState::Killed)
 					target = mSpawnPosition;
 				else
-					target = Coord(1,1);
-					//Coord target = mPersonality.GetTargetPosition(player, mGhostState, mGridPosition, blinkyPos);
+					 target = mPersonality->GetTargetPosition(player, mGhostState, mGridPosition, blinkyPos);
 				Coord shortestFacing = Coord(1000000,1000000);
 				for each (Coord c in possibleGrids)
 					if (pow((target.X - c.X),2) + pow((target.Y - c.Y),2) < pow((target.X - shortestFacing.X),2) + pow((target.Y - shortestFacing.Y),2))
@@ -110,9 +122,15 @@ namespace Model
 	{
 		return mGridPosition;
 	}
+	
+	Coord Ghost::GetSpawnPosition() const 
+	{
+		return mSpawnPosition;
+	}
 
 	void Ghost::GhostStateBehaviour(float gameTime, int levelIndex)
 	{
+		//Check if the ghost should change state
 		if(mGhostState != GhostState::Frightened && mGhostState != GhostState::Killed)
 		{
 			if (levelIndex == 1)
@@ -141,6 +159,7 @@ namespace Model
 
 	bool Ghost::CenterPos()
 	{
+		//Checks if the ghost is close enough to the center of the tile to turn
 		if((int)mRealPosition.X % C_TILESIZE > C_TILESIZE/2 - C_TILESIZE/10 && (int)mRealPosition.X % C_TILESIZE < C_TILESIZE/2 + C_TILESIZE/10)
 		{
 			if((int)mRealPosition.Y % C_TILESIZE > C_TILESIZE/2 - C_TILESIZE/10 && (int)mRealPosition.Y % C_TILESIZE < C_TILESIZE/2 + C_TILESIZE/10)

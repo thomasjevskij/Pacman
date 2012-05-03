@@ -34,7 +34,6 @@ namespace Model
 		mRealPosition += Helper::Point2f(mFacing.X*C_MOVEMENT_SPEED*dt,mFacing.Y*C_MOVEMENT_SPEED*dt);
 		mGridPosition = Coord(mRealPosition.X / C_TILESIZE,mRealPosition.Y / C_TILESIZE);
 		mLastFacing = mFacing;
-		//Glöm ej att uppdatera gridpos
 	}
 
 	void Player::GoLeft()

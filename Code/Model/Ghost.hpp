@@ -2,15 +2,15 @@
 #define GHOST_HPP
 
 #include "Coord.hpp"
-#include "Ai.hpp"
+//#include "Ai.hpp"
 #include "Level.hpp"
 #include "Player.hpp"
-#include "Blinky.hpp"
 
 
 namespace Model
 {
 	class Ai;
+	class Blinky;
 
 	class Ghost
 	{
@@ -20,6 +20,7 @@ namespace Model
 		void GhostStateBehaviour(float gameTime, int levelIndex);
 		
 		Coord GetGridPosition() const;
+		Coord GetSpawnPosition() const;
 		Coord GetFacing() const;
 		Coord GetRealPos() const;
 
@@ -29,7 +30,7 @@ namespace Model
 		
 	private:
 		GhostState mGhostState;
-		//Ai* mPersonality;
+		Ai* mPersonality;
 		Coord mFacing; //Enhetsvektor 0,1 = upp, 1,0 = right 0,-1 = down, -1,0 = left
 		Coord mRealPosition;
 		Coord mGridPosition;

@@ -36,13 +36,12 @@ namespace Model
 		bool mLevelWasWon;
 		bool mGameRestart;
 		int mLives, mCurrentLevel, mScore, mPelletsEaten;
-		float mGameTime;
+		float mGameTime, mPowerModeTimer;
 
 		bool TestGridCollision(Coord objectPos1, Coord objectPos2);
 		bool TestRealCollision(Coord ghostRealPos, Coord pacmanRealPos);
 		void NewLevel();
 		void ResetGame();
-
 
 	};
 }
