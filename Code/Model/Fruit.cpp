@@ -2,13 +2,13 @@
 
 namespace Model
 {
-	Fruit::Fruit(Coord gridPosition): GameObject(gridPosition), mLivedTime(0.0f)
+	Fruit::Fruit()
 	{
 	}
 	bool Fruit::IsLifeTimeOver(float dt)
 	{
 		mLivedTime += dt;
-		if(mLivedTime >= cEndTime)
+		if(mLivedTime >= C_ENDTIME)
 		{
 			return true;
 		}

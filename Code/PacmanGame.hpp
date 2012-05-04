@@ -9,6 +9,10 @@
 #include "ModelObj.hpp"
 #include "Sound2D.hpp" // DEBUG
 #include "Environment.hpp" // DEBUG
+#include "MorphAnimation.hpp"
+#include "Camera.hpp"
+#include "ParticleSystem.hpp"
+#include "DebugCameraControler.hpp"
 
 using namespace Framework;
 
@@ -21,6 +25,8 @@ public:
 	void KeyPressed(ApplicationWindow* window, int keyCode);
 	void KeyReleased(ApplicationWindow* window, int keyCode);
 	void CharEntered(ApplicationWindow* window, char character);
+	
+	
 
 protected:
 	void Update(float dt);
@@ -51,6 +57,14 @@ private:
 	Resources::SoundResourceManager* mSoundManager;
 	Resources::Sound2D* mSound;
 	View::Environment* mEnvironment;
+
+	Helper::MorphAnimation* mAnimation;
+
+	Helper::Camera* mCamera;
+	Helper::DebugCameraControler *c;
+
+	Helper::ParticleSystem *p;
+	float pos;
 };
 
 #endif

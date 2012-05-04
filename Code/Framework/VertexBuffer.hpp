@@ -56,7 +56,7 @@ namespace Framework
 		bool SetData(const Description& description, IndexVector* indices);
 
 		// Bind the buffer(s) to an input slot.
-		void Bind();
+		void Bind(unsigned int slot = 0);
 
 		// Draw the vertices in the buffer - an effect pass should have been applied 
 		// before this one is called.

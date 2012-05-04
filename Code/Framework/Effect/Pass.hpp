@@ -14,11 +14,12 @@ namespace Framework
 	struct InputLayoutElement
 	{
 	public:
-		InputLayoutElement(const std::string& name, DXGI_FORMAT format, unsigned int semanticIndex = 0) :
-			mName(name), mFormat(format), mSemanticIndex(semanticIndex) {}
+		InputLayoutElement(const std::string& name, DXGI_FORMAT format, unsigned int slot = 0, unsigned int semanticIndex = 0) :
+			mName(name), mFormat(format), mSlot(slot), mSemanticIndex(semanticIndex) {}
 
 		std::string mName;				// The name of the variable, specified after the : in the effect file
 		DXGI_FORMAT mFormat;			// The format of the variable, what size and how it should be interpreted.
+		unsigned int mSlot;				// The input slot - the vertex buffer to get this variable from.
 		unsigned int mSemanticIndex;	// In case two variables have the same name, this index will separate them (start at 0).
 	};
 

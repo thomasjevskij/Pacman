@@ -51,7 +51,7 @@ namespace Framework
 		return true;
 	}
 
-	void VertexBuffer::Bind()
+	void VertexBuffer::Bind(unsigned int slot)
 	{
 		// Don't bind unless we've set the buffer data
 		if (mVertexBuffer == NULL)
@@ -63,7 +63,7 @@ namespace Framework
 	
 		// Bind the vertex buffer and set the topology state
 		unsigned int offset = 0;
-		mDevice->IASetVertexBuffers(0, 1, &mVertexBuffer, &mElementSize, &offset);
+		mDevice->IASetVertexBuffers(slot, 1, &mVertexBuffer, &mElementSize, &offset);
 		mDevice->IASetPrimitiveTopology(GetTopologyFlag(mTopology));
 	}
 

@@ -56,4 +56,5 @@ namespace Framework
 		Effect& operator=(const Effect& copy);
 	};
 }
+
 #endif

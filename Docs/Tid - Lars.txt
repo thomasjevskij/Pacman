@@ -27,7 +27,8 @@
 	1h Weekly report
 	3h GUI components
 	
-2012-04-23:	3.5h Particle System
+2012-04-23:	
+	3.5h Particle System
 	0.5h Redmine setup
 2012-04-24:
 	2h Redmine setup
@@ -40,3 +41,4 @@
 	1h Cleanup
 2012-04-27:
 	1h LOC counter script
+	4h Weekly

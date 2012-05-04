@@ -2,13 +2,12 @@
 
 namespace Model
 {
-	const float Player::cMovementSpeed = 16;
-	const int Player::tileSize = 64;
-
-	Player::Player(Coord gridPosition) : GameObject(gridPosition)
+	Player::Player()
+	{}
+	Player::Player(Coord gridPosition)
 	{
 		//Sätt mRealPosition till start värde ändra 64 beroende på hur stora runtorna blir i slut änden
-		mRealPosition = Helper::Point2f(gridPosition.X * tileSize - 32,gridPosition.Y * tileSize - tileSize/2);
+		mRealPosition = Helper::Point2f(gridPosition.X * C_TILESIZE - 32,gridPosition.Y * C_TILESIZE - C_TILESIZE/2);
 		mFacing = Coord(1,0);
 	}
 
@@ -32,10 +31,9 @@ namespace Model
 		}
 
 		//Updatera pacmans position
-		mRealPosition += Helper::Point2f(mFacing.X*cMovementSpeed*dt,mFacing.Y*cMovementSpeed*dt);
-		mGridPosition = Coord(mRealPosition.X / tileSize,mRealPosition.Y / tileSize);
+		mRealPosition += Helper::Point2f(mFacing.X*C_MOVEMENT_SPEED*dt,mFacing.Y*C_MOVEMENT_SPEED*dt);
+		mGridPosition = Coord(mRealPosition.X / C_TILESIZE,mRealPosition.Y / C_TILESIZE);
 		mLastFacing = mFacing;
-		//Glöm ej att uppdatera gridpos
 	}
 
 	void Player::GoLeft()
@@ -55,6 +53,10 @@ namespace Model
 		mFacing = Coord(mFacing.X*-1,mFacing.Y*-1);
 	}
 
+	Coord Player::GetGridPosition() const 
+	{
+		return mGridPosition;
+	}
 
 	Helper::Point2f Player::GetRealPos() const
 	{
@@ -80,20 +82,24 @@ namespace Model
 		{
 			pos.Y = 0;
 		}
-
 		// DEBUG: added this because the function must return a value!
 		return pos;
 	}
 
 	bool Player::CenterPos()
 	{
-		if((int)mRealPosition.X % tileSize > tileSize/2 - tileSize/10 && (int)mRealPosition.X % tileSize < tileSize/2 + tileSize/10)
+		if((int)mRealPosition.X % C_TILESIZE > C_TILESIZE/2 - C_TILESIZE/10 && (int)mRealPosition.X % C_TILESIZE < C_TILESIZE/2 + C_TILESIZE/10)
 		{
-			if((int)mRealPosition.Y % tileSize > tileSize/2 - tileSize/10 && (int)mRealPosition.Y % tileSize < tileSize/2 + tileSize/10)
+			if((int)mRealPosition.Y % C_TILESIZE > C_TILESIZE/2 - C_TILESIZE/10 && (int)mRealPosition.Y % C_TILESIZE < C_TILESIZE/2 + C_TILESIZE/10)
 			{
 				return true;
 			}
 		}
 		return false;
+	}
+
+	const Coord& Player::GetFacing() const
+	{
+		return mFacing;
 	}
 }
