@@ -60,6 +60,7 @@ namespace Framework
 
 		// Draw the vertices in the buffer - an effect pass should have been applied 
 		// before this one is called.
+		// Should deprecate - move responsibility to context.
 		void Draw();
 
 	private:

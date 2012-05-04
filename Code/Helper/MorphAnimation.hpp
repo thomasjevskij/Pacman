@@ -18,11 +18,32 @@ namespace Helper
 		void Update(float dt);
 		void Draw(const Camera& camera, D3DXVECTOR3 position);
 	private:
-		Framework::VertexBuffer mBuf1;
-		Framework::VertexBuffer mBuf2;
+		struct AnimationVertex
+		{
+			D3DXVECTOR3 Position;
+			D3DXVECTOR3 Normal;
+			D3DXVECTOR2 UV;
+		};
+		struct KeyFrame
+		{
+			KeyFrame(Framework::VertexBuffer* buffer, float timeSpan);
+			~KeyFrame() throw();
+
+			Framework::VertexBuffer* Buffer;
+			float TimeSpan;
+		};
+
+		void HandleTime(float dt);
+		
+
+		std::vector<KeyFrame> mKeyFrames;
+
 		Framework::Effect* mEffect;
+
+		bool mLooping;
+		bool mForwards;
+		int mCurrentFrame;
 		float mTime;
-		float mTimeSpan;
 
 		//DEBUG
 		ID3D10Device* mDevice;
