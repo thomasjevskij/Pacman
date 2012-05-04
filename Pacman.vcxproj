@@ -161,6 +161,7 @@
     <None Include="Resources\Effects\Ground.fx" />
     <None Include="Resources\Effects\Animation.fx" />
     <None Include="Resources\Effects\ModelObj.fx" />
+    <None Include="Resources\Levels\Level.png" />
     <None Include="Resources\Textures\whitePixel.png" />
   </ItemGroup>
   <ItemGroup>

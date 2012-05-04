@@ -36,7 +36,8 @@ PacmanGame::PacmanGame(HINSTANCE instance)
 	// DEBUG
 	mSound = mSoundManager->Load("buttonClick.wav");
 
-	mEnvironment = new View::Environment(mD3DContext.GetDevice(), Model::Level());
+	Model::Level* aLevel = mLevelManager->Load("Level.png");
+	mEnvironment = new View::Environment(mD3DContext.GetDevice(), *aLevel);
 	
 	mAnimation = new Helper::MorphAnimation(mD3DContext.GetDevice());	
 	mCamera = new Helper::Camera(f.CreatePerspectiveProjection(),D3DXVECTOR3(200,0,0),D3DXVECTOR3(0,0,1));
