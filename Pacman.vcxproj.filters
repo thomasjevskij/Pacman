@@ -23,13 +23,13 @@
     <ClCompile Include="Code\Resources\ModelObj.cpp" />
     <ClCompile Include="Code\View\Scene.cpp" />
     <ClCompile Include="Code\Resources\Texture.cpp" />
-    <ClCompile Include="Code\View\Ground.cpp" />
     <ClCompile Include="Code\Framework\VertexBuffer.cpp" />
     <ClCompile Include="Code\Framework\Effect\Effect.cpp" />
     <ClCompile Include="Code\Framework\Effect\Pass.cpp" />
     <ClCompile Include="Code\Framework\Effect\Technique.cpp" />
     <ClCompile Include="Code\Framework\GameTime.cpp" />
     <ClCompile Include="Code\View\GUI\Menu.cpp" />
+    <ClCompile Include="Code\View\Environment.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Framework\ApplicationWindow.hpp" />
@@ -61,7 +61,6 @@
     <ClInclude Include="Code\View\Scene.hpp" />
     <ClInclude Include="Code\Resources\Texture.hpp" />
     <ClInclude Include="Code\Resources\D3DResourceManager.hpp" />
-    <ClInclude Include="Code\View\Ground.hpp" />
     <ClInclude Include="Code\Framework\VertexBuffer.hpp" />
     <ClInclude Include="Code\Framework\Effect\Effect.hpp" />
     <ClInclude Include="Code\Framework\Effect\Pass.hpp" />
@@ -69,6 +68,7 @@
     <ClInclude Include="Code\Framework\GameTime.hpp" />
     <ClInclude Include="Code\View\GUI\Menu.hpp" />
     <ClInclude Include="Code\Model\ModelDataInterface.hpp" />
+    <ClInclude Include="Code\View\Environment.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
@@ -76,5 +76,6 @@
     <None Include="push.sh" />
     <None Include="Resources\Effects\ModelObj.fx" />
     <None Include="Resources\Textures\whitePixel.png" />
+    <None Include="Resources\Effects\Ground.fx" />
   </ItemGroup>
 </Project>

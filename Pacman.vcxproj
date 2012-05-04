@@ -158,6 +158,7 @@
     <None Include=".gitignore" />
     <None Include="pull.sh" />
     <None Include="push.sh" />
+    <None Include="Resources\Effects\Ground.fx" />
     <None Include="Resources\Effects\ModelObj.fx" />
     <None Include="Resources\Textures\whitePixel.png" />
   </ItemGroup>
@@ -188,7 +189,7 @@
     <ClCompile Include="Code\Resources\ModelObj.cpp" />
     <ClCompile Include="Code\Resources\Sound2D.cpp" />
     <ClCompile Include="Code\Resources\Texture.cpp" />
-    <ClCompile Include="Code\View\Ground.cpp" />
+    <ClCompile Include="Code\View\Environment.cpp" />
     <ClCompile Include="Code\View\Scene.cpp" />
     <ClCompile Include="Code\View\GUI\Menu.cpp" />
   </ItemGroup>
@@ -227,7 +228,7 @@
     <ClInclude Include="Code\Resources\ResourceManager.hpp" />
     <ClInclude Include="Code\Resources\Sound2D.hpp" />
     <ClInclude Include="Code\Resources\Texture.hpp" />
-    <ClInclude Include="Code\View\Ground.hpp" />
+    <ClInclude Include="Code\View\Environment.hpp" />
     <ClInclude Include="Code\View\Scene.hpp" />
     <ClInclude Include="Code\View\GUI\Menu.hpp" />
   </ItemGroup>

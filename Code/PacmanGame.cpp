@@ -30,7 +30,7 @@ PacmanGame::PacmanGame(HINSTANCE instance)
 	mSoundManager = new Resources::SoundResourceManager("Resources/Sounds/");
 	mSound = mSoundManager->Load("buttonClick.wav");
 
-	mPellet = mObjectManager->Load("pellet.obj");
+	mEnvironment = new View::Environment(mD3DContext.GetDevice(), Model::Level());
 }
 
 PacmanGame::~PacmanGame() throw()
@@ -40,6 +40,7 @@ PacmanGame::~PacmanGame() throw()
 	SafeDelete(mObjectManager);
 	SafeDelete(mMaterialManager);
 	SafeDelete(mSoundManager);
+	SafeDelete(mEnvironment);
 }
 
 void PacmanGame::Update(float dt)
@@ -49,7 +50,7 @@ void PacmanGame::Update(float dt)
 
 void PacmanGame::Draw(RenderBatch& renderBatch, float dt)
 {
-	mPellet->Draw(D3DXVECTOR3(0, 0, 0));
+	mEnvironment->Draw();
 }
 
 void PacmanGame::KeyPressed(ApplicationWindow* window, int keyCode)

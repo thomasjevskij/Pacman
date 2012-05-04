@@ -8,6 +8,7 @@
 #include "Level.hpp"
 #include "ModelObj.hpp"
 #include "Sound2D.hpp" // DEBUG
+#include "Environment.hpp" // DEBUG
 
 using namespace Framework;
 
@@ -49,7 +50,7 @@ private:
 	// DEBUG
 	Resources::SoundResourceManager* mSoundManager;
 	Resources::Sound2D* mSound;
-	Resources::ModelObj* mPellet;
+	View::Environment* mEnvironment;
 };
 
 #endif

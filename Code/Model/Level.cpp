@@ -20,6 +20,7 @@ namespace Model
 		mHeight = 0;
 		mWidth = 0;
 	}
+	
 	Level::Level(const std::string& path)
 	{
 		FIBITMAP *imgFile = FreeImage_Load(FIF_PNG, path.c_str(), PNG_DEFAULT);

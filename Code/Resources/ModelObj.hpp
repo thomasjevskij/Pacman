@@ -34,6 +34,8 @@ namespace Resources
 		std::map<std::string, Definition> Materials;
 
 		Material(std::string filename);
+		
+		const Definition* GetMaterial(std::string materialName) const;
 	};
 
 	class ModelObj
@@ -43,6 +45,7 @@ namespace Resources
 		~ModelObj() throw();
 
 		void Draw(D3DXVECTOR3 drawPosition);
+		void SetScale(float newScale);
 
 	private:
 		// The struct for a vertex in the object. 
@@ -55,6 +58,7 @@ namespace Resources
 		};
 
 		Material* mMaterial;
+		std::string mMaterialName;
 		ID3D10Device* mDevice;
 		Framework::Effect* mEffect;
 		Framework::VertexBuffer* mBuffer;
@@ -65,7 +69,7 @@ namespace Resources
 
 		bool Load(std::string filename);
 		bool LoadMaterial(std::string filename);
-		void UpdateWorldMatrix(D3DXVECTOR3 position);
+		void UpdatePositionInMatrix(D3DXVECTOR3 position);
 	};
 }
 #endif

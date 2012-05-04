@@ -1,4 +1,5 @@
 #include "ModelObj.hpp"
+
 #include <sstream>
 #include <fstream>
 #include <vector>
@@ -111,7 +112,7 @@ namespace Resources
 
 				// Only try to load the texture if a filename was read
 				if(textureFilename.find('.') != std::string::npos)
-					Resources::D3DResourceManager<Texture>::Instance().Load(textureFilename);
+					currMaterial.MainTexture = Resources::D3DResourceManager<Texture>::Instance().Load(textureFilename);
 			}
 		}
 
@@ -121,6 +122,14 @@ namespace Resources
 			assert(Materials.find(currMaterialName) == Materials.end());
 			Materials[currMaterialName] = currMaterial;
 		}
+	}
+
+	const Material::Definition* Material::GetMaterial(std::string materialName) const
+	{
+		if(Materials.find(materialName) == Materials.end())
+			return NULL;
+		else
+			return &Materials.find(materialName)->second;
 	}
 }
 
@@ -222,6 +231,10 @@ namespace Resources
 					vertices.push_back(currVertex);
 				}
 			}
+			else if(key == "usemtl")
+			{
+				streamLine >> mMaterialName;
+			}
 		}
 
 		// Describe the buffer and create it
@@ -240,9 +253,14 @@ namespace Resources
 		Framework::InputLayoutVector inputLayout;
 		inputLayout.push_back(Framework::InputLayoutElement("POSITION", DXGI_FORMAT_R32G32B32_FLOAT));
 		inputLayout.push_back(Framework::InputLayoutElement("NORMAL", DXGI_FORMAT_R32G32B32_FLOAT));
-		inputLayout.push_back(Framework::InputLayoutElement("UV", DXGI_FORMAT_R32G32_FLOAT));
+		inputLayout.push_back(Framework::InputLayoutElement("TEXCOORD", DXGI_FORMAT_R32G32_FLOAT));
 
 		mEffect->GetTechniqueByIndex(0).GetPassByIndex(0).SetInputLayout(inputLayout);
+		
+		const Material::Definition* def = mMaterial->GetMaterial(mMaterialName);
+		if(def != NULL)
+			if(def->MainTexture != NULL)
+				mEffect->SetVariable("g_modelTexture", def->MainTexture->GetShaderResoureceView());
 
 		return true;
 	}
@@ -256,7 +274,7 @@ namespace Resources
 
 	void ModelObj::Draw(D3DXVECTOR3 drawPosition)
 	{
-		UpdateWorldMatrix(drawPosition);
+		UpdatePositionInMatrix(drawPosition);
 		D3DXMATRIX worldViewProjection, view, projection;
 
 		// DEBUG: get from Camera...
@@ -269,7 +287,7 @@ namespace Resources
 		mEffect->SetVariable("g_matWVP", worldViewProjection);
 		
 		// DEBUG: get light position elsewhere
-		mEffect->SetVariable("g_lightDirection", D3DXVECTOR4(10, 10, 0, 0));
+		mEffect->SetVariable("g_lightDirection", D3DXVECTOR4(50, 50, 0, 0));
 
 		// Bind and draw the buffer, once for each pass
 		mBuffer->Bind();
@@ -280,7 +298,14 @@ namespace Resources
 		}
 	}
 
-	void ModelObj::UpdateWorldMatrix(D3DXVECTOR3 position)
+	void ModelObj::SetScale(float newScale)
+	{
+		mWorld.m[0][0] = newScale;
+		mWorld.m[1][1] = newScale;
+		mWorld.m[2][2] = newScale;
+	}
+
+	void ModelObj::UpdatePositionInMatrix(D3DXVECTOR3 position)
 	{
 		// Update position in matrix
 		mWorld.m[3][0] = position.x;
