@@ -133,7 +133,7 @@ namespace Model
 	}
 	bool GameplayHandler::TestRealCollision(Coord ghostRealPos, Coord pacmanRealPos)
 	{ 
-		if(sqrt(pow((ghostRealPos.X - pacmanRealPos.X),2) + pow((ghostRealPos.Y - pacmanRealPos.Y),2)) < 40)
+		if(sqrt(pow((ghostRealPos.X - pacmanRealPos.X),2) + pow((ghostRealPos.Y - pacmanRealPos.Y),2)) < 0.5)
 			return true;
 		return false;
 	}

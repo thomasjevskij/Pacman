@@ -11,9 +11,9 @@ namespace Model
 	{
 		mSpawnPosition = gridPosition;
 		//Sätt mRealPosition till start värde ändra 64 beroende på hur stora runtorna blir i slut änden
-		mRealPosition = Helper::Point2f(gridPosition.X * C_TILESIZE - 32,gridPosition.Y * C_TILESIZE - C_TILESIZE/2);
+		mRealPosition = Helper::Point2f(gridPosition.X - 0.5 ,gridPosition.Y - 0.5 );
 		mFacing = Coord(1,0);
-		mMovementSpeed = 16;
+		mMovementSpeed = 2;
 		if (aiType == 0)
 			mPersonality = new Blinky();
 		else if(aiType == 1)
@@ -77,7 +77,7 @@ namespace Model
 
 		} 
 		mRealPosition += Helper::Point2f(mFacing.X * mMovementSpeed * dt, mFacing.Y * mMovementSpeed * dt);
-		mGridPosition = Coord(mRealPosition.X / C_TILESIZE,mRealPosition.Y / C_TILESIZE);
+		mGridPosition = Coord((int)mRealPosition.X,(int)mRealPosition.Y);
 	}
 	
 	Coord Ghost::GetFacing() const
@@ -97,19 +97,19 @@ namespace Model
 		{
 			mFacing.X *= -1;
 			mFacing.Y *= -1;
-			mMovementSpeed = 10;
+			mMovementSpeed = 1.6;
 		}
 		else if(state == GhostState::Killed)
 		{
-			mMovementSpeed = 16;
+			mMovementSpeed = 2;
 		}
 		else if(state == GhostState::Chase)
 		{
-			mMovementSpeed = 14;
+			mMovementSpeed = 1.8;
 		}
 		else if(state == GhostState::Scatter)
 		{
-			mMovementSpeed = 14;
+			mMovementSpeed = 1.8;
 		}
 	}
 
@@ -160,9 +160,9 @@ namespace Model
 	bool Ghost::CenterPos()
 	{
 		//Checks if the ghost is close enough to the center of the tile to turn
-		if((int)mRealPosition.X % C_TILESIZE > C_TILESIZE/2 - C_TILESIZE/10 && (int)mRealPosition.X % C_TILESIZE < C_TILESIZE/2 + C_TILESIZE/10)
+		if(mRealPosition.X > mGridPosition.X + 0.4 && mRealPosition.X < mGridPosition.X + 0.6)
 		{
-			if((int)mRealPosition.Y % C_TILESIZE > C_TILESIZE/2 - C_TILESIZE/10 && (int)mRealPosition.Y % C_TILESIZE < C_TILESIZE/2 + C_TILESIZE/10)
+			if(mRealPosition.Y > mGridPosition.Y + 0.4 && mRealPosition.Y < mGridPosition.Y + 0.6)
 			{
 				return true;
 			}
