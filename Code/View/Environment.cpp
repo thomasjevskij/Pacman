@@ -99,7 +99,7 @@ namespace View
 
 		for(int i = 0; i < mWallPositions.size(); ++i)
 		{
-			mWallObject->Draw(mWallPositions[i]);
+			//mWallObject->Draw(mWallPositions[i]);
 		}
 	}
 }

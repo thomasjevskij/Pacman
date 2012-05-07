@@ -55,21 +55,28 @@ SamplerState SamLinear
 
 BlendState AdditiveBlending
 {
-    AlphaToCoverageEnable = FALSE;
-    BlendEnable[0] = FALSE;
+    AlphaToCoverageEnable = false;
+    BlendEnable[0] = true;
     SrcBlend = SRC_ALPHA;
     DestBlend = ONE;
     BlendOp = ADD;
     SrcBlendAlpha = ZERO;
     DestBlendAlpha = ZERO;
     BlendOpAlpha = ADD;
-    RenderTargetWriteMask[0] = 0x0F;
+    RenderTargetWriteMask[0] = 0x0f;
 };
 
 DepthStencilState DisableDepth
 {
     DepthEnable = FALSE;
     DepthWriteMask = ZERO;
+};
+
+DepthStencilState EnableDepth
+{
+	DepthEnable = TRUE;
+	DepthWriteMask = ALL;
+	DepthFunc = LESS_EQUAL;
 };
 
 VSParticleDrawOut VSScenemain(VSParticleIn input)
@@ -123,7 +130,7 @@ technique10 RenderParticles
         SetGeometryShader( CompileShader( gs_4_0, GSScenemain() ) );
         SetPixelShader( CompileShader( ps_4_0, PSScenemain() ) );
         
-        SetBlendState( AdditiveBlending, float4( 0.0f, 200.0f, 0.0f, 0.0f ), 0xFFFFFFFF );
-        SetDepthStencilState( DisableDepth, 0 );
+        SetBlendState( AdditiveBlending, float4( 1.0f, 1.0f, 1.0f, 1.0f ), 0xFFFFFFFF );
+        SetDepthStencilState(EnableDepth, 0xff);
     }  
 }
