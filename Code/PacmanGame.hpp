@@ -60,6 +60,7 @@ private:
 	View::Environment* mEnvironment;
 	
 	Helper::MorphAnimation* mAnimation;
+	Helper::ParticleSystem* p;
 
 	Helper::Camera* mCamera;
 	Helper::DebugCameraControler *c;

@@ -70,14 +70,15 @@ PacmanGame::~PacmanGame() throw()
 void PacmanGame::Update(float dt)
 {
 	mSoundManager->Update();
+	c->Update(dt);
 }
 
 void PacmanGame::Draw(float dt)
 {
-	mEnvironment->Draw();
+	mEnvironment->Draw(*mCamera);
 	mAnimation->Draw(*mCamera, D3DXVECTOR3(0,0,0));
 	p->Draw(dt,c->GetCamera());
-	mSprite->Draw(D3DXVECTOR2(0, 0));
+	//mSprite->Draw(D3DXVECTOR2(0, 0));
 }
 
 void PacmanGame::KeyPressed(ApplicationWindow* window, int keyCode)

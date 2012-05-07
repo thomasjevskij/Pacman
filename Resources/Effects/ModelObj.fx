@@ -16,7 +16,7 @@ struct PS_INPUT
 RasterizerState NoCulling
 {
 	CullMode = None;
-	//FillMode = Wireframe;
+	FillMode = Wireframe;
 };
 
 SamplerState linearSampler {
