@@ -8,6 +8,7 @@
 #include "Texture.hpp"
 #include "VertexBuffer.hpp"
 #include "Effect.hpp"
+#include "Camera.hpp"
 
 namespace Resources
 {
@@ -38,13 +39,20 @@ namespace Resources
 		const Definition* GetMaterial(std::string materialName) const;
 	};
 
+
+
 	class ModelObj
 	{
 	public:
-		ModelObj(ID3D10Device* device, std::string filename);
+		ModelObj(ID3D10Device* device, const std::string& filename);
 		~ModelObj() throw();
 
-		void Draw(D3DXVECTOR3 drawPosition);
+		// Bind the model's associated vertex buffer to an input slot
+		void Bind(unsigned int slot = 0);
+
+		// Draw the object. Must be bound to an input slot.
+		void Draw(const D3DXVECTOR3& drawPosition, const Helper::Camera& camera);
+
 		void SetScale(float newScale);
 
 	private:
@@ -67,9 +75,9 @@ namespace Resources
 		ModelObj(const ModelObj&);
 		ModelObj& operator=(const ModelObj&);
 
-		bool Load(std::string filename);
-		bool LoadMaterial(std::string filename);
-		void UpdatePositionInMatrix(D3DXVECTOR3 position);
+		bool Load(const std::string& filename);
+		bool LoadMaterial(const std::string& filename);
+		void UpdatePositionInMatrix(const D3DXVECTOR3& position);
 	};
 }
 #endif

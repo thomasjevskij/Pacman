@@ -135,7 +135,7 @@ namespace Resources
 
 namespace Resources
 {
-	ModelObj::ModelObj(ID3D10Device* device, std::string filename)
+	ModelObj::ModelObj(ID3D10Device* device, const std::string& filename)
 		: mMaterial(NULL), mDevice(device), mEffect(NULL), mBuffer(NULL)
 	{
 		D3DXMatrixIdentity(&mWorld);
@@ -149,7 +149,7 @@ namespace Resources
 		SafeDelete(mBuffer);
 	}
 
-	bool ModelObj::Load(std::string filename)
+	bool ModelObj::Load(const std::string& filename)
 	{
 		std::ifstream file;
 		std::vector<D3DXVECTOR3> outPositions;
@@ -265,23 +265,23 @@ namespace Resources
 		return true;
 	}
 
-	bool ModelObj::LoadMaterial(std::string filename)
+	bool ModelObj::LoadMaterial(const std::string& filename)
 	{
 		mMaterial = FileResourceManager<Material>::Instance().Load(filename);
 
 		return mMaterial->Materials.size() > 0;
 	}
 
-	void ModelObj::Draw(D3DXVECTOR3 drawPosition)
+	void ModelObj::Bind(unsigned int slot) 
+	{
+		mBuffer->Bind(slot);
+	}
+
+	void ModelObj::Draw(const D3DXVECTOR3& drawPosition, const Helper::Camera& camera)
 	{
 		UpdatePositionInMatrix(drawPosition);
 		D3DXMATRIX worldViewProjection, view, projection;
-
-		// DEBUG: get from Camera...
-		D3DXMatrixLookAtLH(&view, &D3DXVECTOR3(0, 50, -50), &D3DXVECTOR3(0, 0, 0), &D3DXVECTOR3(0, 1, 0));
-		D3DXMatrixPerspectiveFovLH(&projection, 0.25f * D3DX_PI, 1024/768, 1.0f, 1000.0f);
-		
-		worldViewProjection = mWorld * view * projection;
+		worldViewProjection = mWorld * camera.GetViewProjection();
 
 		mEffect->SetVariable("g_matWorld", mWorld);
 		mEffect->SetVariable("g_matWVP", worldViewProjection);
@@ -289,8 +289,7 @@ namespace Resources
 		// DEBUG: get light position elsewhere
 		mEffect->SetVariable("g_lightDirection", D3DXVECTOR4(50, 50, 0, 0));
 
-		// Bind and draw the buffer, once for each pass
-		mBuffer->Bind();
+		// Draw the buffer, once for each pass
 		for(UINT p = 0; p < mEffect->GetTechniqueByIndex(0).GetPassCount(); ++p)
 		{
 			mEffect->GetTechniqueByIndex(0).GetPassByIndex(p).Apply(mDevice);
@@ -305,7 +304,7 @@ namespace Resources
 		mWorld.m[2][2] = newScale;
 	}
 
-	void ModelObj::UpdatePositionInMatrix(D3DXVECTOR3 position)
+	void ModelObj::UpdatePositionInMatrix(const D3DXVECTOR3& position)
 	{
 		// Update position in matrix
 		mWorld.m[3][0] = position.x;

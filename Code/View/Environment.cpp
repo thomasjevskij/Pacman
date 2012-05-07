@@ -77,15 +77,10 @@ namespace View
 		//mWallPositions.push_back(D3DXVECTOR3(30, 0, 0));
 	}
 
-	void Environment::Draw()
+	void Environment::Draw(const Helper::Camera& camera)
 	{
-		D3DXMATRIX worldViewProjection, view, projection;
-
-		// DEBUG: get from Camera...
-		D3DXMatrixLookAtLH(&view, &D3DXVECTOR3(0, 50, -50), &D3DXVECTOR3(0, 0, 0), &D3DXVECTOR3(0, 1, 0));
-		D3DXMatrixPerspectiveFovLH(&projection, 0.25f * D3DX_PI, 1024/768, 1.0f, 1000.0f);
-		
-		worldViewProjection = view * projection;
+		D3DXMATRIX worldViewProjection, view, projection;		
+		worldViewProjection = camera.GetViewProjection();
 
 		mEffect->SetVariable("g_matWVP", worldViewProjection);
 
@@ -97,9 +92,10 @@ namespace View
 			mBuffer->Draw();
 		}
 
+		mWallObject->Bind();
 		for(int i = 0; i < mWallPositions.size(); ++i)
 		{
-			//mWallObject->Draw(mWallPositions[i]);
+			mWallObject->Draw(mWallPositions[i], camera);
 		}
 	}
 }

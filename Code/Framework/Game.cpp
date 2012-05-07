@@ -38,7 +38,7 @@ namespace Framework
 	void Game::DrawWrapper(float dt)
 	{
 		mD3DContext.Clear();
-		Draw(mRenderBatch, dt);
+		Draw(dt);
 		mD3DContext.SwapBuffers();
 	}
 }

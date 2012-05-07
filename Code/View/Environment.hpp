@@ -7,7 +7,7 @@
 #include "ModelObj.hpp"
 #include "VertexBuffer.hpp"
 #include "Effect.hpp"
-
+#include "Camera.hpp"
 
 namespace View
 {
@@ -19,7 +19,7 @@ namespace View
 		Environment(ID3D10Device* device, Model::Level level);
 		~Environment() throw();
 
-		void Draw();
+		void Draw(const Helper::Camera& camera);
 
 	private:
 		struct Vertex

@@ -13,6 +13,7 @@
 #include "Camera.hpp"
 #include "ParticleSystem.hpp"
 #include "DebugCameraControler.hpp"
+#include "Sprite.hpp"
 
 using namespace Framework;
 
@@ -26,11 +27,9 @@ public:
 	void KeyReleased(ApplicationWindow* window, int keyCode);
 	void CharEntered(ApplicationWindow* window, char character);
 	
-	
-
 protected:
 	void Update(float dt);
-	void Draw(RenderBatch& renderBatch, float dt);
+	void Draw(float dt);
 
 private:
 	struct WindowDescription
@@ -52,19 +51,19 @@ private:
 	Resources::D3DResourceManager<Resources::ModelObj>* mObjectManager;
 	Resources::FileResourceManager<Resources::Material>* mMaterialManager;
 	Resources::FileResourceManager<Model::Level>* mLevelManager;
-	
-	// DEBUG
 	Resources::SoundResourceManager* mSoundManager;
+	Resources::SpriteResourceManager* mSpriteManager;
+
+	// Debug
+	Resources::Sprite* mSprite;
 	Resources::Sound2D* mSound;
 	View::Environment* mEnvironment;
-
+	
 	Helper::MorphAnimation* mAnimation;
+	Helper::ParticleSystem* p;
 
 	Helper::Camera* mCamera;
 	Helper::DebugCameraControler *c;
-
-	Helper::ParticleSystem *p;
-	float pos;
 };
 
 #endif
