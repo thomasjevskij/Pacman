@@ -1,15 +1,15 @@
 #include "Sprite.hpp"
 #include "r2-exception.hpp"
+#include "D3DResourceManager.hpp"
 
-namespace Framework
+namespace Resources
 {
-	Sprite::Sprite(ID3D10Device* device, const ViewportInterface* viewportInterface, const std::string& filename, float width, float height)
+	Sprite::Sprite(ID3D10Device* device, const std::string& filename, float width, float height)
 		: mDevice(device)
 		, mWidth(width)
 		, mHeight(height)
 		, mBuffer(NULL)
 		, mEffect(NULL)
-		, mViewportInterface(viewportInterface)
 	{
 		ID3D10ShaderResourceView* texture;
 		if (FAILED(D3DX10CreateShaderResourceViewFromFile(mDevice, filename.c_str(), NULL, NULL, &texture, NULL)))
@@ -31,23 +31,23 @@ namespace Framework
 		const int numVertices = 4;
 		SpriteVertex vertices[numVertices];
 
-		vertices[0].Position	= D3DXVECTOR2(0, 0);
+		vertices[0].Position	= D3DXVECTOR2(-1, -1);
 		vertices[0].UV			= D3DXVECTOR2(0, 0);
 
-		vertices[1].Position	= D3DXVECTOR2(mWidth, 0);
+		vertices[1].Position	= D3DXVECTOR2(1, -1);
 		vertices[1].UV			= D3DXVECTOR2(1, 0);
 
-		vertices[2].Position	= D3DXVECTOR2(0, mHeight);
+		vertices[2].Position	= D3DXVECTOR2(-1, 1);
 		vertices[2].UV			= D3DXVECTOR2(0, 1);
 
-		vertices[3].Position	= D3DXVECTOR2(mWidth, mHeight);
+		vertices[3].Position	= D3DXVECTOR2(1, 1);
 		vertices[3].UV			= D3DXVECTOR2(1, 1);
 
-		mBuffer = new Helper::VertexBuffer(mDevice);
-		Helper::VertexBuffer::Description bufferDesc;
+		mBuffer = new Framework::VertexBuffer(mDevice);
+		Framework::VertexBuffer::Description bufferDesc;
 
-		bufferDesc.Usage =					Helper::Usage::Default;
-		bufferDesc.Topology =				Helper::Topology::TriangleStrip;
+		bufferDesc.Usage =					Framework::Usage::Default;
+		bufferDesc.Topology =				Framework::Topology::TriangleStrip;
 		bufferDesc.ElementCount =			numVertices;
 		bufferDesc.ElementSize =			sizeof(SpriteVertex);
 		bufferDesc.FirstElementPointer	=	vertices;
@@ -57,24 +57,23 @@ namespace Framework
 
 	void Sprite::CreateEffect()
 	{
-		mEffect = Resources::EffectResourceManager::Instance().Load("Sprite.fx");
+		mEffect = Resources::D3DResourceManager<Framework::Effect>::Instance().Load("Sprite.fx");
 
-		Helper::InputLayoutVector inputLayout;
-		inputLayout.push_back(Helper::InputLayoutElement("POSITION", DXGI_FORMAT_R32G32_FLOAT));
-		inputLayout.push_back(Helper::InputLayoutElement("TEXCOORD", DXGI_FORMAT_R32G32_FLOAT));
+		Framework::InputLayoutVector inputLayout;
+		inputLayout.push_back(Framework::InputLayoutElement("POSITION", DXGI_FORMAT_R32G32_FLOAT));
+		inputLayout.push_back(Framework::InputLayoutElement("TEXCOORD", DXGI_FORMAT_R32G32_FLOAT));
 
 		mEffect->GetTechniqueByIndex(0).GetPassByIndex(0).SetInputLayout(inputLayout);
 	}
 
 	void Sprite::Draw(const D3DXVECTOR2& position, const D3DXCOLOR& tintColor)
 	{
-		D3DXVECTOR2 normalPos = D3DXVECTOR2(position.x, 1.0f - position.y);
+		//D3DXVECTOR2 normalPos = D3DXVECTOR2(position.x, 1.0f - position.y);
 		//normalPos += mViewportInterface->GetViewportOrigin();
 		
 		D3DXMATRIX model;
-
 		D3DXMatrixIdentity(&model);
-		D3DXMatrixTranslation(&model, normalPos.x, normalPos.y, 0.0f);
+		//D3DXMatrixTranslation(&model, normalPos.x, normalPos.y, 0.0f);
 		
 		mEffect->SetVariable("gModel", model);
 		mEffect->SetVariable("gTintColor", (D3DXVECTOR4)tintColor);
@@ -86,23 +85,21 @@ namespace Framework
 			mBuffer->Draw();
 		}
 	}
-}
 
-namespace Resources
-{
-	SpriteResourceManager::SpriteResourceManager(const std::string& path, ID3D10Device* device, const Framework::ViewportInterface* viewportInterface)
+
+
+	SpriteResourceManager::SpriteResourceManager(const std::string& path, ID3D10Device* device)
 		: mPath(path)
-		, mViewportInterface(viewportInterface)
 		, mDevice(device)
 	{}
 
-	Framework::Sprite* SpriteResourceManager::Load(const std::string& filename, float width, float height)
+	Sprite* SpriteResourceManager::Load(const std::string& filename, float width, float height)
 	{
-		Framework::Sprite* resource = GetResource(filename);
+		Sprite* resource = GetResource(filename);
 
 		if (resource == NULL)
 		{
-			resource = new Framework::Sprite(mDevice, mViewportInterface, mPath + filename, width, height);
+			resource = new Sprite(mDevice, mPath + filename, width, height);
 			AddResource(filename, resource);
 		}
 

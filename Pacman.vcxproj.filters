@@ -41,7 +41,7 @@
     <ClCompile Include="Code\Model\Clyde.cpp" />
     <ClCompile Include="Code\View\GUI\Menu.cpp" />
     <ClCompile Include="Code\Framework\Effect\ParticleSystem.cpp" />
-    <ClCompile Include="Code\Framework\Sprite.cpp" />
+    <ClCompile Include="Code\Resources\Sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Framework\ApplicationWindow.hpp" />
@@ -93,7 +93,7 @@
     <ClInclude Include="Code\Model\ModelDataInterface.hpp" />
     <ClInclude Include="Code\Framework\Effect\ParticleHandlerInterface.h" />
     <ClInclude Include="Code\Framework\Effect\ParticleSystem.hpp" />
-    <ClInclude Include="Code\Framework\Sprite.hpp" />
+    <ClInclude Include="Code\Resources\Sprite.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
@@ -102,5 +102,7 @@
     <None Include="Resources\Effects\ModelObj.fx" />
     <None Include="Resources\Textures\whitePixel.png" />
     <None Include="Resources\Effects\Animation.fx" />
+    <None Include="Resources\Effects\Sprite.fx" />
+    <None Include="Resources\Effects\GhostTrail.fx" />
   </ItemGroup>
 </Project>

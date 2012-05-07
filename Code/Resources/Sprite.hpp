@@ -6,12 +6,12 @@
 #include "VertexBuffer.hpp"
 #include "Effect.hpp"
 
-namespace Framework
+namespace Resources
 {
 	class Sprite
 	{
 	public:
-		Sprite(ID3D10Device* device, const ViewportInterface* viewportInterface, const std::string& filename, float width, float height);
+		Sprite(ID3D10Device* device, const std::string& filename, float width, float height);
 		~Sprite() throw();
 
 		// Draw the sprite at the given position with the given tint.
@@ -25,28 +25,23 @@ namespace Framework
 		};
 
 		ID3D10Device*				mDevice;
-		const ViewportInterface*	mViewportInterface;
-		Helper::VertexBuffer*		mBuffer;
-		Helper::Effect*				mEffect;
+		Framework::VertexBuffer*	mBuffer;
+		Framework::Effect*			mEffect;
 		float						mWidth;
 		float						mHeight;
 
 		void CreateBuffer();
 		void CreateEffect();
 	};
-}
 
-namespace Resources
-{
-	class SpriteResourceManager : public r2::Singleton<SpriteResourceManager>, public Private::ResourceManager<Framework::Sprite>
+	class SpriteResourceManager : public r2::Singleton<SpriteResourceManager>, public Private::ResourceManager<Sprite>
 	{
 	public:
-		SpriteResourceManager(const std::string& path, ID3D10Device* device, const Framework::ViewportInterface* viewportInterface);
+		SpriteResourceManager(const std::string& path, ID3D10Device* device);
 
-		Framework::Sprite* Load(const std::string& filename, float width, float height);
+		Sprite* Load(const std::string& filename, float width, float height);
 	private:
 		ID3D10Device* mDevice;
-		const Framework::ViewportInterface* mViewportInterface;
 		std::string mPath;
 	};
 }
