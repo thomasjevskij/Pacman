@@ -15,7 +15,7 @@ namespace Helper
 	class ParticleSystem
 	{
 	public:
-		ParticleSystem(ID3D10Device *device,const D3DXVECTOR3& pos,const std::string& file,const D3DXCOLOR& color,const bool& Gravity = false,const bool& Acceleration = false);
+		ParticleSystem(ID3D10Device *device,const D3DXVECTOR3& pos,const std::string& file,const D3DXCOLOR& color,const bool& Acceleration = true,const bool& Gravity = false,const bool& RandomStart = true);
 		void SetPosition(const D3DXVECTOR3& pos);
 		void Draw(float dt,const Camera& cam);
 	private:
@@ -37,11 +37,11 @@ namespace Helper
 		D3DXVECTOR3 mPosition;
 		D3DXCOLOR mColor;
 		std::vector<Particle> mParticles;
-		static const int C_PARTICLE_COUNT = 2000;
+		static const int C_PARTICLE_COUNT = 1000;
 		static const int C_GRAVITY = 5;
 		bool mGravityOn;
 		bool mAccelerationOn;
-		
+		bool mRandomStart;
 	};
 }
 #endif

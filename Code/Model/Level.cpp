@@ -20,6 +20,7 @@ namespace Model
 		mHeight = 0;
 		mWidth = 0;
 	}
+	
 	Level::Level(const std::string& path)
 	{
 		FIBITMAP *imgFile = FreeImage_Load(FIF_PNG, path.c_str(), PNG_DEFAULT);
@@ -86,6 +87,12 @@ namespace Model
 					mWallPositions.push_back(c.Coordinate);
 				}
 			}
+		}
+
+		// DEBUG
+		for(int k = -3; k < 3; ++k)
+		{
+			mWallPositions.push_back(Coord(k, 0));
 		}
 
 	}

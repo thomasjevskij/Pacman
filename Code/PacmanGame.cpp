@@ -1,6 +1,5 @@
 #include "PacmanGame.hpp"
 #include "ModelObj.hpp"
-#include "Level.hpp"
 
 PacmanGame::WindowDescription::WindowDescription()
 {
@@ -33,30 +32,35 @@ PacmanGame::PacmanGame(HINSTANCE instance)
 	mMaterialManager = new Resources::FileResourceManager<Resources::Material>("Resources/Objects/");
 	mLevelManager = new Resources::FileResourceManager<Model::Level>("Resources/Levels/");
 	mSoundManager = new Resources::SoundResourceManager("Resources/Sounds/");
+	mSpriteManager = new Resources::SpriteResourceManager("Resources/Textures/", mD3DContext.GetDevice());
 
 	// DEBUG
 	mSound = mSoundManager->Load("buttonClick.wav");
 
-	mPellet = mObjectManager->Load("pellet.obj");
+	Model::Level* aLevel = mLevelManager->Load("Level.png");
+	mEnvironment = new View::Environment(mD3DContext.GetDevice(), *aLevel);
+	
 	mAnimation = new Helper::MorphAnimation(mD3DContext.GetDevice());	
-	mCamera = new Helper::Camera(f.CreatePerspectiveProjection(),D3DXVECTOR3(-10,0,0),D3DXVECTOR3(0,0,1));
+	mCamera = new Helper::Camera(f.CreatePerspectiveProjection(),D3DXVECTOR3(200,0,0),D3DXVECTOR3(0,0,1));
 	c = new Helper::DebugCameraControler(D3DXVECTOR3(0,0,-100),mCamera);
-	p = new Helper::ParticleSystem(mD3DContext.GetDevice(),D3DXVECTOR3(200,0,0),"GhostTrail.fx",D3DXCOLOR(0,255,0,255),false,true);
+	p = new Helper::ParticleSystem(mD3DContext.GetDevice(),D3DXVECTOR3(200,0,0),"GhostTrail.fx",D3DXCOLOR(255,0,0,255),true,true);
 
 	mWindow.AddNotificationSubscriber(c);
 
-	pos = 0;
+	mSprite = mSpriteManager->Load("whitePixel.png", 0, 0);
 }
 
 PacmanGame::~PacmanGame() throw()
 {
 	SafeDelete(mEffectManager);
 	SafeDelete(mTextureManager);
-	SafeDelete(mLevelManager);
 	SafeDelete(mObjectManager);
 	SafeDelete(mMaterialManager);
+	SafeDelete(mLevelManager);
 	SafeDelete(mSoundManager);
-
+	SafeDelete(mSpriteManager);
+	
+	SafeDelete(mEnvironment);
 	SafeDelete(mAnimation);
 	SafeDelete(mCamera);
 	SafeDelete(c);
@@ -70,21 +74,22 @@ void PacmanGame::Update(float dt)
 	pos += 10 * dt;
 	mSoundManager->Update();
 	mAnimation->Update(dt);
+	mSoundManager->Update();
+	c->Update(dt);
 }
 
-void PacmanGame::Draw(RenderBatch& renderBatch, float dt)
+void PacmanGame::Draw(float dt)
 {
-	//mPellet->Draw(D3DXVECTOR3(0, 0, 0));
+	mEnvironment->Draw(*mCamera);
 	mAnimation->Draw(*mCamera, D3DXVECTOR3(0,0,0));
-	//p->Draw(dt,c->GetCamera());
+	p->Draw(dt,c->GetCamera());
+	//mSprite->Draw(D3DXVECTOR2(0, 0));
 }
 
 void PacmanGame::KeyPressed(ApplicationWindow* window, int keyCode)
 {
 	if (keyCode == VK_ESCAPE)
 		Quit();
-	else if (keyCode == VK_F6)
-		mSound->Play();
 }
 
 void PacmanGame::KeyReleased(ApplicationWindow* window, int keyCode)

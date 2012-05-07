@@ -1,15 +1,12 @@
 struct VS_INPUT
 {
 	float3		position	: POSITION;
-	float3		normal		: NORMAL;
 	float2		uv			: TEXCOORD;
 };
 
 struct PS_INPUT
 {
 	float4		position	: SV_POSITION;
-	float3		positionW	: POSITION;
-	float3		normalW		: NORMAL;
 	float2		uv			: TEXCOORD;
 };
 
@@ -34,20 +31,16 @@ DepthStencilState EnableDepth
 
 cbuffer cbEveryFrame
 {
-	matrix	g_matWorld;
 	matrix	g_matWVP;
 };
 
 Texture2D g_modelTexture;
-float4 g_lightDirection;
 
 PS_INPUT VS(VS_INPUT input)
 {
 	PS_INPUT output;
 
 	output.position = mul(float4(input.position, 1.0), g_matWVP);
-	output.positionW = mul(float4(input.position, 1.0), g_matWorld).xyz;
-	output.normalW = mul(float4(input.normal, 0.0), g_matWorld).xyz;
 	output.uv = input.uv;
 
 	return output;
@@ -56,10 +49,6 @@ PS_INPUT VS(VS_INPUT input)
 float4 PS(PS_INPUT input) : SV_Target0
 {
 	float4 texColor = g_modelTexture.Sample(linearSampler, input.uv);
-	float3 lightVec = normalize(g_lightDirection.xyz - input.positionW);
-	float diffuse = dot(lightVec, normalize(input.normalW));
-
-	texColor = texColor + (diffuse * 0.5);
 
 	return texColor;
 }
@@ -76,4 +65,3 @@ technique10 DrawTechnique
 		SetDepthStencilState(EnableDepth, 0xff);
 	}
 }
-

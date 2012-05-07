@@ -158,8 +158,12 @@
     <None Include=".gitignore" />
     <None Include="pull.sh" />
     <None Include="push.sh" />
+    <None Include="Resources\Effects\Ground.fx" />
     <None Include="Resources\Effects\Animation.fx" />
+    <None Include="Resources\Effects\GhostTrail.fx" />
     <None Include="Resources\Effects\ModelObj.fx" />
+    <None Include="Resources\Levels\Level.png" />
+    <None Include="Resources\Effects\Sprite.fx" />
     <None Include="Resources\Textures\whitePixel.png" />
   </ItemGroup>
   <ItemGroup>
@@ -167,6 +171,7 @@
     <ClCompile Include="Code\Framework\Effect\Effect.cpp" />
     <ClCompile Include="Code\Framework\Effect\Pass.cpp" />
     <ClCompile Include="Code\Framework\Effect\Technique.cpp" />
+    <ClCompile Include="Code\Resources\Sprite.cpp" />
     <ClCompile Include="Code\Framework\VertexBuffer.cpp" />
     <ClCompile Include="Code\Framework\ApplicationWindow.cpp" />
     <ClCompile Include="Code\Framework\D3DContext.cpp" />
@@ -198,8 +203,8 @@
     <ClCompile Include="Code\Resources\ModelObj.cpp" />
     <ClCompile Include="Code\Resources\Sound2D.cpp" />
     <ClCompile Include="Code\Resources\Texture.cpp" />
+    <ClCompile Include="Code\View\Environment.cpp" />
     <ClCompile Include="Code\View\GUI\Table.cpp" />
-    <ClCompile Include="Code\View\Ground.cpp" />
     <ClCompile Include="Code\View\Scene.cpp" />
     <ClCompile Include="Code\View\GUI\Menu.cpp" />
   </ItemGroup>
@@ -209,6 +214,7 @@
     <ClInclude Include="Code\Framework\Effect\Effect.hpp" />
     <ClInclude Include="Code\Framework\Effect\Pass.hpp" />
     <ClInclude Include="Code\Framework\Effect\Technique.hpp" />
+    <ClInclude Include="Code\Resources\Sprite.hpp" />
     <ClInclude Include="Code\Framework\VertexBuffer.hpp" />
     <ClInclude Include="Code\Framework\ApplicationWindow.hpp" />
     <ClInclude Include="Code\Framework\D3DContext.hpp" />
@@ -244,11 +250,11 @@
     <ClInclude Include="Code\Resources\FileResourceManager.hpp" />
     <ClInclude Include="Code\Resources\ModelObj.hpp" />
     <ClInclude Include="Code\Resources\ResourceManager.hpp" />
-    <ClInclude Include="Code\View\GameEventSubscriber.hpp" />
-    <ClInclude Include="Code\View\GUI\Table.hpp" />
     <ClInclude Include="Code\Resources\Sound2D.hpp" />
     <ClInclude Include="Code\Resources\Texture.hpp" />
-    <ClInclude Include="Code\View\Ground.hpp" />
+    <ClInclude Include="Code\View\Environment.hpp" />
+    <ClInclude Include="Code\View\GameEventSubscriber.hpp" />
+    <ClInclude Include="Code\View\GUI\Table.hpp" />
     <ClInclude Include="Code\View\Scene.hpp" />
     <ClInclude Include="Code\View\GUI\Menu.hpp" />
   </ItemGroup>
