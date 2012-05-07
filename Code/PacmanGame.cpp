@@ -70,8 +70,6 @@ PacmanGame::~PacmanGame() throw()
 void PacmanGame::Update(float dt)
 {
 	c->Update(dt);
-	p->SetPosition(D3DXVECTOR3(pos,0,0));
-	pos += 10 * dt;
 	mSoundManager->Update();
 	mAnimation->Update(dt);
 	mSoundManager->Update();

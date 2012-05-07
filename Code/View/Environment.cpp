@@ -89,7 +89,7 @@ namespace View
 		for(UINT p = 0; p < mEffect->GetTechniqueByIndex(0).GetPassCount(); ++p)
 		{
 			mEffect->GetTechniqueByIndex(0).GetPassByIndex(p).Apply(mDevice);
-			mBuffer->Draw();
+			mDevice->Draw(mBuffer->GetElementCount(), 0);
 		}
 
 		mWallObject->Bind();

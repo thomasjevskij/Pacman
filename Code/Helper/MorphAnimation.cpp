@@ -56,9 +56,12 @@ namespace Helper
 		: Buffer(buffer), TimeSpan(timeSpan)
 	{}
 
-	MorphAnimation::KeyFrame::~KeyFrame()
+	MorphAnimation::~MorphAnimation() throw()
 	{
-		//SafeDelete(Buffer);
+		for (int i = 0; i < mKeyFrames.size(); ++i)
+		{
+			SafeDelete(mKeyFrames[i].Buffer);
+		}
 	}
 
 	void MorphAnimation::Update(float dt)
@@ -95,8 +98,7 @@ namespace Helper
 		for (int p = 0; p < mEffect->GetTechniqueByIndex(0).GetPassCount(); ++p)
 		{
 			mEffect->GetTechniqueByIndex(0).GetPassByIndex(p).Apply(mDevice);
-			mKeyFrames[mCurrentFrame].Buffer->Draw();   //:-( / Lars
-			//mBuf2.Draw();
+			mDevice->Draw(mKeyFrames[mCurrentFrame].Buffer->GetElementCount(), 0);
 		}
 
 	}

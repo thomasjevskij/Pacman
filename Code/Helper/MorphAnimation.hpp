@@ -14,6 +14,7 @@ namespace Helper
 	{
 	public:
 		MorphAnimation(ID3D10Device* device);
+		~MorphAnimation() throw();
 
 		void Update(float dt);
 		void Draw(const Camera& camera, D3DXVECTOR3 position);
@@ -27,7 +28,6 @@ namespace Helper
 		struct KeyFrame
 		{
 			KeyFrame(Framework::VertexBuffer* buffer, float timeSpan);
-			~KeyFrame() throw();
 
 			Framework::VertexBuffer* Buffer;
 			float TimeSpan;
