@@ -32,6 +32,7 @@ PacmanGame::PacmanGame(HINSTANCE instance)
 	mMaterialManager = new Resources::FileResourceManager<Resources::Material>("Resources/Objects/");
 	mLevelManager = new Resources::FileResourceManager<Model::Level>("Resources/Levels/");
 	mSoundManager = new Resources::SoundResourceManager("Resources/Sounds/");
+	mSpriteManager = new Resources::SpriteResourceManager("Resources/Textures/", mD3DContext.GetDevice());
 
 	// DEBUG
 	mSound = mSoundManager->Load("buttonClick.wav");
@@ -46,19 +47,20 @@ PacmanGame::PacmanGame(HINSTANCE instance)
 
 	mWindow.AddNotificationSubscriber(c);
 
-	pos = 0;
+	mSprite = mSpriteManager->Load("whitePixel.png", 0, 0);
 }
 
 PacmanGame::~PacmanGame() throw()
 {
 	SafeDelete(mEffectManager);
 	SafeDelete(mTextureManager);
-	SafeDelete(mLevelManager);
 	SafeDelete(mObjectManager);
 	SafeDelete(mMaterialManager);
+	SafeDelete(mLevelManager);
 	SafeDelete(mSoundManager);
+	SafeDelete(mSpriteManager);
+	
 	SafeDelete(mEnvironment);
-
 	SafeDelete(mAnimation);
 	SafeDelete(mCamera);
 	SafeDelete(c);
@@ -67,26 +69,21 @@ PacmanGame::~PacmanGame() throw()
 
 void PacmanGame::Update(float dt)
 {
-	c->Update(dt);
-	p->SetPosition(D3DXVECTOR3(pos,0,0));
-	pos += 10 * dt;
 	mSoundManager->Update();
-	mAnimation->Update(dt);
 }
 
-void PacmanGame::Draw(RenderBatch& renderBatch, float dt)
+void PacmanGame::Draw(float dt)
 {
 	mEnvironment->Draw();
 	mAnimation->Draw(*mCamera, D3DXVECTOR3(0,0,0));
 	p->Draw(dt,c->GetCamera());
+	mSprite->Draw(D3DXVECTOR2(0, 0));
 }
 
 void PacmanGame::KeyPressed(ApplicationWindow* window, int keyCode)
 {
 	if (keyCode == VK_ESCAPE)
 		Quit();
-	else if (keyCode == VK_F6)
-		mSound->Play();
 }
 
 void PacmanGame::KeyReleased(ApplicationWindow* window, int keyCode)

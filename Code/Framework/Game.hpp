@@ -3,13 +3,10 @@
 
 #include "ApplicationWindow.hpp"
 #include "D3DContext.hpp"
-#include "RenderBatch.hpp"
 #include "GameTime.hpp"
 
 namespace Framework
 {
-	class RenderBatch;
-
 	class Game : public WindowNotificationSubscriber
 	{
 	public:
@@ -22,12 +19,11 @@ namespace Framework
 		D3DContext mD3DContext;
 
 		virtual void Update(float dt) = 0;
-		virtual void Draw(RenderBatch& renderBatch, float dt) = 0;
+		virtual void Draw(float dt) = 0;
 
 		void Quit();
 	private:
 		bool mRunning;
-		RenderBatch mRenderBatch;
 		Framework::GameTime mTimer;
 
 		void DrawWrapper(float dt);
