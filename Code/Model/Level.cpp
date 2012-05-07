@@ -90,10 +90,12 @@ namespace Model
 		}
 
 		// DEBUG
+		/*
 		for(int k = -3; k < 3; ++k)
 		{
 			mWallPositions.push_back(Coord(k, 0));
 		}
+		*/
 
 	}
 
