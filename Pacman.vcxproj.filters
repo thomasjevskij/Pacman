@@ -33,7 +33,6 @@
     <ClCompile Include="Code\Model\Inky.cpp" />
     <ClCompile Include="Code\Model\Clyde.cpp" />
     <ClCompile Include="Code\Resources\Sound2D.cpp" />
-    <ClCompile Include="Code\Resources\ModelObj.cpp" />
     <ClCompile Include="Code\Resources\Texture.cpp" />
     <ClCompile Include="Code\View\Environment.cpp" />
     <ClCompile Include="Code\View\Scene.cpp" />
@@ -43,6 +42,11 @@
     <ClCompile Include="Code\View\GUI\Table.cpp" />
     <ClCompile Include="Code\Resources\Sprite.cpp" />
     <ClCompile Include="Code\Helper\DebugCameraController.cpp" />
+    <ClCompile Include="Code\Resources\3DObject\ModelObj.cpp" />
+    <ClCompile Include="Code\Resources\3DObject\StaticModelData.cpp" />
+    <ClCompile Include="Code\Resources\3DObject\Material.cpp" />
+    <ClCompile Include="Code\Helper\AnimationCamera.cpp" />
+    <ClCompile Include="Code\View\Pacman.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\PacmanGame.hpp" />
@@ -83,7 +87,6 @@
     <ClInclude Include="Code\Resources\ResourceManager.hpp" />
     <ClInclude Include="Code\Resources\FileResourceManager.hpp" />
     <ClInclude Include="Code\Resources\Sound2D.hpp" />
-    <ClInclude Include="Code\Resources\ModelObj.hpp" />
     <ClInclude Include="Code\Resources\Texture.hpp" />
     <ClInclude Include="Code\Resources\D3DResourceManager.hpp" />
     <ClInclude Include="Code\View\GameEventSubscriber.hpp" />
@@ -95,6 +98,11 @@
     <ClInclude Include="Code\View\Screen\IngameScreen.hpp" />
     <ClInclude Include="Code\Resources\Sprite.hpp" />
     <ClInclude Include="Code\Helper\DebugCameraController.hpp" />
+    <ClInclude Include="Code\Resources\3DObject\ModelObj.hpp" />
+    <ClInclude Include="Code\Resources\3DObject\StaticModelData.hpp" />
+    <ClInclude Include="Code\Resources\3DObject\Material.hpp" />
+    <ClInclude Include="Code\Helper\AnimationCamera.hpp" />
+    <ClInclude Include="Code\View\Pacman.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

@@ -67,16 +67,9 @@ namespace Framework
 		mDevice->IASetPrimitiveTopology(GetTopologyFlag(mTopology));
 	}
 
-	void VertexBuffer::Draw()
+	unsigned int VertexBuffer::GetElementCount() const
 	{
-		if (mIndexBuffer != NULL)
-		{
-			mDevice->DrawIndexed(mIndexCount, 0, 0);
-		}
-		else
-		{
-			mDevice->Draw(mElementCount, 0);
-		}
+		return mElementCount;
 	}
 
 	bool VertexBuffer::SetupIndexBuffer(IndexVector* indices, Usage::Usage usage)
