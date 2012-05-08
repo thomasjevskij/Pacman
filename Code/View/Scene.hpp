@@ -5,7 +5,7 @@ namespace View
 {
 	class Scene
 	{
-
+	
 	};
 }
 #endif

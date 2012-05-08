@@ -56,7 +56,7 @@ void PacmanGame::Update(float dt)
 
 void PacmanGame::Draw(float dt)
 {
-	mSprite->Draw(D3DXVECTOR2(0, 0));
+	//mSprite->Draw(D3DXVECTOR2(0, 0));
 }
 
 void PacmanGame::KeyPressed(ApplicationWindow* window, int keyCode)
