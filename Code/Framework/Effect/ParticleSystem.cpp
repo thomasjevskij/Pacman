@@ -2,8 +2,8 @@
 
 namespace Helper
 {
-	ParticleSystem::ParticleSystem(ID3D10Device *device,const D3DXVECTOR3& pos,const std::string& file,const D3DXCOLOR& color,const bool& Acceleration,const bool& Gravity,const bool& RandomStart):
-	mDevice(device),mPosition(pos), mColor(color), mGravityOn(Gravity),mAccelerationOn(Acceleration),mRandomStart(RandomStart)
+	ParticleSystem::ParticleSystem(ID3D10Device *device,const D3DXVECTOR3& pos,const std::string& file,const D3DXCOLOR& color,const float& radie,const bool& Acceleration,const bool& Gravity,const bool& RandomStart):
+	mDevice(device),mPosition(pos), mColor(color), mGravityOn(Gravity),mAccelerationOn(Acceleration),mRandomStart(RandomStart),mRadie(radie)
 	{
 		
 		mEffect = Resources::D3DResourceManager<Framework::Effect>::Instance().Load(file);
@@ -72,8 +72,8 @@ namespace Helper
 	{
 		for(int i = 0;i < mParticles.size();)
 		{
-			if(mAccelerationOn)
-				mParticles[i].Velocity += mParticles[i].Acceleration*dt;
+			
+			mParticles[i].Velocity += mParticles[i].Acceleration*dt;
 
 			if(mGravityOn)
 				mParticles[i].Acceleration.y -= C_GRAVITY * dt;
@@ -95,11 +95,15 @@ namespace Helper
 				
 				Particle p;
 				if(mRandomStart)
-					p.Position = mPosition + RandVec(10);
+					p.Position = mPosition + RandVec(mRadie);
 				else
 					p.Position = mPosition;
 
-				p.Acceleration = RandVec(5);
+				if(mAccelerationOn)
+					p.Acceleration = RandVec(5);
+				else
+					p.Acceleration = D3DXVECTOR3(0,0,0);
+
 				p.Velocity = RandVec(10);
 				p.TimeToLive = rand() % 3 + 2;
 				p.TimeLived = 0;
