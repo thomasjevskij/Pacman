@@ -7,13 +7,13 @@ namespace Model
 		mCurrentLevelIndex = 0;
 		//Loads Levels into vector
 
-		for(int i = 0; i <= 16; ++i)
+		for(int i = 0; i <= 1; ++i)
 			mLevels.push_back(Level("Level"));
 	}
 
 	Level LevelHandler::GetCurrentLevel()
 	{
-		return mLevels[mCurrentLevelIndex];
+		return mLevels[mCurrentLevelIndex % mLevels.size()];
 	}
 	
 	int LevelHandler::GetCurrentLevelIndex()

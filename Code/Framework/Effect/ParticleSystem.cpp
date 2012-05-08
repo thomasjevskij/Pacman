@@ -2,8 +2,8 @@
 
 namespace Helper
 {
-	ParticleSystem::ParticleSystem(ID3D10Device *device,const D3DXVECTOR3& pos,const std::string& file,const D3DXCOLOR& color,const bool& Gravity,const bool& Acceleration):
-	mDevice(device),mPosition(pos), mColor(color), mGravityOn(Gravity),mAccelerationOn(Acceleration)
+	ParticleSystem::ParticleSystem(ID3D10Device *device,const D3DXVECTOR3& pos,const std::string& file,const D3DXCOLOR& color,const float& radie,const bool& Acceleration,const bool& Gravity,const bool& RandomStart):
+	mDevice(device),mPosition(pos), mColor(color), mGravityOn(Gravity),mAccelerationOn(Acceleration),mRandomStart(RandomStart),mRadie(radie)
 	{
 		
 		mEffect = Resources::D3DResourceManager<Framework::Effect>::Instance().Load(file);
@@ -21,7 +21,7 @@ namespace Helper
 		mEffect->SetVariable("Texture",ParticleTexRV);
 
 		Particle p;
-		p.Position = mPosition + RandVec(100);
+		p.Position = mPosition;
 		p.Acceleration = RandVec(5);
 		p.Velocity = RandVec(10);
 		p.TimeToLive = rand() % 3 + 2;
@@ -56,19 +56,23 @@ namespace Helper
 		D3DXMatrixInverse( &InvView, NULL, &cam.GetView() );
 		mEffect->SetVariable("InvView",InvView);
 		
+		
 
 		for( UINT p = 0; p < mEffect->GetTechniqueByIndex(0).GetPassCount(); ++p )
 		{
 			mEffect->GetTechniqueByIndex( 0 ).GetPassByIndex( p ).Apply(mDevice);
-			buffer.Draw();
+			mDevice->Draw(buffer.GetElementCount(), 0);
 		}
+
+		float blendFactor[] = {0,0,0,0};
+		mDevice->OMSetBlendState(NULL,blendFactor,0xffffffff);
 	}
 
 	void ParticleSystem::Update(float dt)
 	{
 		for(int i = 0;i < mParticles.size();)
 		{
-			if(mAccelerationOn)
+			
 			mParticles[i].Velocity += mParticles[i].Acceleration*dt;
 
 			if(mGravityOn)
@@ -84,14 +88,22 @@ namespace Helper
 		}
 		if(mParticles.size() < C_PARTICLE_COUNT)
 		{
-			for(int i = 0;i < 300*dt ;i++)
+			for(int i = 0;i < (C_PARTICLE_COUNT/3)*dt ;i++)
 			{
 				if(mParticles.size() >= C_PARTICLE_COUNT)
 					break;
 				
 				Particle p;
-				p.Position = mPosition + RandVec(100);
-				p.Acceleration = RandVec(5);
+				if(mRandomStart)
+					p.Position = mPosition + RandVec(mRadie);
+				else
+					p.Position = mPosition;
+
+				if(mAccelerationOn)
+					p.Acceleration = RandVec(5);
+				else
+					p.Acceleration = D3DXVECTOR3(0,0,0);
+
 				p.Velocity = RandVec(10);
 				p.TimeToLive = rand() % 3 + 2;
 				p.TimeLived = 0;

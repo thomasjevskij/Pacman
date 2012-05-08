@@ -41,7 +41,7 @@ cbuffer cbEveryFrame
 	matrix	g_matWVP;
 };
 
-//Texture2D g_modelTexture;
+Texture2D g_modelTexture;
 float4 	g_lightDirection;
 float	g_t;
 
@@ -62,12 +62,12 @@ PS_INPUT VS(VS_INPUT input)
 
 float4 PS(PS_INPUT input) : SV_Target0
 {
-	//float4 texColor = g_modelTexture.Sample(linearSampler, input.uv);
-	float4 texColor = float4(1.0, 1.0, 1.0, 1.0);
-	//float3 lightVec = normalize(g_lightDirection.xyz - input.positionW);
-	//float diffuse = dot(lightVec, normalize(input.normalW));
+	float4 texColor = g_modelTexture.Sample(linearSampler, input.uv);
+	//float4 texColor = float4(1.0, 1.0, 1.0, 1.0);
+	float3 lightVec = normalize(g_lightDirection.xyz - input.positionW);
+	float diffuse = dot(lightVec, normalize(input.normalW));
 
-	//texColor = texColor + (diffuse * 0.5);
+	texColor = texColor + (diffuse * 0.5);
 
 	return texColor;
 }

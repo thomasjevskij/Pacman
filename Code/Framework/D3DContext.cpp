@@ -126,6 +126,10 @@ namespace Framework
 	{
 		mDevice->ClearRenderTargetView(mBackBufferView, color);
 		mDevice->ClearDepthStencilView(mDepthStencilView, D3D10_CLEAR_DEPTH | D3D10_CLEAR_STENCIL, 1.0f, 0);
+
+		// Reset the blend state
+		float blendFactors[] = {0.0f, 0.0f, 0.0f, 0.0f};
+		mDevice->OMSetBlendState(NULL, blendFactors, 0xffffffff);
 	}
 		
 	void D3DContext::SwapBuffers()

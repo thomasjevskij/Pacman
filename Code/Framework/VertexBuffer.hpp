@@ -58,10 +58,8 @@ namespace Framework
 		// Bind the buffer(s) to an input slot.
 		void Bind(unsigned int slot = 0);
 
-		// Draw the vertices in the buffer - an effect pass should have been applied 
-		// before this one is called.
-		void Draw();
-
+		// Get the number of elements in this buffer.
+		unsigned int GetElementCount() const;
 	private:
 		ID3D10Device* mDevice;
 		ID3D10Buffer* mVertexBuffer;
