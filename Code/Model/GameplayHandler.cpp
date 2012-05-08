@@ -6,16 +6,24 @@ namespace Model
 	{
 		mGameRestart = true;
 		srand(NULL);
+
+		//Testing message
+		OutputDebugString("--Model Testing--:  Gameplayhandler initiated");
 	}
 
 	void GameplayHandler::Update(float dt)
 	{
+		
+		//Testing message
+		OutputDebugString("--Model Testing--:  Update() function called");
+
+
 		//Test if it should to load the next level
-		if (mLevelWasWon = true)
+		if (mLevelWasWon == true)
 			NewLevel();
 
 		//Test if it should start a new game
-		if (mGameRestart = true)
+		if (mGameRestart == true)
 			ResetGame();
 
 		
@@ -109,6 +117,8 @@ namespace Model
 					mGameEventSubscriber->GhostResurrected(g);
 				}
 			}
+			//Testing message
+			OutputDebugString("--Model Testing--:  Ghost nr Update() function called");
 		}
 
 		//Test if level is cleared
@@ -183,6 +193,8 @@ namespace Model
 		mLevelWasWon = false;
 		mPelletsEaten = 0;
 		mGameTime = 0;
+		//Testing message
+		OutputDebugString("--Model Testing--:  NewLevel() function called");
 	}
 
 	void GameplayHandler::ResetGame()
@@ -199,6 +211,8 @@ namespace Model
 		mGameRestart = false;
 		mPelletsEaten = 0;
 		mGameTime = 0;
+		//Testing message
+		OutputDebugString("--Model Testing--:  ResetGame() function called");
 	}
 
 
