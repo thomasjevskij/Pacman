@@ -2,11 +2,9 @@
 
 namespace Helper
 {
-	ChaseCamera::ChaseCamera(D3DXVECTOR3 pos)
+	ChaseCamera::ChaseCamera(Helper::Camera *c):
+	mCamera(c)
 	{
-		D3DXMATRIX proj;
-		D3DXMatrixPerspectiveFovLH( &proj, D3DX_PI/2, 1, 0, 500 );
-		mCamera = new Camera(proj,pos,D3DXVECTOR3(0,0,1));
 	}
 
 	void ChaseCamera::Update(float dt,Model::Player pacman)
@@ -16,6 +14,7 @@ namespace Helper
 		temp.z *= pacman.GetFacing().Y;
 		mCamera->SetPosition(D3DXVECTOR3(pacman.GetRealPos().X,10,pacman.GetRealPos().Y) + temp);
 		mCamera->SetFacingPoint(D3DXVECTOR3(pacman.GetRealPos().X,10,pacman.GetRealPos().Y));
+		mCamera->Commit();
 	}
 
 	const Camera& ChaseCamera::GetCamera() const

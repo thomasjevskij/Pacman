@@ -1,22 +1,25 @@
-#ifndef CHASECAMERA_HPP
-#define CHASECAMERA_HPP
+#ifndef ANIMATIONCAMERA_HPP
+#define ANIMATIONCAMERA_HPP
+
 
 #include "Camera.hpp"
 #include "Player.hpp"
 
 namespace Helper
 {
-	class ChaseCamera
+	class AnimationCamera
 	{
 	public:
-		ChaseCamera(Helper::Camera *c);
+		AnimationCamera(Helper::Camera *c);
 
 		void Update(float dt,Model::Player pacman);
+
+		void Restart();
 
 		const Camera& GetCamera() const;
 	private:
 		Camera* mCamera;
+		float mRot;
 	};
 }
-
 #endif
