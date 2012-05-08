@@ -40,6 +40,8 @@ def count_sloc(lines):
 	sloc = 0
 	for line in lines:
 		line = line.strip()
+		if line.startswith("//") or line.startswith("/*") or line.endswith("*/"):
+			continue
 		if len(line) > 3:
 			sloc += 1
 	return sloc

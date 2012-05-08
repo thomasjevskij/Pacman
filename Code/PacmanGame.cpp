@@ -85,7 +85,7 @@ void PacmanGame::Update(float dt)
 
 void PacmanGame::Draw(float dt)
 {
-	mEnvironment->Draw(*mCamera);
+	//mEnvironment->Draw(*mCamera);
 	mAnimation->Draw(*mCamera, D3DXVECTOR3(0,0,0));
 
 	p->Draw(dt,c->GetCamera());
