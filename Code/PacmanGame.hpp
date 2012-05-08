@@ -12,7 +12,7 @@
 #include "MorphAnimation.hpp"
 #include "Camera.hpp"
 #include "ParticleSystem.hpp"
-#include "DebugCameraControler.hpp"
+#include "DebugCameraController.hpp"
 #include "Sprite.hpp"
 
 using namespace Framework;
@@ -63,7 +63,7 @@ private:
 	Helper::ParticleSystem* p;
 
 	Helper::Camera* mCamera;
-	Helper::DebugCameraControler *c;
+	Helper::DebugCameraController *c;
 	float pos;
 };
 

@@ -3,6 +3,9 @@
 
 namespace View
 {
+	GameScreen::GameScreen(GameScreenHandler* handler)
+		: mHandler(handler) {}
+
 	GameScreen::~GameScreen() throw() {}
 
 

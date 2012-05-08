@@ -9,10 +9,10 @@
 
 namespace Helper
 {
-	class DebugCameraControler: public Framework::WindowNotificationSubscriber
+	class DebugCameraController: public Framework::WindowNotificationSubscriber
 	{
 	public:
-		DebugCameraControler(D3DXVECTOR3 pos,Helper::Camera *c);
+		DebugCameraController(D3DXVECTOR3 pos,Helper::Camera *c);
 
 		void Update(float dt);
 

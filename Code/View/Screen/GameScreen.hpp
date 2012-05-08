@@ -3,14 +3,8 @@
 
 namespace View
 {
-	class GameScreen
-	{
-	public:
-		virtual ~GameScreen() throw();
-
-		virtual void Update(float dt) = 0;
-		virtual void Draw(float dt) = 0;
-	};
+	class GameScreen;
+	class GameScreenHandler;
 
 	class GameScreenHandler
 	{
@@ -31,6 +25,20 @@ namespace View
 		GameScreenHandler(const GameScreenHandler&);
 		GameScreenHandler& operator=(const GameScreenHandler&);
 	};
+
+	class GameScreen
+	{
+	public:
+		GameScreen(GameScreenHandler* handler);
+		virtual ~GameScreen() throw();
+
+		virtual void Update(float dt) = 0;
+		virtual void Draw(float dt) = 0;
+	protected:
+		GameScreenHandler* mHandler;
+	};
+
+	
 }
 
 #endif
