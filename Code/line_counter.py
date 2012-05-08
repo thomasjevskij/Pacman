@@ -38,11 +38,25 @@ def get_lines(path):
 
 def count_sloc(lines):
 	sloc = 0
+	comment = False
 	for line in lines:
 		line = line.strip()
+		
+		if line.startswith("//"):
+			continue
+		if line.startswith("/*"):
+			comment = True
+		if line.endswith("*/"):
+			comment = False
+			continue
+		
+		if comment:
+			continue
+			
 		if len(line) > 3:
 			sloc += 1
 	return sloc
+	
 
 def valid_root(ignore_dirs, name):
 	valid = True
