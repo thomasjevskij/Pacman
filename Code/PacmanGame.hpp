@@ -64,6 +64,7 @@ private:
 
 	Helper::Camera* mCamera;
 	Helper::DebugCameraControler *c;
+	float pos;
 };
 
 #endif
