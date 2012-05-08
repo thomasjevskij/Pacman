@@ -61,7 +61,7 @@ namespace Helper
 		for( UINT p = 0; p < mEffect->GetTechniqueByIndex(0).GetPassCount(); ++p )
 		{
 			mEffect->GetTechniqueByIndex( 0 ).GetPassByIndex( p ).Apply(mDevice);
-			buffer.Draw();
+			mDevice->Draw(buffer.GetElementCount(), 0);
 		}
 
 		float blendFactor[] = {0,0,0,0};

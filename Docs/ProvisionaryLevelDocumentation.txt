@@ -4,6 +4,7 @@ pacmanspawn				B
 ghostspawn (4 olika)	RG
 ljuspositioner			GB
 empty					RGB
+wall					SVART
 
 "utdata" även väggar
 

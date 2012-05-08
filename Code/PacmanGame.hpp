@@ -4,6 +4,7 @@
 #include "Game.hpp"
 #include "FileResourceManager.hpp"
 #include "D3DResourceManager.hpp"
+#include "StaticModelData.hpp"
 #include "Effect.hpp"
 #include "Level.hpp"
 #include "ModelObj.hpp"
@@ -48,11 +49,11 @@ private:
 
 	Resources::D3DResourceManager<Framework::Effect>* mEffectManager;
 	Resources::D3DResourceManager<Resources::Texture>* mTextureManager;
-	Resources::D3DResourceManager<Resources::ModelObj>* mObjectManager;
 	Resources::FileResourceManager<Resources::Material>* mMaterialManager;
 	Resources::FileResourceManager<Model::Level>* mLevelManager;
 	Resources::SoundResourceManager* mSoundManager;
 	Resources::SpriteResourceManager* mSpriteManager;
+	Resources::ModelResourceManager* mModelManager;
 
 	// Debug
 	Resources::Sprite* mSprite;
