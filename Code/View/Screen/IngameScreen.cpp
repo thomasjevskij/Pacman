@@ -20,6 +20,8 @@ namespace View
 		mCamera = new Helper::Camera(f.CreatePerspectiveProjection());
 		mCameraController = new Helper::DebugCameraController(D3DXVECTOR3(0, 0, 0), mCamera);
 		mEnvironment = new View::Environment(mDevice, mGameplayHandler.GetLevel());
+
+		mWindow->AddNotificationSubscriber(mCameraController);
 	}
 
 	IngameScreen::~IngameScreen() throw()
@@ -32,7 +34,7 @@ namespace View
 	void IngameScreen::Update(float dt)
 	{
 		// TODO: Add different logic for different states
-		mGameplayHandler.Update(dt);
+		// mGameplayHandler.Update(dt);
 
 		mCameraController->Update(dt);
 		mCamera->Commit();
