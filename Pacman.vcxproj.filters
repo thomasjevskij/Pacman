@@ -43,6 +43,8 @@
     <ClCompile Include="Code\Resources\3DObject\ModelObj.cpp" />
     <ClCompile Include="Code\Resources\3DObject\StaticModelData.cpp" />
     <ClCompile Include="Code\Resources\3DObject\Material.cpp" />
+    <ClCompile Include="Code\Helper\AnimationCamera.cpp" />
+    <ClCompile Include="Code\View\Pacman.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\PacmanGame.hpp" />
@@ -95,6 +97,8 @@
     <ClInclude Include="Code\Resources\3DObject\ModelObj.hpp" />
     <ClInclude Include="Code\Resources\3DObject\StaticModelData.hpp" />
     <ClInclude Include="Code\Resources\3DObject\Material.hpp" />
+    <ClInclude Include="Code\Helper\AnimationCamera.hpp" />
+    <ClInclude Include="Code\View\Pacman.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
