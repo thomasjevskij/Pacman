@@ -8,6 +8,7 @@
 #include "Level.hpp"
 #include "ModelObj.hpp"
 #include "Sound2D.hpp" // DEBUG
+#include "Environment.hpp" // DEBUG
 #include "MorphAnimation.hpp"
 #include "Camera.hpp"
 #include "ParticleSystem.hpp"
@@ -55,6 +56,15 @@ private:
 
 	// Debug
 	Resources::Sprite* mSprite;
+	Resources::Sound2D* mSound;
+	View::Environment* mEnvironment;
+	
+	Helper::MorphAnimation* mAnimation;
+	Helper::ParticleSystem* p;
+
+	Helper::Camera* mCamera;
+	Helper::DebugCameraControler *c;
+	float pos;
 };
 
 #endif
