@@ -49,8 +49,8 @@ PacmanGame::PacmanGame(HINSTANCE instance)
 	mAnimation = new Helper::MorphAnimation(mD3DContext.GetDevice(), animations, timeSpans);	
 	
 	mCamera = new Helper::Camera(f.CreatePerspectiveProjection(),D3DXVECTOR3(200,0,0),D3DXVECTOR3(0,0,1));
-	c = new Helper::DebugCameraControler(D3DXVECTOR3(0,0,-100),mCamera);
-	p = new Helper::ParticleSystem(mD3DContext.GetDevice(),D3DXVECTOR3(200,0,0),"GhostTrail.fx",D3DXCOLOR(255,0,0,255),true,true);
+	c = new Helper::DebugCameraControler(D3DXVECTOR3(190,15,160),mCamera);
+	p = new Helper::ParticleSystem(mD3DContext.GetDevice(),D3DXVECTOR3(280,15,160),"GhostTrail.fx",D3DXCOLOR(10,0,10,255),1,false,true);
 
 	mWindow.AddNotificationSubscriber(c);
 
