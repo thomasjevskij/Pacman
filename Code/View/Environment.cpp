@@ -5,7 +5,7 @@
 namespace View
 {
 	Environment::Environment(ID3D10Device* device, Model::Level level)
-		: mDevice(device), mBuffer(NULL), mEffect(NULL), mWallObject(NULL)
+		: mDevice(device), mBuffer(NULL), mEffect(NULL), mWallObject(device, "wallSegment.obj")
 	{
 		CreateGround();
 		CreateWalls(level);
@@ -56,10 +56,9 @@ namespace View
 		mEffect->SetVariable("g_modelTexture", groundTexture->GetShaderResoureceView());
 	}
 
-	void Environment::CreateWalls(Model::Level level)
+	void Environment::CreateWalls(const Model::Level& level)
 	{
-		mWallObject = Resources::D3DResourceManager<Resources::ModelObj>::Instance().Load("wallSegment.obj");
-		mWallObject->SetScale(C_CELL_SIZE);
+		mWallObject.SetScale(C_CELL_SIZE);
 
 		const std::vector<Model::Coord> wallPosInGrid = level.GetWallPositions();
 
@@ -92,10 +91,10 @@ namespace View
 			mDevice->Draw(mBuffer->GetElementCount(), 0);
 		}
 
-		mWallObject->Bind();
+		mWallObject.Bind();
 		for(int i = 0; i < mWallPositions.size(); ++i)
 		{
-			mWallObject->Draw(mWallPositions[i], camera);
+			mWallObject.Draw(mWallPositions[i], camera);
 		}
 	}
 }

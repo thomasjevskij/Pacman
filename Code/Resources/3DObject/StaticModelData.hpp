@@ -5,6 +5,8 @@
 #include "Global.hpp"
 #include "VertexBuffer.hpp"
 #include "Material.hpp"
+#include "ResourceManager.hpp"
+#include "r2-singleton.hpp"
 
 namespace Resources
 {
@@ -39,6 +41,19 @@ namespace Resources
 
 		StaticModelData(const StaticModelData&);
 		StaticModelData& operator=(const StaticModelData&);
+	};
+
+
+	class ModelResourceManager : public r2::Singleton<ModelResourceManager>, public Private::ResourceManager<StaticModelData>
+	{
+	public:
+		ModelResourceManager(const std::string& path, ID3D10Device* device);
+
+		StaticModelData* Load(const std::string& objectFilename);
+		StaticModelData* Load(const std::string& objectFilename, const std::string& materialFilename);
+	private:
+		ID3D10Device* mDevice;
+		std::string mPath;
 	};
 }
 

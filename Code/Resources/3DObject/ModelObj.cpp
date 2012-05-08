@@ -13,7 +13,6 @@ namespace Resources
 {
 	ModelObj::ModelObj(ID3D10Device* device, const std::string& filename)
 		: mDevice(device)
-		, mData(device, filename)
 		, mEffect(NULL)
 		, mScale(1.0f)
 	{
@@ -25,6 +24,10 @@ namespace Resources
 		inputLayout.push_back(Framework::InputLayoutElement("TEXCOORD", DXGI_FORMAT_R32G32_FLOAT));
 
 		mEffect->GetTechniqueByIndex(0).GetPassByIndex(0).SetInputLayout(inputLayout);
+
+		mData = Resources::ModelResourceManager::Instance().Load(filename);
+
+		mEffect->SetVariable("g_modelTexture", mData->MaterialData->GetMaterial(mData->MaterialName)->MainTexture->GetShaderResoureceView());
 	}
 
 	ModelObj::~ModelObj() throw()
@@ -33,7 +36,7 @@ namespace Resources
 
 	void ModelObj::Bind(unsigned int slot)
 	{
-		mData.VertexData.Bind(slot);
+		mData->VertexData.Bind(slot);
 	}
 
 	void ModelObj::Draw(const D3DXVECTOR3& drawPosition, const Helper::Camera& camera)
@@ -41,8 +44,8 @@ namespace Resources
 		// Calculate the world matrix. Use worldViewProjection as temporary storage. Think green.
 		D3DXMATRIX world;
 		D3DXMATRIX worldViewProjection;
-		D3DXMatrixTranslation(&world, drawPosition.x, drawPosition.y, drawPosition.z);
-		D3DXMatrixScaling(&worldViewProjection, mScale, mScale, mScale);
+		D3DXMatrixScaling(&world, mScale, mScale, mScale);		
+		D3DXMatrixTranslation(&worldViewProjection, drawPosition.x, drawPosition.y, drawPosition.z);
 		world *= worldViewProjection;
 
 		// Calculate the REAL worldViewProjection.
@@ -58,7 +61,7 @@ namespace Resources
 		for(UINT p = 0; p < mEffect->GetTechniqueByIndex(0).GetPassCount(); ++p)
 		{
 			mEffect->GetTechniqueByIndex(0).GetPassByIndex(p).Apply(mDevice);
-			mDevice->Draw(mData.VertexData.GetElementCount(), 0);
+			mDevice->Draw(mData->VertexData.GetElementCount(), 0);
 		}
 	}
 

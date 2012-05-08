@@ -4,7 +4,7 @@
 #include <vector>
 #include "Global.hpp"
 #include "Camera.hpp"
-#include "VertexBuffer.hpp"
+#include "StaticModelData.hpp"
 #include "Effect.hpp"
 #include "D3DResourceManager.hpp"
 
@@ -13,7 +13,8 @@ namespace Helper
 	class MorphAnimation
 	{
 	public:
-		MorphAnimation(ID3D10Device* device);
+		MorphAnimation(ID3D10Device* device, const std::vector<std::string>& keyFrameFilenames,
+					   const std::vector<float> timeSpans);
 		~MorphAnimation() throw();
 
 		void Update(float dt);
@@ -27,9 +28,9 @@ namespace Helper
 		};
 		struct KeyFrame
 		{
-			KeyFrame(Framework::VertexBuffer* buffer, float timeSpan);
+			KeyFrame(Resources::StaticModelData* data, float timeSpan);
 
-			Framework::VertexBuffer* Buffer;
+			Resources::StaticModelData* Data;
 			float TimeSpan;
 		};
 

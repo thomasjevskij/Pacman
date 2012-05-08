@@ -27,7 +27,7 @@ namespace Resources
 		void SetScale(float newScale);
 	private:
 		ID3D10Device* mDevice;
-		StaticModelData mData;
+		StaticModelData* mData;
 		Framework::Effect* mEffect;
 		float mScale;
 

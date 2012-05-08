@@ -4,40 +4,47 @@
 namespace Helper
 {
 
-	MorphAnimation::MorphAnimation(ID3D10Device* device)
+	MorphAnimation::MorphAnimation(ID3D10Device* device, const std::vector<std::string>& keyFrameFilenames,
+								   const std::vector<float> timeSpans)
 		: mTime(0.0f)
 		, mDevice(device)
 		, mCurrentFrame(0)
 		, mLooping(true)
 		, mForwards(true)
 	{
-		AnimationVertex frame1[] = {
-			{D3DXVECTOR3(-1.0f, -1.0f, 1.0f), D3DXVECTOR3(0,0,1), D3DXVECTOR2(0,0)},
-			{D3DXVECTOR3(1.0f, -1.0f, 1.0f), D3DXVECTOR3(0,0,1), D3DXVECTOR2(0,0)},
-			{D3DXVECTOR3(1.0f, 1.0f, 1.0f), D3DXVECTOR3(0,0,1), D3DXVECTOR2(0,0)},
-			{D3DXVECTOR3(-1.0f, 1.0f, 1.0f), D3DXVECTOR3(0,0,1), D3DXVECTOR2(0,0)}
-		};
-		AnimationVertex frame2[] = {
-			{D3DXVECTOR3(-10.0f, -1.0f, 10.0f), D3DXVECTOR3(0,0,1), D3DXVECTOR2(0,0)},
-			{D3DXVECTOR3(1.0f, -1.0f, 10.0f), D3DXVECTOR3(0,0,1), D3DXVECTOR2(0,0)},
-			{D3DXVECTOR3(1.0f, 1.0f, 10.0f), D3DXVECTOR3(0,0,1), D3DXVECTOR2(0,0)},
-			{D3DXVECTOR3(-10.0f, 1.0f, 10.0f), D3DXVECTOR3(0,0,1), D3DXVECTOR2(0,0)}
-		};
-		Framework::VertexBuffer::Description desc;
-		desc.ElementCount = 4;
-		desc.ElementSize = sizeof(AnimationVertex);
-		desc.FirstElementPointer = frame1;
-		desc.Topology = Framework::Topology::TriangleStrip;
-		desc.Usage = Framework::Usage::Default;
+		//AnimationVertex frame1[] = {
+		//	{D3DXVECTOR3(-1.0f, -1.0f, 1.0f), D3DXVECTOR3(0,0,1), D3DXVECTOR2(0,0)},
+		//	{D3DXVECTOR3(1.0f, -1.0f, 1.0f), D3DXVECTOR3(0,0,1), D3DXVECTOR2(0,0)},
+		//	{D3DXVECTOR3(1.0f, 1.0f, 1.0f), D3DXVECTOR3(0,0,1), D3DXVECTOR2(0,0)},
+		//	{D3DXVECTOR3(-1.0f, 1.0f, 1.0f), D3DXVECTOR3(0,0,1), D3DXVECTOR2(0,0)}
+		//};
+		//AnimationVertex frame2[] = {
+		//	{D3DXVECTOR3(-10.0f, -1.0f, 10.0f), D3DXVECTOR3(0,0,1), D3DXVECTOR2(0,0)},
+		//	{D3DXVECTOR3(1.0f, -1.0f, 10.0f), D3DXVECTOR3(0,0,1), D3DXVECTOR2(0,0)},
+		//	{D3DXVECTOR3(1.0f, 1.0f, 10.0f), D3DXVECTOR3(0,0,1), D3DXVECTOR2(0,0)},
+		//	{D3DXVECTOR3(-10.0f, 1.0f, 10.0f), D3DXVECTOR3(0,0,1), D3DXVECTOR2(0,0)}
+		//};
+		//Framework::VertexBuffer::Description desc;
+		//desc.ElementCount = 4;
+		//desc.ElementSize = sizeof(AnimationVertex);
+		//desc.FirstElementPointer = frame1;
+		//desc.Topology = Framework::Topology::TriangleStrip;
+		//desc.Usage = Framework::Usage::Default;
 
-		//desc.
-		Framework::VertexBuffer* buf = new Framework::VertexBuffer(mDevice);
-		buf->SetData(desc, NULL);
-		mKeyFrames.push_back(KeyFrame(buf, 5.0f));
-		desc.FirstElementPointer = frame2;
-		buf = new Framework::VertexBuffer(mDevice);
-		buf->SetData(desc, NULL);
-		mKeyFrames.push_back(KeyFrame(buf, -1.0f));
+		////desc.
+		//Framework::VertexBuffer* buf = new Framework::VertexBuffer(mDevice);
+		//buf->SetData(desc, NULL);
+		//mKeyFrames.push_back(KeyFrame(buf, 5.0f));
+		//desc.FirstElementPointer = frame2;
+		//buf = new Framework::VertexBuffer(mDevice);
+		//buf->SetData(desc, NULL);
+		//mKeyFrames.push_back(KeyFrame(buf, -1.0f));
+
+		assert(keyFrameFilenames.size() == timeSpans.size());
+		for (int i = 0; i < keyFrameFilenames.size(); ++i)
+		{
+			mKeyFrames.push_back(KeyFrame(Resources::ModelResourceManager::Instance().Load(keyFrameFilenames[i]), timeSpans[i]));
+		}
 
 		mEffect = Resources::D3DResourceManager<Framework::Effect>::Instance().Load("Animation.fx");
 		Framework::InputLayoutVector vec;
@@ -50,19 +57,16 @@ namespace Helper
 
 		mEffect->GetTechniqueByIndex(0).GetPassByIndex(0).SetInputLayout(vec);
 		mEffect->SetVariable("g_t", 0.0f);
+		mEffect->SetVariable("g_modelTexture", mKeyFrames[0].Data->MaterialData->GetMaterial(mKeyFrames[0].Data->MaterialName)->MainTexture->GetShaderResoureceView());
+		mEffect->SetVariable("g_lightDirection", D3DXVECTOR4(50, 50, 0, 0));
 	}
 
-	MorphAnimation::KeyFrame::KeyFrame(Framework::VertexBuffer* buffer, float timeSpan)
-		: Buffer(buffer), TimeSpan(timeSpan)
+	MorphAnimation::KeyFrame::KeyFrame(Resources::StaticModelData* data, float timeSpan)
+		: Data(data), TimeSpan(timeSpan)
 	{}
 
 	MorphAnimation::~MorphAnimation() throw()
-	{
-		for (int i = 0; i < mKeyFrames.size(); ++i)
-		{
-			SafeDelete(mKeyFrames[i].Buffer);
-		}
-	}
+	{}
 
 	void MorphAnimation::Update(float dt)
 	{
@@ -92,13 +96,13 @@ namespace Helper
 		mEffect->SetVariable("g_matWorld", w);
 		mEffect->SetVariable("g_matWVP", wvp);
 
-		mKeyFrames[mCurrentFrame].Buffer->Bind(0);
-		mKeyFrames[mCurrentFrame + 1].Buffer->Bind(1);
+		mKeyFrames[mCurrentFrame].Data->VertexData.Bind(0);
+		mKeyFrames[mCurrentFrame + 1].Data->VertexData.Bind(1);
 
 		for (int p = 0; p < mEffect->GetTechniqueByIndex(0).GetPassCount(); ++p)
 		{
 			mEffect->GetTechniqueByIndex(0).GetPassByIndex(p).Apply(mDevice);
-			mDevice->Draw(mKeyFrames[mCurrentFrame].Buffer->GetElementCount(), 0);
+			mDevice->Draw(mKeyFrames[mCurrentFrame].Data->VertexData.GetElementCount(), 0);
 		}
 
 	}

@@ -28,11 +28,11 @@ PacmanGame::PacmanGame(HINSTANCE instance)
 
 	mEffectManager = new Resources::D3DResourceManager<Framework::Effect>(mD3DContext.GetDevice(), "Resources/Effects/");
 	mTextureManager = new Resources::D3DResourceManager<Resources::Texture>(mD3DContext.GetDevice(), "Resources/Textures/");
-	mObjectManager = new Resources::D3DResourceManager<Resources::ModelObj>(mD3DContext.GetDevice(), "Resources/Objects/");
 	mMaterialManager = new Resources::FileResourceManager<Resources::Material>("Resources/Objects/");
 	mLevelManager = new Resources::FileResourceManager<Model::Level>("Resources/Levels/");
 	mSoundManager = new Resources::SoundResourceManager("Resources/Sounds/");
 	mSpriteManager = new Resources::SpriteResourceManager("Resources/Textures/", mD3DContext.GetDevice());
+	mModelManager = new Resources::ModelResourceManager("Resources/Objects/", mD3DContext.GetDevice());
 
 	// DEBUG
 	mSound = mSoundManager->Load("buttonClick.wav");
@@ -40,7 +40,14 @@ PacmanGame::PacmanGame(HINSTANCE instance)
 	Model::Level* aLevel = mLevelManager->Load("Level.png");
 	mEnvironment = new View::Environment(mD3DContext.GetDevice(), *aLevel);
 	
-	mAnimation = new Helper::MorphAnimation(mD3DContext.GetDevice());	
+	// Set up animation parameters
+	std::vector<std::string> animations;
+	animations.push_back("Pacman1.obj"); animations.push_back("Pacman2.obj");
+	std::vector<float> timeSpans;
+	timeSpans.push_back(0.25f); timeSpans.push_back(-1.0f);
+
+	mAnimation = new Helper::MorphAnimation(mD3DContext.GetDevice(), animations, timeSpans);	
+	
 	mCamera = new Helper::Camera(f.CreatePerspectiveProjection(),D3DXVECTOR3(200,0,0),D3DXVECTOR3(0,0,1));
 	c = new Helper::DebugCameraControler(D3DXVECTOR3(0,0,-100),mCamera);
 	p = new Helper::ParticleSystem(mD3DContext.GetDevice(),D3DXVECTOR3(200,0,0),"GhostTrail.fx",D3DXCOLOR(255,0,0,255),true,true);
@@ -54,12 +61,12 @@ PacmanGame::~PacmanGame() throw()
 {
 	SafeDelete(mEffectManager);
 	SafeDelete(mTextureManager);
-	SafeDelete(mObjectManager);
 	SafeDelete(mMaterialManager);
 	SafeDelete(mLevelManager);
 	SafeDelete(mSoundManager);
 	SafeDelete(mSpriteManager);
-	
+	SafeDelete(mModelManager);
+
 	SafeDelete(mEnvironment);
 	SafeDelete(mAnimation);
 	SafeDelete(mCamera);
@@ -78,7 +85,7 @@ void PacmanGame::Update(float dt)
 
 void PacmanGame::Draw(float dt)
 {
-	mEnvironment->Draw(*mCamera);
+	//mEnvironment->Draw(*mCamera);
 	mAnimation->Draw(*mCamera, D3DXVECTOR3(0,0,0));
 	p->Draw(dt,c->GetCamera());
 	//mSprite->Draw(D3DXVECTOR2(0, 0));

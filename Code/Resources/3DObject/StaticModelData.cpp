@@ -139,4 +139,38 @@ namespace Resources
 
 		return VertexData.SetData(desc, NULL);
 	}
+
+
+
+
+	ModelResourceManager::ModelResourceManager(const std::string& path, ID3D10Device* device)
+		: mPath(path)
+		, mDevice(device)
+	{}
+
+	StaticModelData* ModelResourceManager::Load(const std::string& objectFilename)
+	{
+		StaticModelData* resource = GetResource(objectFilename);
+
+		if (resource == NULL)
+		{
+			resource = new StaticModelData(mDevice, mPath + objectFilename);
+			AddResource(objectFilename, resource);
+		}
+
+		return resource;
+	}
+
+	StaticModelData* ModelResourceManager::Load(const std::string& objectFilename, const std::string& materialFilename)
+	{
+		StaticModelData* resource = GetResource(objectFilename);
+
+		if (resource == NULL)
+		{
+			resource = new StaticModelData(mDevice, mPath + objectFilename, mPath + materialFilename);
+			AddResource(objectFilename, resource);
+		}
+
+		return resource;
+	}
 }
