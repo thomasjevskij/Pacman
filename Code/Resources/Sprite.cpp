@@ -30,18 +30,18 @@ namespace Resources
 	{
 		const int numVertices = 4;
 		SpriteVertex vertices[numVertices];
+		
+		vertices[0].Position = D3DXVECTOR2(0, 0);
+		vertices[0].UV = D3DXVECTOR2(0, 1);
 
-		vertices[0].Position	= D3DXVECTOR2(-1, -1);
-		vertices[0].UV			= D3DXVECTOR2(0, 0);
+		vertices[1].Position = D3DXVECTOR2(0, mHeight);
+		vertices[1].UV = D3DXVECTOR2(0, 0);
 
-		vertices[1].Position	= D3DXVECTOR2(1, -1);
-		vertices[1].UV			= D3DXVECTOR2(1, 0);
+		vertices[2].Position = D3DXVECTOR2(mWidth, 0);
+		vertices[2].UV = D3DXVECTOR2(1, 1);
 
-		vertices[2].Position	= D3DXVECTOR2(-1, 1);
-		vertices[2].UV			= D3DXVECTOR2(0, 1);
-
-		vertices[3].Position	= D3DXVECTOR2(1, 1);
-		vertices[3].UV			= D3DXVECTOR2(1, 1);
+		vertices[3].Position = D3DXVECTOR2(mWidth, mHeight);
+		vertices[3].UV = D3DXVECTOR2(1, 0);
 
 		mBuffer = new Framework::VertexBuffer(mDevice);
 		Framework::VertexBuffer::Description bufferDesc;
@@ -68,12 +68,9 @@ namespace Resources
 
 	void Sprite::Draw(const D3DXVECTOR2& position, const D3DXCOLOR& tintColor)
 	{
-		//D3DXVECTOR2 normalPos = D3DXVECTOR2(position.x, 1.0f - position.y);
-		//normalPos += mViewportInterface->GetViewportOrigin();
-		
 		D3DXMATRIX model;
 		D3DXMatrixIdentity(&model);
-		//D3DXMatrixTranslation(&model, normalPos.x, normalPos.y, 0.0f);
+		D3DXMatrixTranslation(&model, position.x, position.y, 0.0f);
 		
 		mEffect->SetVariable("gModel", model);
 		mEffect->SetVariable("gTintColor", (D3DXVECTOR4)tintColor);

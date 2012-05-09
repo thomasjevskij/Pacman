@@ -115,5 +115,7 @@
     <None Include="Resources\Levels\Level.png" />
     <None Include="Resources\Effects\Sprite.fx" />
     <None Include="Resources\Effects\GhostTrail.fx" />
+    <None Include="Resources\Textures\pacManTexture.png" />
+    <None Include="Resources\Textures\cobblestone.png" />
   </ItemGroup>
 </Project>
