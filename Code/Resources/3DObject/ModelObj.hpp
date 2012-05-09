@@ -22,6 +22,7 @@ namespace Resources
 
 		// Draw the object. Must be bound to an input slot.
 		void Draw(const D3DXVECTOR3& drawPosition, const Helper::Camera& camera);
+		void Draw(const D3DXMATRIX& modelMatrix, const Helper::Camera& camera);
 
 		// Scale the object
 		void SetScale(float newScale);

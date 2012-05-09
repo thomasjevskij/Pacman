@@ -21,6 +21,7 @@ namespace View
 		window->AddNotificationSubscriber(mCameraController);
 
 		Create3DLevel(level);
+		mGhost = new View::Ghost(device);		// Debug
 	}
 
 	Scene::~Scene() throw()
@@ -46,10 +47,13 @@ namespace View
 	{
 		mCameraController->Update(dt);
 		mCamera->Commit();
+
+		mGhost->Update(dt, Helper::Point2f(0,0),Helper::Point2f(10,0));
 	}
 
-	void Scene::Draw()
+	void Scene::Draw(float dt)
 	{
 		mEnvironment->Draw(*mCamera);
+		mGhost->Draw(dt, mCamera);
 	}
 }

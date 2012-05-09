@@ -10,7 +10,7 @@ namespace View
 		, mScene(NULL)
 	{
 		mScene = new View::Scene(mDevice, mGameplayHandler.GetLevel(), mWindow);
-		mSprite = Resources::SpriteResourceManager::Instance().Load("pacManTexture.png", 0.8, 0.8);
+		mSprite = Resources::SpriteResourceManager::Instance().Load("pacManTexture.png");
 	}
 
 	IngameScreen::~IngameScreen() throw()
@@ -29,7 +29,7 @@ namespace View
 	{
 		// TODO: Draw different things in different states
 		//mSprite->Draw(D3DXVECTOR2(-1.0, -1.0));
-		mScene->Draw();
+		mScene->Draw(dt);
 	}
 
 	void IngameScreen::PelletEaten(Helper::Point2f position)

@@ -10,9 +10,7 @@
 #include "ModelObj.hpp"
 #include "Sound2D.hpp"
 #include "Sprite.hpp"
-#include "Pacman.hpp"
 #include "GameScreen.hpp"
-
 
 using namespace Framework;
 
@@ -55,6 +53,8 @@ private:
 	Resources::SpriteResourceManager* mSpriteManager;
 
 	View::GameScreenHandler mScreenHandler;
+
+
 };
 
 #endif

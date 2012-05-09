@@ -40,6 +40,7 @@ namespace View
 		Model::GameplayHandler mGameplayHandler;
 		View::Scene* mScene;
 		Resources::Sprite* mSprite;			// Debug
+		
 	};
 }
 

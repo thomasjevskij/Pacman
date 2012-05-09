@@ -1,19 +1,28 @@
 #include "Sprite.hpp"
 #include "r2-exception.hpp"
 #include "D3DResourceManager.hpp"
+#include <sstream>
 
 namespace Resources
 {
-	Sprite::Sprite(ID3D10Device* device, const std::string& filename, float width, float height)
+	Sprite::Sprite(ID3D10Device* device, const std::string& filename)
 		: mDevice(device)
-		, mWidth(width)
-		, mHeight(height)
 		, mBuffer(NULL)
 		, mEffect(NULL)
 	{
 		ID3D10ShaderResourceView* texture;
 		if (FAILED(D3DX10CreateShaderResourceViewFromFile(mDevice, filename.c_str(), NULL, NULL, &texture, NULL)))
-			throw r2ExceptionIOM("Failed to load sprite: " + filename);
+			throw r2ExceptionIOM("Failed to load image: " + filename);
+
+		if (FAILED(D3DX10GetImageInfoFromFile(filename.c_str(), NULL, &mImageInfo, NULL)))
+			throw r2ExceptionIOM("Failed to load image information: " + filename);
+
+		std::stringstream ss;
+		ss << "Image loaded: " << filename << std::endl;
+		ss << "Image width: " << mImageInfo.Width << std::endl;
+		ss << "Image height: " << mImageInfo.Height << std::endl;
+
+		OutputDebugString(ss.str().c_str());
 
 		CreateBuffer();
 		CreateEffect();
@@ -34,13 +43,13 @@ namespace Resources
 		vertices[0].Position = D3DXVECTOR2(0, 0);
 		vertices[0].UV = D3DXVECTOR2(0, 1);
 
-		vertices[1].Position = D3DXVECTOR2(0, mHeight);
+		vertices[1].Position = D3DXVECTOR2(0, mImageInfo.Width);
 		vertices[1].UV = D3DXVECTOR2(0, 0);
 
-		vertices[2].Position = D3DXVECTOR2(mWidth, 0);
+		vertices[2].Position = D3DXVECTOR2(mImageInfo.Width, 0);
 		vertices[2].UV = D3DXVECTOR2(1, 1);
 
-		vertices[3].Position = D3DXVECTOR2(mWidth, mHeight);
+		vertices[3].Position = D3DXVECTOR2(mImageInfo.Width, mImageInfo.Height);
 		vertices[3].UV = D3DXVECTOR2(1, 0);
 
 		mBuffer = new Framework::VertexBuffer(mDevice);
@@ -90,13 +99,13 @@ namespace Resources
 		, mDevice(device)
 	{}
 
-	Sprite* SpriteResourceManager::Load(const std::string& filename, float width, float height)
+	Sprite* SpriteResourceManager::Load(const std::string& filename)
 	{
 		Sprite* resource = GetResource(filename);
 
 		if (resource == NULL)
 		{
-			resource = new Sprite(mDevice, mPath + filename, width, height);
+			resource = new Sprite(mDevice, mPath + filename);
 			AddResource(filename, resource);
 		}
 
