@@ -12,10 +12,6 @@
 #include "Sprite.hpp"
 #include "Pacman.hpp"
 #include "GameScreen.hpp"
-#include "Environment.hpp"
-#include "DebugCameraController.hpp"
-#include "ParticleSystem.hpp"
-
 
 using namespace Framework;
 
@@ -55,18 +51,6 @@ private:
 	Resources::FileResourceManager<Model::Level>* mLevelManager;
 	Resources::SoundResourceManager* mSoundManager;
 	Resources::SpriteResourceManager* mSpriteManager;
-
-	Resources::ModelResourceManager* mModelManager;
-
-	// Debug
-	Resources::Sprite* mSprite;
-	Resources::Sound2D* mSound;
-	View::Environment* mEnvironment;
-	View::Pacman* mPacman;
-
-	Helper::ParticleSystem* p;
-
-
 
 	View::GameScreenHandler mScreenHandler;
 };
