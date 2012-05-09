@@ -1,5 +1,5 @@
 #include "PacmanGame.hpp"
-#include "ModelObj.hpp"
+#include "IngameScreen.hpp"
 
 PacmanGame::WindowDescription::WindowDescription()
 {
@@ -20,76 +20,37 @@ PacmanGame::ContextDescription::ContextDescription()
 PacmanGame::PacmanGame(HINSTANCE instance)
 	: Game(instance, WindowDescription().Description, ContextDescription().Description)
 {
-	Helper::Frustum f;
-	f.AspectRatio = static_cast<float>(mWindow.GetClientWidth()) / mWindow.GetClientHeight();
-	f.FarDistance = 1000;
-	f.FieldOfViewY = D3DX_PI * 0.25;
-	f.NearDistance = 1;
-
 	mEffectManager = new Resources::D3DResourceManager<Framework::Effect>(mD3DContext.GetDevice(), "Resources/Effects/");
 	mTextureManager = new Resources::D3DResourceManager<Resources::Texture>(mD3DContext.GetDevice(), "Resources/Textures/");
+	mModelManager = new Resources::ModelResourceManager("Resources/Objects/", mD3DContext.GetDevice());
 	mMaterialManager = new Resources::FileResourceManager<Resources::Material>("Resources/Objects/");
 	mLevelManager = new Resources::FileResourceManager<Model::Level>("Resources/Levels/");
 	mSoundManager = new Resources::SoundResourceManager("Resources/Sounds/");
 	mSpriteManager = new Resources::SpriteResourceManager("Resources/Textures/", mD3DContext.GetDevice());
-	mModelManager = new Resources::ModelResourceManager("Resources/Objects/", mD3DContext.GetDevice());
 
-	// DEBUG
-	mSound = mSoundManager->Load("buttonClick.wav");
-
-	Model::Level* aLevel = mLevelManager->Load("Level.png");
-	mEnvironment = new View::Environment(mD3DContext.GetDevice(), *aLevel);
-	
-	// Set up animation parameters
-	std::vector<std::string> animations;
-	animations.push_back("Pacman1.obj"); animations.push_back("Pacman2.obj");
-	std::vector<float> timeSpans;
-	timeSpans.push_back(0.25f); timeSpans.push_back(-1.0f);
-
-	mAnimation = new Helper::MorphAnimation(mD3DContext.GetDevice(), animations, timeSpans);	
-	
-	mCamera = new Helper::Camera(f.CreatePerspectiveProjection(),D3DXVECTOR3(200,0,0),D3DXVECTOR3(0,0,1));
-	c = new Helper::DebugCameraControler(D3DXVECTOR3(190,15,160),mCamera);
-	p = new Helper::ParticleSystem(mD3DContext.GetDevice(),D3DXVECTOR3(280,15,160),"GhostTrail.fx",D3DXCOLOR(10,0,10,255),1,false,true);
-
-	mWindow.AddNotificationSubscriber(c);
-
-	mSprite = mSpriteManager->Load("whitePixel.png", 0, 0);
+	mScreenHandler.ChangeScreen(new View::IngameScreen(&mScreenHandler, mD3DContext.GetDevice(), &mWindow));
 }
 
 PacmanGame::~PacmanGame() throw()
 {
 	SafeDelete(mEffectManager);
 	SafeDelete(mTextureManager);
+	SafeDelete(mModelManager);
 	SafeDelete(mMaterialManager);
 	SafeDelete(mLevelManager);
 	SafeDelete(mSoundManager);
 	SafeDelete(mSpriteManager);
-	SafeDelete(mModelManager);
-
-	SafeDelete(mEnvironment);
-	SafeDelete(mAnimation);
-	SafeDelete(mCamera);
-	SafeDelete(c);
-	SafeDelete(p);
 }
 
 void PacmanGame::Update(float dt)
 {
-	c->Update(dt);
-	mSoundManager->Update();
-	mAnimation->Update(dt);
-	mSoundManager->Update();
-	c->Update(dt);
+	mScreenHandler.SwapScreens();
+	mScreenHandler.UpdateScreen(dt);
 }
 
 void PacmanGame::Draw(float dt)
 {
-	mEnvironment->Draw(*mCamera);
-	mAnimation->Draw(*mCamera, D3DXVECTOR3(0,0,0));
-
-	p->Draw(dt,c->GetCamera());
-	//mSprite->Draw(D3DXVECTOR2(0, 0));
+	mScreenHandler.DrawScreen(dt);
 }
 
 void PacmanGame::KeyPressed(ApplicationWindow* window, int keyCode)

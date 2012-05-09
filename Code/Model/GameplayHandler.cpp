@@ -164,12 +164,12 @@ namespace Model
 
 	Level GameplayHandler::GetLevel() const
 	{
-		return mLevel;
+		return mLevelHandler.GetCurrentLevel();
 	}
 
 	int GameplayHandler::GetCurrentlevelIndex() const
 	{
-		return mCurrentLevel;
+		return mLevelHandler.GetCurrentLevelIndex();
 	}
 
 	int GameplayHandler::GetLives() const

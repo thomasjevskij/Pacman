@@ -1,4 +1,5 @@
 #include "LevelHandler.hpp"
+#include "FileResourceManager.hpp"
 
 namespace Model
 {
@@ -7,16 +8,16 @@ namespace Model
 		mCurrentLevelIndex = 0;
 		//Loads Levels into vector
 
-		for(int i = 0; i <= 1; ++i)
-			mLevels.push_back(Level("Level"));
+		for(int i = 0; i < 1; ++i)
+			mLevels.push_back(Resources::FileResourceManager<Level>::Instance().Load("Level.png"));
 	}
 
-	Level LevelHandler::GetCurrentLevel()
+	const Level& LevelHandler::GetCurrentLevel() const
 	{
-		return mLevels[mCurrentLevelIndex % mLevels.size()];
+		return *mLevels[mCurrentLevelIndex % mLevels.size()];
 	}
 	
-	int LevelHandler::GetCurrentLevelIndex()
+	int LevelHandler::GetCurrentLevelIndex() const
 	{
 		return mCurrentLevelIndex;
 	}

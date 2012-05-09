@@ -18,7 +18,6 @@
     <ClCompile Include="Code\Helper\r2tk\r2-assert.cpp" />
     <ClCompile Include="Code\Helper\r2tk\r2-exception.cpp" />
     <ClCompile Include="Code\Helper\GameFont.cpp" />
-    <ClCompile Include="Code\Helper\DebugCameraControler.cpp" />
     <ClCompile Include="Code\Helper\ChaseCamera.cpp" />
     <ClCompile Include="Code\Helper\MorphAnimation.cpp" />
     <ClCompile Include="Code\Model\Fruit.cpp" />
@@ -38,8 +37,11 @@
     <ClCompile Include="Code\View\Environment.cpp" />
     <ClCompile Include="Code\View\Scene.cpp" />
     <ClCompile Include="Code\View\GUI\Menu.cpp" />
+    <ClCompile Include="Code\View\Screen\GameScreen.cpp" />
+    <ClCompile Include="Code\View\Screen\IngameScreen.cpp" />
     <ClCompile Include="Code\View\GUI\Table.cpp" />
     <ClCompile Include="Code\Resources\Sprite.cpp" />
+    <ClCompile Include="Code\Helper\DebugCameraController.cpp" />
     <ClCompile Include="Code\Resources\3DObject\ModelObj.cpp" />
     <ClCompile Include="Code\Resources\3DObject\StaticModelData.cpp" />
     <ClCompile Include="Code\Resources\3DObject\Material.cpp" />
@@ -67,7 +69,6 @@
     <ClInclude Include="Code\Helper\r2tk\r2-global.hpp" />
     <ClInclude Include="Code\Helper\r2tk\r2-singleton.hpp" />
     <ClInclude Include="Code\Helper\GameFont.hpp" />
-    <ClInclude Include="Code\Helper\DebugCameraControler.hpp" />
     <ClInclude Include="Code\Helper\ChaseCamera.hpp" />
     <ClInclude Include="Code\Helper\MorphAnimation.hpp" />
     <ClInclude Include="Code\Model\Ai.hpp" />
@@ -93,7 +94,10 @@
     <ClInclude Include="Code\View\Environment.hpp" />
     <ClInclude Include="Code\View\GUI\Menu.hpp" />
     <ClInclude Include="Code\View\GUI\Table.hpp" />
+    <ClInclude Include="Code\View\Screen\GameScreen.hpp" />
+    <ClInclude Include="Code\View\Screen\IngameScreen.hpp" />
     <ClInclude Include="Code\Resources\Sprite.hpp" />
+    <ClInclude Include="Code\Helper\DebugCameraController.hpp" />
     <ClInclude Include="Code\Resources\3DObject\ModelObj.hpp" />
     <ClInclude Include="Code\Resources\3DObject\StaticModelData.hpp" />
     <ClInclude Include="Code\Resources\3DObject\Material.hpp" />
@@ -111,5 +115,7 @@
     <None Include="Resources\Levels\Level.png" />
     <None Include="Resources\Effects\Sprite.fx" />
     <None Include="Resources\Effects\GhostTrail.fx" />
+    <None Include="Resources\Textures\pacManTexture.png" />
+    <None Include="Resources\Textures\cobblestone.png" />
   </ItemGroup>
 </Project>
