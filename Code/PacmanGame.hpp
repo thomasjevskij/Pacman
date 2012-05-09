@@ -53,19 +53,6 @@ private:
 	Resources::SoundResourceManager* mSoundManager;
 	Resources::SpriteResourceManager* mSpriteManager;
 
-	Resources::ModelResourceManager* mModelManager;
-
-	// Debug
-	Resources::Sprite* mSprite;
-	Resources::Sound2D* mSound;
-	View::Environment* mEnvironment;
-	View::Pacman* mPacman;
-
-	Helper::MorphAnimation* mAnimation;
-	Helper::ParticleSystem* p;
-
-
-
 	View::GameScreenHandler mScreenHandler;
 };
 

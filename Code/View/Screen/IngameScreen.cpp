@@ -45,7 +45,7 @@ namespace View
 	{
 		// TODO: Draw different things in different states
 		mEnvironment->Draw(*mCamera);
-		mSprite->Draw(D3DXVECTOR2(-1.0, -1.0));
+		//mSprite->Draw(D3DXVECTOR2(-1.0, -1.0));
 	}
 
 	void IngameScreen::PelletEaten(Helper::Point2f position)
