@@ -47,7 +47,8 @@ private:
 
 	Resources::D3DResourceManager<Framework::Effect>* mEffectManager;
 	Resources::D3DResourceManager<Resources::Texture>* mTextureManager;
-	Resources::ModelResourceManager* mModelManager;
+	//Resources::ModelResourceManager* mModelManager;
+	Resources::D3DResourceManager<Resources::StaticModelData>* mModelManager;
 	Resources::FileResourceManager<Resources::Material>* mMaterialManager;
 	Resources::FileResourceManager<Model::Level>* mLevelManager;
 	Resources::SoundResourceManager* mSoundManager;

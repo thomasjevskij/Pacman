@@ -15,6 +15,7 @@ namespace Resources
 		: mDevice(device)
 		, mEffect(NULL)
 		, mScale(1.0f)
+		, mTintColour(D3DXCOLOR(1.0, 1.0, 1.0, 1.0))
 	{
 		mEffect = D3DResourceManager<Framework::Effect>::Instance().Load("ModelObj.fx");
 
@@ -25,9 +26,26 @@ namespace Resources
 
 		mEffect->GetTechniqueByIndex(0).GetPassByIndex(0).SetInputLayout(inputLayout);
 
-		mData = Resources::ModelResourceManager::Instance().Load(filename);
+		//mData = Resources::ModelResourceManager::Instance().Load(filename);
+		mData = Resources::D3DResourceManager<Resources::StaticModelData>::Instance().Load(filename);
 
-		mEffect->SetVariable("g_modelTexture", mData->MaterialData->GetMaterial(mData->MaterialName)->MainTexture->GetShaderResoureceView());
+		const Material::Definition* def = mData->MaterialData->GetMaterial(mData->MaterialName);
+		if(def != NULL)
+			if(def->MainTexture != NULL)
+				mEffect->SetVariable("g_modelTexture", def->MainTexture->GetShaderResoureceView());
+			else
+			{
+				Resources::Texture* defaultTexture = Resources::D3DResourceManager<Resources::Texture>::Instance().Load("whitePixel.png");
+				mEffect->SetVariable("g_modelTexture", defaultTexture->GetShaderResoureceView());
+			}
+		else
+		{
+			Resources::Texture* defaultTexture = Resources::D3DResourceManager<Resources::Texture>::Instance().Load("whitePixel.png");
+			mEffect->SetVariable("g_modelTexture", defaultTexture->GetShaderResoureceView());
+		}
+
+		// Commented out to instead use above code that makes sure the texture exists, else loads the whitepixel texture
+		//mEffect->SetVariable("g_modelTexture", mData->MaterialData->GetMaterial(mData->MaterialName)->MainTexture->GetShaderResoureceView());
 	}
 
 	ModelObj::~ModelObj() throw()
@@ -53,6 +71,7 @@ namespace Resources
 
 		mEffect->SetVariable("g_matWorld", world);
 		mEffect->SetVariable("g_matWVP", worldViewProjection);
+		mEffect->SetVariable("g_modelTintColour", static_cast<D3DXVECTOR4>(mTintColour));
 		
 		// DEBUG: get light position elsewhere
 		mEffect->SetVariable("g_lightDirection", D3DXVECTOR4(50, 50, 0, 0));
@@ -70,7 +89,10 @@ namespace Resources
 		mScale = newScale;
 	}
 
-
+	void ModelObj::SetTintColour(D3DXCOLOR newColour)
+	{
+		mTintColour = newColour;
+	}
 
 
 	/*

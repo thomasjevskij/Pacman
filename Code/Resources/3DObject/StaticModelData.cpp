@@ -143,7 +143,7 @@ namespace Resources
 
 
 
-	ModelResourceManager::ModelResourceManager(const std::string& path, ID3D10Device* device)
+	/*ModelResourceManager::ModelResourceManager(const std::string& path, ID3D10Device* device)
 		: mPath(path)
 		, mDevice(device)
 	{}
@@ -172,5 +172,5 @@ namespace Resources
 		}
 
 		return resource;
-	}
+	}*/
 }

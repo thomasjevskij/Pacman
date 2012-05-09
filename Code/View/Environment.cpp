@@ -7,7 +7,7 @@ namespace View
 	Environment::Environment(ID3D10Device* device, Model::Level level)
 		: mDevice(device), mBuffer(NULL), mEffect(NULL), mWallObject(device, "wallSegment.obj")
 	{
-		CreateGround();
+		CreateGround(level.GetWidth(), level.GetHeight());
 		CreateWalls(level);
 	}
 
@@ -16,21 +16,27 @@ namespace View
 		SafeDelete(mBuffer);
 	}
 
-	void Environment::CreateGround()
+	void Environment::CreateGround(int width, int depth)
 	{
 		const int C_NUM_VERTICES = 4;
 		Vertex vertices[C_NUM_VERTICES];
+		
+		float halfSize = C_CELL_SIZE * 0.5;
+		float startX = -halfSize;
+		float endX = C_CELL_SIZE * width - halfSize;
+		float startZ = -halfSize;
+		float endZ = C_CELL_SIZE * depth - halfSize;
 
-		vertices[0].Position = D3DXVECTOR3(-100, -3, -100);
+		vertices[0].Position = D3DXVECTOR3(startX, 0, startZ);
 		vertices[0].UV = D3DXVECTOR2(0, 0);
 
-		vertices[1].Position = D3DXVECTOR3(100, -3, -100);
+		vertices[1].Position = D3DXVECTOR3(endX, 0, startZ);
 		vertices[1].UV = D3DXVECTOR2(10, 0);
 
-		vertices[2].Position = D3DXVECTOR3(-100, -3, 100);
+		vertices[2].Position = D3DXVECTOR3(startX, 0, endZ);
 		vertices[2].UV = D3DXVECTOR2(0, 10);
 
-		vertices[3].Position = D3DXVECTOR3(100, -3, 100);
+		vertices[3].Position = D3DXVECTOR3(endX, 0, endZ);
 		vertices[3].UV = D3DXVECTOR2(10, 10);
 
 		// Describe the buffer and create it
@@ -66,14 +72,6 @@ namespace View
 		{
 			mWallPositions.push_back(D3DXVECTOR3(wallPosInGrid[i].X * C_CELL_SIZE, 0, wallPosInGrid[i].Y * C_CELL_SIZE));
 		}
-
-		//mWallPositions.push_back(D3DXVECTOR3(-30, 0, 0));
-		//mWallPositions.push_back(D3DXVECTOR3(-20, 0, 0));
-		//mWallPositions.push_back(D3DXVECTOR3(-10, 0, 0));
-		//mWallPositions.push_back(D3DXVECTOR3(0, 0, 0));
-		//mWallPositions.push_back(D3DXVECTOR3(10, 0, 0));
-		//mWallPositions.push_back(D3DXVECTOR3(20, 0, 0));
-		//mWallPositions.push_back(D3DXVECTOR3(30, 0, 0));
 	}
 
 	void Environment::Draw(const Helper::Camera& camera)

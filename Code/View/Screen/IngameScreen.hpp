@@ -6,9 +6,6 @@
 #include "GameEventSubscriber.hpp"
 #include "ApplicationWindow.hpp"
 #include "Scene.hpp"
-#include "Environment.hpp" // Debug
-#include "Camera.hpp"
-#include "DebugCameraController.hpp"	// Debug
 #include "Sprite.hpp"	// Debug
 
 namespace View
@@ -34,16 +31,14 @@ namespace View
 		void GhostResurrected(int index);
 		void PacmanKilled();
 		void GameWon();
+
 	private:
 		ID3D10Device* mDevice;
 		IngameScreenState::IngameScreenState mState;
 
 		Framework::ApplicationWindow* mWindow;
-		Helper::Camera* mCamera;
-		Helper::DebugCameraController* mCameraController;
 		Model::GameplayHandler mGameplayHandler;
-		View::Scene mScene;
-		View::Environment* mEnvironment;	// Debug
+		View::Scene* mScene;
 		Resources::Sprite* mSprite;			// Debug
 	};
 }

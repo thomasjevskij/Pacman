@@ -22,7 +22,8 @@ PacmanGame::PacmanGame(HINSTANCE instance)
 {
 	mEffectManager = new Resources::D3DResourceManager<Framework::Effect>(mD3DContext.GetDevice(), "Resources/Effects/");
 	mTextureManager = new Resources::D3DResourceManager<Resources::Texture>(mD3DContext.GetDevice(), "Resources/Textures/");
-	mModelManager = new Resources::ModelResourceManager("Resources/Objects/", mD3DContext.GetDevice());
+	//mModelManager = new Resources::ModelResourceManager("Resources/Objects/", mD3DContext.GetDevice());
+	mModelManager = new Resources::D3DResourceManager<Resources::StaticModelData>(mD3DContext.GetDevice(), "Resources/Objects/");
 	mMaterialManager = new Resources::FileResourceManager<Resources::Material>("Resources/Objects/");
 	mLevelManager = new Resources::FileResourceManager<Model::Level>("Resources/Levels/");
 	mSoundManager = new Resources::SoundResourceManager("Resources/Sounds/");

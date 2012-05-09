@@ -43,7 +43,10 @@ namespace Helper
 		assert(keyFrameFilenames.size() == timeSpans.size());
 		for (int i = 0; i < keyFrameFilenames.size(); ++i)
 		{
-			mKeyFrames.push_back(KeyFrame(Resources::ModelResourceManager::Instance().Load(keyFrameFilenames[i]), timeSpans[i]));
+			//mKeyFrames.push_back(KeyFrame(Resources::ModelResourceManager::Instance().Load(keyFrameFilenames[i]), timeSpans[i]));
+			mKeyFrames.push_back(
+				KeyFrame(Resources::D3DResourceManager<Resources::StaticModelData>::Instance().Load(keyFrameFilenames[i])
+				, timeSpans[i]));
 		}
 
 		mEffect = Resources::D3DResourceManager<Framework::Effect>::Instance().Load("Animation.fx");

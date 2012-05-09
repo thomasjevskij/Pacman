@@ -31,6 +31,7 @@ namespace Resources
 		bool Load(const std::string& objectFilename);
 		bool LoadBuffer(const std::string& filename);
 		bool LoadMaterial(const std::string& filename);
+
 	private:
 		// Loads the data from an .obj file.
 		// vertices, materialFile and materialName are all
@@ -44,7 +45,7 @@ namespace Resources
 	};
 
 
-	class ModelResourceManager : public r2::Singleton<ModelResourceManager>, public Private::ResourceManager<StaticModelData>
+	/*class ModelResourceManager : public r2::Singleton<ModelResourceManager>, public Private::ResourceManager<StaticModelData>
 	{
 	public:
 		ModelResourceManager(const std::string& path, ID3D10Device* device);
@@ -54,7 +55,7 @@ namespace Resources
 	private:
 		ID3D10Device* mDevice;
 		std::string mPath;
-	};
+	};*/
 }
 
 #endif
