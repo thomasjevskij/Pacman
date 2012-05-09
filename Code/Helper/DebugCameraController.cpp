@@ -1,8 +1,8 @@
-#include "DebugCameraControler.hpp"
+#include "DebugCameraController.hpp"
 
 namespace Helper
 {
-	DebugCameraControler::DebugCameraControler(D3DXVECTOR3 pos,Helper::Camera *c):
+	DebugCameraController::DebugCameraController(D3DXVECTOR3 pos,Helper::Camera *c):
 	mCamera(c)
 	{
 		mCamera->SetPosition(pos);
@@ -13,7 +13,7 @@ namespace Helper
 
 	}
 
-	void DebugCameraControler::Update(float dt)
+	void DebugCameraController::Update(float dt)
 	{
 		//Kollar så att rotationen befinner sig i ett lagom intervall och ökar om 
 		//keystates säger att en av svängnings knapparna är nertryckta
@@ -37,7 +37,7 @@ namespace Helper
 		mCamera->Commit();
 	}
 
-	void DebugCameraControler::KeyPressed(Framework::ApplicationWindow* window, int keyCode)
+	void DebugCameraController::KeyPressed(Framework::ApplicationWindow* window, int keyCode)
 	{
 		if(VK_UP == keyCode)
 		{
@@ -65,7 +65,7 @@ namespace Helper
 		}
 	}
 
-	void DebugCameraControler::KeyReleased(Framework::ApplicationWindow* window, int keyCode)
+	void DebugCameraController::KeyReleased(Framework::ApplicationWindow* window, int keyCode)
 	{
 		if(VK_UP == keyCode)
 		{
@@ -93,24 +93,24 @@ namespace Helper
 		}
 	}
 
-	const D3DXVECTOR3& DebugCameraControler::GetPosition() const
+	const D3DXVECTOR3& DebugCameraController::GetPosition() const
 	{
 		return mCamera->GetPosition();
 	}
-	const D3DXVECTOR3& DebugCameraControler::GetDirection() const
+	const D3DXVECTOR3& DebugCameraController::GetDirection() const
 	{
 		return mCamera->GetDirection();
 	}
-	const D3DXMATRIX& DebugCameraControler::GetViewProjection() const
+	const D3DXMATRIX& DebugCameraController::GetViewProjection() const
 	{
 		return mCamera->GetViewProjection();
 	}
-	const D3DXMATRIX& DebugCameraControler::GetView() const
+	const D3DXMATRIX& DebugCameraController::GetView() const
 	{
 		return mCamera->GetView();
 	}
 
-	const Camera& DebugCameraControler::GetCamera() const
+	const Camera& DebugCameraController::GetCamera() const
 	{
 		return *mCamera;
 	}

@@ -8,14 +8,11 @@
 #include "Effect.hpp"
 #include "Level.hpp"
 #include "ModelObj.hpp"
-#include "Sound2D.hpp" // DEBUG
-#include "Environment.hpp" // DEBUG
-#include "MorphAnimation.hpp"
-#include "Camera.hpp"
-#include "ParticleSystem.hpp"
-#include "DebugCameraControler.hpp"
+#include "Sound2D.hpp"
 #include "Sprite.hpp"
 #include "Pacman.hpp"
+#include "GameScreen.hpp"
+
 
 using namespace Framework;
 
@@ -50,10 +47,12 @@ private:
 
 	Resources::D3DResourceManager<Framework::Effect>* mEffectManager;
 	Resources::D3DResourceManager<Resources::Texture>* mTextureManager;
+	Resources::ModelResourceManager* mModelManager;
 	Resources::FileResourceManager<Resources::Material>* mMaterialManager;
 	Resources::FileResourceManager<Model::Level>* mLevelManager;
 	Resources::SoundResourceManager* mSoundManager;
 	Resources::SpriteResourceManager* mSpriteManager;
+
 	Resources::ModelResourceManager* mModelManager;
 
 	// Debug
@@ -65,9 +64,9 @@ private:
 	Helper::MorphAnimation* mAnimation;
 	Helper::ParticleSystem* p;
 
-	Helper::Camera* mCamera;
-	Helper::DebugCameraControler *c;
-	float pos;
+
+
+	View::GameScreenHandler mScreenHandler;
 };
 
 #endif
