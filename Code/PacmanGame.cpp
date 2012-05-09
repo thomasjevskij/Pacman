@@ -29,7 +29,6 @@ PacmanGame::PacmanGame(HINSTANCE instance)
 	mSpriteManager = new Resources::SpriteResourceManager("Resources/Textures/", mD3DContext.GetDevice());
 
 
-	mAnimation = new Helper::MorphAnimation(mD3DContext.GetDevice(), animations, timeSpans);	
 	
 	mCamera = new Helper::Camera(f.CreatePerspectiveProjection(),D3DXVECTOR3(200,0,0),D3DXVECTOR3(0,0,1));
 	c = new Helper::DebugCameraControler(D3DXVECTOR3(190,15,160),mCamera);
