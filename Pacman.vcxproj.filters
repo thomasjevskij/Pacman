@@ -103,6 +103,7 @@
     <ClInclude Include="Code\Resources\3DObject\Material.hpp" />
     <ClInclude Include="Code\Helper\AnimationCamera.hpp" />
     <ClInclude Include="Code\View\Pacman.hpp" />
+    <ClInclude Include="Code\Resources\SpriteFont.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

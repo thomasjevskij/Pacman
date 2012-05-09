@@ -20,9 +20,15 @@ namespace View
 		mCamera = new Helper::Camera(f.CreatePerspectiveProjection());
 		mCameraController = new Helper::DebugCameraController(D3DXVECTOR3(0, 0, 0), mCamera);
 		mEnvironment = new View::Environment(mDevice, mGameplayHandler.GetLevel());
-		mSprite = Resources::SpriteResourceManager::Instance().Load("pacManTexture.png", 0.8, 0.8);
+		mSprite = Resources::SpriteResourceManager::Instance().Load("pacman-life.png", 0.07, 0.07);
 
 		mWindow->AddNotificationSubscriber(mCameraController);
+
+		ID3DX10Sprite* sprite;
+		ID3DX10Font* font;
+		
+		
+		
 	}
 
 	IngameScreen::~IngameScreen() throw()
@@ -45,7 +51,7 @@ namespace View
 	{
 		// TODO: Draw different things in different states
 		mEnvironment->Draw(*mCamera);
-		mSprite->Draw(D3DXVECTOR2(-1.0, -1.0));
+		mSprite->Draw(D3DXVECTOR2(-0.5, -0.5));
 	}
 
 	void IngameScreen::PelletEaten(Helper::Point2f position)

@@ -30,8 +30,8 @@ RasterizerState NoCulling
 
 SamplerState linearSampler {
 	Filter = MIN_MAG_MIP_LINEAR;
-	AddressU = Wrap;
-	AddressV = Wrap;
+	AddressU = Clamp;
+	AddressV = Clamp;
 };
 
 BlendState blend

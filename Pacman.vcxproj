@@ -262,6 +262,7 @@
     <ClInclude Include="Code\Resources\3DObject\ModelObj.hpp" />
     <ClInclude Include="Code\Resources\ResourceManager.hpp" />
     <ClInclude Include="Code\Resources\Sound2D.hpp" />
+    <ClInclude Include="Code\Resources\SpriteFont.hpp" />
     <ClInclude Include="Code\Resources\Texture.hpp" />
     <ClInclude Include="Code\View\Environment.hpp" />
     <ClInclude Include="Code\View\GameEventSubscriber.hpp" />
