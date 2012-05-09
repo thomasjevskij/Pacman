@@ -29,6 +29,7 @@ PacmanGame::PacmanGame(HINSTANCE instance)
 	mSpriteManager = new Resources::SpriteResourceManager("Resources/Textures/", mD3DContext.GetDevice());
 
 	mScreenHandler.ChangeScreen(new View::IngameScreen(&mScreenHandler, mD3DContext.GetDevice(), &mWindow));
+
 }
 
 PacmanGame::~PacmanGame() throw()
@@ -46,6 +47,7 @@ void PacmanGame::Update(float dt)
 {
 	mScreenHandler.SwapScreens();
 	mScreenHandler.UpdateScreen(dt);
+
 }
 
 void PacmanGame::Draw(float dt)

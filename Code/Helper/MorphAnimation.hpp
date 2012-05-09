@@ -18,7 +18,7 @@ namespace Helper
 		~MorphAnimation() throw();
 
 		void Update(float dt);
-		void Draw(const Camera& camera, D3DXVECTOR3 position);
+		void Draw(const Camera& camera, D3DXMATRIX modelMatrix);
 	private:
 		struct AnimationVertex
 		{

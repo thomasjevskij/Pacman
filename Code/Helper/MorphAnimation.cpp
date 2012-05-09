@@ -86,14 +86,12 @@ namespace Helper
 		mEffect->SetVariable("g_t", mTime / mKeyFrames[mCurrentFrame].TimeSpan);
 	}
 
-	void MorphAnimation::Draw(const Camera& camera, D3DXVECTOR3 position)
+	void MorphAnimation::Draw(const Camera& camera, D3DXMATRIX modelMatrix)
 	{
-		D3DXMATRIX w;
 		D3DXMATRIX wvp;
-		D3DXMatrixTranslation(&w, position.x, position.y, position.z);
-		wvp = w * camera.GetViewProjection();
+		wvp = modelMatrix * camera.GetViewProjection();
 
-		mEffect->SetVariable("g_matWorld", w);
+		mEffect->SetVariable("g_matWorld", modelMatrix);
 		mEffect->SetVariable("g_matWVP", wvp);
 
 		mKeyFrames[mCurrentFrame].Data->VertexData.Bind(0);
