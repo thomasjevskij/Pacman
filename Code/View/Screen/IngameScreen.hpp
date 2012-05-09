@@ -44,7 +44,7 @@ namespace View
 		Model::GameplayHandler mGameplayHandler;
 		View::Scene mScene;
 		View::Environment* mEnvironment;	// Debug
-		Resources::Sprite* mSprite;			// Debug
+		//View::Sprite* mSprite;			// Debug
 	};
 }
 

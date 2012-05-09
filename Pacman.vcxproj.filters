@@ -40,13 +40,14 @@
     <ClCompile Include="Code\View\Screen\GameScreen.cpp" />
     <ClCompile Include="Code\View\Screen\IngameScreen.cpp" />
     <ClCompile Include="Code\View\GUI\Table.cpp" />
-    <ClCompile Include="Code\Resources\Sprite.cpp" />
     <ClCompile Include="Code\Helper\DebugCameraController.cpp" />
     <ClCompile Include="Code\Resources\3DObject\ModelObj.cpp" />
     <ClCompile Include="Code\Resources\3DObject\StaticModelData.cpp" />
     <ClCompile Include="Code\Resources\3DObject\Material.cpp" />
     <ClCompile Include="Code\Helper\AnimationCamera.cpp" />
     <ClCompile Include="Code\View\Pacman.cpp" />
+    <ClCompile Include="Code\View\HUD\Sprite.cpp" />
+    <ClCompile Include="Code\View\HUD\UISurface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\PacmanGame.hpp" />
@@ -96,14 +97,14 @@
     <ClInclude Include="Code\View\GUI\Table.hpp" />
     <ClInclude Include="Code\View\Screen\GameScreen.hpp" />
     <ClInclude Include="Code\View\Screen\IngameScreen.hpp" />
-    <ClInclude Include="Code\Resources\Sprite.hpp" />
     <ClInclude Include="Code\Helper\DebugCameraController.hpp" />
     <ClInclude Include="Code\Resources\3DObject\ModelObj.hpp" />
     <ClInclude Include="Code\Resources\3DObject\StaticModelData.hpp" />
     <ClInclude Include="Code\Resources\3DObject\Material.hpp" />
     <ClInclude Include="Code\Helper\AnimationCamera.hpp" />
     <ClInclude Include="Code\View\Pacman.hpp" />
-    <ClInclude Include="Code\Resources\SpriteFont.hpp" />
+    <ClInclude Include="Code\View\HUD\Sprite.hpp" />
+    <ClInclude Include="Code\View\HUD\UISurface.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

@@ -20,7 +20,7 @@ namespace View
 		mCamera = new Helper::Camera(f.CreatePerspectiveProjection());
 		mCameraController = new Helper::DebugCameraController(D3DXVECTOR3(0, 0, 0), mCamera);
 		mEnvironment = new View::Environment(mDevice, mGameplayHandler.GetLevel());
-		mSprite = Resources::SpriteResourceManager::Instance().Load("pacManTexture.png");
+		//mSprite = Resources::SpriteResourceManager::Instance().Load("pacManTexture.png");
 
 		mWindow->AddNotificationSubscriber(mCameraController);
 
