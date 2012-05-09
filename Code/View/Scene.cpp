@@ -2,11 +2,17 @@
 
 namespace View
 {
+	const float Scene::C_PELLET_SIZE = 0.1f;
+	const float Scene::C_POW_PELLET_SIZE = 0.3f;
+	const float Scene::C_PELLET_Y_POS = 3;
+
 	Scene::Scene(ID3D10Device* device, Model::Level level, Framework::ApplicationWindow* window)
 		: mDevice(device)
 		, mEnvironment(NULL)
 		, mCamera(NULL)
 		, mCameraController(NULL)
+		, mPelletObject(device, "pellet.obj")
+		, mPowPelletObject(device, "pellet.obj")
 	{
 		Helper::Frustum f;
 		f.AspectRatio = static_cast<float>(window->GetClientWidth()) / window->GetClientHeight();
@@ -21,6 +27,11 @@ namespace View
 		window->AddNotificationSubscriber(mCameraController);
 
 		Create3DLevel(level);
+		mPelletObject.SetScale(C_PELLET_SIZE);
+		mPelletObject.SetTintColour(D3DXCOLOR(1.0, 1.0, 0.0, 1.0));
+		mPowPelletObject.SetScale(C_POW_PELLET_SIZE);
+		mPowPelletObject.SetTintColour(D3DXCOLOR(0.0, 0.0, 1.0, 1.0));
+
 		mGhost = new View::Ghost(device);		// Debug
 	}
 
@@ -41,6 +52,25 @@ namespace View
 												   level.GetPacmanSpawnPosition().Y * Environment::C_CELL_SIZE);
 
 		mCamera->SetPosition(pacmanSpawnPoint);
+
+		const std::vector<Model::Coord> pelletPosInGrid = level.GetPelletPositions();
+		const std::vector<Model::Coord> powPelletPosInGrid = level.GetPowerPelletPositions();
+		mPelletPositions.clear();
+		mPowPelletPositions.clear();
+
+		for(int i = 0; i < pelletPosInGrid.size(); ++i)
+		{
+			mPelletPositions.push_back(D3DXVECTOR3(pelletPosInGrid[i].X * Environment::C_CELL_SIZE, 
+												   C_PELLET_Y_POS, 
+												   pelletPosInGrid[i].Y * Environment::C_CELL_SIZE));
+		}
+
+		for(int j = 0; j < powPelletPosInGrid.size(); ++j)
+		{
+			mPowPelletPositions.push_back(D3DXVECTOR3(powPelletPosInGrid[j].X * Environment::C_CELL_SIZE,
+													  C_PELLET_Y_POS, 
+													  powPelletPosInGrid[j].Y * Environment::C_CELL_SIZE));
+		}
 	}
 
 	void Scene::Update(float dt)
@@ -55,5 +85,17 @@ namespace View
 	{
 		mEnvironment->Draw(*mCamera);
 		mGhost->Draw(dt, mCamera);
+
+		mPelletObject.Bind();
+		for(int i = 0; i < mPelletPositions.size(); ++i)
+		{
+			mPelletObject.Draw(mPelletPositions[i], *mCamera);
+		}
+
+		mPowPelletObject.Bind();
+		for(int i = 0; i < mPowPelletPositions.size(); ++i)
+		{
+			mPowPelletObject.Draw(mPowPelletPositions[i], *mCamera);
+		}
 	}
 }

@@ -22,10 +22,18 @@ namespace View
 		void Draw(float dt);
 
 	private:
+		static const float C_PELLET_SIZE;
+		static const float C_POW_PELLET_SIZE;
+		static const float C_PELLET_Y_POS;
+
 		ID3D10Device* mDevice;
 		View::Environment* mEnvironment;
 		Helper::Camera* mCamera;
 		Helper::DebugCameraController* mCameraController;
+		Resources::ModelObj mPelletObject;
+		Resources::ModelObj mPowPelletObject;
+		std::vector<D3DXVECTOR3> mPelletPositions;
+		std::vector<D3DXVECTOR3> mPowPelletPositions;
 		View::Ghost* mGhost;				// Debug
 
 		Scene(const Scene&);
