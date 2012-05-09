@@ -17,9 +17,9 @@ namespace View
 			D3DXMatrixIdentity(&mModelMatrix);
 		}
 
-		void Pacman::Draw(Helper::Camera camera)
+		void Pacman::Draw(Helper::Camera* camera)
 		{
-			mAnimation->Draw(camera,mModelMatrix);
+			mAnimation->Draw(*camera,mModelMatrix);
 		}
 
 		void Pacman::Update(float dt,Helper::Point2f pos,Model::Coord facing)

@@ -47,6 +47,7 @@
     <ClCompile Include="Code\Helper\AnimationCamera.cpp" />
     <ClCompile Include="Code\View\Pacman.cpp" />
     <ClCompile Include="Code\Helper\ParticleSystem.cpp" />
+    <ClCompile Include="Code\View\Ghost.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\PacmanGame.hpp" />
@@ -102,6 +103,7 @@
     <ClInclude Include="Code\Helper\AnimationCamera.hpp" />
     <ClInclude Include="Code\View\Pacman.hpp" />
     <ClInclude Include="Code\Helper\ParticleSystem.hpp" />
+    <ClInclude Include="Code\View\Ghost.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

@@ -12,7 +12,7 @@ namespace View
 	{
 	public:
 		Pacman(ID3D10Device* device);
-		void Draw(Helper::Camera camera);
+		void Draw(Helper::Camera* camera);
 		void Update(float dt,Helper::Point2f pos,Model::Coord facing);
 		void PlayEatPellet();
 		void PlayDie();

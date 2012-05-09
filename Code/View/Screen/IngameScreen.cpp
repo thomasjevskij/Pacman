@@ -23,6 +23,8 @@ namespace View
 		mSprite = Resources::SpriteResourceManager::Instance().Load("pacManTexture.png", 0.8, 0.8);
 
 		mWindow->AddNotificationSubscriber(mCameraController);
+
+		mGhost = new View::Ghost(device);
 	}
 
 	IngameScreen::~IngameScreen() throw()
@@ -36,7 +38,7 @@ namespace View
 	{
 		// TODO: Add different logic for different states
 		// mGameplayHandler.Update(dt);
-
+		mGhost->Update(dt,Helper::Point2f(0,0),Helper::Point2f(10,0));
 		mCameraController->Update(dt);
 		mCamera->Commit();
 	}
@@ -46,6 +48,8 @@ namespace View
 		// TODO: Draw different things in different states
 		mEnvironment->Draw(*mCamera);
 		//mSprite->Draw(D3DXVECTOR2(-1.0, -1.0));
+
+		mGhost->Draw(dt,mCamera);
 	}
 
 	void IngameScreen::PelletEaten(Helper::Point2f position)

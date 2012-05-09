@@ -53,7 +53,30 @@ namespace Resources
 
 		mEffect->SetVariable("g_matWorld", world);
 		mEffect->SetVariable("g_matWVP", worldViewProjection);
+		mEffect->SetVariable("g_modelTexture",mData->MaterialData->GetMaterial(mData->MaterialName)->MainTexture->GetShaderResoureceView());
 		
+		// DEBUG: get light position elsewhere
+		mEffect->SetVariable("g_lightDirection", D3DXVECTOR4(50, 50, 0, 0));
+
+		// Draw the buffer, once for each pass
+		for(UINT p = 0; p < mEffect->GetTechniqueByIndex(0).GetPassCount(); ++p)
+		{
+			mEffect->GetTechniqueByIndex(0).GetPassByIndex(p).Apply(mDevice);
+			mDevice->Draw(mData->VertexData.GetElementCount(), 0);
+		}
+	}
+
+	void ModelObj::Draw(const D3DXMATRIX& modelMatrix, const Helper::Camera& camera)
+	{
+		D3DXMATRIX worldViewProjection;
+
+		// Calculate the REAL worldViewProjection.
+		worldViewProjection = modelMatrix * camera.GetViewProjection();
+
+		mEffect->SetVariable("g_matWorld", modelMatrix);
+		mEffect->SetVariable("g_matWVP", worldViewProjection);
+		mEffect->SetVariable("g_modelTexture",mData->MaterialData->GetMaterial(mData->MaterialName)->MainTexture->GetShaderResoureceView());
+
 		// DEBUG: get light position elsewhere
 		mEffect->SetVariable("g_lightDirection", D3DXVECTOR4(50, 50, 0, 0));
 

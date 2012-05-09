@@ -30,6 +30,8 @@ PacmanGame::PacmanGame(HINSTANCE instance)
 
 	mScreenHandler.ChangeScreen(new View::IngameScreen(&mScreenHandler, mD3DContext.GetDevice(), &mWindow));
 
+	
+
 }
 
 PacmanGame::~PacmanGame() throw()
@@ -48,11 +50,14 @@ void PacmanGame::Update(float dt)
 	mScreenHandler.SwapScreens();
 	mScreenHandler.UpdateScreen(dt);
 
+	
 }
 
 void PacmanGame::Draw(float dt)
 {
 	mScreenHandler.DrawScreen(dt);
+
+	
 }
 
 void PacmanGame::KeyPressed(ApplicationWindow* window, int keyCode)

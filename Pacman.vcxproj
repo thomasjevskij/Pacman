@@ -209,6 +209,7 @@
     <ClCompile Include="Code\Resources\Sound2D.cpp" />
     <ClCompile Include="Code\Resources\Texture.cpp" />
     <ClCompile Include="Code\View\Environment.cpp" />
+    <ClCompile Include="Code\View\Ghost.cpp" />
     <ClCompile Include="Code\View\GUI\Table.cpp" />
     <ClCompile Include="Code\View\Pacman.cpp" />
     <ClCompile Include="Code\View\Scene.cpp" />
@@ -264,6 +265,7 @@
     <ClInclude Include="Code\Resources\Texture.hpp" />
     <ClInclude Include="Code\View\Environment.hpp" />
     <ClInclude Include="Code\View\GameEventSubscriber.hpp" />
+    <ClInclude Include="Code\View\Ghost.hpp" />
     <ClInclude Include="Code\View\GUI\Table.hpp" />
     <ClInclude Include="Code\View\Pacman.hpp" />
     <ClInclude Include="Code\View\Scene.hpp" />

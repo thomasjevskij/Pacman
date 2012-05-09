@@ -10,6 +10,7 @@
 #include "Camera.hpp"
 #include "DebugCameraController.hpp"	// Debug
 #include "Sprite.hpp"	// Debug
+#include "Ghost.hpp" // Debug
 
 namespace View
 {
@@ -45,6 +46,7 @@ namespace View
 		View::Scene mScene;
 		View::Environment* mEnvironment;	// Debug
 		Resources::Sprite* mSprite;			// Debug
+		View::Ghost* mGhost;				// Debug
 	};
 }
 
