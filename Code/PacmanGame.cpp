@@ -55,6 +55,8 @@ PacmanGame::PacmanGame(HINSTANCE instance)
 	mWindow.AddNotificationSubscriber(c);
 
 	mSprite = mSpriteManager->Load("whitePixel.png", 0, 0);
+
+	mPacman = new View::Pacman(mD3DContext.GetDevice());
 }
 
 PacmanGame::~PacmanGame() throw()
@@ -81,15 +83,18 @@ void PacmanGame::Update(float dt)
 	mAnimation->Update(dt);
 	mSoundManager->Update();
 	c->Update(dt);
+	mPacman->Update(dt,Helper::Point2f(220,160) ,Model::Coord(0,1));
 }
 
 void PacmanGame::Draw(float dt)
 {
-	mEnvironment->Draw(*mCamera);
-	mAnimation->Draw(*mCamera, D3DXVECTOR3(0,0,0));
+	//mEnvironment->Draw(*mCamera);
+	//mAnimation->Draw(*mCamera, D3DXVECTOR3(0,0,0));
 
-	p->Draw(dt,c->GetCamera());
+	//p->Draw(dt,c->GetCamera());
 	//mSprite->Draw(D3DXVECTOR2(0, 0));
+
+	mPacman->Draw(c->GetCamera());
 }
 
 void PacmanGame::KeyPressed(ApplicationWindow* window, int keyCode)

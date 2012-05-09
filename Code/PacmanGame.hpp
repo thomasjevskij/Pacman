@@ -15,6 +15,7 @@
 #include "ParticleSystem.hpp"
 #include "DebugCameraControler.hpp"
 #include "Sprite.hpp"
+#include "Pacman.hpp"
 
 using namespace Framework;
 
@@ -59,7 +60,8 @@ private:
 	Resources::Sprite* mSprite;
 	Resources::Sound2D* mSound;
 	View::Environment* mEnvironment;
-	
+	View::Pacman* mPacman;
+
 	Helper::MorphAnimation* mAnimation;
 	Helper::ParticleSystem* p;
 
