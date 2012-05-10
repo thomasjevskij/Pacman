@@ -1,6 +1,6 @@
-#include "Menu.hpp"
-
 #include <cassert>
+#include <algorithm>
+#include "Menu.hpp"
 
 namespace View
 {
@@ -18,6 +18,11 @@ namespace View
 		void Menu::MenuItem::Draw(bool isSelected) const
 		{
 
+		}
+
+		bool Menu::MenuItem::operator==(const MenuItem& rhs) const
+		{
+			return mCaption == rhs.mCaption;
 		}
 
 		Menu::Menu()
@@ -51,22 +56,21 @@ namespace View
 
 		void Menu::RemoveItem(const std::string& caption)
 		{
-			int removeIndex = -1;
-			for (int i = 0; i < mMenuItems.size(); ++i)
+			std::vector<MenuItem>::iterator it;
+			while ( (it = std::find(mMenuItems.begin(), mMenuItems.end(), caption)) != mMenuItems.end())
 			{
-				if (mMenuItems[i].GetCaption() == caption)
-				{
-					removeIndex = i;
-					break;
-				}
+				mMenuItems.erase(it);
 			}
-			if (removeIndex > -1)
-				mMenuItems.erase(mMenuItems.begin() + removeIndex);
 		}
 
 		void Menu::SetPadding(int padding)
 		{
 			mPadding = padding;
+		}
+
+		void Menu::SetPosition(const Helper::Point2i position)
+		{
+			mPosition = position;
 		}
 
 		void Menu::SelectNext()

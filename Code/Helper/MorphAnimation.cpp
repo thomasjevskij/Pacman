@@ -60,7 +60,7 @@ namespace Helper
 
 		mEffect->GetTechniqueByIndex(0).GetPassByIndex(0).SetInputLayout(vec);
 		mEffect->SetVariable("g_t", 0.0f);
-		mEffect->SetVariable("g_modelTexture", mKeyFrames[0].Data->MaterialData->GetMaterial(mKeyFrames[0].Data->MaterialName)->MainTexture->GetShaderResoureceView());
+		mEffect->SetVariable("g_modelTexture", mKeyFrames[0].Data->MaterialData->GetMaterial(mKeyFrames[0].Data->MaterialName)->MainTexture->GetShaderResourceView());
 		mEffect->SetVariable("g_lightDirection", D3DXVECTOR4(50, 50, 0, 0));
 	}
 

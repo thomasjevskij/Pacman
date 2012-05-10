@@ -59,7 +59,7 @@ namespace View
 		mEffect->GetTechniqueByIndex(0).GetPassByIndex(0).SetInputLayout(inputLayout);
 
 		Resources::Texture* groundTexture = Resources::D3DResourceManager<Resources::Texture>::Instance().Load("cobblestone.png");
-		mEffect->SetVariable("g_modelTexture", groundTexture->GetShaderResoureceView());
+		mEffect->SetVariable("g_modelTexture", groundTexture->GetShaderResourceView());
 	}
 
 	void Environment::CreateWalls(const Model::Level& level)
