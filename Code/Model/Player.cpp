@@ -10,6 +10,8 @@ namespace Model
 		mRealPosition = Helper::Point2f(gridPosition.X - 0.5 ,gridPosition.Y - 0.5 );
 		mFacing = Coord(1,0);
 		mMovementSpeed = 2;
+
+		OutputDebugString("--Model Testing--:  Player Initiated \n");
 	}
 
 	void Player::UpdateMovement(Level *level,float dt)
@@ -32,7 +34,9 @@ namespace Model
 		}
 
 		//Updatera pacmans position
-		mRealPosition += Helper::Point2f(mFacing.X * mMovementSpeed * dt, mFacing.Y * mMovementSpeed * dt);
+		//mRealPosition += Helper::Point2f(mFacing.X * mMovementSpeed * dt, mFacing.Y * mMovementSpeed * dt);
+		mRealPosition.X += mFacing.X * mMovementSpeed * dt;
+		mRealPosition.Y += mFacing.Y * mMovementSpeed * dt;
 		mGridPosition = Coord((int)mRealPosition.X,(int)mRealPosition.Y);
 		mLastFacing = mFacing;
 	}

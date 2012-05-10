@@ -22,6 +22,7 @@ namespace View
 		mEnvironment = new View::Environment(mDevice, mGameplayHandler.GetLevel());
 		mSprite = Resources::SpriteResourceManager::Instance().Load("pacManTexture.png", 0.8, 0.8);
 
+
 		mWindow->AddNotificationSubscriber(mCameraController);
 	}
 
@@ -35,7 +36,7 @@ namespace View
 	void IngameScreen::Update(float dt)
 	{
 		// TODO: Add different logic for different states
-		// mGameplayHandler.Update(dt);
+		mGameplayHandler.Update(dt);
 
 		mCameraController->Update(dt);
 		mCamera->Commit();

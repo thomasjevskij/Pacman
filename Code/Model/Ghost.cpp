@@ -13,7 +13,8 @@ namespace Model
 		//Sätt mRealPosition till start värde ändra 64 beroende på hur stora runtorna blir i slut änden
 		mRealPosition = Helper::Point2f(gridPosition.X - 0.5 ,gridPosition.Y - 0.5 );
 		mFacing = Coord(1,0);
-		mMovementSpeed = 2;
+		mMovementSpeed = 0;
+		mGhostState = GhostState::Chase;
 		if (aiType == 0)
 			mPersonality = new Blinky();
 		else if(aiType == 1)
@@ -23,12 +24,18 @@ namespace Model
 		else
 			mPersonality = new Clyde();
 
+		OutputDebugString("--Model Testing--:  Ghost Initiated \n");
 	}
 
 	void Ghost::UpdateMovement(Coord playerPosition, float dt, Level* level, Player* player, Coord blinkyPos)
 	{
+		
+		OutputDebugString("--Model Testing--:  Ghost::UpdateMovement() function called \n");
 		if(CenterPos())
 		{
+			
+		OutputDebugString("--Model Testing--:  CenterPos() returned positive \n");
+
 			//check if current gridpos is an intersection
 			//if killed get ghostspawn from level 
 			//mPersonality->GetTargetPosition(player, mGhostState, mGridPosition, blinkyPos)
@@ -42,21 +49,25 @@ namespace Model
 				Coord(mGridPosition.X + 1, mGridPosition.Y) != backFacing)
 			{
 				possibleGrids.push_back(Coord(mGridPosition.X + 1, mGridPosition.Y));
+				OutputDebugString("--Model Testing--:  Path Up is possible \n");
 			}
 			if(level->GetCell(mGridPosition.X - 1, mGridPosition.Y).Type != Model::Cell::C_CELLTYPE_WALL && 
 				Coord(mGridPosition.X - 1, mGridPosition.Y) != backFacing)
 			{
 				possibleGrids.push_back(Coord(mGridPosition.X - 1, mGridPosition.Y));
+				OutputDebugString("--Model Testing--:  Path Down is possible \n");
 			}
 			if(level->GetCell(mGridPosition.X, mGridPosition.Y + 1).Type != Model::Cell::C_CELLTYPE_WALL && 
 				Coord(mGridPosition.X, mGridPosition.Y + 1) != backFacing)
 			{
 				possibleGrids.push_back(Coord(mGridPosition.X, mGridPosition.Y + 1));
+				OutputDebugString("--Model Testing--:  Path Right is possible \n");
 			}
 			if(level->GetCell(mGridPosition.X, mGridPosition.Y - 1).Type != Model::Cell::C_CELLTYPE_WALL && 
 				Coord(mGridPosition.X, mGridPosition.Y - 1) != backFacing)
 			{
 				possibleGrids.push_back(Coord(mGridPosition.X, mGridPosition.Y - 1));
+				OutputDebugString("--Model Testing--:  Path Left is possible \n");
 			}
 			//Choose a route
 			if(possibleGrids.size() == 1)
@@ -76,7 +87,9 @@ namespace Model
 			}
 
 		} 
-		mRealPosition += Helper::Point2f(mFacing.X * mMovementSpeed * dt, mFacing.Y * mMovementSpeed * dt);
+		//mRealPosition += Helper::Point2f(mFacing.X * mMovementSpeed * dt, mFacing.Y * mMovementSpeed * dt);
+		mRealPosition.X += mFacing.X * mMovementSpeed * dt;
+		mRealPosition.Y += mFacing.Y * mMovementSpeed * dt;
 		mGridPosition = Coord((int)mRealPosition.X,(int)mRealPosition.Y);
 	}
 	

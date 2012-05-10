@@ -20,7 +20,7 @@ namespace Model
 
 		Player GetPacman() const;
 		std::vector<Ghost> GetGhosts() const;
-		Level GetLevel() const;
+		Level GetLevel();
 		int GetCurrentlevelIndex() const;
 		int GetLives() const;
 		int GetScore() const;
@@ -28,7 +28,7 @@ namespace Model
 	private:
 		LevelHandler mLevelHandler;
 		View::GameEventSubscriber* mGameEventSubscriber;
-		Level mLevel;
+		//Level mLevel;
 		Player mPlayer;
 		Fruit mFruit;
 		std::vector<Ghost> mGhosts;

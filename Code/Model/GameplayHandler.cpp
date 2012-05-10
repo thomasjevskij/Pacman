@@ -8,23 +8,22 @@ namespace Model
 		srand(NULL);
 
 		//Testing message
-		OutputDebugString("--Model Testing--:  Gameplayhandler initiated");
+		OutputDebugString("--Model Testing--:  Gameplayhandler initiated \n");
 	}
 
 	void GameplayHandler::Update(float dt)
 	{
 		
 		//Testing message
-		OutputDebugString("--Model Testing--:  Update() function called");
-
+		OutputDebugString("--Model Testing--:  Update() function called \n");
+		
+		//Test if it should start a new game
+		if (mGameRestart == true)
+			ResetGame();
 
 		//Test if it should to load the next level
 		if (mLevelWasWon == true)
 			NewLevel();
-
-		//Test if it should start a new game
-		if (mGameRestart == true)
-			ResetGame();
 
 		
 		mGameTime += dt;
@@ -38,30 +37,29 @@ namespace Model
 				for each (Ghost c in mGhosts)
 					c.SetGhostState(c.Chase);
 				mPowerModeTimer = 0;
-				mGameEventSubscriber->PowerPelletEnd();
+				//mGameEventSubscriber->PowerPelletEnd();
 			}
 		}
 
 		//Update movement
-		mPlayer.UpdateMovement(&mLevel, dt);
-		for each( Ghost g in mGhosts)
+		mPlayer.UpdateMovement(&mLevelHandler.GetCurrentLevel(), dt);
+		for(int s = 0; s < mGhosts.size(); s++)
 		{
-			g.GhostStateBehaviour(mGameTime,mCurrentLevel);
-			g.UpdateMovement(mPlayer.GetGridPosition(), dt, &mLevel, &mPlayer, mGhosts[0].GetGridPosition());
+			mGhosts[s].GhostStateBehaviour(mGameTime,mCurrentLevel);
+			mGhosts[s].UpdateMovement(mPlayer.GetGridPosition(), dt, &mLevelHandler.GetCurrentLevel(), &mPlayer, mGhosts[0].GetGridPosition());
 		}
-
 		//Test if Pacman is eating anything
 		Coord playerPos = mPlayer.GetGridPosition();
-		if (mLevel.GetCell(playerPos.X, playerPos.Y).Type == Cell::C_CELLTYPE_PELLET)
+		if (mLevelHandler.GetCurrentLevel().GetCell(playerPos.X, playerPos.Y).Type == Cell::C_CELLTYPE_PELLET)
 		{
 			mScore += 10;
 			mPelletsEaten++;
 			if (mPelletsEaten == 70 || mPelletsEaten == 170)
 				mFruit = Fruit();
-			mLevel.SetEaten(playerPos.X, playerPos.Y);
-			mGameEventSubscriber->PelletEaten(playerPos);
+			mLevelHandler.GetCurrentLevel().SetEaten(playerPos.X, playerPos.Y);
+			//mGameEventSubscriber->PelletEaten(playerPos);
 		}
-		else if (mLevel.GetCell(playerPos.X, playerPos.Y).Type == Cell::C_CELLTYPE_POWERPELLET)
+		else if (mLevelHandler.GetCurrentLevel().GetCell(playerPos.X, playerPos.Y).Type == Cell::C_CELLTYPE_POWERPELLET)
 		{
 			mScore += 50;
 			mPowerModeTimer = dt;
@@ -70,21 +68,21 @@ namespace Model
 				mFruit = Fruit();
 			for each (Ghost c in mGhosts)
 				c.SetGhostState(c.Frightened);
-			mLevel.SetEaten(playerPos.X, playerPos.Y);
-			mGameEventSubscriber->PowerPelletEaten(playerPos);
+			mLevelHandler.GetCurrentLevel().SetEaten(playerPos.X, playerPos.Y);
+			//mGameEventSubscriber->PowerPelletEaten(playerPos);
 		}
-		else if (mLevel.GetCell(playerPos.X, playerPos.Y).Type == Cell::C_CELLTYPE_FOOD)
+		else if (mLevelHandler.GetCurrentLevel().GetCell(playerPos.X, playerPos.Y).Type == Cell::C_CELLTYPE_FOOD)
 		{
 			mScore += mCurrentLevel * 100;
-			mLevel.RemoveFood();
+			mLevelHandler.GetCurrentLevel().RemoveFood();
 		}
 
 		//Check if fruitlifetime has ended
-		if (mLevel.FoodExists() == true)
+		if (mLevelHandler.GetCurrentLevel().FoodExists() == true)
 		{
 			if (mFruit.IsLifeTimeOver(dt) == true)
 			{
-				mLevel.RemoveFood();
+				mLevelHandler.GetCurrentLevel().RemoveFood();
 			}
 		}
 
@@ -96,12 +94,12 @@ namespace Model
 				if(mGhosts[g].GetGhostState() == mGhosts[g].Chase || mGhosts[g].GetGhostState() == mGhosts[g].Scatter)
 				{
 					mGameRestart = true;
-					mGameEventSubscriber->PacmanKilled();
+					//mGameEventSubscriber->PacmanKilled();
 				}
 				else if(mGhosts[g].GetGhostState() == mGhosts[g].Frightened)
 				{
 					mGhosts[g].SetGhostState(mGhosts[g].Killed);
-					mGameEventSubscriber->GhostEaten(g);
+					//mGameEventSubscriber->GhostEaten(g);
 					int k = 100;
 					for each (Ghost c in mGhosts)
 						if (c.GetGhostState() == c.Killed)
@@ -114,21 +112,23 @@ namespace Model
 				if(TestGridCollision(mGhosts[g].GetGridPosition(), mGhosts[g].GetSpawnPosition()))
 				{
 					mGhosts[g].SetGhostState(mGhosts[g].Chase);
-					mGameEventSubscriber->GhostResurrected(g);
+					//mGameEventSubscriber->GhostResurrected(g);
 				}
 			}
 			//Testing message
-			OutputDebugString("--Model Testing--:  (Update)Ghost nr:" + g );
-			OutputDebugString("--Model Testing--:  (Update)Ghost GridPos X:" + (int)mGhosts[g].GetGridPosition().X );
-			OutputDebugString("--Model Testing--:  (Update)Ghost GridPos Y:" + (int)mGhosts[g].GetGridPosition().Y );
-			OutputDebugString("--Model Testing--:  (Update)Ghost RealPos X:" + (int)mGhosts[g].GetRealPos().X );
-			OutputDebugString("--Model Testing--:  (Update)Ghost RealPos Y:" + (int)mGhosts[g].GetRealPos().Y );
+			char buffer[512];
+			sprintf(buffer,"%d",g);
+			OutputDebugString("\n--Model Testing--:  Ghost nr:" + g );
+			OutputDebugString(buffer);
+			OutputDebugString(" Ghost RealPos X:"/* + (int)mGhosts[g].GetRealPos().X */);
+			OutputDebugString(" Ghost RealPos Y:"/* + (int)mGhosts[g].GetRealPos().Y */);
+			OutputDebugString("\n");
 		}
 
 		//Test if level is cleared
-		if(mLevel.GetPelletPositions().size() == 0 && mLevel.GetPowerPelletPositions().size() == 0)
+		if(mLevelHandler.GetCurrentLevel().GetPelletPositions().size() == 0 && mLevelHandler.GetCurrentLevel().GetPowerPelletPositions().size() == 0)
 		{
-			mGameEventSubscriber->GameWon();
+			//mGameEventSubscriber->GameWon();
 			mLevelWasWon = true;
 		}
 
@@ -136,7 +136,7 @@ namespace Model
 		if(GetTimeLeft() <= 0)
 		{
 			mGameRestart = true;
-			mGameEventSubscriber->PacmanKilled();
+			//mGameEventSubscriber->PacmanKilled();
 		}
 	}
 
@@ -147,7 +147,7 @@ namespace Model
 	}
 	bool GameplayHandler::TestRealCollision(Coord ghostRealPos, Coord pacmanRealPos)
 	{ 
-		if(sqrt(pow((ghostRealPos.X - pacmanRealPos.X),2) + pow((ghostRealPos.Y - pacmanRealPos.Y),2)) < 40)
+		if(sqrt(pow((ghostRealPos.X - pacmanRealPos.X),2) + pow((ghostRealPos.Y - pacmanRealPos.Y),2)) < 0.5)
 			return true;
 		return false;
 	}
@@ -162,7 +162,7 @@ namespace Model
 		return mGhosts;
 	}
 
-	Level GameplayHandler::GetLevel() const
+	Level GameplayHandler::GetLevel()
 	{
 		return mLevelHandler.GetCurrentLevel();
 	}
@@ -187,36 +187,42 @@ namespace Model
 
 	void GameplayHandler::NewLevel()
 	{
-		mLevelHandler.SetCurrentLevelIndex(mLevelHandler.GetCurrentLevelIndex() + 1);
-		mLevel = mLevelHandler.GetCurrentLevel();
+		//mLevelHandler.SetCurrentLevelIndex(mLevelHandler.GetCurrentLevelIndex() + 1);
+		mLevelHandler.NextLevel();
+		//mLevel = mLevelHandler.GetCurrentLevel();
 		mCurrentLevel = mLevelHandler.GetCurrentLevelIndex() +1;
 		mGhosts.clear();
 		for (int i = 0; i < 4; i++)
-			mGhosts.push_back(Ghost(mLevel.GetGhostSpawnPositions()[i], i));
-		mPlayer = Player(mLevel.GetPacmanSpawnPosition());
+			mGhosts.push_back(Ghost(mLevelHandler.GetCurrentLevel().GetGhostSpawnPositions()[i], i));
+		mPlayer = Player(mLevelHandler.GetCurrentLevel().GetPacmanSpawnPosition());
 		mLevelWasWon = false;
+		mGameRestart = false;
 		mPelletsEaten = 0;
 		mGameTime = 0;
+		mPowerModeTimer = 0;
 		//Testing message
-		OutputDebugString("--Model Testing--:  NewLevel() function called");
+		OutputDebugString("--Model Testing--:  NewLevel() function called \n");
 	}
 
 	void GameplayHandler::ResetGame()
 	{
-		mLevelHandler.SetCurrentLevelIndex(0);
-		mLevel = mLevelHandler.GetCurrentLevel();
+		//mLevelHandler.SetCurrentLevelIndex(0);
+		mLevelHandler.ResetCurrentLevelIndex();
+		//mLevel = mLevelHandler.GetCurrentLevel();
 		mCurrentLevel = mLevelHandler.GetCurrentLevelIndex() +1;
 		mGhosts.clear();
 		for (int i = 0; i<=3; i++)
-			mGhosts.push_back(Ghost(mLevel.GetGhostSpawnPositions()[i], i));
-		mPlayer = Player(mLevel.GetPacmanSpawnPosition());
+			mGhosts.push_back(Ghost(mLevelHandler.GetCurrentLevel().GetGhostSpawnPositions()[i], i));
+		mPlayer = Player(mLevelHandler.GetCurrentLevel().GetPacmanSpawnPosition());
 		mScore = 0;
 		mLives = 3;
 		mGameRestart = false;
+		mLevelWasWon = false;
 		mPelletsEaten = 0;
 		mGameTime = 0;
+		mPowerModeTimer = 0;
 		//Testing message
-		OutputDebugString("--Model Testing--:  ResetGame() function called");
+		OutputDebugString("--Model Testing--:  ResetGame() function called \n");
 	}
 
 
