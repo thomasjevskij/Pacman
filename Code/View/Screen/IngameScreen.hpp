@@ -15,7 +15,7 @@ namespace View
 		enum IngameScreenState { Pregame, Running, Paused };
 	}
 
-	class IngameScreen : public GameScreen, public GameEventSubscriber
+	class IngameScreen : public GameScreen, public GameEventSubscriber, public Framework::WindowNotificationSubscriber
 	{
 	public:
 		IngameScreen(GameScreenHandler* handler, ID3D10Device* device, Framework::ApplicationWindow* window);
@@ -32,6 +32,8 @@ namespace View
 		void PacmanKilled();
 		void GameWon();
 
+		void KeyPressed(Framework::ApplicationWindow* window, int keyCode);
+		void KeyReleased(Framework::ApplicationWindow* window, int keyCode);
 	private:
 		ID3D10Device* mDevice;
 		IngameScreenState::IngameScreenState mState;
@@ -41,6 +43,9 @@ namespace View
 		View::Scene* mScene;
 		Resources::Sprite* mSprite;			// Debug
 		
+		bool mLeftPressed;
+		bool mRightPressed;
+		bool mDownPressed;
 	};
 }
 

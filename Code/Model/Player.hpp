@@ -4,6 +4,8 @@
 #include "Coord.hpp"
 #include "Level.hpp"
 
+#include "DebuggingParts.hpp"
+
 
 namespace Model
 {
@@ -29,6 +31,7 @@ namespace Model
 
 		Helper::Point2f mRealPosition;
 		float mMovementSpeed;
+		bool mHasTurned;
 
 		Coord GetValidGridPos(Coord pos,int width,int height);
 		bool CenterPos();

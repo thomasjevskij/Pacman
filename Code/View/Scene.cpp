@@ -6,13 +6,14 @@ namespace View
 	const float Scene::C_POW_PELLET_SIZE = 0.3f;
 	const float Scene::C_PELLET_Y_POS = 3;
 
-	Scene::Scene(ID3D10Device* device, Model::Level level, Framework::ApplicationWindow* window)
+	Scene::Scene(ID3D10Device* device, Model::Level level, Framework::ApplicationWindow* window, Model::ModelDataInterface* modelData)
 		: mDevice(device)
 		, mEnvironment(NULL)
 		, mCamera(NULL)
 		, mCameraController(NULL)
 		, mPelletObject(device, "pellet.obj")
 		, mPowPelletObject(device, "pellet.obj")
+		, mModelDataInterface(modelData)
 	{
 		Helper::Frustum f;
 		f.AspectRatio = static_cast<float>(window->GetClientWidth()) / window->GetClientHeight();

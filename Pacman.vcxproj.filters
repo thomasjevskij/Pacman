@@ -104,6 +104,7 @@
     <ClInclude Include="Code\View\Pacman.hpp" />
     <ClInclude Include="Code\Helper\ParticleSystem.hpp" />
     <ClInclude Include="Code\View\Ghost.hpp" />
+    <ClInclude Include="Code\Model\DebuggingParts.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

@@ -223,6 +223,7 @@
     <ClInclude Include="Code\Framework\Effect\Pass.hpp" />
     <ClInclude Include="Code\Framework\Effect\Technique.hpp" />
     <ClInclude Include="Code\Helper\AnimationCamera.hpp" />
+    <ClInclude Include="Code\Model\DebuggingParts.hpp" />
     <ClInclude Include="Code\Resources\3DObject\Material.hpp" />
     <ClInclude Include="Code\Resources\3DObject\StaticModelData.hpp" />
     <ClInclude Include="Code\Resources\Sprite.hpp" />

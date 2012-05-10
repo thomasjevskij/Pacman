@@ -11,8 +11,9 @@ namespace Model
 	{
 	public:
 		virtual Helper::Point2f GetPacmanPosition() const = 0;
+		virtual Helper::Point2f GetPacmanFacing() const = 0;
 		virtual std::vector<Helper::Point2f> GetGhostPositions() const = 0;
-		virtual const Level* GetLevel() const = 0;
+		virtual const Level& GetLevel() = 0;
 		virtual int GetCurrentLevelIndex() const = 0;
 		virtual int GetLives() const = 0;
 		virtual int GetScore() const = 0;

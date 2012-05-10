@@ -128,15 +128,7 @@ namespace Model
 
 	const Cell& Level::GetCell(int x, int y) const
 	{
-		//if(x < 0)
-		//	x += mWidth;
-		//else if (x >= mWidth)
-		//	x -= mWidth;
-		//if(y < 0)
-		//	y += mHeight;
-		//else if (y >= mHeight)
-		//	y -= mHeight;
-		//
+		
 		int i = GetIndex(x, y);
 		assert(i >= 0 && i < mCells.size());
 
@@ -177,7 +169,7 @@ namespace Model
 	{
 		if (x >= 0 && x < mWidth &&
 			y >= 0 && y < mHeight)
-			return x + y * mHeight;
+			return x + ((mHeight-1) - y) * mWidth;
 		else
 			return -1;
 	}

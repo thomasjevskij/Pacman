@@ -11,7 +11,7 @@ namespace Model
 		OutputDebugString("--Model Testing--:  Gameplayhandler initiated \n");
 	}
 
-	void GameplayHandler::Update(float dt)
+	void GameplayHandler::Update(float dt, bool leftPressed, bool rightPressed, bool backPressed)
 	{
 		
 		//Testing message
@@ -25,8 +25,15 @@ namespace Model
 		if (mLevelWasWon == true)
 			NewLevel();
 
-		
 		mGameTime += dt;
+		
+
+		if(leftPressed)
+			mPlayer.GoLeft();
+		if(rightPressed)
+			mPlayer.GoRight();
+		if(backPressed)
+			mPlayer.GoBack();
 
 		//Update Powermode timer
 		if(mPowerModeTimer != 0)
@@ -46,12 +53,20 @@ namespace Model
 		for(int s = 0; s < mGhosts.size(); s++)
 		{
 			mGhosts[s].GhostStateBehaviour(mGameTime,mCurrentLevel);
+			//Test code
+			char buffer[512];
+			sprintf(buffer,"%d",s);
+			OutputDebugString("\n--Model Testing--:  Ghost nr: ");
+			OutputDebugString(buffer);
+			OutputDebugString("\n");
+
 			mGhosts[s].UpdateMovement(mPlayer.GetGridPosition(), dt, &mLevelHandler.GetCurrentLevel(), &mPlayer, mGhosts[0].GetGridPosition());
 		}
 		//Test if Pacman is eating anything
 		Coord playerPos = mPlayer.GetGridPosition();
 		if (mLevelHandler.GetCurrentLevel().GetCell(playerPos.X, playerPos.Y).Type == Cell::C_CELLTYPE_PELLET)
 		{
+			OutputDebugString("\n--Model Testing--:  Pellet Eaten  \n ");
 			mScore += 10;
 			mPelletsEaten++;
 			if (mPelletsEaten == 70 || mPelletsEaten == 170)
@@ -61,6 +76,8 @@ namespace Model
 		}
 		else if (mLevelHandler.GetCurrentLevel().GetCell(playerPos.X, playerPos.Y).Type == Cell::C_CELLTYPE_POWERPELLET)
 		{
+			
+			OutputDebugString("\n--Model Testing--:  Powerpellet Eaten  \n ");
 			mScore += 50;
 			mPowerModeTimer = dt;
 			mPelletsEaten++;
@@ -73,6 +90,7 @@ namespace Model
 		}
 		else if (mLevelHandler.GetCurrentLevel().GetCell(playerPos.X, playerPos.Y).Type == Cell::C_CELLTYPE_FOOD)
 		{
+			OutputDebugString("\n--Model Testing--:  Food Eaten  \n ");
 			mScore += mCurrentLevel * 100;
 			mLevelHandler.GetCurrentLevel().RemoveFood();
 		}
@@ -93,6 +111,7 @@ namespace Model
 			{
 				if(mGhosts[g].GetGhostState() == mGhosts[g].Chase || mGhosts[g].GetGhostState() == mGhosts[g].Scatter)
 				{
+					OutputDebugString("\n--Model Testing--: PACMAN IS DEAD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \n \n \n");
 					mGameRestart = true;
 					//mGameEventSubscriber->PacmanKilled();
 				}
@@ -115,14 +134,6 @@ namespace Model
 					//mGameEventSubscriber->GhostResurrected(g);
 				}
 			}
-			//Testing message
-			char buffer[512];
-			sprintf(buffer,"%d",g);
-			OutputDebugString("\n--Model Testing--:  Ghost nr:" + g );
-			OutputDebugString(buffer);
-			OutputDebugString(" Ghost RealPos X:"/* + (int)mGhosts[g].GetRealPos().X */);
-			OutputDebugString(" Ghost RealPos Y:"/* + (int)mGhosts[g].GetRealPos().Y */);
-			OutputDebugString("\n");
 		}
 
 		//Test if level is cleared
@@ -162,12 +173,14 @@ namespace Model
 		return mGhosts;
 	}
 
-	Level GameplayHandler::GetLevel()
+	
+	const Level& GameplayHandler::GetLevel()
+	//Level GameplayHandler::GetLevel()
 	{
 		return mLevelHandler.GetCurrentLevel();
 	}
 
-	int GameplayHandler::GetCurrentlevelIndex() const
+	int GameplayHandler::GetCurrentLevelIndex() const
 	{
 		return mLevelHandler.GetCurrentLevelIndex();
 	}
@@ -223,6 +236,24 @@ namespace Model
 		mPowerModeTimer = 0;
 		//Testing message
 		OutputDebugString("--Model Testing--:  ResetGame() function called \n");
+	}
+
+	Helper::Point2f GameplayHandler::GetPacmanPosition() const
+	{
+		return mPlayer.GetRealPos();
+	}
+	Helper::Point2f GameplayHandler::GetPacmanFacing() const
+	{
+		return mPlayer.GetFacing();
+	}
+	std::vector<Helper::Point2f> GameplayHandler::GetGhostPositions() const
+	{
+		std::vector<Helper::Point2f> ghostsPos;
+		for(int t = 0; t < mGhosts.size(); t++)
+		{
+			ghostsPos.push_back(mGhosts[t].GetRealPos());
+		}
+		return ghostsPos;
 	}
 
 

@@ -6,50 +6,69 @@ namespace Model
 	{}
 	Player::Player(Coord gridPosition)
 	{
-		//Sätt mRealPosition till start värde ändra 64 beroende på hur stora runtorna blir i slut änden
-		mRealPosition = Helper::Point2f(gridPosition.X - 0.5 ,gridPosition.Y - 0.5 );
+		mRealPosition = Helper::Point2f(gridPosition.X + 0.5 ,gridPosition.Y + 0.5 );
 		mFacing = Coord(1,0);
-		mMovementSpeed = 2;
-
+		mMovementSpeed = 1;
+		mHasTurned = false;
 		OutputDebugString("--Model Testing--:  Player Initiated \n");
 	}
 
 	void Player::UpdateMovement(Level *level,float dt)
 	{
+		Coord validCoord = GetValidGridPos(mGridPosition + mFacing,level->GetWidth(), level->GetHeight());
+		OutputDebugString("--Model Testing--:  Player::UpdateMovement() function called \n");
 		if(CenterPos())
 		{
-			Coord validCoord = GetValidGridPos(mGridPosition + mFacing,level->GetWidth(), level->GetHeight());
+	
+			OutputDebugString("--Model Testing--:  CenterPos() returned positive \n");
+			Cell testCell = level->GetCell(mGridPosition.X,mGridPosition.Y);
 			Cell forwardCell = level->GetCell(validCoord.X,validCoord.Y);
 			if(forwardCell.Type == Cell::C_CELLTYPE_WALL)
 			{
 				if(mFacing == mLastFacing)
 				{
+					OutputDebugString("--Model Testing--: Packade packis gick i en wall \n");
 					return;
+
 				}
 				else
 				{
 					mFacing = mLastFacing;
 				}
 			}
+			mHasTurned = true;
 		}
-
+		else
+		{
+			mHasTurned = false;
+		}
+		validCoord = GetValidGridPos(mGridPosition + mFacing,level->GetWidth(), level->GetHeight());
 		//Updatera pacmans position
 		//mRealPosition += Helper::Point2f(mFacing.X * mMovementSpeed * dt, mFacing.Y * mMovementSpeed * dt);
-		mRealPosition.X += mFacing.X * mMovementSpeed * dt;
-		mRealPosition.Y += mFacing.Y * mMovementSpeed * dt;
+		if(level->GetCell(validCoord.X,validCoord.Y).Type == Cell::C_CELLTYPE_WALL && CenterPos())
+		{}
+		else
+		{
+			mRealPosition.X += mFacing.X * mMovementSpeed * dt;
+			mRealPosition.Y += mFacing.Y * mMovementSpeed * dt;
+		}
 		mGridPosition = Coord((int)mRealPosition.X,(int)mRealPosition.Y);
 		mLastFacing = mFacing;
+		
+		DbgOutFloat(" --Model Testing--: mRealPosition.X = ",mRealPosition.X);
+		DbgOutFloat("\n --Model Testing--: mRealPosition.Y = ",mRealPosition.Y);
+		OutputDebugString("\n");
 	}
 
 	void Player::GoLeft()
 	{	
-		if(CenterPos())
+		if(CenterPos() && mHasTurned == false)
 			mFacing = Coord(mFacing.Y*-1,mFacing.X);
 	}
 
 	void Player::GoRight()
 	{
-		if(CenterPos())
+		if(CenterPos() && mHasTurned == false)
 			mFacing = Coord(mFacing.Y,mFacing.X*-1);
 	}
 
