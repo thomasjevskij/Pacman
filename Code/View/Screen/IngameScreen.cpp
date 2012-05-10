@@ -10,9 +10,13 @@ namespace View
 		, mScene(NULL)
 		, mUISurface(D3DContext->GetDevice())
 		, mSprite("pacManTexture.png")			// Debug
+		, mLeftPressed(false)
+		, mRightPressed(false)
+		, mDownPressed(false)
 	{
-		mScene = new View::Scene(mD3DContext->GetDevice(), mGameplayHandler.GetLevel(), mWindow);
+		mWindow->AddNotificationSubscriber(this);
 
+		mScene = new View::Scene(mDevice, mGameplayHandler.GetLevel(), mWindow, &mGameplayHandler);
 		mSprite.SetScale(0.5f);
 	}
 
@@ -24,7 +28,7 @@ namespace View
 	void IngameScreen::Update(float dt)
 	{
 		// TODO: Add different logic for different states
-		// mGameplayHandler.Update(dt);
+		mGameplayHandler.Update(dt, mLeftPressed, mRightPressed, mDownPressed);
 		mScene->Update(dt);
 	}
 
@@ -73,4 +77,40 @@ namespace View
 		// TODO: Change to highscore screen
 	}
 
+
+	void IngameScreen::KeyPressed(Framework::ApplicationWindow* window, int keyCode) 
+	{
+		switch (keyCode)
+		{
+			case VK_LEFT:
+				mLeftPressed = true;
+			break;
+
+			case VK_RIGHT:
+				mRightPressed = true;
+			break;
+
+			case VK_DOWN:
+				mDownPressed = true;
+			break;
+		}
+	}
+
+	void IngameScreen::KeyReleased(Framework::ApplicationWindow* window, int keyCode)
+	{
+		switch (keyCode)
+		{
+			case VK_LEFT:
+				mLeftPressed = false;
+			break;
+
+			case VK_RIGHT:
+				mRightPressed = false;
+			break;
+
+			case VK_DOWN:
+				mDownPressed = false;
+			break;
+		}
+	}
 }

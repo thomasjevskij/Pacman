@@ -49,7 +49,7 @@
     <ClCompile Include="Code\View\Ghost.cpp" />
     <ClCompile Include="Code\View\HUD\Sprite.cpp" />
     <ClCompile Include="Code\View\HUD\UISurface.cpp" />
->>>>>>> hud
+    <ClCompile Include="Code\Model\DebuggingParts.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\PacmanGame.hpp" />
@@ -107,6 +107,7 @@
     <ClInclude Include="Code\View\Ghost.hpp" />
     <ClInclude Include="Code\View\HUD\Sprite.hpp" />
     <ClInclude Include="Code\View\HUD\UISurface.hpp" />
+    <ClInclude Include="Code\Model\DebuggingParts.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

@@ -6,13 +6,15 @@ namespace View
 	const float Scene::C_POW_PELLET_SIZE = 0.3f;
 	const float Scene::C_PELLET_Y_POS = 3;
 
-	Scene::Scene(ID3D10Device* device, Model::Level level, Framework::ApplicationWindow* window)
+	Scene::Scene(ID3D10Device* device, Model::Level level, Framework::ApplicationWindow* window, Model::ModelDataInterface* modelData)
 		: mDevice(device)
 		, mEnvironment(NULL)
 		, mCamera(NULL)
 		, mCameraController(NULL)
 		, mPelletObject(device, "pellet.obj")
 		, mPowPelletObject(device, "pellet.obj")
+		, mModelDataInterface(modelData)
+		, mPacman(device)
 	{
 		Helper::Frustum f;
 		f.AspectRatio = static_cast<float>(window->GetClientWidth()) / window->GetClientHeight();
@@ -21,10 +23,7 @@ namespace View
 		f.NearDistance = 1;
 
 		mCamera = new Helper::Camera(f.CreatePerspectiveProjection());
-		mCameraController = new Helper::DebugCameraController(D3DXVECTOR3(0, 0, 0), mCamera);
-		//mCameraController = new Helper::DebugCameraController(pacmanSpawnPoint, mCamera);
-
-		window->AddNotificationSubscriber(mCameraController);
+		mCameraController = new Helper::ChaseCamera(mCamera, mModelDataInterface);
 
 		Create3DLevel(level);
 		mPelletObject.SetScale(C_PELLET_SIZE);
@@ -60,31 +59,34 @@ namespace View
 
 		for(int i = 0; i < pelletPosInGrid.size(); ++i)
 		{
-			mPelletPositions.push_back(D3DXVECTOR3(pelletPosInGrid[i].X * Environment::C_CELL_SIZE, 
+			mPelletPositions.push_back(D3DXVECTOR3((pelletPosInGrid[i].X + 0.5f) * Environment::C_CELL_SIZE, 
 												   C_PELLET_Y_POS, 
-												   pelletPosInGrid[i].Y * Environment::C_CELL_SIZE));
+												   (pelletPosInGrid[i].Y + 0.5f) * Environment::C_CELL_SIZE));
 		}
 
 		for(int j = 0; j < powPelletPosInGrid.size(); ++j)
 		{
-			mPowPelletPositions.push_back(D3DXVECTOR3(powPelletPosInGrid[j].X * Environment::C_CELL_SIZE,
+			mPowPelletPositions.push_back(D3DXVECTOR3((powPelletPosInGrid[j].X + 0.5f) * Environment::C_CELL_SIZE,
 													  C_PELLET_Y_POS, 
-													  powPelletPosInGrid[j].Y * Environment::C_CELL_SIZE));
+													  (powPelletPosInGrid[j].Y + 0.5f) * Environment::C_CELL_SIZE));
 		}
 	}
 
 	void Scene::Update(float dt)
 	{
-		mCameraController->Update(dt);
+		mCameraController->Update(dt, mModelDataInterface);
 		mCamera->Commit();
 
 		mGhost->Update(dt, Helper::Point2f(0,0),Helper::Point2f(10,0));
+		Helper::Point2f offset(0.5f, 0.5f);
+		mPacman.Update(dt, (mModelDataInterface->GetPacmanPosition()) * Environment::C_CELL_SIZE, mModelDataInterface->GetPacmanFacing());
 	}
 
 	void Scene::Draw(float dt)
 	{
 		mEnvironment->Draw(*mCamera);
 		mGhost->Draw(dt, mCamera);
+		mPacman.Draw(mCamera);
 
 		mPelletObject.Bind();
 		for(int i = 0; i < mPelletPositions.size(); ++i)

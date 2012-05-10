@@ -174,6 +174,7 @@
     <ClCompile Include="Code\Framework\Effect\Pass.cpp" />
     <ClCompile Include="Code\Framework\Effect\Technique.cpp" />
     <ClCompile Include="Code\Helper\AnimationCamera.cpp" />
+    <ClCompile Include="Code\Model\DebuggingParts.cpp" />
     <ClCompile Include="Code\Resources\3DObject\Material.cpp" />
     <ClCompile Include="Code\Resources\3DObject\StaticModelData.cpp" />
     <ClCompile Include="Code\View\HUD\Sprite.cpp" />
@@ -224,6 +225,7 @@
     <ClInclude Include="Code\Framework\Effect\Pass.hpp" />
     <ClInclude Include="Code\Framework\Effect\Technique.hpp" />
     <ClInclude Include="Code\Helper\AnimationCamera.hpp" />
+    <ClInclude Include="Code\Model\DebuggingParts.hpp" />
     <ClInclude Include="Code\Resources\3DObject\Material.hpp" />
     <ClInclude Include="Code\Resources\3DObject\StaticModelData.hpp" />
     <ClInclude Include="Code\View\HUD\Sprite.hpp" />

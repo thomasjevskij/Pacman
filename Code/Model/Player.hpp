@@ -4,6 +4,8 @@
 #include "Coord.hpp"
 #include "Level.hpp"
 
+#include "DebuggingParts.hpp"
+
 
 namespace Model
 {
@@ -28,8 +30,8 @@ namespace Model
 		Coord mGridPosition;
 
 		Helper::Point2f mRealPosition;
-		static const int C_MOVEMENT_SPEED = 16;
-		static const int C_TILESIZE = 64;
+		float mMovementSpeed;
+		bool mHasTurned;
 
 		Coord GetValidGridPos(Coord pos,int width,int height);
 		bool CenterPos();

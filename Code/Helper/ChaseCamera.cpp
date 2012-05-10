@@ -1,19 +1,48 @@
+#include <cmath>
 #include "ChaseCamera.hpp"
+#include "Environment.hpp"
+#include "Pacman.hpp"
 
 namespace Helper
 {
-	ChaseCamera::ChaseCamera(Helper::Camera *c):
-	mCamera(c)
+	const float ChaseCamera::C_CHASE_SPEED = 10.0f;
+	const float ChaseCamera::C_CHASE_HEIGHT = 20.0f;
+	const float ChaseCamera::C_CHASE_DISTANCE = 2.5f;
+
+	ChaseCamera::ChaseCamera(Helper::Camera *c, Model::ModelDataInterface* modelDataInterface)
+		: mCamera(c)
+		, mTargetPosition(0,0,0)
+		, mPosition(0,0,0)
 	{
+		mTargetPosition.x = modelDataInterface->GetPacmanPosition().X - (C_CHASE_DISTANCE * modelDataInterface->GetPacmanFacing().X);
+		mTargetPosition.z = modelDataInterface->GetPacmanPosition().Y - (C_CHASE_DISTANCE * modelDataInterface->GetPacmanFacing().Y);
+
+		mTargetPosition *= View::Environment::C_CELL_SIZE;
+		mTargetPosition.y = C_CHASE_HEIGHT + View::Pacman::C_HEIGHT;
+
+		mPosition = mTargetPosition;
 	}
 
-	void ChaseCamera::Update(float dt,Model::Player pacman)
+	void ChaseCamera::Update(float dt, Model::ModelDataInterface* modelDataInterface)
 	{
-		D3DXVECTOR3 temp = D3DXVECTOR3(-50,10,-50);
-		temp.x *= pacman.GetFacing().X;
-		temp.z *= pacman.GetFacing().Y;
-		mCamera->SetPosition(D3DXVECTOR3(pacman.GetRealPos().X,10,pacman.GetRealPos().Y) + temp);
-		mCamera->SetFacingPoint(D3DXVECTOR3(pacman.GetRealPos().X,10,pacman.GetRealPos().Y));
+		mTargetPosition.x = modelDataInterface->GetPacmanPosition().X - (C_CHASE_DISTANCE * modelDataInterface->GetPacmanFacing().X);
+		mTargetPosition.z = modelDataInterface->GetPacmanPosition().Y - (C_CHASE_DISTANCE * modelDataInterface->GetPacmanFacing().Y);
+
+		mTargetPosition *= View::Environment::C_CELL_SIZE;
+		mTargetPosition.y = C_CHASE_HEIGHT + View::Pacman::C_HEIGHT;
+
+		if (D3DXVec3LengthSq(&(mTargetPosition - mPosition)) > 0.1)
+			mPosition += (mTargetPosition - mPosition) / 8;
+
+		D3DXVECTOR3 pacPos;
+		pacPos.x = modelDataInterface->GetPacmanPosition().X;
+		pacPos.z = modelDataInterface->GetPacmanPosition().Y;
+		pacPos *= View::Environment::C_CELL_SIZE;
+
+		pacPos.y = View::Pacman::C_HEIGHT;
+
+		mCamera->SetPosition(mPosition);
+		mCamera->SetFacingPoint(pacPos);
 		mCamera->Commit();
 	}
 
