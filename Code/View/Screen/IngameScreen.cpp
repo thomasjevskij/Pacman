@@ -11,7 +11,7 @@ namespace View
 		, mUISurface(D3DContext->GetDevice())
 		, mSprite("pacManTexture.png")			// Debug
 	{
-		mScene = new View::Scene(mDevice, mGameplayHandler.GetLevel(), mWindow);
+		mScene = new View::Scene(mD3DContext->GetDevice(), mGameplayHandler.GetLevel(), mWindow);
 
 		mSprite.SetScale(0.5f);
 	}

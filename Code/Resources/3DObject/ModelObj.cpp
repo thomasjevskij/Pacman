@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #include "ModelObj.hpp"
 
 #include <sstream>
@@ -33,20 +32,20 @@ namespace Resources
 		const Material::Definition* def = mData->MaterialData->GetMaterial(mData->MaterialName);
 		if(def != NULL)
 			if(def->MainTexture != NULL)
-				mEffect->SetVariable("g_modelTexture", def->MainTexture->GetShaderResoureceView());
+				mEffect->SetVariable("g_modelTexture", def->MainTexture->GetShaderResourceView());
 			else
 			{
 				Resources::Texture* defaultTexture = Resources::D3DResourceManager<Resources::Texture>::Instance().Load("whitePixel.png");
-				mEffect->SetVariable("g_modelTexture", defaultTexture->GetShaderResoureceView());
+				mEffect->SetVariable("g_modelTexture", defaultTexture->GetShaderResourceView());
 			}
 		else
 		{
 			Resources::Texture* defaultTexture = Resources::D3DResourceManager<Resources::Texture>::Instance().Load("whitePixel.png");
-			mEffect->SetVariable("g_modelTexture", defaultTexture->GetShaderResoureceView());
+			mEffect->SetVariable("g_modelTexture", defaultTexture->GetShaderResourceView());
 		}
 
 		// Commented out to instead use above code that makes sure the texture exists, else loads the whitepixel texture
-		//mEffect->SetVariable("g_modelTexture", mData->MaterialData->GetMaterial(mData->MaterialName)->MainTexture->GetShaderResoureceView());
+		//mEffect->SetVariable("g_modelTexture", mData->MaterialData->GetMaterial(mData->MaterialName)->MainTexture->GetShaderResourceView());
 	}
 
 	ModelObj::~ModelObj() throw()
@@ -73,7 +72,7 @@ namespace Resources
 		mEffect->SetVariable("g_matWorld", world);
 		mEffect->SetVariable("g_matWVP", worldViewProjection);
 		mEffect->SetVariable("g_modelTintColour", static_cast<D3DXVECTOR4>(mTintColour));
-		mEffect->SetVariable("g_modelTexture",mData->MaterialData->GetMaterial(mData->MaterialName)->MainTexture->GetShaderResoureceView());
+		mEffect->SetVariable("g_modelTexture",mData->MaterialData->GetMaterial(mData->MaterialName)->MainTexture->GetShaderResourceView());
 		
 		// DEBUG: get light position elsewhere
 		mEffect->SetVariable("g_lightDirection", D3DXVECTOR4(50, 50, 0, 0));
@@ -95,7 +94,7 @@ namespace Resources
 
 		mEffect->SetVariable("g_matWorld", modelMatrix);
 		mEffect->SetVariable("g_matWVP", worldViewProjection);
-		mEffect->SetVariable("g_modelTexture",mData->MaterialData->GetMaterial(mData->MaterialName)->MainTexture->GetShaderResoureceView());
+		mEffect->SetVariable("g_modelTexture",mData->MaterialData->GetMaterial(mData->MaterialName)->MainTexture->GetShaderResourceView());
 
 		// DEBUG: get light position elsewhere
 		mEffect->SetVariable("g_lightDirection", D3DXVECTOR4(50, 50, 0, 0));
