@@ -70,7 +70,7 @@ namespace View
 
 		for(int i = 0; i < wallPosInGrid.size(); ++i)
 		{
-			mWallPositions.push_back(D3DXVECTOR3(wallPosInGrid[i].X * C_CELL_SIZE, 0, wallPosInGrid[i].Y * C_CELL_SIZE));
+			mWallPositions.push_back(D3DXVECTOR3((wallPosInGrid[i].X + 0.5f) * C_CELL_SIZE, 0, (wallPosInGrid[i].Y + 0.5f) * C_CELL_SIZE));
 		}
 	}
 

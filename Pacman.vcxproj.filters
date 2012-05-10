@@ -48,6 +48,7 @@
     <ClCompile Include="Code\View\Pacman.cpp" />
     <ClCompile Include="Code\Helper\ParticleSystem.cpp" />
     <ClCompile Include="Code\View\Ghost.cpp" />
+    <ClCompile Include="Code\Model\DebuggingParts.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\PacmanGame.hpp" />

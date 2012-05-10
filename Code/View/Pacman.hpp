@@ -19,9 +19,13 @@ namespace View
 		void PlayEatPowerPellet();
 		void PlayEatFruit();
 		void PlayEatGhost();
+
+		static const float C_HEIGHT;
 	private:
 		Helper::MorphAnimation* mAnimation;
 		D3DXMATRIX mModelMatrix;
+
+		
 		//Resources::Sound3D mEatPelletSound;
 		//Resources::Sound3D mDieSound;
 		//Resources::Sound3D mEatPowerPelletSound;

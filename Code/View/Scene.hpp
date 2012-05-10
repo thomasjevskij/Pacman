@@ -2,12 +2,14 @@
 #define SCENE_HPP
 
 #include "Global.hpp"
+#include "ApplicationWindow.hpp"
 #include "Environment.hpp"
 #include "Level.hpp"
 #include "Ghost.hpp" // Debug
 #include "Camera.hpp"
 #include "ModelDataInterface.hpp"
-#include "DebugCameraController.hpp"	// Debug
+#include "ChaseCamera.hpp"	// Debug
+#include "Pacman.hpp"
 
 namespace View
 {
@@ -31,12 +33,13 @@ namespace View
 		ID3D10Device* mDevice;
 		View::Environment* mEnvironment;
 		Helper::Camera* mCamera;
-		Helper::DebugCameraController* mCameraController;
+		Helper::ChaseCamera* mCameraController;
 		Resources::ModelObj mPelletObject;
 		Resources::ModelObj mPowPelletObject;
 		std::vector<D3DXVECTOR3> mPelletPositions;
 		std::vector<D3DXVECTOR3> mPowPelletPositions;
 		View::Ghost* mGhost;				// Debug
+		Pacman mPacman;
 
 		Scene(const Scene&);
 		Scene& operator=(const Scene&);
