@@ -106,12 +106,18 @@ namespace Model
 		if (c.Type == Cell::C_CELLTYPE_PELLET)
 		{
 			std::vector<Coord>::iterator it = std::find(mPelletPositions.begin(), mPelletPositions.end(), c.Coordinate);
-			mPelletPositions.erase(it);
+			if (it != mPelletPositions.end())
+			{
+				mPelletPositions.erase(it);
+			}
 		}
 		else if (c.Type == Cell::C_CELLTYPE_POWERPELLET)
 		{
 			std::vector<Coord>::iterator it = std::find(mPowerPelletPositions.begin(), mPowerPelletPositions.end(), c.Coordinate);
-			mPelletPositions.erase(it);
+			if (it != mPowerPelletPositions.end())
+			{
+				mPowerPelletPositions.erase(it);
+			}
 		}
 		SetCellType(x, y, Cell::C_CELLTYPE_EMPTY);
 	}

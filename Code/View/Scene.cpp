@@ -1,4 +1,5 @@
 #include "Scene.hpp"
+#include <cmath>
 
 namespace View
 {
@@ -51,25 +52,6 @@ namespace View
 												   level.GetPacmanSpawnPosition().Y * Environment::C_CELL_SIZE);
 
 		mCamera->SetPosition(pacmanSpawnPoint);
-
-		const std::vector<Model::Coord> pelletPosInGrid = level.GetPelletPositions();
-		const std::vector<Model::Coord> powPelletPosInGrid = level.GetPowerPelletPositions();
-		mPelletPositions.clear();
-		mPowPelletPositions.clear();
-
-		for(int i = 0; i < pelletPosInGrid.size(); ++i)
-		{
-			mPelletPositions.push_back(D3DXVECTOR3((pelletPosInGrid[i].X + 0.5f) * Environment::C_CELL_SIZE, 
-												   C_PELLET_Y_POS, 
-												   (pelletPosInGrid[i].Y + 0.5f) * Environment::C_CELL_SIZE));
-		}
-
-		for(int j = 0; j < powPelletPosInGrid.size(); ++j)
-		{
-			mPowPelletPositions.push_back(D3DXVECTOR3((powPelletPosInGrid[j].X + 0.5f) * Environment::C_CELL_SIZE,
-													  C_PELLET_Y_POS, 
-													  (powPelletPosInGrid[j].Y + 0.5f) * Environment::C_CELL_SIZE));
-		}
 	}
 
 	void Scene::Update(float dt)
@@ -87,17 +69,38 @@ namespace View
 		mEnvironment->Draw(*mCamera);
 		mGhost->Draw(dt, mCamera);
 		mPacman.Draw(mCamera);
+		D3DXVECTOR3 camPos = mCamera->GetPosition();
+		
+		const std::vector<Model::Coord>& pelletPosInGrid = mModelDataInterface->GetLevel().GetPelletPositions();
+
 
 		mPelletObject.Bind();
-		for(int i = 0; i < mPelletPositions.size(); ++i)
+		for(int i = 0; i < pelletPosInGrid.size(); ++i)
 		{
-			mPelletObject.Draw(mPelletPositions[i], *mCamera);
+			D3DXVECTOR3 pelletPos = D3DXVECTOR3((pelletPosInGrid[i].X + 0.5f) * Environment::C_CELL_SIZE, 
+												 C_PELLET_Y_POS, 
+												 (pelletPosInGrid[i].Y + 0.5f) * Environment::C_CELL_SIZE);
+			
+
+			if (abs(camPos.x - pelletPos.x) <= 1.1f * Environment::C_CELL_SIZE || 
+				abs(camPos.z - pelletPos.z) <= 1.1f * Environment::C_CELL_SIZE)
+				mPelletObject.Draw(pelletPos, *mCamera);
 		}
 
+
+
+		const std::vector<Model::Coord>& powPelletPosInGrid = mModelDataInterface->GetLevel().GetPowerPelletPositions();
+
 		mPowPelletObject.Bind();
-		for(int i = 0; i < mPowPelletPositions.size(); ++i)
+		for(int i = 0; i < powPelletPosInGrid.size(); ++i)
 		{
-			mPowPelletObject.Draw(mPowPelletPositions[i], *mCamera);
+			D3DXVECTOR3 pelletPos = D3DXVECTOR3((powPelletPosInGrid[i].X + 0.5f) * Environment::C_CELL_SIZE, 
+												 C_PELLET_Y_POS, 
+												 (powPelletPosInGrid[i].Y + 0.5f) * Environment::C_CELL_SIZE);
+
+			if (abs(camPos.x - pelletPos.x) <= 1.1f * Environment::C_CELL_SIZE || 
+				abs(camPos.z - pelletPos.z) <= 1.1f * Environment::C_CELL_SIZE)
+				mPowPelletObject.Draw(pelletPos, *mCamera);
 		}
 	}
 }

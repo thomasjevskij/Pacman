@@ -6,6 +6,7 @@ namespace View
 	const float Pacman::C_HEIGHT = 5.0f;
 	
 	Pacman::Pacman(ID3D10Device* device)
+		: mScale(2.5f)
 	{
 		std::vector<std::string> keyFrameFilenames;
 		keyFrameFilenames.push_back("Pacman1.obj");
@@ -26,7 +27,8 @@ namespace View
 
 	void Pacman::Update(float dt,Helper::Point2f pos,Model::Coord facing)
 	{
-		D3DXMATRIX translation,rot;
+		D3DXMATRIX translation, rot, scale;
+		D3DXMatrixScaling(&scale, mScale, mScale, mScale);
 		D3DXMatrixTranslation(&translation,pos.X,C_HEIGHT,pos.Y);
 
 		if(facing.X == -1)
@@ -38,7 +40,7 @@ namespace View
 		else if(facing.Y == -1)
 			D3DXMatrixRotationY(&rot,-D3DX_PI/2);
 
-		mModelMatrix = rot * translation;
+		mModelMatrix = scale * rot * translation;
 		mAnimation->Update(dt);
 	}
 

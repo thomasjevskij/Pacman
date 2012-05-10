@@ -36,8 +36,6 @@ namespace View
 		Helper::ChaseCamera* mCameraController;
 		Resources::ModelObj mPelletObject;
 		Resources::ModelObj mPowPelletObject;
-		std::vector<D3DXVECTOR3> mPelletPositions;
-		std::vector<D3DXVECTOR3> mPowPelletPositions;
 		View::Ghost* mGhost;				// Debug
 		Pacman mPacman;
 

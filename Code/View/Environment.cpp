@@ -1,6 +1,7 @@
 #include "Environment.hpp"
 #include "D3DResourceManager.hpp"
 #include "Texture.hpp"
+#include <cmath>
 
 namespace View
 {
@@ -89,10 +90,11 @@ namespace View
 			mDevice->Draw(mBuffer->GetElementCount(), 0);
 		}
 
+		D3DXVECTOR3 camPos = camera.GetPosition();
+
 		mWallObject.Bind();
 		for(int i = 0; i < mWallPositions.size(); ++i)
 		{
-			//insert "If culling"
 			mWallObject.Draw(mWallPositions[i], camera);
 		}
 	}

@@ -16,7 +16,7 @@ namespace View
 	{
 		mWindow->AddNotificationSubscriber(this);
 
-		mScene = new View::Scene(mDevice, mGameplayHandler.GetLevel(), mWindow, &mGameplayHandler);
+		mScene = new View::Scene(mD3DContext->GetDevice(), mGameplayHandler.GetLevel(), mWindow, &mGameplayHandler);
 		mSprite.SetScale(0.5f);
 	}
 

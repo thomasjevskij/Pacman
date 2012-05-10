@@ -24,6 +24,7 @@ namespace View
 	private:
 		Helper::MorphAnimation* mAnimation;
 		D3DXMATRIX mModelMatrix;
+		float mScale;
 
 		
 		//Resources::Sound3D mEatPelletSound;
