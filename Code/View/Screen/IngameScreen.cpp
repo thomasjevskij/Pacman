@@ -2,15 +2,18 @@
 
 namespace View
 {
-	IngameScreen::IngameScreen(GameScreenHandler* handler, ID3D10Device* device, Framework::ApplicationWindow* window)
+	IngameScreen::IngameScreen(GameScreenHandler* handler, Framework::ApplicationWindow* window, const Framework::D3DContext* D3DContext)
 		: GameScreen(handler)
-		, mDevice(device)
 		, mState(IngameScreenState::Running)	// Debug, start running immediately during testing
 		, mWindow(window)
+		, mD3DContext(D3DContext)
 		, mScene(NULL)
+		, mUISurface(D3DContext->GetDevice())
+		, mSprite("pacManTexture.png")			// Debug
 	{
 		mScene = new View::Scene(mDevice, mGameplayHandler.GetLevel(), mWindow);
-		mSprite = Resources::SpriteResourceManager::Instance().Load("pacManTexture.png");
+
+		mSprite.SetScale(0.5f);
 	}
 
 	IngameScreen::~IngameScreen() throw()
@@ -28,8 +31,11 @@ namespace View
 	void IngameScreen::Draw(float dt)
 	{
 		// TODO: Draw different things in different states
-		//mSprite->Draw(D3DXVECTOR2(-1.0, -1.0));
 		mScene->Draw(dt);
+
+		mUISurface.Clear();
+		// TODO: Draw UI here
+		mUISurface.DrawSurface(*mD3DContext);
 	}
 
 	void IngameScreen::PelletEaten(Helper::Point2f position)

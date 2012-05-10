@@ -27,12 +27,8 @@ PacmanGame::PacmanGame(HINSTANCE instance)
 	mMaterialManager = new Resources::FileResourceManager<Resources::Material>("Resources/Objects/");
 	mLevelManager = new Resources::FileResourceManager<Model::Level>("Resources/Levels/");
 	mSoundManager = new Resources::SoundResourceManager("Resources/Sounds/");
-	mSpriteManager = new Resources::SpriteResourceManager("Resources/Textures/", mD3DContext.GetDevice());
 
-	mScreenHandler.ChangeScreen(new View::IngameScreen(&mScreenHandler, mD3DContext.GetDevice(), &mWindow));
-
-	
-
+	mScreenHandler.ChangeScreen(new View::IngameScreen(&mScreenHandler, &mWindow, &mD3DContext));
 }
 
 PacmanGame::~PacmanGame() throw()
@@ -43,7 +39,6 @@ PacmanGame::~PacmanGame() throw()
 	SafeDelete(mMaterialManager);
 	SafeDelete(mLevelManager);
 	SafeDelete(mSoundManager);
-	SafeDelete(mSpriteManager);
 }
 
 void PacmanGame::Update(float dt)

@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "Global.hpp"
+#include "Primitives.hpp"
 #include "ApplicationWindow.hpp"
 
 namespace Framework
@@ -56,13 +57,16 @@ namespace Framework
 		~D3DContext() throw();
 
 		// Getters
-		ID3D10Device* GetDevice();
+		ID3D10Device* GetDevice() const;
 
 		// Viewport management
 		const std::vector<Viewport> GetViewports() const;
 		void SetViewports(const std::vector<Viewport>& viewports);
 		void SetActiveViewport(unsigned int index);
 		unsigned int GetActiveViewport() const;
+		Helper::Point2i GetViewportOrigin(unsigned int index) const;
+		unsigned int GetViewportWidth(unsigned int index) const;
+		unsigned int GetViewportHeight(unsigned int index) const;
 
 
 		// Toggle fullscreen mode
