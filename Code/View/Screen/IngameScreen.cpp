@@ -10,6 +10,7 @@ namespace View
 		, mScene(NULL)
 		, mUISurface(D3DContext->GetDevice())
 		, mSprite("pacManTexture.png")			// Debug
+		, mSpriteFont("font.bmp")
 	{
 		mScene = new View::Scene(mD3DContext->GetDevice(), mGameplayHandler.GetLevel(), mWindow);
 
@@ -35,6 +36,8 @@ namespace View
 
 		mUISurface.Clear();
 		// TODO: Draw UI here
+		mUISurface.Draw(mSprite);
+		mUISurface.Draw(mSpriteFont, D3DXVECTOR2(40, 40), "H");
 		mUISurface.DrawSurface(*mD3DContext);
 	}
 

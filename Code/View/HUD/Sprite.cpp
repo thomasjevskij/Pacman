@@ -5,6 +5,13 @@
 
 namespace View
 {
+	Sprite::UVCoordinates::UVCoordinates()
+		: U(0.0f)
+		, V(0.0f)
+		, Width(1.0f)
+		, Height(1.0f)
+	{}
+
 	Sprite::Sprite(const std::string& filename)
 		: mTexture(NULL)
 		, mScale(1.0f)
@@ -47,5 +54,18 @@ namespace View
 	const D3DXCOLOR& Sprite::GetTintColor() const
 	{
 		return mTintColor;
+	}
+
+	void Sprite::SetUVCoordinates(float u, float v, float width, float height)
+	{
+		mUVCoordinates.U = u;
+		mUVCoordinates.V = v;
+		mUVCoordinates.Width = width;
+		mUVCoordinates.Height = height;
+	}
+
+	Sprite::UVCoordinates Sprite::GetUVCoordinates() const
+	{
+		return mUVCoordinates;
 	}
 }

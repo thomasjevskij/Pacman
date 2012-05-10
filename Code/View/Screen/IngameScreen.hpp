@@ -7,6 +7,7 @@
 #include "ApplicationWindow.hpp"
 #include "Scene.hpp"
 #include "Sprite.hpp"	// Debug
+#include "SpriteFont.hpp"
 #include "UISurface.hpp"
 
 namespace View
@@ -43,6 +44,7 @@ namespace View
 		View::Scene* mScene;
 		View::UISurface mUISurface;
 		View::Sprite mSprite;				// Debug
+		View::SpriteFont mSpriteFont;
 		
 	};
 }

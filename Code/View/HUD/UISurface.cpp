@@ -29,6 +29,29 @@ namespace View
 		mBufferedSprites.push_back(sprite);
 	}
 
+	void UISurface::Draw(const SpriteFont& font, D3DXVECTOR2 position, const std::string& string)
+	{
+		float startX = position.x;
+		for (int i = 0; i < string.size(); ++i)
+		{
+			char c = string[i];
+			if (c == '\n')
+			{
+				position.x = startX;
+				position.y += font.GetCharacterHeight();
+			}
+			else
+			{
+				position.x += font.GetCharacterWidth();
+			}
+
+			Sprite charSprite(font.GetGlyphSprite(c));
+			charSprite.SetPosition(position);
+			
+			Draw(charSprite);
+		}
+	}
+
 	void UISurface::DrawSurface(const Framework::D3DContext& context)
 	{
 		// Draw all the buffered sprites to the surface
@@ -80,6 +103,7 @@ namespace View
 
 	void UISurface::DrawSpriteToViewport(const Sprite& sprite, const Framework::D3DContext& context)
 	{
+		Sprite::UVCoordinates uvCoords = sprite.GetUVCoordinates();
 		float viewportWidth = static_cast<float>(context.GetViewportWidth(context.GetActiveViewport()));
 		float viewportHeight = static_cast<float>(context.GetViewportHeight(context.GetActiveViewport()));
 		
@@ -93,8 +117,14 @@ namespace View
 		D3DXMatrixTranslation(&translation, posX, posY, 1.0f);
 		model = scale * translation;
 
+		D3DXMATRIX uvscale, uvtranslation, uvmodel;
+		D3DXMatrixScaling(&uvscale, sprite.GetUVCoordinates().Width, sprite.GetUVCoordinates().Height, 1.0f);
+		D3DXMatrixTranslation(&uvtranslation, sprite.GetUVCoordinates().U, sprite.GetUVCoordinates().V, 0.0f);
+		uvmodel = uvscale * uvtranslation;
+
 		mSpriteEffect->SetVariable("gTintColor", static_cast<D3DXVECTOR4>(sprite.GetTintColor()) );
 		mSpriteEffect->SetVariable("gModel", model);
+		mSpriteEffect->SetVariable("gUVModel", uvmodel);
 		mSpriteEffect->SetVariable("gImage", sprite.GetTexture()->GetShaderResourceView());
 
 		for (unsigned int p = 0; p < mSpriteEffect->GetTechniqueByIndex(0).GetPassCount(); ++p)

@@ -211,6 +211,7 @@
     <ClCompile Include="Code\View\Environment.cpp" />
     <ClCompile Include="Code\View\Ghost.cpp" />
     <ClCompile Include="Code\View\GUI\Table.cpp" />
+    <ClCompile Include="Code\View\HUD\SpriteFont.cpp" />
     <ClCompile Include="Code\View\HUD\UISurface.cpp" />
     <ClCompile Include="Code\View\Pacman.cpp" />
     <ClCompile Include="Code\View\Scene.cpp" />
@@ -268,6 +269,7 @@
     <ClInclude Include="Code\View\GameEventSubscriber.hpp" />
     <ClInclude Include="Code\View\Ghost.hpp" />
     <ClInclude Include="Code\View\GUI\Table.hpp" />
+    <ClInclude Include="Code\View\HUD\SpriteFont.hpp" />
     <ClInclude Include="Code\View\HUD\UISurface.hpp" />
     <ClInclude Include="Code\View\Pacman.hpp" />
     <ClInclude Include="Code\View\Scene.hpp" />

@@ -14,8 +14,9 @@ struct PS_INPUT
 // Global variables & constant buffers
 cbuffer cbEveryFrame
 {
-	float4		gTintColor;
-	matrix		gModel;
+	float4 gTintColor;
+	matrix gModel;
+	matrix gUVModel;	
 }
 
 Texture2D gImage;
@@ -56,7 +57,10 @@ PS_INPUT VS(VS_INPUT input)
 	// Sprites are drawn on top of everything else, thus z = 0.
 	output.position = mul(float4(float3(input.position, 0.0), 1.0), gModel);
 	output.position.z = 0.0f;
-	output.uv = input.uv;
+
+	// Transform the UV coordinates to only draw part of a texture.
+	float4 transformedUV = mul(float4(float3(input.uv, 0.0), 1.0), gUVModel);
+	output.uv = transformedUV.xy;
 
 	return output;
 }

@@ -2,6 +2,7 @@
 #define UISURFACE_HPP
 
 #include "Sprite.hpp"
+#include "SpriteFont.hpp"
 #include "VertexBuffer.hpp"
 #include "Effect.hpp"
 #include "D3DContext.hpp"
@@ -19,6 +20,9 @@ namespace View
 
 		// Buffer a sprite up for rendering to the surface
 		void Draw(const Sprite& sprite);
+
+		// Buffer up the sprites required to draw the text string.
+		void Draw(const SpriteFont& font, D3DXVECTOR2 position, const std::string& string);
 
 		// Draw all buffered sprites and then render the surface to the
 		// current render target.
