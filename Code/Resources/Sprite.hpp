@@ -11,7 +11,7 @@ namespace Resources
 	class Sprite
 	{
 	public:
-		Sprite(ID3D10Device* device, const std::string& filename, float width, float height);
+		Sprite(ID3D10Device* device, const std::string& filename);
 		~Sprite() throw();
 
 		// Draw the sprite at the given position with the given tint.
@@ -27,8 +27,7 @@ namespace Resources
 		ID3D10Device*				mDevice;
 		Framework::VertexBuffer*	mBuffer;
 		Framework::Effect*			mEffect;
-		float						mWidth;
-		float						mHeight;
+		D3DX10_IMAGE_INFO			mImageInfo;
 
 		void CreateBuffer();
 		void CreateEffect();
@@ -39,7 +38,7 @@ namespace Resources
 	public:
 		SpriteResourceManager(const std::string& path, ID3D10Device* device);
 
-		Sprite* Load(const std::string& filename, float width, float height);
+		Sprite* Load(const std::string& filename);
 	private:
 		ID3D10Device* mDevice;
 		std::string mPath;

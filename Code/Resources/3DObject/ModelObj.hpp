@@ -22,14 +22,20 @@ namespace Resources
 
 		// Draw the object. Must be bound to an input slot.
 		void Draw(const D3DXVECTOR3& drawPosition, const Helper::Camera& camera);
+		void Draw(const D3DXMATRIX& modelMatrix, const Helper::Camera& camera);
 
 		// Scale the object
 		void SetScale(float newScale);
+
+		// Set the tint colour of the object
+		void SetTintColour(D3DXCOLOR newColour);
+
 	private:
 		ID3D10Device* mDevice;
 		StaticModelData* mData;
 		Framework::Effect* mEffect;
 		float mScale;
+		D3DXCOLOR mTintColour;
 
 		ModelObj(const ModelObj&);
 		ModelObj& operator=(const ModelObj&);

@@ -104,7 +104,7 @@ namespace Helper
 				else
 					p.Acceleration = D3DXVECTOR3(0,0,0);
 
-				p.Velocity = RandVec(10);
+				p.Velocity = RandVec(5);
 				p.TimeToLive = rand() % 3 + 2;
 				p.TimeLived = 0;
 				

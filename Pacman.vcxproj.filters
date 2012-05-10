@@ -12,7 +12,6 @@
     <ClCompile Include="Code\Framework\Effect\Pass.cpp" />
     <ClCompile Include="Code\Framework\Effect\Technique.cpp" />
     <ClCompile Include="Code\Framework\GameTime.cpp" />
-    <ClCompile Include="Code\Framework\Effect\ParticleSystem.cpp" />
     <ClCompile Include="Code\Helper\Camera.cpp" />
     <ClCompile Include="Code\Helper\Primitives.cpp" />
     <ClCompile Include="Code\Helper\r2tk\r2-assert.cpp" />
@@ -47,6 +46,8 @@
     <ClCompile Include="Code\Resources\3DObject\Material.cpp" />
     <ClCompile Include="Code\Helper\AnimationCamera.cpp" />
     <ClCompile Include="Code\View\Pacman.cpp" />
+    <ClCompile Include="Code\Helper\ParticleSystem.cpp" />
+    <ClCompile Include="Code\View\Ghost.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\PacmanGame.hpp" />
@@ -58,8 +59,6 @@
     <ClInclude Include="Code\Framework\Effect\Effect.hpp" />
     <ClInclude Include="Code\Framework\Effect\Pass.hpp" />
     <ClInclude Include="Code\Framework\Effect\Technique.hpp" />
-    <ClInclude Include="Code\Framework\Effect\ParticleHandlerInterface.h" />
-    <ClInclude Include="Code\Framework\Effect\ParticleSystem.hpp" />
     <ClInclude Include="Code\Framework\GameTime.hpp" />
     <ClInclude Include="Code\Helper\Camera.hpp" />
     <ClInclude Include="Code\Helper\Global.hpp" />
@@ -103,6 +102,8 @@
     <ClInclude Include="Code\Resources\3DObject\Material.hpp" />
     <ClInclude Include="Code\Helper\AnimationCamera.hpp" />
     <ClInclude Include="Code\View\Pacman.hpp" />
+    <ClInclude Include="Code\Helper\ParticleSystem.hpp" />
+    <ClInclude Include="Code\View\Ghost.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

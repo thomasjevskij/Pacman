@@ -43,7 +43,10 @@ namespace Helper
 		assert(keyFrameFilenames.size() == timeSpans.size());
 		for (int i = 0; i < keyFrameFilenames.size(); ++i)
 		{
-			mKeyFrames.push_back(KeyFrame(Resources::ModelResourceManager::Instance().Load(keyFrameFilenames[i]), timeSpans[i]));
+			//mKeyFrames.push_back(KeyFrame(Resources::ModelResourceManager::Instance().Load(keyFrameFilenames[i]), timeSpans[i]));
+			mKeyFrames.push_back(
+				KeyFrame(Resources::D3DResourceManager<Resources::StaticModelData>::Instance().Load(keyFrameFilenames[i])
+				, timeSpans[i]));
 		}
 
 		mEffect = Resources::D3DResourceManager<Framework::Effect>::Instance().Load("Animation.fx");
@@ -86,14 +89,12 @@ namespace Helper
 		mEffect->SetVariable("g_t", mTime / mKeyFrames[mCurrentFrame].TimeSpan);
 	}
 
-	void MorphAnimation::Draw(const Camera& camera, D3DXVECTOR3 position)
+	void MorphAnimation::Draw(const Camera& camera, D3DXMATRIX modelMatrix)
 	{
-		D3DXMATRIX w;
 		D3DXMATRIX wvp;
-		D3DXMatrixTranslation(&w, position.x, position.y, position.z);
-		wvp = w * camera.GetViewProjection();
+		wvp = modelMatrix * camera.GetViewProjection();
 
-		mEffect->SetVariable("g_matWorld", w);
+		mEffect->SetVariable("g_matWorld", modelMatrix);
 		mEffect->SetVariable("g_matWVP", wvp);
 
 		mKeyFrames[mCurrentFrame].Data->VertexData.Bind(0);

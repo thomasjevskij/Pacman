@@ -39,6 +39,7 @@ cbuffer cbEveryFrame
 };
 
 Texture2D g_modelTexture;
+float4 g_modelTintColour = float4(1.0, 1.0, 1.0, 1.0);
 float4 g_lightDirection;
 
 PS_INPUT VS(VS_INPUT input)
@@ -55,13 +56,14 @@ PS_INPUT VS(VS_INPUT input)
 
 float4 PS(PS_INPUT input) : SV_Target0
 {
-	float4 texColor = g_modelTexture.Sample(linearSampler, input.uv);
+	float4 texColour = g_modelTexture.Sample(linearSampler, input.uv);
 	float3 lightVec = normalize(g_lightDirection.xyz - input.positionW);
 	float diffuse = dot(lightVec, normalize(input.normalW));
 
-	texColor = texColor + (diffuse * 0.5);
+	texColour = texColour + (diffuse * 0.5);
+	texColour = texColour * g_modelTintColour;
 
-	return texColor;
+	return texColour;
 }
 
 technique10 DrawTechnique

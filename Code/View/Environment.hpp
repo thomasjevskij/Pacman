@@ -37,7 +37,7 @@ namespace View
 		Environment(const Environment&);
 		Environment& operator=(const Environment&);
 
-		void CreateGround();
+		void CreateGround(int width, int depth);
 		void CreateWalls(const Model::Level& level);
 	};
 }
