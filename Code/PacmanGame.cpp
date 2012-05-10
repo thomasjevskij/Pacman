@@ -27,7 +27,7 @@ PacmanGame::PacmanGame(HINSTANCE instance)
 	mLevelManager = new Resources::FileResourceManager<Model::Level>("Resources/Levels/");
 	mSoundManager = new Resources::SoundResourceManager("Resources/Sounds/");
 
-	mScreenHandler.ChangeScreen(new View::IngameScreen(&mScreenHandler, mD3DContext.GetDevice(), &mWindow));
+	mScreenHandler.ChangeScreen(new View::IngameScreen(&mScreenHandler, &mWindow, &mD3DContext));
 
 }
 

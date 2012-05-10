@@ -57,7 +57,7 @@ namespace Framework
 		SafeRelease(mDevice);
 	}
 
-	ID3D10Device* D3DContext::GetDevice()
+	ID3D10Device* D3DContext::GetDevice() const
 	{
 		return mDevice;
 	}

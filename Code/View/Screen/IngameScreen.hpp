@@ -10,6 +10,7 @@
 #include "Camera.hpp"
 #include "DebugCameraController.hpp"	// Debug
 #include "Sprite.hpp"	// Debug
+#include "UISurface.hpp"
 
 namespace View
 {
@@ -21,7 +22,7 @@ namespace View
 	class IngameScreen : public GameScreen, public GameEventSubscriber
 	{
 	public:
-		IngameScreen(GameScreenHandler* handler, ID3D10Device* device, Framework::ApplicationWindow* window);
+		IngameScreen(GameScreenHandler* handler, Framework::ApplicationWindow* window, const Framework::D3DContext* D3DContext);
 		~IngameScreen() throw();
 
 		void Update(float dt);
@@ -35,16 +36,17 @@ namespace View
 		void PacmanKilled();
 		void GameWon();
 	private:
-		ID3D10Device* mDevice;
 		IngameScreenState::IngameScreenState mState;
 
 		Framework::ApplicationWindow* mWindow;
+		const Framework::D3DContext* mD3DContext;
 		Helper::Camera* mCamera;
 		Helper::DebugCameraController* mCameraController;
 		Model::GameplayHandler mGameplayHandler;
 		View::Scene mScene;
 		View::Environment* mEnvironment;	// Debug
-		//View::Sprite* mSprite;			// Debug
+		View::Sprite mSprite;				// Debug
+		View::UISurface mUISurface;
 	};
 }
 

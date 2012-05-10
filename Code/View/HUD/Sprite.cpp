@@ -7,6 +7,9 @@ namespace View
 {
 	Sprite::Sprite(const std::string& filename)
 		: mTexture(NULL)
+		, mScale(1.0f)
+		, mPosition(0.0f, 0.0f)
+		, mTintColor(1.0f, 1.0f, 1.0f, 1.0f)
 	{
 		mTexture = Resources::D3DResourceManager<Resources::Texture>::Instance().Load(filename);
 	}

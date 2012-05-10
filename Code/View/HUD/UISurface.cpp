@@ -5,8 +5,6 @@ namespace View
 {
 	UISurface::UISurface(ID3D10Device* device)
 		: mDevice(device)
-		, mOverlayTexture(NULL)
-		, mOverlayTarget(NULL)
 		, mSpriteEffect(NULL)
 		, mSpriteBuffer(NULL)
 	{
@@ -17,9 +15,12 @@ namespace View
 	UISurface::~UISurface() throw()
 	{
 		SafeDelete(mSpriteBuffer);
-		SafeDelete(mSpriteEffect);
-		SafeRelease(mOverlayTarget);
-		SafeRelease(mOverlayTexture);
+	}
+
+	void UISurface::Clear()
+	{
+		// Clear all buffered sprite copies
+		mBufferedSprites.clear();
 	}
 
 	void UISurface::Draw(const Sprite& sprite)
@@ -28,15 +29,14 @@ namespace View
 		mBufferedSprites.push_back(sprite);
 	}
 
-	void UISurface::DrawSurface(const D3DXVECTOR2& position, const Framework::D3DContext& context)
+	void UISurface::DrawSurface(const Framework::D3DContext& context)
 	{
 		// Draw all the buffered sprites to the surface
+		mSpriteBuffer->Bind();
 		for (int i = 0; i < mBufferedSprites.size(); ++i)
 		{
-			DrawSpriteToSurface(mBufferedSprites[i], context);
+			DrawSpriteToViewport(mBufferedSprites[i], context);
 		}
-
-		// TODO: Draw the surface to the current render target
 	}
 
 	void UISurface::CreateSpriteEffect()
@@ -78,21 +78,25 @@ namespace View
 		mSpriteBuffer->SetData(bufferDesc, NULL);
 	}
 
-	void UISurface::DrawSpriteToSurface(const Sprite& sprite, const Framework::D3DContext& context)
+	void UISurface::DrawSpriteToViewport(const Sprite& sprite, const Framework::D3DContext& context)
 	{
-		D3DXMATRIX scale;
-		D3DXMATRIX translation;
-		float scaleX = static_cast<float>( sprite.GetTexture()->GetWidth() ) / static_cast<float>( context.GetViewportWidth(context.GetActiveViewport()) );
-		float scaleY = static_cast<float>( sprite.GetTexture()->GetHeight() ) / static_cast<float>( context.GetViewportHeight(context.GetActiveViewport()) );
+		float viewportWidth = static_cast<float>(context.GetViewportWidth(context.GetActiveViewport()));
+		float viewportHeight = static_cast<float>(context.GetViewportHeight(context.GetActiveViewport()));
+		
+		float scaleX = sprite.GetScale() * static_cast<float>(sprite.GetTexture()->GetWidth()) / viewportWidth;
+		float scaleY = sprite.GetScale() * static_cast<float>(sprite.GetTexture()->GetHeight()) / viewportHeight;
+		float posX = (2.0f * sprite.GetPosition().x / viewportWidth) - 1.0f;
+		float posY = (2.0f * sprite.GetPosition().y / viewportHeight) - 1.0f;
 
-		D3DXMatrixScaling(&scale, sprite.GetScale() * scaleX, sprite.GetScale() * scaleY, 1.0f);
-		//D3DXMatrixTranslation(&translation, 
+		D3DXMATRIX scale, translation, model;
+		D3DXMatrixScaling(&scale, scaleX, scaleY, 1.0f);
+		D3DXMatrixTranslation(&translation, posX, posY, 1.0f);
+		model = scale * translation;
 
 		mSpriteEffect->SetVariable("gTintColor", static_cast<D3DXVECTOR4>(sprite.GetTintColor()) );
 		mSpriteEffect->SetVariable("gModel", model);
 		mSpriteEffect->SetVariable("gImage", sprite.GetTexture()->GetShaderResourceView());
 
-		mSpriteBuffer->Bind();
 		for (unsigned int p = 0; p < mSpriteEffect->GetTechniqueByIndex(0).GetPassCount(); ++p)
 		{
 			mSpriteEffect->GetTechniqueByIndex(0).GetPassByIndex(p).Apply(mDevice);

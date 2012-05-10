@@ -2,14 +2,16 @@
 
 namespace View
 {
-	IngameScreen::IngameScreen(GameScreenHandler* handler, ID3D10Device* device, Framework::ApplicationWindow* window)
+	IngameScreen::IngameScreen(GameScreenHandler* handler, Framework::ApplicationWindow* window, const Framework::D3DContext* D3DContext)
 		: GameScreen(handler)
-		, mDevice(device)
 		, mState(IngameScreenState::Running)	// Debug, start running immediately during testing
 		, mWindow(window)
+		, mD3DContext(D3DContext)
 		, mCamera(NULL)
 		, mCameraController(NULL)
 		, mEnvironment(NULL)
+		, mSprite("pacManTexture.png")
+		, mUISurface(D3DContext->GetDevice())
 	{
 		Helper::Frustum f;
 		f.AspectRatio = static_cast<float>(mWindow->GetClientWidth()) / mWindow->GetClientHeight();
@@ -19,16 +21,13 @@ namespace View
 
 		mCamera = new Helper::Camera(f.CreatePerspectiveProjection());
 		mCameraController = new Helper::DebugCameraController(D3DXVECTOR3(0, 0, 0), mCamera);
-		mEnvironment = new View::Environment(mDevice, mGameplayHandler.GetLevel());
-		//mSprite = Resources::SpriteResourceManager::Instance().Load("pacManTexture.png");
+		mEnvironment = new View::Environment(D3DContext->GetDevice(), mGameplayHandler.GetLevel());
 
 		mWindow->AddNotificationSubscriber(mCameraController);
 
-		ID3DX10Sprite* sprite;
-		ID3DX10Font* font;
-		
-		
-		
+		mSprite.SetPosition(D3DXVECTOR2(80, 80));
+		mSprite.SetScale(0.5f);
+		mSprite.SetTintColor(D3DXCOLOR(1.0f, 0.0f, 1.0f, 1.0f));
 	}
 
 	IngameScreen::~IngameScreen() throw()
@@ -51,7 +50,10 @@ namespace View
 	{
 		// TODO: Draw different things in different states
 		mEnvironment->Draw(*mCamera);
-		//mSprite->Draw(D3DXVECTOR2(-1.0, -1.0));
+		
+		mUISurface.Clear();
+		// TODO: Draw UI here
+		mUISurface.DrawSurface(*mD3DContext);
 	}
 
 	void IngameScreen::PelletEaten(Helper::Point2f position)
