@@ -92,6 +92,7 @@ namespace View
 		mWallObject.Bind();
 		for(int i = 0; i < mWallPositions.size(); ++i)
 		{
+			//insert "If culling"
 			mWallObject.Draw(mWallPositions[i], camera);
 		}
 	}
