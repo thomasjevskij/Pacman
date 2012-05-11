@@ -53,10 +53,15 @@ namespace Model
 			mPowerModeTimer += dt;
 			if(mPowerModeTimer > 9)
 			{
+				OutputDebugString("\n--Model Testing--:  Player is in Powermode ");
 				for(int d = 0; d < mGhosts.size(); d++)
 				{
 					if(mGhosts[d].GetGhostState() != mGhosts[d].Killed)
 						mGhosts[d].SetGhostState(mGhosts[d].Chase);
+					
+			
+					OutputDebugString("\n--Model Testing--:  POWERMODE ENDED: ");
+					DbgOutFloat("\n--Model Testing--:  Ghost state: ", mGhosts[d].GetGhostState());
 				}
 				mPowerModeTimer = 0;
 				//mGameEventSubscriber->PowerPelletEnd();
@@ -69,11 +74,11 @@ namespace Model
 		{
 			mGhosts[s].GhostStateBehaviour(mGameTime,mCurrentLevel);
 			//Test code
-			char buffer[512];
-			sprintf(buffer,"%d",s);
-			OutputDebugString("\n--Model Testing--:  Ghost nr: ");
-			OutputDebugString(buffer);
-			OutputDebugString("\n");
+			//char buffer[512];
+			//sprintf(buffer,"%d",s);
+			//OutputDebugString("\n--Model Testing--:  Ghost nr: ");
+			//OutputDebugString(buffer);
+			//OutputDebugString("\n");
 
 			mGhosts[s].UpdateMovement(mPlayer.GetGridPosition(), dt, &mLevelHandler.GetCurrentLevel(), &mPlayer, mGhosts[0].GetGridPosition());
 		}

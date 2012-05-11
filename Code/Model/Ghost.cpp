@@ -115,10 +115,10 @@ namespace Model
 		mRealPosition = GetValidGridPos(mRealPosition,level->GetWidth(), level->GetHeight());
 		mGridPosition = Coord((int)mRealPosition.X,(int)mRealPosition.Y);
 
-		DbgOutFloat(" --Model Testing--: mRealPosition.X = ",mRealPosition.X);
-		DbgOutFloat("\n --Model Testing--: mRealPosition.Y = ",mRealPosition.Y);
-		DbgOutFloat("\n --Model Testing--: mGridPos.X = ",mGridPosition.X);
-		DbgOutFloat("\n --Model Testing--: mGridPos.Y = ", mGridPosition.Y);
+		//DbgOutFloat(" --Model Testing--: mRealPosition.X = ",mRealPosition.X);
+		//DbgOutFloat("\n --Model Testing--: mRealPosition.Y = ",mRealPosition.Y);
+		//DbgOutFloat("\n --Model Testing--: mGridPos.X = ",mGridPosition.X);
+		//DbgOutFloat("\n --Model Testing--: mGridPos.Y = ", mGridPosition.Y);
 		OutputDebugString(" \n");
 	}
 	
