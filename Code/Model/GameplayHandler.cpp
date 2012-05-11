@@ -5,6 +5,7 @@ namespace Model
 	GameplayHandler::GameplayHandler(): mPlayer(Coord(1,1)), mFruit()
 	{
 		mGameRestart = true;
+		mBackPressed = false;
 		srand(NULL);
 
 		//Testing message
@@ -35,8 +36,13 @@ namespace Model
 			mPlayer.GoLeft();
 		if(rightPressed)
 			mPlayer.GoRight();
-		if(backPressed)
+		if(backPressed && !mBackPressed)
+		{
 			mPlayer.GoBack();
+			mBackPressed = true;
+		}
+		else if(!backPressed)
+			mBackPressed = false;
 
 		//Update Powermode timer
 		if(mPowerModeTimer != 0)
