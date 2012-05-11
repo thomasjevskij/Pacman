@@ -1,6 +1,7 @@
 #ifndef SCENE_HPP
 #define SCENE_HPP
 
+#include <vector>
 #include "Global.hpp"
 #include "ApplicationWindow.hpp"
 #include "Environment.hpp"
@@ -36,7 +37,7 @@ namespace View
 		Helper::ChaseCamera* mCameraController;
 		Resources::ModelObj mPelletObject;
 		Resources::ModelObj mPowPelletObject;
-		View::Ghost* mGhost;				// Debug
+		std::vector<View::Ghost> mGhosts;				// Debug
 		Pacman mPacman;
 
 		Scene(const Scene&);

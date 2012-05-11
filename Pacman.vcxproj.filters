@@ -122,5 +122,7 @@
     <None Include="Resources\Effects\GhostTrail.fx" />
     <None Include="Resources\Textures\pacManTexture.png" />
     <None Include="Resources\Textures\cobblestone.png" />
+    <None Include="Resources\Textures\star.jpg" />
+    <None Include="Resources\Textures\pacman-life.png" />
   </ItemGroup>
 </Project>

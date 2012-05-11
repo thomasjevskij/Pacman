@@ -9,6 +9,9 @@ namespace Model
 
 		//Testing message
 		OutputDebugString("--Model Testing--:  Gameplayhandler initiated \n");
+
+		// Rarosu: Start a new level when created - so that when the gameplay handler is created, the scene can be set up.
+		NewLevel();
 	}
 
 	void GameplayHandler::Update(float dt, bool leftPressed, bool rightPressed, bool backPressed)
