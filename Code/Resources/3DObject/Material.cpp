@@ -11,7 +11,9 @@ namespace Resources
 		,  Specular(D3DXVECTOR3(1.0, 1.0, 1.0)), Tf(D3DXVECTOR3(1.0, 1.0, 1.0))
 		,  IlluminationModel(0), /*Opacitiy(1.0),*/ RefractionIndex(1.0)
 		/*,  SpecularExp(), Sharpness(60.0)*/, MainTexture(NULL)
-	{}
+	{
+		MainTexture = D3DResourceManager<Texture>::Instance().Load("whitePixel.png");
+	}
 
 	Material::Material()
 	{
@@ -113,7 +115,25 @@ namespace Resources
 
 				// Only try to load the texture if a filename was read
 				if(textureFilename.find('.') != std::string::npos)
-					currMaterial.MainTexture = D3DResourceManager<Texture>::Instance().Load(textureFilename);
+				{
+					try 
+					{
+						currMaterial.MainTexture = D3DResourceManager<Texture>::Instance().Load(textureFilename);
+					} 
+					catch (r2::Exception::IO& e)
+					{
+						// Failed to load texture, simply load whitePixel.png and print a warning
+						currMaterial.MainTexture = D3DResourceManager<Texture>::Instance().Load("whitePixel.png");
+						OutputDebugString( ("Failed to load texture for model: " + filename).c_str() );
+					}
+					catch (...)
+					{
+						throw;
+					}
+				}
+				
+				
+					
 			}
 		}
 

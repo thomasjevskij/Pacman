@@ -126,5 +126,6 @@
     <None Include="Resources\Textures\cobblestone.png" />
     <None Include="Resources\Textures\star.jpg" />
     <None Include="Resources\Textures\pacman-life.png" />
+    <None Include="Resources\Textures\pacmanUV.png" />
   </ItemGroup>
 </Project>

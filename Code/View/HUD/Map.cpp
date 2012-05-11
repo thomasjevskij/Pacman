@@ -15,8 +15,16 @@ namespace View
 		: mCellSprite("whitePixel.png")
 		, mBackgroundSprite("whitePixel.png")
 		, mActorSprite("circle.png")
+	{}
+
+	unsigned int Map::GetWidth(const Model::Level& level) const
 	{
-		
+		return level.GetWidth() * C_CELL_SIZE;
+	}
+
+	unsigned int Map::GetHeight(const Model::Level& level) const
+	{
+		return level.GetHeight() * C_CELL_SIZE;
 	}
 
 	void Map::Draw(UISurface& surface, Model::ModelDataInterface& model, const D3DXVECTOR2& position, bool renderGhosts)
@@ -29,8 +37,8 @@ namespace View
 		model.GetGhostPositions();
 		
 		// Draw background
-		mBackgroundSprite.SetScale(level.GetWidth() * C_CELL_SIZE, 
-								   level.GetHeight() * C_CELL_SIZE);
+		mBackgroundSprite.SetScale(GetWidth(level), 
+								   GetHeight(level));
 		mBackgroundSprite.SetPosition(position);
 		mBackgroundSprite.SetTintColor(C_BACKGROUND_COLOR);
 		surface.Draw(mBackgroundSprite);
@@ -67,7 +75,7 @@ namespace View
 
 	void Map::DrawActor(UISurface& surface, const D3DXVECTOR2& mapPosition, const D3DXVECTOR2& actorPosition, const D3DXCOLOR& color)
 	{
-		mActorSprite.SetPosition( mapPosition + D3DXVECTOR2(actorPosition.x * C_CELL_SIZE * 0.5f, actorPosition.y * C_CELL_SIZE * 0.5f) );
+		mActorSprite.SetPosition( mapPosition + D3DXVECTOR2((actorPosition.x - 0.5f) * C_CELL_SIZE * 0.5f, (actorPosition.y - 0.5f) * C_CELL_SIZE * 0.5f) );
 		mActorSprite.SetTintColor(color);
 		surface.Draw(mActorSprite);
 	}

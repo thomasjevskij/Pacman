@@ -28,14 +28,14 @@ namespace Resources
 		void SetScale(float newScale);
 
 		// Set the tint colour of the object
-		void SetTintColour(D3DXCOLOR newColour);
+		void SetTintColor(D3DXCOLOR newColor);
 
 	private:
 		ID3D10Device* mDevice;
 		StaticModelData* mData;
 		Framework::Effect* mEffect;
 		float mScale;
-		D3DXCOLOR mTintColour;
+		D3DXCOLOR mTintColor;
 
 		ModelObj(const ModelObj&);
 		ModelObj& operator=(const ModelObj&);

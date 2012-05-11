@@ -13,6 +13,9 @@ namespace View
 		Map();
 
 		void Draw(UISurface& surface, Model::ModelDataInterface& model, const D3DXVECTOR2& position, bool renderGhosts);
+		unsigned int GetWidth(const Model::Level& level) const;
+		unsigned int GetHeight(const Model::Level& level) const;
+
 
 		static const unsigned int C_CELL_PADDING;
 		static const unsigned int C_CELL_SIZE;
