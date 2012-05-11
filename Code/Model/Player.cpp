@@ -45,7 +45,6 @@ namespace Model
 		validCoord = GetValidGridPos(mGridPosition + mFacing,level->GetWidth(), level->GetHeight());
 		//Updatera pacmans position
 
-		//mRealPosition += Helper::Point2f(mFacing.X * mMovementSpeed * dt, mFacing.Y * mMovementSpeed * dt);
 		if(level->GetCell(validCoord.X,validCoord.Y).Type == Cell::C_CELLTYPE_WALL && CenterPos())
 		{}
 		else
@@ -85,7 +84,7 @@ namespace Model
 
 	Helper::Point2f Player::GetRealPos() const
 	{
-		return Coord(mRealPosition.X / C_TILESIZE,mRealPosition.Y / C_TILESIZE);
+		return mRealPosition;
 	}
 
 	Coord Player::GetValidGridPos(Coord pos,int width,int height)
