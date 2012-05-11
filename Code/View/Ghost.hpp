@@ -22,6 +22,8 @@ namespace View
 		Resources::ModelObj* mObject;
 		Helper::ParticleSystem* mParticleSystem;
 		D3DXMATRIX mModelMatrix;
+		float mScale;
+		D3DXCOLOR mColor;
 		//Resources::Sound3D* mSound;
 	};
 }
