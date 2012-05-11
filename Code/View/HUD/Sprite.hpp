@@ -16,8 +16,10 @@ namespace View
 		Resources::Texture* GetTexture() const;
 
 		// Get/Set the uniform scale of the sprite
-		void SetScale(float scale);
-		float GetScale() const;
+		void SetScale(float uniformScale);
+		void SetScale(float scaleX, float scaleY);
+		float GetScaleX() const;
+		float GetScaleY() const;
 
 		// Get/Set the position of the sprite, with the origin
 		// in the upper-left corner.
@@ -29,7 +31,8 @@ namespace View
 		const D3DXCOLOR& GetTintColor() const;
 	private:
 		Resources::Texture*	mTexture;
-		float mScale;
+		float mScaleX;
+		float mScaleY;
 		D3DXVECTOR2 mPosition;
 		D3DXCOLOR mTintColor;
 	};

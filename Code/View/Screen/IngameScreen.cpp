@@ -39,6 +39,7 @@ namespace View
 
 		mUISurface.Clear();
 		// TODO: Draw UI here
+		mMap.Draw(mUISurface, mGameplayHandler, D3DXVECTOR2(80, 80), true); 
 		mUISurface.DrawSurface(*mD3DContext);
 	}
 

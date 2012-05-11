@@ -179,6 +179,7 @@
     <ClCompile Include="Code\Model\DebuggingParts.cpp" />
     <ClCompile Include="Code\Resources\3DObject\Material.cpp" />
     <ClCompile Include="Code\Resources\3DObject\StaticModelData.cpp" />
+    <ClCompile Include="Code\View\HUD\Map.cpp" />
     <ClCompile Include="Code\View\HUD\Sprite.cpp" />
     <ClCompile Include="Code\Framework\VertexBuffer.cpp" />
     <ClCompile Include="Code\Framework\ApplicationWindow.cpp" />
@@ -230,6 +231,7 @@
     <ClInclude Include="Code\Model\DebuggingParts.hpp" />
     <ClInclude Include="Code\Resources\3DObject\Material.hpp" />
     <ClInclude Include="Code\Resources\3DObject\StaticModelData.hpp" />
+    <ClInclude Include="Code\View\HUD\Map.hpp" />
     <ClInclude Include="Code\View\HUD\Sprite.hpp" />
     <ClInclude Include="Code\Framework\VertexBuffer.hpp" />
     <ClInclude Include="Code\Framework\ApplicationWindow.hpp" />
