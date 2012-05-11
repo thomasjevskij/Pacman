@@ -29,7 +29,6 @@ namespace Model
 				{
 					OutputDebugString("--Model Testing--: Packade packis gick i en wall \n");
 					return;
-
 				}
 				else
 				{
@@ -51,6 +50,7 @@ namespace Model
 		{
 			mRealPosition.X += mFacing.X * mMovementSpeed * dt;
 			mRealPosition.Y += mFacing.Y * mMovementSpeed * dt;
+			mRealPosition = GetValidGridPos(mRealPosition,level->GetWidth(), level->GetHeight());
 		}
 		mGridPosition = Coord((int)mRealPosition.X,(int)mRealPosition.Y);
 		mLastFacing = mFacing;

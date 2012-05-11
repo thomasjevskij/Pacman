@@ -27,6 +27,9 @@ namespace Model
 
 		mGameTime += dt;
 		
+		DbgOutFloat("\n --Model Testing--: GameTime = ", mGameTime);
+		OutputDebugString(" \n");
+		
 
 		if(leftPressed)
 			mPlayer.GoLeft();

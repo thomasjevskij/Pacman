@@ -74,6 +74,8 @@ namespace Model
 			}
 			//Choose a route
 			OutputDebugString("--Model Testing--: Choosing route \n");
+			if(possibleGrids.size() == 0)
+				possibleGrids.push_back(Coord(mGridPosition.X, mGridPosition.Y - 1));
 			assert(possibleGrids.size() > 0);
 			if(possibleGrids.size() == 1)
 			{
@@ -101,6 +103,7 @@ namespace Model
 		//mRealPosition += Helper::Point2f(mFacing.X * mMovementSpeed * dt, mFacing.Y * mMovementSpeed * dt);
 		mRealPosition.X += mFacing.X * mMovementSpeed * dt;
 		mRealPosition.Y += mFacing.Y * mMovementSpeed * dt;
+		mRealPosition = GetValidGridPos(mRealPosition,level->GetWidth(), level->GetHeight());
 		mGridPosition = Coord((int)mRealPosition.X,(int)mRealPosition.Y);
 		DbgOutFloat(" --Model Testing--: mRealPosition.X = ",mRealPosition.X);
 		DbgOutFloat("\n --Model Testing--: mRealPosition.Y = ",mRealPosition.Y);
@@ -124,8 +127,8 @@ namespace Model
 		mGhostState = state;
 		if(state == GhostState::Frightened)
 		{
-			mFacing.X *= -1;
-			mFacing.Y *= -1;
+			//mFacing.X *= -1;
+			//mFacing.Y *= -1;
 			mMovementSpeed = 0.8;
 		}
 		else if(state == GhostState::Killed)
@@ -184,6 +187,29 @@ namespace Model
 					mGhostState = GhostState::Chase;
 			}
 		}
+	}
+
+	Helper::Point2f Ghost::GetValidGridPos(Coord pos,int width,int height)
+	{
+		if(pos.X < 0)
+		{
+			pos.X = width-1;
+		}
+		else if( pos.X > width-1)
+		{
+			pos.X = 0;
+		}
+
+		if(pos.Y < 0)
+		{
+			pos.Y = height-1;
+		}
+		else if( pos.Y > height-1)
+		{
+			pos.Y = 0;
+		}
+		// DEBUG: added this because the function must return a value!
+		return pos;
 	}
 
 	bool Ghost::CenterPos()
