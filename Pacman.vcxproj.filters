@@ -12,13 +12,11 @@
     <ClCompile Include="Code\Framework\Effect\Pass.cpp" />
     <ClCompile Include="Code\Framework\Effect\Technique.cpp" />
     <ClCompile Include="Code\Framework\GameTime.cpp" />
-    <ClCompile Include="Code\Framework\Effect\ParticleSystem.cpp" />
     <ClCompile Include="Code\Helper\Camera.cpp" />
     <ClCompile Include="Code\Helper\Primitives.cpp" />
     <ClCompile Include="Code\Helper\r2tk\r2-assert.cpp" />
     <ClCompile Include="Code\Helper\r2tk\r2-exception.cpp" />
     <ClCompile Include="Code\Helper\GameFont.cpp" />
-    <ClCompile Include="Code\Helper\DebugCameraControler.cpp" />
     <ClCompile Include="Code\Helper\ChaseCamera.cpp" />
     <ClCompile Include="Code\Helper\MorphAnimation.cpp" />
     <ClCompile Include="Code\Model\Fruit.cpp" />
@@ -34,13 +32,25 @@
     <ClCompile Include="Code\Model\Inky.cpp" />
     <ClCompile Include="Code\Model\Clyde.cpp" />
     <ClCompile Include="Code\Resources\Sound2D.cpp" />
-    <ClCompile Include="Code\Resources\ModelObj.cpp" />
     <ClCompile Include="Code\Resources\Texture.cpp" />
     <ClCompile Include="Code\View\Environment.cpp" />
     <ClCompile Include="Code\View\Scene.cpp" />
     <ClCompile Include="Code\View\GUI\Menu.cpp" />
+    <ClCompile Include="Code\View\Screen\GameScreen.cpp" />
+    <ClCompile Include="Code\View\Screen\IngameScreen.cpp" />
     <ClCompile Include="Code\View\GUI\Table.cpp" />
-    <ClCompile Include="Code\Resources\Sprite.cpp" />
+    <ClCompile Include="Code\Helper\DebugCameraController.cpp" />
+    <ClCompile Include="Code\Resources\3DObject\ModelObj.cpp" />
+    <ClCompile Include="Code\Resources\3DObject\StaticModelData.cpp" />
+    <ClCompile Include="Code\Resources\3DObject\Material.cpp" />
+    <ClCompile Include="Code\Helper\AnimationCamera.cpp" />
+    <ClCompile Include="Code\View\Pacman.cpp" />
+    <ClCompile Include="Code\Helper\ParticleSystem.cpp" />
+    <ClCompile Include="Code\View\Ghost.cpp" />
+    <ClCompile Include="Code\View\HUD\Sprite.cpp" />
+    <ClCompile Include="Code\View\HUD\UISurface.cpp" />
+    <ClCompile Include="Code\Model\DebuggingParts.cpp" />
+    <ClCompile Include="Code\View\HUD\Map.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\PacmanGame.hpp" />
@@ -52,8 +62,6 @@
     <ClInclude Include="Code\Framework\Effect\Effect.hpp" />
     <ClInclude Include="Code\Framework\Effect\Pass.hpp" />
     <ClInclude Include="Code\Framework\Effect\Technique.hpp" />
-    <ClInclude Include="Code\Framework\Effect\ParticleHandlerInterface.h" />
-    <ClInclude Include="Code\Framework\Effect\ParticleSystem.hpp" />
     <ClInclude Include="Code\Framework\GameTime.hpp" />
     <ClInclude Include="Code\Helper\Camera.hpp" />
     <ClInclude Include="Code\Helper\Global.hpp" />
@@ -63,7 +71,6 @@
     <ClInclude Include="Code\Helper\r2tk\r2-global.hpp" />
     <ClInclude Include="Code\Helper\r2tk\r2-singleton.hpp" />
     <ClInclude Include="Code\Helper\GameFont.hpp" />
-    <ClInclude Include="Code\Helper\DebugCameraControler.hpp" />
     <ClInclude Include="Code\Helper\ChaseCamera.hpp" />
     <ClInclude Include="Code\Helper\MorphAnimation.hpp" />
     <ClInclude Include="Code\Model\Ai.hpp" />
@@ -82,7 +89,6 @@
     <ClInclude Include="Code\Resources\ResourceManager.hpp" />
     <ClInclude Include="Code\Resources\FileResourceManager.hpp" />
     <ClInclude Include="Code\Resources\Sound2D.hpp" />
-    <ClInclude Include="Code\Resources\ModelObj.hpp" />
     <ClInclude Include="Code\Resources\Texture.hpp" />
     <ClInclude Include="Code\Resources\D3DResourceManager.hpp" />
     <ClInclude Include="Code\View\GameEventSubscriber.hpp" />
@@ -90,7 +96,20 @@
     <ClInclude Include="Code\View\Environment.hpp" />
     <ClInclude Include="Code\View\GUI\Menu.hpp" />
     <ClInclude Include="Code\View\GUI\Table.hpp" />
-    <ClInclude Include="Code\Resources\Sprite.hpp" />
+    <ClInclude Include="Code\View\Screen\GameScreen.hpp" />
+    <ClInclude Include="Code\View\Screen\IngameScreen.hpp" />
+    <ClInclude Include="Code\Helper\DebugCameraController.hpp" />
+    <ClInclude Include="Code\Resources\3DObject\ModelObj.hpp" />
+    <ClInclude Include="Code\Resources\3DObject\StaticModelData.hpp" />
+    <ClInclude Include="Code\Resources\3DObject\Material.hpp" />
+    <ClInclude Include="Code\Helper\AnimationCamera.hpp" />
+    <ClInclude Include="Code\View\Pacman.hpp" />
+    <ClInclude Include="Code\Helper\ParticleSystem.hpp" />
+    <ClInclude Include="Code\View\Ghost.hpp" />
+    <ClInclude Include="Code\View\HUD\Sprite.hpp" />
+    <ClInclude Include="Code\View\HUD\UISurface.hpp" />
+    <ClInclude Include="Code\Model\DebuggingParts.hpp" />
+    <ClInclude Include="Code\View\HUD\Map.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
@@ -103,5 +122,10 @@
     <None Include="Resources\Levels\Level.png" />
     <None Include="Resources\Effects\Sprite.fx" />
     <None Include="Resources\Effects\GhostTrail.fx" />
+    <None Include="Resources\Textures\pacManTexture.png" />
+    <None Include="Resources\Textures\cobblestone.png" />
+    <None Include="Resources\Textures\star.jpg" />
+    <None Include="Resources\Textures\pacman-life.png" />
+    <None Include="Resources\Textures\pacmanUV.png" />
   </ItemGroup>
 </Project>

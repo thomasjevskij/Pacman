@@ -2,8 +2,14 @@
 
 namespace Helper
 {
-	ParticleSystem::ParticleSystem(ID3D10Device *device,const D3DXVECTOR3& pos,const std::string& file,const D3DXCOLOR& color,const bool& Acceleration,const bool& Gravity,const bool& RandomStart):
-	mDevice(device),mPosition(pos), mColor(color), mGravityOn(Gravity),mAccelerationOn(Acceleration),mRandomStart(RandomStart)
+	ParticleSystem::ParticleSystem(ID3D10Device *device,const D3DXVECTOR3& pos,const std::string& file,const D3DXCOLOR& color,const float& radie,const bool& Acceleration,const bool& Gravity,const bool& RandomStart)
+		: mDevice(device)
+		, mPosition(pos)
+		, mColor(color)
+		, mGravityOn(Gravity)
+		, mAccelerationOn(Acceleration)
+		, mRandomStart(RandomStart)
+		, mRadie(radie)
 	{
 		
 		mEffect = Resources::D3DResourceManager<Framework::Effect>::Instance().Load(file);
@@ -15,10 +21,8 @@ namespace Helper
 		ParticleLayout.push_back(Framework::InputLayoutElement("TIMETOLIVE",DXGI_FORMAT_R32_FLOAT));
 
 		mEffect->GetTechniqueByIndex(0).GetPassByIndex(0).SetInputLayout(ParticleLayout);
-		ID3D10ShaderResourceView* ParticleTexRV;
-		D3DX10CreateShaderResourceViewFromFile( device, "Resources/Effects/star.jpg", NULL, NULL, &ParticleTexRV, NULL );
-		mEffect->SetVariable("Color",D3DXVECTOR4(mColor));
-		mEffect->SetVariable("Texture",ParticleTexRV);
+
+		mTexture = Resources::D3DResourceManager<Resources::Texture>::Instance().Load("star.jpg");
 
 		Particle p;
 		p.Position = mPosition;
@@ -49,19 +53,21 @@ namespace Helper
 		Framework::VertexBuffer buffer(mDevice);
 		buffer.SetData(particleBuffer,NULL);
 
-		buffer.Bind();
 
-		mEffect->SetVariable("WorldViewProj",cam.GetViewProjection());
 		D3DXMATRIX InvView;
 		D3DXMatrixInverse( &InvView, NULL, &cam.GetView() );
-		mEffect->SetVariable("InvView",InvView);
-		
-		
 
+		mEffect->SetVariable("WorldViewProj", cam.GetViewProjection());
+		mEffect->SetVariable("InvView", InvView);
+		mEffect->SetVariable("Color", D3DXVECTOR4(mColor));
+		mEffect->SetVariable("Texture", mTexture->GetShaderResourceView());
+		
+		
+		buffer.Bind();
 		for( UINT p = 0; p < mEffect->GetTechniqueByIndex(0).GetPassCount(); ++p )
 		{
 			mEffect->GetTechniqueByIndex( 0 ).GetPassByIndex( p ).Apply(mDevice);
-			buffer.Draw();
+			mDevice->Draw(buffer.GetElementCount(), 0);
 		}
 
 		float blendFactor[] = {0,0,0,0};
@@ -72,8 +78,8 @@ namespace Helper
 	{
 		for(int i = 0;i < mParticles.size();)
 		{
-			if(mAccelerationOn)
-				mParticles[i].Velocity += mParticles[i].Acceleration*dt;
+			
+			mParticles[i].Velocity += mParticles[i].Acceleration*dt;
 
 			if(mGravityOn)
 				mParticles[i].Acceleration.y -= C_GRAVITY * dt;
@@ -86,6 +92,7 @@ namespace Helper
 			else
 				i++;
 		}
+
 		if(mParticles.size() < C_PARTICLE_COUNT)
 		{
 			for(int i = 0;i < (C_PARTICLE_COUNT/3)*dt ;i++)
@@ -95,12 +102,16 @@ namespace Helper
 				
 				Particle p;
 				if(mRandomStart)
-					p.Position = mPosition + RandVec(10);
+					p.Position = mPosition + RandVec(mRadie);
 				else
 					p.Position = mPosition;
 
-				p.Acceleration = RandVec(5);
-				p.Velocity = RandVec(10);
+				if(mAccelerationOn)
+					p.Acceleration = RandVec(5);
+				else
+					p.Acceleration = D3DXVECTOR3(0,0,0);
+
+				p.Velocity = RandVec(5);
 				p.TimeToLive = rand() % 3 + 2;
 				p.TimeLived = 0;
 				

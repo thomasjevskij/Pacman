@@ -88,15 +88,6 @@ namespace Model
 				}
 			}
 		}
-
-		// DEBUG
-		/*
-		for(int k = -3; k < 3; ++k)
-		{
-			mWallPositions.push_back(Coord(k, 0));
-		}
-		*/
-
 	}
 
 	void Level::AddFood()
@@ -115,12 +106,18 @@ namespace Model
 		if (c.Type == Cell::C_CELLTYPE_PELLET)
 		{
 			std::vector<Coord>::iterator it = std::find(mPelletPositions.begin(), mPelletPositions.end(), c.Coordinate);
-			mPelletPositions.erase(it);
+			if (it != mPelletPositions.end())
+			{
+				mPelletPositions.erase(it);
+			}
 		}
 		else if (c.Type == Cell::C_CELLTYPE_POWERPELLET)
 		{
 			std::vector<Coord>::iterator it = std::find(mPowerPelletPositions.begin(), mPowerPelletPositions.end(), c.Coordinate);
-			mPelletPositions.erase(it);
+			if (it != mPowerPelletPositions.end())
+			{
+				mPowerPelletPositions.erase(it);
+			}
 		}
 		SetCellType(x, y, Cell::C_CELLTYPE_EMPTY);
 	}
@@ -137,6 +134,16 @@ namespace Model
 
 	const Cell& Level::GetCell(int x, int y) const
 	{
+		if(x < 0)
+			x = mWidth-1;
+		else if( x > mWidth-1)
+			x = 0;
+
+		if(y < 0)
+			y = mHeight-1;
+		else if( y > mHeight-1)
+			y = 0;
+
 		int i = GetIndex(x, y);
 		assert(i >= 0 && i < mCells.size());
 
@@ -177,7 +184,7 @@ namespace Model
 	{
 		if (x >= 0 && x < mWidth &&
 			y >= 0 && y < mHeight)
-			return x + y * mHeight;
+			return x + ((mHeight-1) - y) * mWidth;
 		else
 			return -1;
 	}

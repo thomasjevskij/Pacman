@@ -32,13 +32,13 @@ namespace View
 		Framework::VertexBuffer* mBuffer;
 		Framework::Effect* mEffect;
 		std::vector<D3DXVECTOR3> mWallPositions;
-		Resources::ModelObj* mWallObject;
+		Resources::ModelObj mWallObject;
 
 		Environment(const Environment&);
 		Environment& operator=(const Environment&);
 
-		void CreateGround();
-		void CreateWalls(Model::Level level);
+		void CreateGround(int width, int depth);
+		void CreateWalls(const Model::Level& level);
 	};
 }
 #endif

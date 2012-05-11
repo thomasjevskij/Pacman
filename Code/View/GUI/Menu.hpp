@@ -19,6 +19,7 @@ namespace View
 			void RemoveItem(int index);
 			void RemoveItem(const std::string& caption);
 			void SetPadding(int padding);
+			void SetPosition(const Helper::Point2i position);
 
 			void SelectNext();
 			void SelectPrevious();
@@ -33,6 +34,8 @@ namespace View
 		
 				const std::string& GetCaption() const;
 				void Draw(bool isSelected) const;
+
+				bool operator==(const MenuItem& rhs) const;
 			private:
 				std::string mCaption;
 			};

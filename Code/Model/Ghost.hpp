@@ -35,11 +35,12 @@ namespace Model
 		Coord mRealPosition;
 		Coord mGridPosition;
 		Coord mSpawnPosition;
-		int mMovementSpeed;
+		float mMovementSpeed;
+		bool mHasTurned;
 
+		Helper::Point2f GetValidGridPos(Coord pos,int width,int height);
 		bool CenterPos();
 
-		static const int C_TILESIZE = 64;
 	};
 
 	class Ai

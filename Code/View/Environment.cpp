@@ -1,13 +1,14 @@
 #include "Environment.hpp"
 #include "D3DResourceManager.hpp"
 #include "Texture.hpp"
+#include <cmath>
 
 namespace View
 {
 	Environment::Environment(ID3D10Device* device, Model::Level level)
-		: mDevice(device), mBuffer(NULL), mEffect(NULL), mWallObject(NULL)
+		: mDevice(device), mBuffer(NULL), mEffect(NULL), mWallObject(device, "wallSegment.obj")
 	{
-		CreateGround();
+		CreateGround(level.GetWidth(), level.GetHeight());
 		CreateWalls(level);
 	}
 
@@ -16,21 +17,27 @@ namespace View
 		SafeDelete(mBuffer);
 	}
 
-	void Environment::CreateGround()
+	void Environment::CreateGround(int width, int depth)
 	{
 		const int C_NUM_VERTICES = 4;
 		Vertex vertices[C_NUM_VERTICES];
+		
+		float halfSize = C_CELL_SIZE * 0.5;
+		float startX = -halfSize;
+		float endX = C_CELL_SIZE * width - halfSize;
+		float startZ = -halfSize;
+		float endZ = C_CELL_SIZE * depth - halfSize;
 
-		vertices[0].Position = D3DXVECTOR3(-100, -3, -100);
+		vertices[0].Position = D3DXVECTOR3(startX, 0, startZ);
 		vertices[0].UV = D3DXVECTOR2(0, 0);
 
-		vertices[1].Position = D3DXVECTOR3(100, -3, -100);
+		vertices[1].Position = D3DXVECTOR3(endX, 0, startZ);
 		vertices[1].UV = D3DXVECTOR2(10, 0);
 
-		vertices[2].Position = D3DXVECTOR3(-100, -3, 100);
+		vertices[2].Position = D3DXVECTOR3(startX, 0, endZ);
 		vertices[2].UV = D3DXVECTOR2(0, 10);
 
-		vertices[3].Position = D3DXVECTOR3(100, -3, 100);
+		vertices[3].Position = D3DXVECTOR3(endX, 0, endZ);
 		vertices[3].UV = D3DXVECTOR2(10, 10);
 
 		// Describe the buffer and create it
@@ -53,28 +60,19 @@ namespace View
 		mEffect->GetTechniqueByIndex(0).GetPassByIndex(0).SetInputLayout(inputLayout);
 
 		Resources::Texture* groundTexture = Resources::D3DResourceManager<Resources::Texture>::Instance().Load("cobblestone.png");
-		mEffect->SetVariable("g_modelTexture", groundTexture->GetShaderResoureceView());
+		mEffect->SetVariable("g_modelTexture", groundTexture->GetShaderResourceView());
 	}
 
-	void Environment::CreateWalls(Model::Level level)
+	void Environment::CreateWalls(const Model::Level& level)
 	{
-		mWallObject = Resources::D3DResourceManager<Resources::ModelObj>::Instance().Load("wallSegment.obj");
-		mWallObject->SetScale(C_CELL_SIZE);
+		mWallObject.SetScale(C_CELL_SIZE);
 
 		const std::vector<Model::Coord> wallPosInGrid = level.GetWallPositions();
 
 		for(int i = 0; i < wallPosInGrid.size(); ++i)
 		{
-			mWallPositions.push_back(D3DXVECTOR3(wallPosInGrid[i].X * C_CELL_SIZE, 0, wallPosInGrid[i].Y * C_CELL_SIZE));
+			mWallPositions.push_back(D3DXVECTOR3((wallPosInGrid[i].X + 0.5f) * C_CELL_SIZE, 0, (wallPosInGrid[i].Y + 0.5f) * C_CELL_SIZE));
 		}
-
-		//mWallPositions.push_back(D3DXVECTOR3(-30, 0, 0));
-		//mWallPositions.push_back(D3DXVECTOR3(-20, 0, 0));
-		//mWallPositions.push_back(D3DXVECTOR3(-10, 0, 0));
-		//mWallPositions.push_back(D3DXVECTOR3(0, 0, 0));
-		//mWallPositions.push_back(D3DXVECTOR3(10, 0, 0));
-		//mWallPositions.push_back(D3DXVECTOR3(20, 0, 0));
-		//mWallPositions.push_back(D3DXVECTOR3(30, 0, 0));
 	}
 
 	void Environment::Draw(const Helper::Camera& camera)
@@ -89,13 +87,15 @@ namespace View
 		for(UINT p = 0; p < mEffect->GetTechniqueByIndex(0).GetPassCount(); ++p)
 		{
 			mEffect->GetTechniqueByIndex(0).GetPassByIndex(p).Apply(mDevice);
-			mBuffer->Draw();
+			mDevice->Draw(mBuffer->GetElementCount(), 0);
 		}
 
-		mWallObject->Bind();
+		D3DXVECTOR3 camPos = camera.GetPosition();
+
+		mWallObject.Bind();
 		for(int i = 0; i < mWallPositions.size(); ++i)
 		{
-			mWallObject->Draw(mWallPositions[i], camera);
+			mWallObject.Draw(mWallPositions[i], camera);
 		}
 	}
 }

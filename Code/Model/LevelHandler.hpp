@@ -12,11 +12,15 @@ namespace Model
 		//To do: Inladdning av banorna
 	public:
 		LevelHandler();
-		Level GetCurrentLevel();
-		int GetCurrentLevelIndex();
-		void SetCurrentLevelIndex(int levelIndex);
+
+		Level& GetCurrentLevel();
+		int GetCurrentLevelIndex() const;
+		void ResetCurrentLevelIndex();
+		void NextLevel();
+		//void SetCurrentLevelIndex(int levelIndex);
 	private:
-		std::vector<Level> mLevels;
+		std::vector<Level*> mLevels;
+		Level mCurrentLevel;
 		int mCurrentLevelIndex;
 	};
 }
