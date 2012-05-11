@@ -15,7 +15,7 @@ struct PS_INPUT
 
 RasterizerState NoCulling
 {
-	CullMode = None;
+	//CullMode = None;
 	//FillMode = Wireframe;
 };
 

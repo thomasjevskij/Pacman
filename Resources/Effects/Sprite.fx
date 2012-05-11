@@ -53,7 +53,9 @@ PS_INPUT VS(VS_INPUT input)
 {
 	PS_INPUT output;
 
+	// Sprites are drawn on top of everything else, thus z = 0.
 	output.position = mul(float4(float3(input.position, 0.0), 1.0), gModel);
+	output.position.z = 0.0f;
 	output.uv = input.uv;
 
 	return output;

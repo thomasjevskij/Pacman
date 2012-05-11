@@ -2,15 +2,22 @@
 
 namespace View
 {
-	IngameScreen::IngameScreen(GameScreenHandler* handler, ID3D10Device* device, Framework::ApplicationWindow* window)
+	IngameScreen::IngameScreen(GameScreenHandler* handler, Framework::ApplicationWindow* window, const Framework::D3DContext* D3DContext)
 		: GameScreen(handler)
-		, mDevice(device)
 		, mState(IngameScreenState::Running)	// Debug, start running immediately during testing
 		, mWindow(window)
+		, mD3DContext(D3DContext)
 		, mScene(NULL)
+		, mUISurface(D3DContext->GetDevice())
+		, mSprite("pacManTexture.png")			// Debug
+		, mLeftPressed(false)
+		, mRightPressed(false)
+		, mDownPressed(false)
 	{
-		mScene = new View::Scene(mDevice, mGameplayHandler.GetLevel(), mWindow);
-		mSprite = Resources::SpriteResourceManager::Instance().Load("pacManTexture.png");
+		mWindow->AddNotificationSubscriber(this);
+
+		mScene = new View::Scene(mD3DContext->GetDevice(), mGameplayHandler.GetLevel(), mWindow, &mGameplayHandler);
+		mSprite.SetScale(0.5f);
 	}
 
 	IngameScreen::~IngameScreen() throw()
@@ -21,15 +28,18 @@ namespace View
 	void IngameScreen::Update(float dt)
 	{
 		// TODO: Add different logic for different states
-		// mGameplayHandler.Update(dt);
+		mGameplayHandler.Update(dt, mLeftPressed, mRightPressed, mDownPressed);
 		mScene->Update(dt);
 	}
 
 	void IngameScreen::Draw(float dt)
 	{
 		// TODO: Draw different things in different states
-		//mSprite->Draw(D3DXVECTOR2(-1.0, -1.0));
 		mScene->Draw(dt);
+
+		mUISurface.Clear();
+		// TODO: Draw UI here
+		mUISurface.DrawSurface(*mD3DContext);
 	}
 
 	void IngameScreen::PelletEaten(Helper::Point2f position)
@@ -67,4 +77,40 @@ namespace View
 		// TODO: Change to highscore screen
 	}
 
+
+	void IngameScreen::KeyPressed(Framework::ApplicationWindow* window, int keyCode) 
+	{
+		switch (keyCode)
+		{
+			case VK_LEFT:
+				mLeftPressed = true;
+			break;
+
+			case VK_RIGHT:
+				mRightPressed = true;
+			break;
+
+			case VK_DOWN:
+				mDownPressed = true;
+			break;
+		}
+	}
+
+	void IngameScreen::KeyReleased(Framework::ApplicationWindow* window, int keyCode)
+	{
+		switch (keyCode)
+		{
+			case VK_LEFT:
+				mLeftPressed = false;
+			break;
+
+			case VK_RIGHT:
+				mRightPressed = false;
+			break;
+
+			case VK_DOWN:
+				mDownPressed = false;
+			break;
+		}
+	}
 }

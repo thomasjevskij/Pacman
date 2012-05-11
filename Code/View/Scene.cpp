@@ -1,4 +1,5 @@
 #include "Scene.hpp"
+#include <cmath>
 
 namespace View
 {
@@ -6,13 +7,15 @@ namespace View
 	const float Scene::C_POW_PELLET_SIZE = 0.3f;
 	const float Scene::C_PELLET_Y_POS = 3;
 
-	Scene::Scene(ID3D10Device* device, Model::Level level, Framework::ApplicationWindow* window)
+	Scene::Scene(ID3D10Device* device, Model::Level level, Framework::ApplicationWindow* window, Model::ModelDataInterface* modelData)
 		: mDevice(device)
 		, mEnvironment(NULL)
 		, mCamera(NULL)
 		, mCameraController(NULL)
 		, mPelletObject(device, "pellet.obj")
 		, mPowPelletObject(device, "pellet.obj")
+		, mModelDataInterface(modelData)
+		, mPacman(device)
 	{
 		Helper::Frustum f;
 		f.AspectRatio = static_cast<float>(window->GetClientWidth()) / window->GetClientHeight();
@@ -21,10 +24,7 @@ namespace View
 		f.NearDistance = 1;
 
 		mCamera = new Helper::Camera(f.CreatePerspectiveProjection());
-		mCameraController = new Helper::DebugCameraController(D3DXVECTOR3(0, 0, 0), mCamera);
-		//mCameraController = new Helper::DebugCameraController(pacmanSpawnPoint, mCamera);
-
-		window->AddNotificationSubscriber(mCameraController);
+		mCameraController = new Helper::ChaseCamera(mCamera, mModelDataInterface);
 
 		Create3DLevel(level);
 		mPelletObject.SetScale(C_PELLET_SIZE);
@@ -32,7 +32,10 @@ namespace View
 		mPowPelletObject.SetScale(C_POW_PELLET_SIZE);
 		mPowPelletObject.SetTintColour(D3DXCOLOR(0.0, 0.0, 1.0, 1.0));
 
-		mGhost = new View::Ghost(device);		// Debug
+		for (int i = 0; i < mModelDataInterface->GetGhostPositions().size(); ++i)
+		{
+			mGhosts.push_back(View::Ghost(device, Ghost::C_COLORS[i]));
+		}
 	}
 
 	Scene::~Scene() throw()
@@ -52,50 +55,68 @@ namespace View
 												   level.GetPacmanSpawnPosition().Y * Environment::C_CELL_SIZE);
 
 		mCamera->SetPosition(pacmanSpawnPoint);
-
-		const std::vector<Model::Coord> pelletPosInGrid = level.GetPelletPositions();
-		const std::vector<Model::Coord> powPelletPosInGrid = level.GetPowerPelletPositions();
-		mPelletPositions.clear();
-		mPowPelletPositions.clear();
-
-		for(int i = 0; i < pelletPosInGrid.size(); ++i)
-		{
-			mPelletPositions.push_back(D3DXVECTOR3(pelletPosInGrid[i].X * Environment::C_CELL_SIZE, 
-												   C_PELLET_Y_POS, 
-												   pelletPosInGrid[i].Y * Environment::C_CELL_SIZE));
-		}
-
-		for(int j = 0; j < powPelletPosInGrid.size(); ++j)
-		{
-			mPowPelletPositions.push_back(D3DXVECTOR3(powPelletPosInGrid[j].X * Environment::C_CELL_SIZE,
-													  C_PELLET_Y_POS, 
-													  powPelletPosInGrid[j].Y * Environment::C_CELL_SIZE));
-		}
 	}
 
 	void Scene::Update(float dt)
 	{
-		mCameraController->Update(dt);
+		mCameraController->Update(dt, mModelDataInterface);
 		mCamera->Commit();
 
-		mGhost->Update(dt, Helper::Point2f(0,0),Helper::Point2f(10,0));
+		const std::vector<Model::Coord>& ghostPositions = mModelDataInterface->GetGhostPositions();
+		for (int i = 0; i < ghostPositions.size(); ++i)
+		{
+			mGhosts[i].Update(dt, Helper::Point2f((ghostPositions[i].X + 0.5f) * Environment::C_CELL_SIZE, 
+											      (ghostPositions[i].Y + 0.5f) * Environment::C_CELL_SIZE), 
+							      Helper::Point2f((mModelDataInterface->GetPacmanPosition().X + 0.5f) * Environment::C_CELL_SIZE, 
+											      (mModelDataInterface->GetPacmanPosition().Y + 0.5f) * Environment::C_CELL_SIZE));
+		}
+		
+		Helper::Point2f offset(0.5f, 0.5f);
+		mPacman.Update(dt, (mModelDataInterface->GetPacmanPosition()) * Environment::C_CELL_SIZE, mModelDataInterface->GetPacmanFacing());
 	}
 
 	void Scene::Draw(float dt)
 	{
 		mEnvironment->Draw(*mCamera);
-		mGhost->Draw(dt, mCamera);
-
-		mPelletObject.Bind();
-		for(int i = 0; i < mPelletPositions.size(); ++i)
+		mPacman.Draw(mCamera);
+		for (int i = 0; i < mModelDataInterface->GetGhostPositions().size(); ++i)
 		{
-			mPelletObject.Draw(mPelletPositions[i], *mCamera);
+			mGhosts[i].Draw(dt, mCamera);
 		}
 
-		mPowPelletObject.Bind();
-		for(int i = 0; i < mPowPelletPositions.size(); ++i)
+
+		D3DXVECTOR3 camPos = mCamera->GetPosition();
+		
+		const std::vector<Model::Coord>& pelletPosInGrid = mModelDataInterface->GetLevel().GetPelletPositions();
+
+
+		mPelletObject.Bind();
+		for(int i = 0; i < pelletPosInGrid.size(); ++i)
 		{
-			mPowPelletObject.Draw(mPowPelletPositions[i], *mCamera);
+			D3DXVECTOR3 pelletPos = D3DXVECTOR3((pelletPosInGrid[i].X + 0.5f) * Environment::C_CELL_SIZE, 
+												 C_PELLET_Y_POS, 
+												 (pelletPosInGrid[i].Y + 0.5f) * Environment::C_CELL_SIZE);
+			
+
+			if (abs(camPos.x - pelletPos.x) <= 1.1f * Environment::C_CELL_SIZE || 
+				abs(camPos.z - pelletPos.z) <= 1.1f * Environment::C_CELL_SIZE)
+				mPelletObject.Draw(pelletPos, *mCamera);
+		}
+
+
+
+		const std::vector<Model::Coord>& powPelletPosInGrid = mModelDataInterface->GetLevel().GetPowerPelletPositions();
+
+		mPowPelletObject.Bind();
+		for(int i = 0; i < powPelletPosInGrid.size(); ++i)
+		{
+			D3DXVECTOR3 pelletPos = D3DXVECTOR3((powPelletPosInGrid[i].X + 0.5f) * Environment::C_CELL_SIZE, 
+												 C_PELLET_Y_POS, 
+												 (powPelletPosInGrid[i].Y + 0.5f) * Environment::C_CELL_SIZE);
+
+			if (abs(camPos.x - pelletPos.x) <= 1.1f * Environment::C_CELL_SIZE || 
+				abs(camPos.z - pelletPos.z) <= 1.1f * Environment::C_CELL_SIZE)
+				mPowPelletObject.Draw(pelletPos, *mCamera);
 		}
 	}
 }

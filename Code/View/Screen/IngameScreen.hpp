@@ -7,6 +7,7 @@
 #include "ApplicationWindow.hpp"
 #include "Scene.hpp"
 #include "Sprite.hpp"	// Debug
+#include "UISurface.hpp"
 
 namespace View
 {
@@ -15,10 +16,10 @@ namespace View
 		enum IngameScreenState { Pregame, Running, Paused };
 	}
 
-	class IngameScreen : public GameScreen, public GameEventSubscriber
+	class IngameScreen : public GameScreen, public GameEventSubscriber, public Framework::WindowNotificationSubscriber
 	{
 	public:
-		IngameScreen(GameScreenHandler* handler, ID3D10Device* device, Framework::ApplicationWindow* window);
+		IngameScreen(GameScreenHandler* handler, Framework::ApplicationWindow* window, const Framework::D3DContext* D3DContext);
 		~IngameScreen() throw();
 
 		void Update(float dt);
@@ -32,15 +33,22 @@ namespace View
 		void PacmanKilled();
 		void GameWon();
 
+		void KeyPressed(Framework::ApplicationWindow* window, int keyCode);
+		void KeyReleased(Framework::ApplicationWindow* window, int keyCode);
 	private:
-		ID3D10Device* mDevice;
 		IngameScreenState::IngameScreenState mState;
 
 		Framework::ApplicationWindow* mWindow;
+		const Framework::D3DContext* mD3DContext;
+
 		Model::GameplayHandler mGameplayHandler;
 		View::Scene* mScene;
-		Resources::Sprite* mSprite;			// Debug
+		View::UISurface mUISurface;
+		View::Sprite mSprite;				// Debug
 		
+		bool mLeftPressed;
+		bool mRightPressed;
+		bool mDownPressed;
 	};
 }
 

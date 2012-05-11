@@ -61,7 +61,7 @@ def count_sloc(lines):
 def valid_root(ignore_dirs, name):
 	valid = True
 	for dir in ignore_dirs:
-		if name.endswith(dir):
+		if name.find(dir) != -1:
 			valid = False
 			break
 	return valid

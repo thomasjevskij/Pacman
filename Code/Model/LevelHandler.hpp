@@ -13,12 +13,14 @@ namespace Model
 	public:
 		LevelHandler();
 
-		const Level& GetCurrentLevel() const;
+		Level& GetCurrentLevel();
 		int GetCurrentLevelIndex() const;
-
-		void SetCurrentLevelIndex(int levelIndex);
+		void ResetCurrentLevelIndex();
+		void NextLevel();
+		//void SetCurrentLevelIndex(int levelIndex);
 	private:
 		std::vector<Level*> mLevels;
+		Level mCurrentLevel;
 		int mCurrentLevelIndex;
 	};
 }

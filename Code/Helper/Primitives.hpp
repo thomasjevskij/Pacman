@@ -38,6 +38,8 @@ namespace Helper
 		Point2<T>& operator+=(const Point2<T>& rhs);
 		Point2<T> operator-(const Point2<T>& rhs) const;
 		Point2<T>& operator-=(const Point2<T>& rhs);
+		Point2<T> operator*(T rhs) const;
+		Point2<T>& operator*=(T rhs);
 	};
 
 	typedef Point2<int> Point2i;
@@ -173,7 +175,10 @@ namespace Helper
 	template <typename T>
 	Point2<T>& Point2<T>::operator+=(const Point2<T>& rhs)
 	{
-		return *this + rhs;
+		X += rhs.X;
+		Y += rhs.Y;
+
+		return *this;
 	}
 
 	template <typename T>
@@ -185,7 +190,25 @@ namespace Helper
 	template <typename T>
 	Point2<T>& Point2<T>::operator-=(const Point2<T>& rhs)
 	{
-		return *this - rhs;
+		X -= rhs.X;
+		Y -= rhs.Y;
+
+		return *this;
+	}
+
+	template <typename T>
+	Point2<T> Point2<T>::operator*(T rhs) const
+	{
+		return Point2<T>(X * rhs, Y * rhs);
+	}
+
+	template <typename T>
+	Point2<T>& Point2<T>::operator*=(T rhs)
+	{
+		X *= rhs;
+		Y *= rhs;
+
+		return *this;
 	}
 
 

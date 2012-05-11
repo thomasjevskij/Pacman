@@ -8,27 +8,32 @@
 #include "Ghost.hpp"
 #include "GameTime.hpp"
 #include "GameEventSubscriber.hpp"
+#include "ModelDataInterface.hpp"
 #include <vector>
 
 namespace Model
 {
-	class GameplayHandler
+	class GameplayHandler : public ModelDataInterface
 	{
 	public:
 		GameplayHandler();
-		void Update(float dt);
+		void Update(float dt, bool leftPressed, bool rightPressed, bool backPressed);
+
+		Helper::Point2f GetPacmanPosition() const;
+		Helper::Point2f GetPacmanFacing() const;
+		std::vector<Helper::Point2f> GetGhostPositions() const;
 
 		Player GetPacman() const;
 		std::vector<Ghost> GetGhosts() const;
-		Level GetLevel() const;
-		int GetCurrentlevelIndex() const;
+		const Level& GetLevel();
+		int GetCurrentLevelIndex() const;
 		int GetLives() const;
 		int GetScore() const;
 		float GetTimeLeft() const;
 	private:
 		LevelHandler mLevelHandler;
 		View::GameEventSubscriber* mGameEventSubscriber;
-		Level mLevel;
+		//Level mLevel;
 		Player mPlayer;
 		Fruit mFruit;
 		std::vector<Ghost> mGhosts;

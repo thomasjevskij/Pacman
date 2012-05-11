@@ -50,7 +50,6 @@ private:
 	Resources::FileResourceManager<Resources::Material>* mMaterialManager;
 	Resources::FileResourceManager<Model::Level>* mLevelManager;
 	Resources::SoundResourceManager* mSoundManager;
-	Resources::SpriteResourceManager* mSpriteManager;
 
 	View::GameScreenHandler mScreenHandler;
 

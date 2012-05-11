@@ -57,7 +57,7 @@ namespace Framework
 		SafeRelease(mDevice);
 	}
 
-	ID3D10Device* D3DContext::GetDevice()
+	ID3D10Device* D3DContext::GetDevice() const
 	{
 		return mDevice;
 	}
@@ -92,6 +92,33 @@ namespace Framework
 	{
 		return mActiveViewport;
 	}
+
+	Helper::Point2i D3DContext::GetViewportOrigin(unsigned int index) const
+	{
+		assert(index < mViewports.size());
+
+		Helper::Point2i origin;
+		origin.X = mViewports[index].Left * mTargetWindow->GetClientWidth();
+		origin.Y = mViewports[index].Top * mTargetWindow->GetClientHeight();
+
+		return origin;
+	}
+
+	unsigned int D3DContext::GetViewportWidth(unsigned int index) const
+	{
+		assert(index < mViewports.size());
+
+		return mViewports[index].Width * mTargetWindow->GetClientWidth();
+	}
+
+	unsigned int D3DContext::GetViewportHeight(unsigned int index) const
+	{
+		assert(index < mViewports.size());
+
+		return mViewports[index].Height * mTargetWindow->GetClientHeight();
+	}
+
+
 
 	void D3DContext::ToggleFullscreen()
 	{

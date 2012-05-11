@@ -35,11 +35,10 @@ namespace Model
 		Coord mRealPosition;
 		Coord mGridPosition;
 		Coord mSpawnPosition;
-		int mMovementSpeed;
+		float mMovementSpeed;
 
 		bool CenterPos();
 
-		static const int C_TILESIZE = 64;
 	};
 
 	class Ai
