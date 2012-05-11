@@ -10,7 +10,7 @@ namespace View
 		, mColor(color)
 	{
 
-		mParticleSystem = new Helper::ParticleSystem(device, D3DXVECTOR3(0,0,0), "GhostTrail.fx", color ,0,false,true,false);
+		mParticleSystem = new Helper::ParticleSystem(device, D3DXVECTOR3(0,0,0), "GhostTrail.fx", color ,10,false,true,true);
 
 		mObject = new Resources::ModelObj(device,"ghost2.obj");
 		mObject->SetTintColor(mColor);
