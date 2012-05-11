@@ -3,7 +3,8 @@
 namespace View
 {
 	const float Ghost::C_HEIGHT = 5.0f;
-	const D3DXCOLOR Ghost::C_COLORS[] = { D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f), D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f), D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f), D3DXCOLOR(1.0f, 0.0f, 1.0f, 1.0f) };
+	const D3DXCOLOR Ghost::C_SCARED_COLOR(0.0f, 0.0f, 1.0f, 1.0f);
+	const D3DXCOLOR Ghost::C_COLORS[] = { D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f), D3DXCOLOR(1.0f, 0.0f, 1.0f, 1.0f), D3DXCOLOR(0.4f, 0.4f, 1.0f, 1.0f), D3DXCOLOR(0.7f, 0.3f, 0.0f, 1.0f) };
 
 	Ghost::Ghost(ID3D10Device* device, const D3DXCOLOR& color)
 		: mScale(2.5f)
@@ -18,8 +19,19 @@ namespace View
 		D3DXMatrixIdentity(&mModelMatrix);
 	}
 
-	void Ghost::Draw(float dt, Helper::Camera* camera)
+	void Ghost::Draw(float dt, Helper::Camera* camera, bool scared)
 	{
+		if (scared)
+		{
+			mObject->SetTintColor(C_SCARED_COLOR);
+			mParticleSystem->SetColor(C_SCARED_COLOR);
+		}
+		else
+		{
+			mObject->SetTintColor(mColor);
+			mParticleSystem->SetColor(mColor);
+		}
+
 		mObject->Bind();
 		mObject->Draw(mModelMatrix, *camera);
 		mParticleSystem->Draw(dt, *camera);

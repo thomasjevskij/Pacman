@@ -12,12 +12,13 @@ namespace View
 	{
 	public:
 		Ghost(ID3D10Device* device, const D3DXCOLOR& color);
-		void Draw(float dt,Helper::Camera* camera);
-		void Update(float dt,Helper::Point2f ghostPos,Helper::Point2f pacmanPos);
+		void Draw(float dt, Helper::Camera* camera, bool scared);
+		void Update(float dt, Helper::Point2f ghostPos, Helper::Point2f pacmanPos);
 		void PlayerSound();
 
 		static const float C_HEIGHT;
 		static const D3DXCOLOR C_COLORS[];
+		static const D3DXCOLOR C_SCARED_COLOR;
 	private:
 		Resources::ModelObj* mObject;
 		Helper::ParticleSystem* mParticleSystem;

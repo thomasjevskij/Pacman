@@ -39,6 +39,11 @@ namespace Helper
 		mPosition = pos;
 	}
 
+	void ParticleSystem::SetColor(const D3DXCOLOR& color)
+	{
+		mColor = color;
+	}
+
 	void ParticleSystem::Draw(float dt,const Camera& cam)
 	{
 		Update(dt);

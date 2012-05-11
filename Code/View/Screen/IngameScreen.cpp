@@ -1,4 +1,5 @@
 #include "IngameScreen.hpp"
+#include "GameOverScreen.hpp"
 
 namespace View
 {
@@ -23,6 +24,7 @@ namespace View
 
 	IngameScreen::~IngameScreen() throw()
 	{
+		mWindow->RemoveNotificationSubscriber(this);
 		SafeDelete(mScene);
 	}
 
@@ -76,7 +78,8 @@ namespace View
 
 	void IngameScreen::PacmanKilled()
 	{
-
+		// TODO: Change to game over screen
+		mHandler->ChangeScreen(new View::GameOverScreen(mHandler, mWindow, mD3DContext));
 	}
 
 	void IngameScreen::GameWon()

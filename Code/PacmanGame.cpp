@@ -1,5 +1,6 @@
 #include "PacmanGame.hpp"
 #include "IngameScreen.hpp"
+#include "GameOverScreen.hpp"
 
 PacmanGame::WindowDescription::WindowDescription()
 {
@@ -29,6 +30,7 @@ PacmanGame::PacmanGame(HINSTANCE instance)
 	mSoundManager = new Resources::SoundResourceManager("Resources/Sounds/");
 
 	mScreenHandler.ChangeScreen(new View::IngameScreen(&mScreenHandler, &mWindow, &mD3DContext));
+	//mScreenHandler.ChangeScreen(new View::GameOverScreen(&mScreenHandler, &mWindow, &mD3DContext));
 }
 
 PacmanGame::~PacmanGame() throw()
@@ -45,8 +47,8 @@ void PacmanGame::Update(float dt)
 {
 	mSoundManager->Update();
 
-	mScreenHandler.SwapScreens();
 	mScreenHandler.UpdateScreen(dt);
+	mScreenHandler.SwapScreens();
 }
 
 void PacmanGame::Draw(float dt)
