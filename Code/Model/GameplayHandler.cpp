@@ -2,8 +2,9 @@
 
 namespace Model
 {
-	GameplayHandler::GameplayHandler(): mPlayer(Coord(1,1)), mFruit()
+	GameplayHandler::GameplayHandler(View::GameEventSubscriber* gameEventSubscriber): mPlayer(Coord(1,1)), mFruit()
 	{
+		mGameEventSubscriber = gameEventSubscriber;
 		mGameRestart = true;
 		mBackPressed = false;
 		srand(NULL);
@@ -90,7 +91,9 @@ namespace Model
 			mScore += 10;
 			mPelletsEaten++;
 			if (mPelletsEaten == 70 || mPelletsEaten == 170)
+			{
 				mFruit = Fruit();
+			}
 			mLevelHandler.GetCurrentLevel().SetEaten(playerPos.X, playerPos.Y);
 			//mGameEventSubscriber->PelletEaten(playerPos);
 		}

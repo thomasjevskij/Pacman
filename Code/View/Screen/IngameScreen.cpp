@@ -8,6 +8,7 @@ namespace View
 		, mState(IngameScreenState::Running)	// Debug, start running immediately during testing
 		, mWindow(window)
 		, mD3DContext(D3DContext)
+		, mGameplayHandler(this)
 		, mScene(NULL)
 		, mUISurface(D3DContext->GetDevice())
 		, mSprite("pacManTexture.png")			// Debug
