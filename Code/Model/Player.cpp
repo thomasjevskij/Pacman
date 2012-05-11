@@ -8,7 +8,7 @@ namespace Model
 	{
 		mRealPosition = Helper::Point2f(gridPosition.X + 0.5 ,gridPosition.Y + 0.5 );
 		mFacing = Coord(1,0);
-		mMovementSpeed = 1.4;
+		mMovementSpeed = 1.5;
 		mHasTurned = false;
 		OutputDebugString("--Model Testing--:  Player Initiated \n");
 	}

@@ -27,12 +27,16 @@ namespace View
 
 	void Ghost::Update(float dt, Helper::Point2f ghostPos, Helper::Point2f pacmanPos)
 	{
-		D3DXMATRIX translation, scale;
+		D3DXMATRIX translation, scale,rot;
 
 		D3DXMatrixScaling(&scale, mScale, mScale, mScale);
 		D3DXMatrixTranslation(&translation,ghostPos.X, C_HEIGHT, ghostPos.Y);
 
-		mModelMatrix = scale * translation;
+		D3DXVECTOR3 dxzGP = D3DXVECTOR3(pacmanPos.X - ghostPos.X,0,pacmanPos.Y - ghostPos.Y);
+
+		D3DXMatrixRotationY(&rot,atan(dxzGP.x / dxzGP.z));
+
+		mModelMatrix = scale * rot * translation;
 		mParticleSystem->SetPosition(D3DXVECTOR3(ghostPos.X, C_HEIGHT, ghostPos.Y));
 	}
 

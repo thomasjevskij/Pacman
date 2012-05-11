@@ -16,7 +16,7 @@ namespace Model
 	class GameplayHandler : public ModelDataInterface
 	{
 	public:
-		GameplayHandler();
+		GameplayHandler(View::GameEventSubscriber* gameEventSubscriber);
 		void Update(float dt, bool leftPressed, bool rightPressed, bool backPressed);
 
 		Helper::Point2f GetPacmanPosition() const;
