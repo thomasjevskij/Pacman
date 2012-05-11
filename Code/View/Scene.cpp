@@ -32,7 +32,10 @@ namespace View
 		mPowPelletObject.SetScale(C_POW_PELLET_SIZE);
 		mPowPelletObject.SetTintColour(D3DXCOLOR(0.0, 0.0, 1.0, 1.0));
 
-		mGhost = new View::Ghost(device);		// Debug
+		for (int i = 0; i < mModelDataInterface->GetGhostPositions().size(); ++i)
+		{
+			mGhosts.push_back(View::Ghost(device, Ghost::C_COLORS[i]));
+		}
 	}
 
 	Scene::~Scene() throw()
@@ -59,7 +62,15 @@ namespace View
 		mCameraController->Update(dt, mModelDataInterface);
 		mCamera->Commit();
 
-		mGhost->Update(dt, Helper::Point2f(0,0),Helper::Point2f(10,0));
+		const std::vector<Model::Coord>& ghostPositions = mModelDataInterface->GetGhostPositions();
+		for (int i = 0; i < ghostPositions.size(); ++i)
+		{
+			mGhosts[i].Update(dt, Helper::Point2f((ghostPositions[i].X + 0.5f) * Environment::C_CELL_SIZE, 
+											      (ghostPositions[i].Y + 0.5f) * Environment::C_CELL_SIZE), 
+							      Helper::Point2f((mModelDataInterface->GetPacmanPosition().X + 0.5f) * Environment::C_CELL_SIZE, 
+											      (mModelDataInterface->GetPacmanPosition().Y + 0.5f) * Environment::C_CELL_SIZE));
+		}
+		
 		Helper::Point2f offset(0.5f, 0.5f);
 		mPacman.Update(dt, (mModelDataInterface->GetPacmanPosition()) * Environment::C_CELL_SIZE, mModelDataInterface->GetPacmanFacing());
 	}
@@ -67,8 +78,13 @@ namespace View
 	void Scene::Draw(float dt)
 	{
 		mEnvironment->Draw(*mCamera);
-		mGhost->Draw(dt, mCamera);
 		mPacman.Draw(mCamera);
+		for (int i = 0; i < mModelDataInterface->GetGhostPositions().size(); ++i)
+		{
+			mGhosts[i].Draw(dt, mCamera);
+		}
+
+
 		D3DXVECTOR3 camPos = mCamera->GetPosition();
 		
 		const std::vector<Model::Coord>& pelletPosInGrid = mModelDataInterface->GetLevel().GetPelletPositions();
