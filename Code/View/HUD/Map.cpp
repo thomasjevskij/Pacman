@@ -19,12 +19,12 @@ namespace View
 
 	unsigned int Map::GetWidth(const Model::Level& level) const
 	{
-		return level.GetWidth() * C_CELL_SIZE;
+		return level.GetWidth() * C_CELL_SIZE * 0.5f;
 	}
 
 	unsigned int Map::GetHeight(const Model::Level& level) const
 	{
-		return level.GetHeight() * C_CELL_SIZE;
+		return level.GetHeight() * C_CELL_SIZE * 0.5f;
 	}
 
 	void Map::Draw(UISurface& surface, Model::ModelDataInterface& model, const D3DXVECTOR2& position, bool renderGhosts)
@@ -37,8 +37,8 @@ namespace View
 		model.GetGhostPositions();
 		
 		// Draw background
-		mBackgroundSprite.SetScale(GetWidth(level), 
-								   GetHeight(level));
+		mBackgroundSprite.SetScale(2 * GetWidth(level), 
+								   2 * GetHeight(level));
 		mBackgroundSprite.SetPosition(position);
 		mBackgroundSprite.SetTintColor(C_BACKGROUND_COLOR);
 		surface.Draw(mBackgroundSprite);

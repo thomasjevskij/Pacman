@@ -40,9 +40,9 @@ namespace View
 
 		mUISurface.Clear();
 		// TODO: Draw UI here
-		mUISurface.Draw(mSprite);
-		mUISurface.Draw(mSpriteFont, D3DXVECTOR2(40, 40), "H");
 		mMap.Draw(mUISurface, mGameplayHandler, D3DXVECTOR2(0, 0), true); 
+		//mUISurface.Draw(mSprite);
+		mUISurface.Draw(mSpriteFont, D3DXVECTOR2(mMap.GetWidth(mGameplayHandler.GetLevel()), mMap.GetHeight(mGameplayHandler.GetLevel())), "H");
 
 		mUISurface.DrawSurface(*mD3DContext);
 	}
