@@ -15,7 +15,7 @@ namespace Model
 		mSpawnPosition = gridPosition;
 		//Sätt mRealPosition till start värde ändra 64 beroende på hur stora runtorna blir i slut änden
 		mRealPosition = Helper::Point2f(gridPosition.X + 0.5 ,gridPosition.Y + 0.5 );
-		mFacing = Coord(1,0);
+		mFacing = Coord(0,1);
 		mMovementSpeed = 1;
 		mHasTurned = false;
 		mGhostState = GhostState::Chase;
@@ -48,38 +48,38 @@ namespace Model
 			//Change facing (revesed not allowed)
 
 			std::vector<Coord> possibleGrids;
-			Coord backFacing = Coord(mGridPosition.X + mFacing.X * -1,mGridPosition.Y + mFacing.Y * -1);
+			Helper::Point2i backFacing = Helper::Point2i(mGridPosition.X + mFacing.X * -1, mGridPosition.Y + mFacing.Y * -1);
 			//Find possible routes
 			if(level->GetCell(mGridPosition.X + 1, mGridPosition.Y).Type != Model::Cell::C_CELLTYPE_WALL && 
-				Coord(mGridPosition.X + 1, mGridPosition.Y) != backFacing)
+				Helper::Point2i(mGridPosition.X + 1, mGridPosition.Y) != backFacing)
 			{
 				possibleGrids.push_back(Coord(mGridPosition.X + 1, mGridPosition.Y));
-				OutputDebugString("--Model Testing--:  Path Up is possible \n");
-			}
-			if(level->GetCell(mGridPosition.X - 1, mGridPosition.Y).Type != Model::Cell::C_CELLTYPE_WALL && 
-				Coord(mGridPosition.X - 1, mGridPosition.Y) != backFacing)
-			{
-				possibleGrids.push_back(Coord(mGridPosition.X - 1, mGridPosition.Y));
-				OutputDebugString("--Model Testing--:  Path Down is possible \n");
-			}
-			if(level->GetCell(mGridPosition.X, mGridPosition.Y + 1).Type != Model::Cell::C_CELLTYPE_WALL && 
-				Coord(mGridPosition.X, mGridPosition.Y + 1) != backFacing)
-			{
-				possibleGrids.push_back(Coord(mGridPosition.X, mGridPosition.Y + 1));
 				OutputDebugString("--Model Testing--:  Path Right is possible \n");
 			}
+			if(level->GetCell(mGridPosition.X - 1, mGridPosition.Y).Type != Model::Cell::C_CELLTYPE_WALL && 
+				Helper::Point2i(mGridPosition.X - 1, mGridPosition.Y) != backFacing)
+			{
+				possibleGrids.push_back(Coord(mGridPosition.X - 1, mGridPosition.Y));
+				OutputDebugString("--Model Testing--:  Path Left is possible \n");
+			}
+			if(level->GetCell(mGridPosition.X, mGridPosition.Y + 1).Type != Model::Cell::C_CELLTYPE_WALL && 
+				Helper::Point2i(mGridPosition.X, mGridPosition.Y + 1) != backFacing)
+			{
+				possibleGrids.push_back(Coord(mGridPosition.X, mGridPosition.Y + 1));
+				OutputDebugString("--Model Testing--:  Path Up is possible \n");
+			}
 			if(level->GetCell(mGridPosition.X, mGridPosition.Y - 1).Type != Model::Cell::C_CELLTYPE_WALL && 
-				Coord(mGridPosition.X, mGridPosition.Y - 1) != backFacing)
+				Helper::Point2i(mGridPosition.X, mGridPosition.Y - 1) != backFacing)
 			{
 				possibleGrids.push_back(Coord(mGridPosition.X, mGridPosition.Y - 1));
-				OutputDebugString("--Model Testing--:  Path Left is possible \n");
+				OutputDebugString("--Model Testing--:  Path Down is possible \n");
 			}
 			//Choose a route
 			OutputDebugString("--Model Testing--: Choosing route \n");
 			assert(possibleGrids.size() > 0);
 			if(possibleGrids.size() == 1)
 			{
-				mFacing = mGridPosition - possibleGrids[0];
+				mFacing =  possibleGrids[0] - mGridPosition;
 				OutputDebugString("--Model Testing--:  Ghost has taken the only way possible \n");
 			}
 			else
@@ -96,10 +96,10 @@ namespace Model
 						shortestFacing = possibleGrids[c];
 				}
 				mFacing = shortestFacing - mGridPosition;
-				OutputDebugString("--Model Testing--:  Ghost has choosen way possible \n");
+				OutputDebugString("--Model Testing--:  Ghost has choosen a possible way \n");
+			}
 			}
 			mHasTurned = true;
-			}
 		} 
 		else
 		{
@@ -110,6 +110,7 @@ namespace Model
 		mRealPosition.Y += mFacing.Y * mMovementSpeed * dt;
 		mRealPosition = GetValidGridPos(mRealPosition,level->GetWidth(), level->GetHeight());
 		mGridPosition = Coord((int)mRealPosition.X,(int)mRealPosition.Y);
+
 		DbgOutFloat(" --Model Testing--: mRealPosition.X = ",mRealPosition.X);
 		DbgOutFloat("\n --Model Testing--: mRealPosition.Y = ",mRealPosition.Y);
 		DbgOutFloat("\n --Model Testing--: mGridPos.X = ",mGridPosition.X);
@@ -213,7 +214,6 @@ namespace Model
 		{
 			pos.Y = 0;
 		}
-		// DEBUG: added this because the function must return a value!
 		return pos;
 	}
 
