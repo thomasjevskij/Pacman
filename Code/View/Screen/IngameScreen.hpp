@@ -8,6 +8,7 @@
 #include "Scene.hpp"
 #include "Sprite.hpp"	// Debug
 #include "UISurface.hpp"
+#include "Map.hpp"
 
 namespace View
 {
@@ -45,6 +46,7 @@ namespace View
 		View::Scene* mScene;
 		View::UISurface mUISurface;
 		View::Sprite mSprite;				// Debug
+		View::Map mMap;
 		
 		bool mLeftPressed;
 		bool mRightPressed;

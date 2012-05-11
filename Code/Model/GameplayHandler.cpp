@@ -5,6 +5,7 @@ namespace Model
 	GameplayHandler::GameplayHandler(): mPlayer(Coord(1,1)), mFruit()
 	{
 		mGameRestart = true;
+		mBackPressed = false;
 		srand(NULL);
 
 		//Testing message
@@ -38,8 +39,13 @@ namespace Model
 			mPlayer.GoLeft();
 		if(rightPressed)
 			mPlayer.GoRight();
-		if(backPressed)
+		if(backPressed && !mBackPressed)
+		{
 			mPlayer.GoBack();
+			mBackPressed = true;
+		}
+		else if(!backPressed)
+			mBackPressed = false;
 
 		//Update Powermode timer
 		if(mPowerModeTimer != 0)
@@ -47,8 +53,8 @@ namespace Model
 			mPowerModeTimer += dt;
 			if(mPowerModeTimer > 9)
 			{
-				for each (Ghost c in mGhosts)
-					c.SetGhostState(c.Chase);
+				for(int d = 0; d < mGhosts.size(); d++)
+					mGhosts[d].SetGhostState(mGhosts[d].Chase);
 				mPowerModeTimer = 0;
 				//mGameEventSubscriber->PowerPelletEnd();
 			}
@@ -211,7 +217,7 @@ namespace Model
 		//mLevel = mLevelHandler.GetCurrentLevel();
 		mCurrentLevel = mLevelHandler.GetCurrentLevelIndex() +1;
 		mGhosts.clear();
-		for (int i = 0; i < 1; i++)
+		for (int i = 0; i <= 3; i++)
 			mGhosts.push_back(Ghost(mLevelHandler.GetCurrentLevel().GetGhostSpawnPositions()[i], i));
 		mPlayer = Player(mLevelHandler.GetCurrentLevel().GetPacmanSpawnPosition());
 		mLevelWasWon = false;

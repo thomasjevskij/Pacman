@@ -7,7 +7,8 @@ namespace View
 {
 	Sprite::Sprite(const std::string& filename)
 		: mTexture(NULL)
-		, mScale(1.0f)
+		, mScaleX(1.0f)
+		, mScaleY(1.0f)
 		, mPosition(0.0f, 0.0f)
 		, mTintColor(1.0f, 1.0f, 1.0f, 1.0f)
 	{
@@ -19,14 +20,26 @@ namespace View
 		return mTexture;
 	}
 
-	void Sprite::SetScale(float scale)
+	void Sprite::SetScale(float uniformScale)
 	{
-		mScale = scale;
+		mScaleX = uniformScale;
+		mScaleY = uniformScale;
 	}
 
-	float Sprite::GetScale() const
+	void Sprite::SetScale(float scaleX, float scaleY) 
 	{
-		return mScale;
+		mScaleX = scaleX;
+		mScaleY = scaleY;
+	}
+
+	float Sprite::GetScaleX() const
+	{
+		return mScaleX;
+	}
+
+	float Sprite::GetScaleY() const
+	{
+		return mScaleY;
 	}
 
 	void Sprite::SetPosition(const D3DXVECTOR2& position)

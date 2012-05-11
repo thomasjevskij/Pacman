@@ -21,9 +21,11 @@ namespace View
 	void Ghost::Update(float dt, Helper::Point2f ghostPos, Helper::Point2f pacmanPos)
 	{
 		D3DXMATRIX translation,rot;
+
 		D3DXMatrixTranslation(&translation,ghostPos.X, C_HEIGHT, ghostPos.Y);
 
 		D3DXVECTOR3 dxyGP = D3DXVECTOR3(ghostPos.X - pacmanPos.X, 0, ghostPos.Y - pacmanPos.Y);
+
 
 		D3DXVec3Normalize(&dxyGP, &dxyGP);
 		

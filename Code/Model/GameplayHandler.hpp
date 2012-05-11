@@ -37,6 +37,7 @@ namespace Model
 		Player mPlayer;
 		Fruit mFruit;
 		std::vector<Ghost> mGhosts;
+		bool mBackPressed;
 
 		bool mLevelWasWon;
 		bool mGameRestart;

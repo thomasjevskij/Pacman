@@ -76,8 +76,6 @@ namespace Model
 			}
 			//Choose a route
 			OutputDebugString("--Model Testing--: Choosing route \n");
-			if(possibleGrids.size() == 0)
-				possibleGrids.push_back(Coord(mGridPosition.X, mGridPosition.Y - 1));
 			assert(possibleGrids.size() > 0);
 			if(possibleGrids.size() == 1)
 			{

@@ -43,7 +43,7 @@ namespace Model
 		}
 		validCoord = GetValidGridPos(mGridPosition + mFacing,level->GetWidth(), level->GetHeight());
 		//Updatera pacmans position
-		//mRealPosition += Helper::Point2f(mFacing.X * mMovementSpeed * dt, mFacing.Y * mMovementSpeed * dt);
+
 		if(level->GetCell(validCoord.X,validCoord.Y).Type == Cell::C_CELLTYPE_WALL && CenterPos())
 		{}
 		else
