@@ -36,6 +36,7 @@ namespace Model
 		Coord mGridPosition;
 		Coord mSpawnPosition;
 		float mMovementSpeed;
+		bool mHasTurned;
 
 		Helper::Point2f GetValidGridPos(Coord pos,int width,int height);
 		bool CenterPos();

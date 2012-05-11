@@ -211,7 +211,7 @@ namespace Model
 		//mLevel = mLevelHandler.GetCurrentLevel();
 		mCurrentLevel = mLevelHandler.GetCurrentLevelIndex() +1;
 		mGhosts.clear();
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 1; i++)
 			mGhosts.push_back(Ghost(mLevelHandler.GetCurrentLevel().GetGhostSpawnPositions()[i], i));
 		mPlayer = Player(mLevelHandler.GetCurrentLevel().GetPacmanSpawnPosition());
 		mLevelWasWon = false;

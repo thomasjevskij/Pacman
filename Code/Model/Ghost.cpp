@@ -17,6 +17,7 @@ namespace Model
 		mRealPosition = Helper::Point2f(gridPosition.X + 0.5 ,gridPosition.Y + 0.5 );
 		mFacing = Coord(1,0);
 		mMovementSpeed = 1;
+		mHasTurned = false;
 		mGhostState = GhostState::Chase;
 		if (aiType == 0)
 			mPersonality = new Blinky();
@@ -36,8 +37,9 @@ namespace Model
 		OutputDebugString("--Model Testing--:  Ghost::UpdateMovement() function called \n");
 		if(CenterPos())
 		{
-			
-		OutputDebugString("--Model Testing--:  CenterPos() returned positive \n");
+			if(mHasTurned == false)
+			{
+				OutputDebugString("--Model Testing--:  CenterPos() returned positive \n");
 
 			//check if current gridpos is an intersection
 			//if killed get ghostspawn from level 
@@ -98,8 +100,13 @@ namespace Model
 				mFacing = shortestFacing - mGridPosition;
 				OutputDebugString("--Model Testing--:  Ghost has choosen way possible \n");
 			}
-
+			mHasTurned = true;
+			}
 		} 
+		else
+		{
+			mHasTurned = false;
+		}
 		//mRealPosition += Helper::Point2f(mFacing.X * mMovementSpeed * dt, mFacing.Y * mMovementSpeed * dt);
 		mRealPosition.X += mFacing.X * mMovementSpeed * dt;
 		mRealPosition.Y += mFacing.Y * mMovementSpeed * dt;

@@ -55,9 +55,9 @@ namespace Model
 		mGridPosition = Coord((int)mRealPosition.X,(int)mRealPosition.Y);
 		mLastFacing = mFacing;
 		
-		DbgOutFloat(" --Model Testing--: mRealPosition.X = ",mRealPosition.X);
-		DbgOutFloat("\n --Model Testing--: mRealPosition.Y = ",mRealPosition.Y);
-		OutputDebugString("\n");
+		//DbgOutFloat(" --Model Testing--: mRealPosition.X = ",mRealPosition.X);
+		//DbgOutFloat("\n --Model Testing--: mRealPosition.Y = ",mRealPosition.Y);
+		//OutputDebugString("\n");
 	}
 
 	void Player::GoLeft()
