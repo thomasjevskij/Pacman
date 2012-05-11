@@ -9,6 +9,7 @@
 #include "Sprite.hpp"	// Debug
 #include "SpriteFont.hpp"
 #include "UISurface.hpp"
+#include "Map.hpp"
 
 namespace View
 {
@@ -17,7 +18,7 @@ namespace View
 		enum IngameScreenState { Pregame, Running, Paused };
 	}
 
-	class IngameScreen : public GameScreen, public GameEventSubscriber
+	class IngameScreen : public GameScreen, public GameEventSubscriber, public Framework::WindowNotificationSubscriber
 	{
 	public:
 		IngameScreen(GameScreenHandler* handler, Framework::ApplicationWindow* window, const Framework::D3DContext* D3DContext);
@@ -34,6 +35,8 @@ namespace View
 		void PacmanKilled();
 		void GameWon();
 
+		void KeyPressed(Framework::ApplicationWindow* window, int keyCode);
+		void KeyReleased(Framework::ApplicationWindow* window, int keyCode);
 	private:
 		IngameScreenState::IngameScreenState mState;
 
@@ -45,7 +48,11 @@ namespace View
 		View::UISurface mUISurface;
 		View::Sprite mSprite;				// Debug
 		View::SpriteFont mSpriteFont;
+		View::Map mMap;
 		
+		bool mLeftPressed;
+		bool mRightPressed;
+		bool mDownPressed;
 	};
 }
 

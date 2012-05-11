@@ -1,6 +1,7 @@
 #include "Environment.hpp"
 #include "D3DResourceManager.hpp"
 #include "Texture.hpp"
+#include <cmath>
 
 namespace View
 {
@@ -70,7 +71,7 @@ namespace View
 
 		for(int i = 0; i < wallPosInGrid.size(); ++i)
 		{
-			mWallPositions.push_back(D3DXVECTOR3(wallPosInGrid[i].X * C_CELL_SIZE, 0, wallPosInGrid[i].Y * C_CELL_SIZE));
+			mWallPositions.push_back(D3DXVECTOR3((wallPosInGrid[i].X + 0.5f) * C_CELL_SIZE, 0, (wallPosInGrid[i].Y + 0.5f) * C_CELL_SIZE));
 		}
 	}
 
@@ -88,6 +89,8 @@ namespace View
 			mEffect->GetTechniqueByIndex(0).GetPassByIndex(p).Apply(mDevice);
 			mDevice->Draw(mBuffer->GetElementCount(), 0);
 		}
+
+		D3DXVECTOR3 camPos = camera.GetPosition();
 
 		mWallObject.Bind();
 		for(int i = 0; i < mWallPositions.size(); ++i)

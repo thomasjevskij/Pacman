@@ -50,6 +50,8 @@
     <ClCompile Include="Code\View\Screen\GameScreen.cpp" />
     <ClCompile Include="Code\View\Screen\IngameScreen.cpp" />
     <ClCompile Include="Code\View\HUD\SpriteFont.cpp" />
+    <ClCompile Include="Code\Model\DebuggingParts.cpp" />
+    <ClCompile Include="Code\View\HUD\Map.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Helper\ParticleSystem.hpp" />
@@ -108,6 +110,8 @@
     <ClInclude Include="Code\View\Screen\GameScreen.hpp" />
     <ClInclude Include="Code\View\Screen\IngameScreen.hpp" />
     <ClInclude Include="Code\View\HUD\SpriteFont.hpp" />
+    <ClInclude Include="Code\Model\DebuggingParts.hpp" />
+    <ClInclude Include="Code\View\HUD\Map.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
@@ -122,5 +126,7 @@
     <None Include="Resources\Textures\cobblestone.png" />
     <None Include="Resources\Textures\pacManTexture.png" />
     <None Include="Resources\Textures\whitePixel.png" />
+    <None Include="Resources\Textures\star.jpg" />
+    <None Include="Resources\Textures\pacman-life.png" />
   </ItemGroup>
 </Project>

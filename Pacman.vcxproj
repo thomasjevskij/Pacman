@@ -165,7 +165,9 @@
     <None Include="Resources\Levels\Level.png" />
     <None Include="Resources\Effects\Sprite.fx" />
     <None Include="Resources\Textures\cobblestone.png" />
+    <None Include="Resources\Textures\pacman-life.png" />
     <None Include="Resources\Textures\pacManTexture.png" />
+    <None Include="Resources\Textures\star.jpg" />
     <None Include="Resources\Textures\whitePixel.png" />
   </ItemGroup>
   <ItemGroup>
@@ -174,8 +176,10 @@
     <ClCompile Include="Code\Framework\Effect\Pass.cpp" />
     <ClCompile Include="Code\Framework\Effect\Technique.cpp" />
     <ClCompile Include="Code\Helper\AnimationCamera.cpp" />
+    <ClCompile Include="Code\Model\DebuggingParts.cpp" />
     <ClCompile Include="Code\Resources\3DObject\Material.cpp" />
     <ClCompile Include="Code\Resources\3DObject\StaticModelData.cpp" />
+    <ClCompile Include="Code\View\HUD\Map.cpp" />
     <ClCompile Include="Code\View\HUD\Sprite.cpp" />
     <ClCompile Include="Code\Framework\VertexBuffer.cpp" />
     <ClCompile Include="Code\Framework\ApplicationWindow.cpp" />
@@ -225,8 +229,10 @@
     <ClInclude Include="Code\Framework\Effect\Pass.hpp" />
     <ClInclude Include="Code\Framework\Effect\Technique.hpp" />
     <ClInclude Include="Code\Helper\AnimationCamera.hpp" />
+    <ClInclude Include="Code\Model\DebuggingParts.hpp" />
     <ClInclude Include="Code\Resources\3DObject\Material.hpp" />
     <ClInclude Include="Code\Resources\3DObject\StaticModelData.hpp" />
+    <ClInclude Include="Code\View\HUD\Map.hpp" />
     <ClInclude Include="Code\View\HUD\Sprite.hpp" />
     <ClInclude Include="Code\Framework\VertexBuffer.hpp" />
     <ClInclude Include="Code\Framework\ApplicationWindow.hpp" />

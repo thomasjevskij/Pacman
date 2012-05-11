@@ -107,8 +107,8 @@ namespace View
 		float viewportWidth = static_cast<float>(context.GetViewportWidth(context.GetActiveViewport()));
 		float viewportHeight = static_cast<float>(context.GetViewportHeight(context.GetActiveViewport()));
 		
-		float scaleX = sprite.GetScale() * static_cast<float>(sprite.GetTexture()->GetWidth()) / viewportWidth;
-		float scaleY = sprite.GetScale() * static_cast<float>(sprite.GetTexture()->GetHeight()) / viewportHeight;
+		float scaleX = sprite.GetScaleX() * static_cast<float>(sprite.GetTexture()->GetWidth()) / viewportWidth;
+		float scaleY = sprite.GetScaleY() * static_cast<float>(sprite.GetTexture()->GetHeight()) / viewportHeight;
 		float posX = (2.0f * sprite.GetPosition().x / viewportWidth) - 1.0f;
 		float posY = (2.0f * sprite.GetPosition().y / viewportHeight) - 1.0f;
 

@@ -9,6 +9,7 @@
 #include <cstdlib>
 #include "VertexBuffer.hpp"
 #include "D3DResourceManager.hpp"
+#include "Texture.hpp"
 
 namespace Helper
 {
@@ -30,13 +31,15 @@ namespace Helper
 		};
 
 		D3DXVECTOR3 RandVec(int radius);
-
 		void Update(float dt);
+
 		ID3D10Device* mDevice;
 		Framework::Effect* mEffect;
+		Resources::Texture* mTexture;
 		D3DXVECTOR3 mPosition;
 		D3DXCOLOR mColor;
 		std::vector<Particle> mParticles;
+
 		static const int C_PARTICLE_COUNT = 1000;
 		static const int C_GRAVITY = 5;
 		bool mGravityOn;

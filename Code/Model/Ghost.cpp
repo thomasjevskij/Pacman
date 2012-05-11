@@ -4,6 +4,9 @@
 #include "Inky.hpp"
 #include "Clyde.hpp"
 
+#include <cassert>
+#include "DebuggingParts.hpp"
+
 namespace Model
 {
 
@@ -11,9 +14,10 @@ namespace Model
 	{
 		mSpawnPosition = gridPosition;
 		//Sätt mRealPosition till start värde ändra 64 beroende på hur stora runtorna blir i slut änden
-		mRealPosition = Helper::Point2f(gridPosition.X * C_TILESIZE - 32,gridPosition.Y * C_TILESIZE - C_TILESIZE/2);
+		mRealPosition = Helper::Point2f(gridPosition.X + 0.5 ,gridPosition.Y + 0.5 );
 		mFacing = Coord(1,0);
-		mMovementSpeed = 16;
+		mMovementSpeed = 1;
+		mGhostState = GhostState::Chase;
 		if (aiType == 0)
 			mPersonality = new Blinky();
 		else if(aiType == 1)
@@ -23,12 +27,18 @@ namespace Model
 		else
 			mPersonality = new Clyde();
 
+		OutputDebugString("--Model Testing--:  Ghost Initiated \n");
 	}
 
 	void Ghost::UpdateMovement(Coord playerPosition, float dt, Level* level, Player* player, Coord blinkyPos)
 	{
+		
+		OutputDebugString("--Model Testing--:  Ghost::UpdateMovement() function called \n");
 		if(CenterPos())
 		{
+			
+		OutputDebugString("--Model Testing--:  CenterPos() returned positive \n");
+
 			//check if current gridpos is an intersection
 			//if killed get ghostspawn from level 
 			//mPersonality->GetTargetPosition(player, mGhostState, mGridPosition, blinkyPos)
@@ -42,25 +52,34 @@ namespace Model
 				Coord(mGridPosition.X + 1, mGridPosition.Y) != backFacing)
 			{
 				possibleGrids.push_back(Coord(mGridPosition.X + 1, mGridPosition.Y));
+				OutputDebugString("--Model Testing--:  Path Up is possible \n");
 			}
 			if(level->GetCell(mGridPosition.X - 1, mGridPosition.Y).Type != Model::Cell::C_CELLTYPE_WALL && 
 				Coord(mGridPosition.X - 1, mGridPosition.Y) != backFacing)
 			{
 				possibleGrids.push_back(Coord(mGridPosition.X - 1, mGridPosition.Y));
+				OutputDebugString("--Model Testing--:  Path Down is possible \n");
 			}
 			if(level->GetCell(mGridPosition.X, mGridPosition.Y + 1).Type != Model::Cell::C_CELLTYPE_WALL && 
 				Coord(mGridPosition.X, mGridPosition.Y + 1) != backFacing)
 			{
 				possibleGrids.push_back(Coord(mGridPosition.X, mGridPosition.Y + 1));
+				OutputDebugString("--Model Testing--:  Path Right is possible \n");
 			}
 			if(level->GetCell(mGridPosition.X, mGridPosition.Y - 1).Type != Model::Cell::C_CELLTYPE_WALL && 
 				Coord(mGridPosition.X, mGridPosition.Y - 1) != backFacing)
 			{
 				possibleGrids.push_back(Coord(mGridPosition.X, mGridPosition.Y - 1));
+				OutputDebugString("--Model Testing--:  Path Left is possible \n");
 			}
 			//Choose a route
+			OutputDebugString("--Model Testing--: Choosing route \n");
+			assert(possibleGrids.size() > 0);
 			if(possibleGrids.size() == 1)
-				mFacing == mGridPosition - possibleGrids[0];
+			{
+				mFacing = mGridPosition - possibleGrids[0];
+				OutputDebugString("--Model Testing--:  Ghost has taken the only way possible \n");
+			}
 			else
 			{
 				Coord target;
@@ -69,15 +88,25 @@ namespace Model
 				else
 					 target = mPersonality->GetTargetPosition(player, mGhostState, mGridPosition, blinkyPos);
 				Coord shortestFacing = Coord(1000000,1000000);
-				for each (Coord c in possibleGrids)
-					if (pow((target.X - c.X),2) + pow((target.Y - c.Y),2) < pow((target.X - shortestFacing.X),2) + pow((target.Y - shortestFacing.Y),2))
-						shortestFacing = c;
-				mFacing = shortestFacing;
+				for(int c = 0; c < possibleGrids.size(); c++)
+				{
+					if (pow((target.X - possibleGrids[c].X),2) + pow((target.Y - possibleGrids[c].Y),2) < pow((target.X - shortestFacing.X),2) + pow((target.Y - shortestFacing.Y),2))
+						shortestFacing = possibleGrids[c];
+				}
+				mFacing = shortestFacing - mGridPosition;
+				OutputDebugString("--Model Testing--:  Ghost has choosen way possible \n");
 			}
 
 		} 
-		mRealPosition += Helper::Point2f(mFacing.X * mMovementSpeed * dt, mFacing.Y * mMovementSpeed * dt);
-		mGridPosition = Coord(mRealPosition.X / C_TILESIZE,mRealPosition.Y / C_TILESIZE);
+		//mRealPosition += Helper::Point2f(mFacing.X * mMovementSpeed * dt, mFacing.Y * mMovementSpeed * dt);
+		mRealPosition.X += mFacing.X * mMovementSpeed * dt;
+		mRealPosition.Y += mFacing.Y * mMovementSpeed * dt;
+		mGridPosition = Coord((int)mRealPosition.X,(int)mRealPosition.Y);
+		DbgOutFloat(" --Model Testing--: mRealPosition.X = ",mRealPosition.X);
+		DbgOutFloat("\n --Model Testing--: mRealPosition.Y = ",mRealPosition.Y);
+		DbgOutFloat("\n --Model Testing--: mGridPos.X = ",mGridPosition.X);
+		DbgOutFloat("\n --Model Testing--: mGridPos.Y = ", mGridPosition.Y);
+		OutputDebugString(" \n");
 	}
 	
 	Coord Ghost::GetFacing() const
@@ -97,19 +126,19 @@ namespace Model
 		{
 			mFacing.X *= -1;
 			mFacing.Y *= -1;
-			mMovementSpeed = 10;
+			mMovementSpeed = 0.8;
 		}
 		else if(state == GhostState::Killed)
 		{
-			mMovementSpeed = 16;
+			mMovementSpeed = 1;
 		}
 		else if(state == GhostState::Chase)
 		{
-			mMovementSpeed = 14;
+			mMovementSpeed = 0.9;
 		}
 		else if(state == GhostState::Scatter)
 		{
-			mMovementSpeed = 14;
+			mMovementSpeed = 0.9;
 		}
 	}
 
@@ -160,9 +189,9 @@ namespace Model
 	bool Ghost::CenterPos()
 	{
 		//Checks if the ghost is close enough to the center of the tile to turn
-		if((int)mRealPosition.X % C_TILESIZE > C_TILESIZE/2 - C_TILESIZE/10 && (int)mRealPosition.X % C_TILESIZE < C_TILESIZE/2 + C_TILESIZE/10)
+		if(mRealPosition.X > mGridPosition.X + 0.35 && mRealPosition.X < mGridPosition.X + 0.65)
 		{
-			if((int)mRealPosition.Y % C_TILESIZE > C_TILESIZE/2 - C_TILESIZE/10 && (int)mRealPosition.Y % C_TILESIZE < C_TILESIZE/2 + C_TILESIZE/10)
+			if(mRealPosition.Y > mGridPosition.Y + 0.35 && mRealPosition.Y < mGridPosition.Y + 0.65)
 			{
 				return true;
 			}
