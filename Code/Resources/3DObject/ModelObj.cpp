@@ -29,6 +29,7 @@ namespace Resources
 		//mData = Resources::ModelResourceManager::Instance().Load(filename);
 		mData = Resources::D3DResourceManager<Resources::StaticModelData>::Instance().Load(filename);
 
+		/*
 		const Material::Definition* def = mData->MaterialData->GetMaterial(mData->MaterialName);
 		if(def != NULL)
 			if(def->MainTexture != NULL)
@@ -43,6 +44,7 @@ namespace Resources
 			Resources::Texture* defaultTexture = Resources::D3DResourceManager<Resources::Texture>::Instance().Load("whitePixel.png");
 			mEffect->SetVariable("g_modelTexture", defaultTexture->GetShaderResourceView());
 		}
+		*/
 
 		// Commented out to instead use above code that makes sure the texture exists, else loads the whitepixel texture
 		//mEffect->SetVariable("g_modelTexture", mData->MaterialData->GetMaterial(mData->MaterialName)->MainTexture->GetShaderResourceView());
@@ -94,6 +96,7 @@ namespace Resources
 
 		mEffect->SetVariable("g_matWorld", modelMatrix);
 		mEffect->SetVariable("g_matWVP", worldViewProjection);
+		mEffect->SetVariable("g_modelTintColour", static_cast<D3DXVECTOR4>(mTintColour));
 		mEffect->SetVariable("g_modelTexture",mData->MaterialData->GetMaterial(mData->MaterialName)->MainTexture->GetShaderResourceView());
 
 		// DEBUG: get light position elsewhere

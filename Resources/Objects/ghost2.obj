@@ -1,6 +1,6 @@
 # This file uses centimeters as units for non-parametric coordinates.
 
-mtllib ghost.mtl
+mtllib ghost2.mtl
 g default
 v 0.923880 0.188869 -0.382683
 v 0.707107 0.000000 -0.707106

@@ -15,7 +15,7 @@ namespace View
 	void Ghost::Draw(float dt, Helper::Camera* camera)
 	{
 		mObject->Draw(mModelMatrix, *camera);
-		mParticleSystem->Draw(dt, *camera);
+		//mParticleSystem->Draw(dt, *camera);
 	}
 
 	void Ghost::Update(float dt, Helper::Point2f ghostPos, Helper::Point2f pacmanPos)
@@ -24,6 +24,9 @@ namespace View
 
 		D3DXMatrixTranslation(&translation,ghostPos.X, C_HEIGHT, ghostPos.Y);
 
+		mModelMatrix = translation;
+
+		/*
 		D3DXVECTOR3 dxyGP = D3DXVECTOR3(ghostPos.X - pacmanPos.X, 0, ghostPos.Y - pacmanPos.Y);
 
 
@@ -32,8 +35,9 @@ namespace View
 		D3DXMatrixRotationY(&rot, atan(dxyGP.z / dxyGP.x));
 
 		mModelMatrix = rot * translation;
+		*/
 
-		mParticleSystem->SetPosition(D3DXVECTOR3(ghostPos.X, C_HEIGHT, ghostPos.Y));
+		//mParticleSystem->SetPosition(D3DXVECTOR3(ghostPos.X, C_HEIGHT, ghostPos.Y));
 	}
 
 	void Ghost::PlayerSound()
