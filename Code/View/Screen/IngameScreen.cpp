@@ -22,6 +22,7 @@ namespace View
 
 	IngameScreen::~IngameScreen() throw()
 	{
+		mWindow->RemoveNotificationSubscriber(this);
 		SafeDelete(mScene);
 	}
 
@@ -75,7 +76,7 @@ namespace View
 
 	void IngameScreen::PacmanKilled()
 	{
-
+		// TODO: Change to game over screen
 	}
 
 	void IngameScreen::GameWon()

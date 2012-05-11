@@ -220,6 +220,7 @@
     <ClCompile Include="Code\View\Pacman.cpp" />
     <ClCompile Include="Code\View\Scene.cpp" />
     <ClCompile Include="Code\View\GUI\Menu.cpp" />
+    <ClCompile Include="Code\View\Screen\GameOverScreen.cpp" />
     <ClCompile Include="Code\View\Screen\GameScreen.cpp" />
     <ClCompile Include="Code\View\Screen\IngameScreen.cpp" />
   </ItemGroup>
@@ -279,6 +280,7 @@
     <ClInclude Include="Code\View\Pacman.hpp" />
     <ClInclude Include="Code\View\Scene.hpp" />
     <ClInclude Include="Code\View\GUI\Menu.hpp" />
+    <ClInclude Include="Code\View\Screen\GameOverScreen.hpp" />
     <ClInclude Include="Code\View\Screen\GameScreen.hpp" />
     <ClInclude Include="Code\View\Screen\IngameScreen.hpp" />
   </ItemGroup>
