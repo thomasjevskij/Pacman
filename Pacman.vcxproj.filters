@@ -50,8 +50,8 @@
     <ClCompile Include="Code\View\HUD\Sprite.cpp" />
     <ClCompile Include="Code\View\HUD\UISurface.cpp" />
     <ClCompile Include="Code\Model\DebuggingParts.cpp" />
-    <ClCompile Include="Code\View\HUD\Map.cpp" />
     <ClCompile Include="Code\View\Screen\GameOverScreen.cpp" />
+    <ClCompile Include="Code\View\HUD\Map.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\PacmanGame.hpp" />

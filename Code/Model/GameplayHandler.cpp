@@ -31,6 +31,9 @@ namespace Model
 
 		mGameTime += dt;
 		
+		DbgOutFloat("\n --Model Testing--: GameTime = ", mGameTime);
+		OutputDebugString(" \n");
+		
 
 		if(leftPressed)
 			mPlayer.GoLeft();
@@ -50,8 +53,16 @@ namespace Model
 			mPowerModeTimer += dt;
 			if(mPowerModeTimer > 9)
 			{
-				for each (Ghost c in mGhosts)
-					c.SetGhostState(c.Chase);
+				OutputDebugString("\n--Model Testing--:  Player is in Powermode ");
+				for(int d = 0; d < mGhosts.size(); d++)
+				{
+					if(mGhosts[d].GetGhostState() != mGhosts[d].Killed)
+						mGhosts[d].SetGhostState(mGhosts[d].Chase);
+					
+			
+					OutputDebugString("\n--Model Testing--:  POWERMODE ENDED: ");
+					DbgOutFloat("\n--Model Testing--:  Ghost state: ", mGhosts[d].GetGhostState());
+				}
 				mPowerModeTimer = 0;
 				//mGameEventSubscriber->PowerPelletEnd();
 			}
@@ -63,11 +74,11 @@ namespace Model
 		{
 			mGhosts[s].GhostStateBehaviour(mGameTime,mCurrentLevel);
 			//Test code
-			char buffer[512];
-			sprintf(buffer,"%d",s);
-			OutputDebugString("\n--Model Testing--:  Ghost nr: ");
-			OutputDebugString(buffer);
-			OutputDebugString("\n");
+			//char buffer[512];
+			//sprintf(buffer,"%d",s);
+			//OutputDebugString("\n--Model Testing--:  Ghost nr: ");
+			//OutputDebugString(buffer);
+			//OutputDebugString("\n");
 
 			mGhosts[s].UpdateMovement(mPlayer.GetGridPosition(), dt, &mLevelHandler.GetCurrentLevel(), &mPlayer, mGhosts[0].GetGridPosition());
 		}
@@ -92,8 +103,9 @@ namespace Model
 			mPelletsEaten++;
 			if (mPelletsEaten == 70 || mPelletsEaten == 170)
 				mFruit = Fruit();
-			for each (Ghost c in mGhosts)
-				c.SetGhostState(c.Frightened);
+			
+			for(int h = 0; h < mGhosts.size(); h++)
+				mGhosts[h].SetGhostState(mGhosts[h].Frightened);
 			mLevelHandler.GetCurrentLevel().SetEaten(playerPos.X, playerPos.Y);
 			//mGameEventSubscriber->PowerPelletEaten(playerPos);
 		}
@@ -126,6 +138,7 @@ namespace Model
 				}
 				else if(mGhosts[g].GetGhostState() == mGhosts[g].Frightened)
 				{
+					OutputDebugString("\n--Model Testing--: Ghost IS DEAD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \n \n \n");
 					mGhosts[g].SetGhostState(mGhosts[g].Killed);
 					//mGameEventSubscriber->GhostEaten(g);
 					int k = 100;
@@ -143,6 +156,8 @@ namespace Model
 					//mGameEventSubscriber->GhostResurrected(g);
 				}
 			}
+			//Testing message
+			OutputDebugString("--Model Testing--:  Ghost nr Update() function called");
 		}
 
 		//Test if level is cleared
@@ -214,7 +229,7 @@ namespace Model
 		//mLevel = mLevelHandler.GetCurrentLevel();
 		mCurrentLevel = mLevelHandler.GetCurrentLevelIndex() +1;
 		mGhosts.clear();
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i <= 3; i++)
 			mGhosts.push_back(Ghost(mLevelHandler.GetCurrentLevel().GetGhostSpawnPositions()[i], i));
 		mPlayer = Player(mLevelHandler.GetCurrentLevel().GetPacmanSpawnPosition());
 		mLevelWasWon = false;

@@ -77,8 +77,17 @@ namespace View
 
 	void Scene::Draw(float dt)
 	{
+		/*
+		Resources::ModelObj obj(mDevice, "ghost2.obj");
+		D3DXMATRIX translation, scale, model;
+		D3DXMatrixTranslation(&translation, 40, 40, 40);
+		D3DXMatrixScaling(&scale, 30.0f, 30.0f, 30.0f);
+		model = scale * translation;
+		*/
+
 		mEnvironment->Draw(*mCamera);
 		mPacman.Draw(mCamera);
+
 		for (int i = 0; i < mModelDataInterface->GetGhostPositions().size(); ++i)
 		{
 			mGhosts[i].Draw(dt, mCamera);
