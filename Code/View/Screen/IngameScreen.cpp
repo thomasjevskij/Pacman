@@ -39,7 +39,12 @@ namespace View
 
 		mUISurface.Clear();
 		// TODO: Draw UI here
-		mMap.Draw(mUISurface, mGameplayHandler, D3DXVECTOR2(80, 80), true); 
+
+		D3DXVECTOR2 mapPosition(0, 0);
+		//mapPosition.x = mD3DContext->GetViewportWidth(mD3DContext->GetActiveViewport()) - mMap.GetWidth(mGameplayHandler.GetLevel());
+		//mapPosition.y = mD3DContext->GetViewportHeight(mD3DContext->GetActiveViewport()) - mMap.GetHeight(mGameplayHandler.GetLevel());
+
+		mMap.Draw(mUISurface, mGameplayHandler, mapPosition, true); 
 		mUISurface.DrawSurface(*mD3DContext);
 	}
 
