@@ -7,7 +7,7 @@ namespace View
 
 	Ghost::Ghost(ID3D10Device* device, const D3DXCOLOR& color)
 	{
-		mParticleSystem = new Helper::ParticleSystem(device, D3DXVECTOR3(0,0,0), "GhostTrail.fx", color ,10);
+		mParticleSystem = new Helper::ParticleSystem(device, D3DXVECTOR3(0,0,0), "GhostTrail.fx", color ,0,false,true,false);
 		mObject = new Resources::ModelObj(device,"ghost.obj");
 		D3DXMatrixIdentity(&mModelMatrix);
 	}

@@ -6,7 +6,7 @@
 namespace Helper
 {
 	const float ChaseCamera::C_CHASE_SPEED = 10.0f;
-	const float ChaseCamera::C_CHASE_HEIGHT = 100.0f;
+	const float ChaseCamera::C_CHASE_HEIGHT = 50.0f;
 	const float ChaseCamera::C_CHASE_DISTANCE = 2.5f;
 
 	ChaseCamera::ChaseCamera(Helper::Camera *c, Model::ModelDataInterface* modelDataInterface)
