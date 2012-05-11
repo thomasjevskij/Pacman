@@ -12,7 +12,7 @@ namespace View
 	{
 	public:
 		Ghost(ID3D10Device* device, const D3DXCOLOR& color);
-		void Draw(float dt, Helper::Camera* camera, bool scared);
+		void Draw(float dt, Helper::Camera* camera, bool scared, bool dead);
 		void Update(float dt, Helper::Point2f ghostPos, Helper::Point2f pacmanPos);
 		void PlayerSound();
 

@@ -19,7 +19,7 @@ namespace View
 		D3DXMatrixIdentity(&mModelMatrix);
 	}
 
-	void Ghost::Draw(float dt, Helper::Camera* camera, bool scared)
+	void Ghost::Draw(float dt, Helper::Camera* camera, bool scared, bool dead)
 	{
 		if (scared)
 		{
@@ -32,8 +32,11 @@ namespace View
 			mParticleSystem->SetColor(mColor);
 		}
 
-		mObject->Bind();
-		mObject->Draw(mModelMatrix, *camera);
+		if(!dead)
+		{
+			mObject->Bind();
+			mObject->Draw(mModelMatrix, *camera);
+		}
 		mParticleSystem->Draw(dt, *camera);
 	}
 

@@ -26,7 +26,7 @@ namespace Model
 
 		enum GhostState{ Scatter, Chase, Frightened, Killed};
 		void SetGhostState(Ghost::GhostState state);
-		GhostState GetGhostState();
+		GhostState GetGhostState() const;
 		
 	private:
 		GhostState mGhostState;

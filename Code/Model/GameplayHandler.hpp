@@ -22,6 +22,7 @@ namespace Model
 		Helper::Point2f GetPacmanPosition() const;
 		Helper::Point2f GetPacmanFacing() const;
 		std::vector<Helper::Point2f> GetGhostPositions() const;
+		std::vector<bool> GetKilledGhosts() const;
 
 		Player GetPacman() const;
 		std::vector<Ghost> GetGhosts() const;

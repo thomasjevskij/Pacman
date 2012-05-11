@@ -155,7 +155,7 @@ namespace Model
 		}
 	}
 
-	Ghost::GhostState Ghost::GetGhostState()
+	Ghost::GhostState Ghost::GetGhostState() const
 	{
 		return mGhostState;
 	}

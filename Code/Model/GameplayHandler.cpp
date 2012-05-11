@@ -287,6 +287,16 @@ namespace Model
 	{
 		return(mPowerModeTimer > 0);
 	}
+	
+	std::vector<bool> GameplayHandler::GetKilledGhosts() const
+	{
+		std::vector<bool> ghostkilled;
+		for(int t = 0; t < mGhosts.size(); t++)
+		{
+			ghostkilled.push_back(mGhosts[t].GetGhostState() == Ghost::Killed);
+		}
+		return ghostkilled;
+	}
 
 
 }

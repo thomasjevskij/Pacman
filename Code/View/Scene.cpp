@@ -90,7 +90,7 @@ namespace View
 
 		for (int i = 0; i < mModelDataInterface->GetGhostPositions().size(); ++i)
 		{
-			mGhosts[i].Draw(dt, mCamera);
+			mGhosts[i].Draw(dt, mCamera, mModelDataInterface->AreGhostsScared(), mModelDataInterface->GetKilledGhosts()[i]);
 		}
 
 
