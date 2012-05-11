@@ -47,8 +47,8 @@ void PacmanGame::Update(float dt)
 {
 	mSoundManager->Update();
 
-	mScreenHandler.SwapScreens();
 	mScreenHandler.UpdateScreen(dt);
+	mScreenHandler.SwapScreens();
 }
 
 void PacmanGame::Draw(float dt)

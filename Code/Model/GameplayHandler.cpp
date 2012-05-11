@@ -134,7 +134,7 @@ namespace Model
 				{
 					OutputDebugString("\n--Model Testing--: PACMAN IS DEAD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \n \n \n");
 					mGameRestart = true;
-					//mGameEventSubscriber->PacmanKilled();
+					mGameEventSubscriber->PacmanKilled();
 				}
 				else if(mGhosts[g].GetGhostState() == mGhosts[g].Frightened)
 				{
