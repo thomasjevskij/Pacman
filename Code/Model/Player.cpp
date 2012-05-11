@@ -8,7 +8,7 @@ namespace Model
 	{
 		mRealPosition = Helper::Point2f(gridPosition.X + 0.5 ,gridPosition.Y + 0.5 );
 		mFacing = Coord(1,0);
-		mMovementSpeed = 1;
+		mMovementSpeed = 1.4;
 		mHasTurned = false;
 		OutputDebugString("--Model Testing--:  Player Initiated \n");
 	}
@@ -20,14 +20,14 @@ namespace Model
 		if(CenterPos())
 		{
 	
-			OutputDebugString("--Model Testing--:  CenterPos() returned positive \n");
+			//OutputDebugString("--Model Testing--:  CenterPos() returned positive \n");
 			Cell testCell = level->GetCell(mGridPosition.X,mGridPosition.Y);
 			Cell forwardCell = level->GetCell(validCoord.X,validCoord.Y);
 			if(forwardCell.Type == Cell::C_CELLTYPE_WALL)
 			{
 				if(mFacing == mLastFacing)
 				{
-					OutputDebugString("--Model Testing--: Packade packis gick i en wall \n");
+					//OutputDebugString("--Model Testing--: Packade packis gick i en wall \n");
 					return;
 				}
 				else

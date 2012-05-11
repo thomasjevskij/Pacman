@@ -28,9 +28,9 @@ namespace View
 
 		Create3DLevel(level);
 		mPelletObject.SetScale(C_PELLET_SIZE);
-		mPelletObject.SetTintColour(D3DXCOLOR(1.0, 1.0, 0.0, 1.0));
+		mPelletObject.SetTintColor(D3DXCOLOR(1.0, 1.0, 0.0, 1.0));
 		mPowPelletObject.SetScale(C_POW_PELLET_SIZE);
-		mPowPelletObject.SetTintColour(D3DXCOLOR(0.0, 0.0, 1.0, 1.0));
+		mPowPelletObject.SetTintColor(D3DXCOLOR(0.0, 0.0, 1.0, 1.0));
 
 		for (int i = 0; i < mModelDataInterface->GetGhostPositions().size(); ++i)
 		{
@@ -65,8 +65,8 @@ namespace View
 		const std::vector<Model::Coord>& ghostPositions = mModelDataInterface->GetGhostPositions();
 		for (int i = 0; i < ghostPositions.size(); ++i)
 		{
-			mGhosts[i].Update(dt, Helper::Point2f((ghostPositions[i].X + 0.5f) * Environment::C_CELL_SIZE, 
-											      (ghostPositions[i].Y + 0.5f) * Environment::C_CELL_SIZE), 
+			mGhosts[i].Update(dt, Helper::Point2f(ghostPositions[i].X * Environment::C_CELL_SIZE, 
+											      ghostPositions[i].Y * Environment::C_CELL_SIZE), 
 							      Helper::Point2f((mModelDataInterface->GetPacmanPosition().X + 0.5f) * Environment::C_CELL_SIZE, 
 											      (mModelDataInterface->GetPacmanPosition().Y + 0.5f) * Environment::C_CELL_SIZE));
 		}

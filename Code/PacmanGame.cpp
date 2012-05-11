@@ -43,10 +43,10 @@ PacmanGame::~PacmanGame() throw()
 
 void PacmanGame::Update(float dt)
 {
+	mSoundManager->Update();
+
 	mScreenHandler.SwapScreens();
 	mScreenHandler.UpdateScreen(dt);
-
-	
 }
 
 void PacmanGame::Draw(float dt)

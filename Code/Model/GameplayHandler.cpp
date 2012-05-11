@@ -54,7 +54,10 @@ namespace Model
 			if(mPowerModeTimer > 9)
 			{
 				for(int d = 0; d < mGhosts.size(); d++)
-					mGhosts[d].SetGhostState(mGhosts[d].Chase);
+				{
+					if(mGhosts[d].GetGhostState() != mGhosts[d].Killed)
+						mGhosts[d].SetGhostState(mGhosts[d].Chase);
+				}
 				mPowerModeTimer = 0;
 				//mGameEventSubscriber->PowerPelletEnd();
 			}
@@ -95,8 +98,9 @@ namespace Model
 			mPelletsEaten++;
 			if (mPelletsEaten == 70 || mPelletsEaten == 170)
 				mFruit = Fruit();
-			for each (Ghost c in mGhosts)
-				c.SetGhostState(c.Frightened);
+			
+			for(int h = 0; h < mGhosts.size(); h++)
+				mGhosts[h].SetGhostState(mGhosts[h].Frightened);
 			mLevelHandler.GetCurrentLevel().SetEaten(playerPos.X, playerPos.Y);
 			//mGameEventSubscriber->PowerPelletEaten(playerPos);
 		}
@@ -129,6 +133,7 @@ namespace Model
 				}
 				else if(mGhosts[g].GetGhostState() == mGhosts[g].Frightened)
 				{
+					OutputDebugString("\n--Model Testing--: Ghost IS DEAD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \n \n \n");
 					mGhosts[g].SetGhostState(mGhosts[g].Killed);
 					//mGameEventSubscriber->GhostEaten(g);
 					int k = 100;

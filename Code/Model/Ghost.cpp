@@ -86,7 +86,11 @@ namespace Model
 			{
 				Coord target;
 				if(mGhostState == GhostState::Killed)
+				{
+					
+					OutputDebugString("\n--Model Testing--:  Ghost is dead and looking for home \n \n \n");
 					target = mSpawnPosition;
+				}
 				else
 					 target = mPersonality->GetTargetPosition(player, mGhostState, mGridPosition, blinkyPos);
 				Coord shortestFacing = Coord(1000000,1000000);
