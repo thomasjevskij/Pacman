@@ -15,7 +15,7 @@ namespace Resources
 		: mDevice(device)
 		, mEffect(NULL)
 		, mScale(1.0f)
-		, mTintColour(D3DXCOLOR(1.0, 1.0, 1.0, 1.0))
+		, mTintColor(D3DXCOLOR(1.0, 1.0, 1.0, 1.0))
 	{
 		mEffect = D3DResourceManager<Framework::Effect>::Instance().Load("ModelObj.fx");
 
@@ -73,7 +73,7 @@ namespace Resources
 
 		mEffect->SetVariable("g_matWorld", world);
 		mEffect->SetVariable("g_matWVP", worldViewProjection);
-		mEffect->SetVariable("g_modelTintColour", static_cast<D3DXVECTOR4>(mTintColour));
+		mEffect->SetVariable("g_modelTintColor", static_cast<D3DXVECTOR4>(mTintColor));
 		mEffect->SetVariable("g_modelTexture",mData->MaterialData->GetMaterial(mData->MaterialName)->MainTexture->GetShaderResourceView());
 		
 		// DEBUG: get light position elsewhere
@@ -96,7 +96,7 @@ namespace Resources
 
 		mEffect->SetVariable("g_matWorld", modelMatrix);
 		mEffect->SetVariable("g_matWVP", worldViewProjection);
-		mEffect->SetVariable("g_modelTintColour", static_cast<D3DXVECTOR4>(mTintColour));
+		mEffect->SetVariable("g_modelTintColor", static_cast<D3DXVECTOR4>(mTintColor));
 		mEffect->SetVariable("g_modelTexture",mData->MaterialData->GetMaterial(mData->MaterialName)->MainTexture->GetShaderResourceView());
 
 		// DEBUG: get light position elsewhere
@@ -115,8 +115,8 @@ namespace Resources
 		mScale = newScale;
 	}
 
-	void ModelObj::SetTintColour(D3DXCOLOR newColour)
+	void ModelObj::SetTintColor(D3DXCOLOR newColor)
 	{
-		mTintColour = newColour;
+		mTintColor = newColor;
 	}
 }
