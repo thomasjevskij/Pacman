@@ -6,11 +6,11 @@ namespace View
 	const D3DXCOLOR Ghost::C_COLORS[] = { D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f), D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f), D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f), D3DXCOLOR(1.0f, 0.0f, 1.0f, 1.0f) };
 
 	Ghost::Ghost(ID3D10Device* device, const D3DXCOLOR& color)
-		: mScale(2.5f)
+		: mScale(10.0f)
 		, mColor(color)
 	{
 		mParticleSystem = new Helper::ParticleSystem(device, D3DXVECTOR3(0,0,0), "GhostTrail.fx", mColor ,10);
-		mObject = new Resources::ModelObj(device,"ghost2.obj");
+		mObject = new Resources::ModelObj(device,"ghost1.obj");
 		mObject->SetTintColor(mColor);
 
 		D3DXMatrixIdentity(&mModelMatrix);
