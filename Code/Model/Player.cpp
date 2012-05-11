@@ -32,7 +32,8 @@ namespace Model
 
 		//Updatera pacmans position
 		mRealPosition += Helper::Point2f(mFacing.X*C_MOVEMENT_SPEED*dt,mFacing.Y*C_MOVEMENT_SPEED*dt);
-		mGridPosition = Coord(mRealPosition.X / C_TILESIZE,mRealPosition.Y / C_TILESIZE);
+		mGridPosition = Coord((int)mRealPosition.X % C_TILESIZE,(int)mRealPosition.Y % C_TILESIZE);
+		
 		mLastFacing = mFacing;
 	}
 
@@ -60,7 +61,7 @@ namespace Model
 
 	Helper::Point2f Player::GetRealPos() const
 	{
-		return mRealPosition;
+		return Coord(mRealPosition.X / C_TILESIZE,mRealPosition.Y / C_TILESIZE);
 	}
 
 	Coord Player::GetValidGridPos(Coord pos,int width,int height)

@@ -17,7 +17,6 @@ namespace Model
 		void GoRight();
 		void GoBack();
 
-		
 		Coord GetGridPosition() const;
 		Helper::Point2f GetRealPos() const;
 		const Coord& GetFacing() const;

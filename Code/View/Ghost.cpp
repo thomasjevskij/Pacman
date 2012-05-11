@@ -21,7 +21,7 @@ namespace View
 	{
 		D3DXMATRIX translation,rot;
 		D3DXMatrixTranslation(&translation,ghostPos.X,30,ghostPos.Y);
-
+		
 		D3DXVECTOR3 dxyGP = D3DXVECTOR3(ghostPos.X - pacmanPos.X,0,ghostPos.Y - pacmanPos.Y);
 
 		D3DXVec3Normalize(&dxyGP,&dxyGP);
