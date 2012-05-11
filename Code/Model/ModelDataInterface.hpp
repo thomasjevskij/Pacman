@@ -18,6 +18,7 @@ namespace Model
 		virtual int GetLives() const = 0;
 		virtual int GetScore() const = 0;
 		virtual float GetTimeLeft() const = 0;
+		virtual bool AreGhostsScared() const =0;
 	};
 }
 

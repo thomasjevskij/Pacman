@@ -30,6 +30,7 @@ namespace Model
 		int GetLives() const;
 		int GetScore() const;
 		float GetTimeLeft() const;
+		bool AreGhostsScared() const;
 	private:
 		LevelHandler mLevelHandler;
 		View::GameEventSubscriber* mGameEventSubscriber;
@@ -48,6 +49,7 @@ namespace Model
 		bool TestRealCollision(Coord ghostRealPos, Coord pacmanRealPos);
 		void NewLevel();
 		void ResetGame();
+
 
 	};
 }

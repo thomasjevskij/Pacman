@@ -65,7 +65,7 @@ namespace Model
 					DbgOutFloat("\n--Model Testing--:  Ghost state: ", mGhosts[d].GetGhostState());
 				}
 				mPowerModeTimer = 0;
-				//mGameEventSubscriber->PowerPelletEnd();
+				mGameEventSubscriber->PowerPelletEnd();
 			}
 		}
 
@@ -95,7 +95,7 @@ namespace Model
 				mFruit = Fruit();
 			}
 			mLevelHandler.GetCurrentLevel().SetEaten(playerPos.X, playerPos.Y);
-			//mGameEventSubscriber->PelletEaten(playerPos);
+			mGameEventSubscriber->PelletEaten(playerPos);
 		}
 		else if (mLevelHandler.GetCurrentLevel().GetCell(playerPos.X, playerPos.Y).Type == Cell::C_CELLTYPE_POWERPELLET)
 		{
@@ -110,7 +110,7 @@ namespace Model
 			for(int h = 0; h < mGhosts.size(); h++)
 				mGhosts[h].SetGhostState(mGhosts[h].Frightened);
 			mLevelHandler.GetCurrentLevel().SetEaten(playerPos.X, playerPos.Y);
-			//mGameEventSubscriber->PowerPelletEaten(playerPos);
+			mGameEventSubscriber->PowerPelletEaten(playerPos);
 		}
 		else if (mLevelHandler.GetCurrentLevel().GetCell(playerPos.X, playerPos.Y).Type == Cell::C_CELLTYPE_FOOD)
 		{
@@ -143,7 +143,7 @@ namespace Model
 				{
 					OutputDebugString("\n--Model Testing--: Ghost IS DEAD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \n \n \n");
 					mGhosts[g].SetGhostState(mGhosts[g].Killed);
-					//mGameEventSubscriber->GhostEaten(g);
+					mGameEventSubscriber->GhostEaten(g);
 					int k = 100;
 					for each (Ghost c in mGhosts)
 						if (c.GetGhostState() == c.Killed)
@@ -156,7 +156,7 @@ namespace Model
 				if(TestGridCollision(mGhosts[g].GetGridPosition(), mGhosts[g].GetSpawnPosition()))
 				{
 					mGhosts[g].SetGhostState(mGhosts[g].Chase);
-					//mGameEventSubscriber->GhostResurrected(g);
+					mGameEventSubscriber->GhostResurrected(g);
 				}
 			}
 			//Testing message
@@ -166,7 +166,7 @@ namespace Model
 		//Test if level is cleared
 		if(mLevelHandler.GetCurrentLevel().GetPelletPositions().size() == 0 && mLevelHandler.GetCurrentLevel().GetPowerPelletPositions().size() == 0)
 		{
-			//mGameEventSubscriber->GameWon();
+			mGameEventSubscriber->GameWon();
 			mLevelWasWon = true;
 		}
 
@@ -174,7 +174,7 @@ namespace Model
 		if(GetTimeLeft() <= 0)
 		{
 			mGameRestart = true;
-			//mGameEventSubscriber->PacmanKilled();
+			mGameEventSubscriber->PacmanKilled();
 		}
 	}
 
@@ -281,6 +281,11 @@ namespace Model
 			ghostsPos.push_back(mGhosts[t].GetRealPos());
 		}
 		return ghostsPos;
+	}
+	
+	bool GameplayHandler::AreGhostsScared() const
+	{
+		return(mPowerModeTimer > 0);
 	}
 
 
