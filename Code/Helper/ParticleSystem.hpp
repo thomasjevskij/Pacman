@@ -18,6 +18,7 @@ namespace Helper
 	public:
 		ParticleSystem(ID3D10Device *device,const D3DXVECTOR3& pos,const std::string& file,const D3DXCOLOR& color,const float& radie,const bool& Acceleration = true,const bool& Gravity = false,const bool& RandomStart = true);
 		void SetPosition(const D3DXVECTOR3& pos);
+		void SetColor(const D3DXCOLOR& color);
 		void Draw(float dt,const Camera& cam);
 	private:
 
