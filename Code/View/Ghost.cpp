@@ -55,7 +55,7 @@ namespace View
 		mParticleSystem->SetPosition(D3DXVECTOR3(ghostPos.X, C_HEIGHT, ghostPos.Y));
 	}
 
-	void Ghost::PlayerSound()
+	void Ghost::PlaySound()
 	{
 
 	}
