@@ -46,7 +46,7 @@ def count_sloc(lines):
 			continue
 		if line.startswith("/*"):
 			comment = True
-		if line.endswith("*/"):
+		if line.find("*/") != -1:
 			comment = False
 			continue
 		
@@ -57,6 +57,29 @@ def count_sloc(lines):
 			sloc += 1
 	return sloc
 	
+def count_cloc(lines):
+	cloc = 0
+	comment = False
+	for line in lines:
+		line = line.strip()
+		
+		if line.find("//") != -1:
+			cloc += 1
+			continue
+		if line.startswith("/*"):
+			comment = True
+		if line.find("*/") != -1:
+			comment = False
+			cloc += 1
+			cline = line[line.find("*/"):]
+			if cline.find("/*") != -1:
+				comment = True
+				continue
+			
+		if comment:
+			cloc += 1
+	
+	return cloc
 
 def valid_root(ignore_dirs, name):
 	valid = True
@@ -76,6 +99,7 @@ def valid_file(ignore_files, name):
 	
 loc = 0
 sloc = 0
+cloc = 0
 
 ignore_files, ignore_roots = get_ignore()
 
@@ -89,9 +113,12 @@ for root, dirs, files in walk('.'):
 		lines = get_lines(path)
 		file_loc = len(lines)
 		file_sloc = count_sloc(lines)
-		print "%s has %d loc and %d sloc" % (path, file_loc, file_sloc)
+		file_cloc = count_cloc(lines)
+		print "%s has %d loc, %d sloc and %d cloc" % (path, file_loc, file_sloc, file_cloc)
 		loc += file_loc
 		sloc += file_sloc
+		cloc += file_cloc
 		
 print "Total lines of code: %d" % loc
 print "Total source lines of code: %d" % sloc
+print "Total commented lines of code: %d" % cloc
